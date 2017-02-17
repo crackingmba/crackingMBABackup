@@ -1,0 +1,136 @@
+package com.crackingMBA.training.pojo;
+
+/**
+ * Created by MSK on 06-02-2017.
+ */
+public class VideoList {
+
+    private String videoDescription;
+
+    private String videoID;
+
+    private String Duration;
+
+    private String videoSubCategory;
+
+    private String videoTitle;
+
+    private String videoCategory;
+
+    private String uploadDate;
+
+    private String videoURL;
+
+    private String thumbnailURL;
+
+    public String getVideoDescription ()
+    {
+        return videoDescription;
+    }
+
+    public void setVideoDescription (String videoDescription)
+    {
+        this.videoDescription = videoDescription;
+    }
+
+    public String getVideoID ()
+    {
+        return videoID;
+    }
+
+    public void setVideoID (String videoID)
+    {
+        this.videoID = videoID;
+    }
+
+    public String getDuration ()
+    {
+        return Duration;
+    }
+
+    public void setDuration (String Duration)
+    {
+        this.Duration = Duration;
+    }
+
+    public String getVideoSubCategory ()
+    {
+        return videoSubCategory;
+    }
+
+    public void setVideoSubCategory (String videoSubCategory)
+    {
+        this.videoSubCategory = videoSubCategory;
+    }
+
+    public String getVideoTitle ()
+    {
+        return videoTitle;
+    }
+
+    public void setVideoTitle (String videoTitle)
+    {
+        this.videoTitle = videoTitle;
+    }
+
+    public String getVideoCategory ()
+    {
+        return videoCategory;
+    }
+
+    public void setVideoCategory (String videoCategory)
+    {
+        this.videoCategory = videoCategory;
+    }
+
+    public String getUploadDate ()
+    {
+        return uploadDate;
+    }
+
+    public void setUploadDate (String uploadDate)
+    {
+        this.uploadDate = uploadDate;
+    }
+
+    public String getVideoURL ()
+    {
+        return videoURL;
+    }
+
+    public void setVideoURL (String videoURL)
+    {
+        this.videoURL = videoURL;
+    }
+
+    public String getThumbnailURL ()
+    {
+        return thumbnailURL;
+    }
+
+    public void setThumbnailURL (String thumbnailURL)
+    {
+        this.thumbnailURL = thumbnailURL;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ClassPojo [videoDescription = "+videoDescription+", videoID = "+videoID+", Duration = "+Duration+", videoSubCategory = "+videoSubCategory+", videoTitle = "+videoTitle+", videoCategory = "+videoCategory+", uploadDate = "+uploadDate+", videoURL = "+videoURL+", thumbnailURL = "+thumbnailURL+"]";
+    }
+    public VideoList(String id, String videoTitle, String thumbnailURL, String videoURL, String videoType, String dateOdUploaded, String duration, String videoDescription) {
+        this.videoID = id;
+        this.videoTitle = videoTitle;
+        this.thumbnailURL = thumbnailURL;
+        this.videoURL = videoURL;
+        this.videoSubCategory= videoType;
+        this.uploadDate = dateOdUploaded;
+        this.Duration = duration;
+        this.videoDescription = videoDescription;
+    }
+    public VideoList(){
+
+    }
+
+
+}
