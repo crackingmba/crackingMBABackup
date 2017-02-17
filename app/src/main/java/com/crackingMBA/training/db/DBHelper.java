@@ -125,7 +125,7 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                // VideoList videoDataObject = new VideoList();
                 VideoList    videoDataObject = new VideoList(cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getColumnName(3),
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3),
                         cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
                 // Adding contact to list
                 videoDataObjects.add(videoDataObject);
@@ -155,10 +155,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Deleting single VideoRecord
     public void deleteVideoRecord(VideoList videoDataObject) {
-
+        Log.d("first","videoDataObject.getVideoURL()"+videoDataObject.getVideoURL());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_DOWNLOAD, videoURL + " = ?",
-                new String[] { String.valueOf(videoDataObject.getVideoURL()) });
+        db.delete(TABLE_DOWNLOAD, id + " = ?",
+                new String[] { String.valueOf(videoDataObject.getVideoID()) });
         db.close();
     }
 }

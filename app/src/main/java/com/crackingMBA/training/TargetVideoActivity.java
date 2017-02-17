@@ -23,14 +23,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-
 import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.validator.LocalVideoCheck;
+
+import java.io.File;
 
 public class TargetVideoActivity extends AppCompatActivity {
 
@@ -166,27 +166,10 @@ public class TargetVideoActivity extends AppCompatActivity {
         intent.putExtra("clickedVideo", clickedVideo);
         startActivity(intent);
 
-/*
-
-        String fileName = "/Ice.mkv";
-        String filePath = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_MOVIES) + fileName;
-        File file = new File(filePath);
-        Log.d("first", file + "");
-        Uri fullUri = Uri.parse("http://crackingmba.com/video.mp4");
-        surfaceView.setVideoURI(fullUri);
-        surfaceView.requestFocus();
-        surfaceView.start();
-        Log.d("first", fullUri + "");*/
     }
-
-
     public void downloadNow() {
-        //Uri uri = Uri.parse(CrackingConstant.MYPATH+"video.mp4");
-
 
         downloadId = downloadData();
-//        downloadBtn.setText("Cancel Download");
     }
 
     private long downloadData() {
@@ -204,7 +187,7 @@ public class TargetVideoActivity extends AppCompatActivity {
 
             if (!localavailablity) {
                 // String fileName = "/video.mp4";
-                Log.d("suresh", "Entered into delete video");
+                Log.d("suresh", "Entered into download video");
                 String filePath1 = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
                 File file1 = new File(filePath1);
                 file1.delete();
@@ -213,7 +196,7 @@ public class TargetVideoActivity extends AppCompatActivity {
                 Uri destUri = Uri.fromFile(file);
                 request.setDestinationUri(destUri);
                 VideoList selectedVideo = VideoApplication.videoList;
-                VideoDataObject videoDataObject = new VideoDataObject();
+                VideoList videoDataObject = new VideoList();
                 selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getThumbnailURL());
 
                 selectedVideo.setThumbnailURL(CrackingConstant.MYPATH + "img/" + selectedVideo.getThumbnailURL());

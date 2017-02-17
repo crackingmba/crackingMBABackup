@@ -89,6 +89,7 @@ public class HomeVideoViewAdapter extends RecyclerView
         //holder.thumbnailUrl.setImageURI(Uri.parse(mDataset.get(position).getThumbnailUrl()));
         Log.d(TAG,"in onBindViewHolder..");
        // holder.thumbnail.setImageResource(R.drawable.img1);
+        holder.id.setText(mDataset.get(position).getVideoID());
         holder.duration.setText("Duration: "+mDataset.get(position).getDuration()+"m");
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
         holder.videoCategory.setText(mDataset.get(position).getVideoCategory());

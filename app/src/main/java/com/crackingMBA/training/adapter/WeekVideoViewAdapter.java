@@ -31,6 +31,7 @@ import com.crackingMBA.training.FullscreenActivity;
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.VideoApplication;
 import com.crackingMBA.training.WeeksActivity;
+import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.validator.LocalVideoCheck;
@@ -47,7 +48,7 @@ public class WeekVideoViewAdapter extends RecyclerView
     private static Activity myActivity=new Activity();
     private static long downloadId;
     private static DownloadManager downloadManager;
-
+    private static DBHelper dbHelper;
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
@@ -66,6 +67,7 @@ public class WeekVideoViewAdapter extends RecyclerView
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+
             thumbnail = (ImageView) itemView.findViewById(R.id.week_thumbnail);
             duration = (TextView) itemView.findViewById(R.id.week_duration);
             id = (TextView) itemView.findViewById(R.id.week_id);
@@ -127,7 +129,7 @@ public class WeekVideoViewAdapter extends RecyclerView
             } else if (v.getId() == R.id.week_downloadnow) {
                 Log.d("Suresh", "Clickd on download");
                 if (viewOfflineBtn.getText().toString().equalsIgnoreCase("View Offline")) {
-                    boolean localavailablity = LocalVideoCheck.verifyLocalStorage(mDataset.get(getPosition()).getVideoURL());
+                    boolean localavailablity = LocalVideoCheck.verifyLocalStorage(mDataset.get(getPosition()).getVideoID());
 
                     Log.d("first", "Playing online..");
 
@@ -139,7 +141,7 @@ public class WeekVideoViewAdapter extends RecyclerView
                     boolean internetAvailblity= MyUtil.checkConnectivity(myContext);
                     Log.d("first","internet connnectivity lost");
                     if(internetAvailblity)
-                    downloadNow(getPosition());
+                    downloadNow(getPosition(),mDataset.get(getPosition()).getVideoURL());
 
                     else{
                         Toast toast = Toast.makeText(myContext, "Internet Connectivity Lost. Please connect to internet", Toast.LENGTH_LONG);
@@ -167,14 +169,14 @@ public class WeekVideoViewAdapter extends RecyclerView
 
     }
 
-    public void downloadNow(int position) {
+    public void downloadNow(int position,String destURL) {
         //Uri uri = Uri.parse(CrackingConstant.MYPATH+"video.mp4");
 
-        Uri uri = Uri.parse("http://3gp.telugump4.org/med/Chikki_Chikki_Bam_Bam_-_Aadhi_(HD_DTH_Rip).3gp");
+        Uri uri = Uri.parse(CrackingConstant.MYPATH+"videos/"+destURL);
         int permissionCheck = ContextCompat.checkSelfPermission(myContext,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            downloadId = downloadData(uri, position);
+            downloadId = downloadData(uri, position,destURL);
         } else {
             Log.d("week View Adaptor", "Storage Access Permission is mandatory to download video");
             Toast toast = Toast.makeText(myContext, "Storage Permission is mandatory to download video", Toast.LENGTH_LONG);
@@ -186,18 +188,22 @@ public class WeekVideoViewAdapter extends RecyclerView
 //        downloadBtn.setText("Cancel Download");
     }
 
-    private long downloadData(Uri uri, int position) {
-        String fileName = "video.3gp";
+    private long downloadData(Uri uri, int position,String destURL) {
+       // String fileName = "video.3gp";
+        dbHelper = DBHelper.getInstance(myContext);
         downloadManager = (DownloadManager) myContext.getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setTitle("crackingMBA.com");
         request.setDescription("Downloading Video..");
-        String filePath = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
+        String filePath = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + destURL;
         File file = new File(filePath);
         Uri destUri = Uri.fromFile(file);
         request.setDestinationUri(destUri);
         viewOfflineBtn.setText("Downloading..");
         viewOfflineBtn.setEnabled(false);
+        mDataset.get(position).setThumbnailURL(CrackingConstant.MYPATH + "img/" + mDataset.get(position).getThumbnailURL());
+
+        dbHelper.addDownloadVideo(mDataset.get(position));
         return downloadManager.enqueue(request);
 
     }

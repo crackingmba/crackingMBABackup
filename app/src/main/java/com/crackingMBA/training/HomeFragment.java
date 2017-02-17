@@ -123,7 +123,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //mLayoutManager.setReverseLayout(false);
         //mLayoutManager.setStackFromEnd(false);
         recyclerView1.setLayoutManager(mLayoutManager1);
-        DownloadViewAdapter downloadAdapter = new DownloadViewAdapter(getDataSetDownloadedVideos());
+        ArrayList<VideoList> downloadedList=getDataSetDownloadedVideos();
+        DownloadViewAdapter downloadAdapter = new DownloadViewAdapter(downloadedList);
+        if(downloadedList.size()==0) {
+
+            rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.VISIBLE);
+        }
+        else{
+            rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.GONE);
+        }
         recyclerView1.setAdapter(downloadAdapter);
         recyclerView1.addItemDecoration(itemDecoration);
 
@@ -366,10 +374,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public ArrayList<VideoDataObject> getDataSetDownloadedVideos() {
+    public ArrayList<VideoList> getDataSetDownloadedVideos() {
 
-        ArrayList<VideoDataObject> mockResults = new ArrayList<VideoDataObject>();
-        VideoDataObject vo = null;
+        ArrayList<VideoList> mockResults = new ArrayList<VideoList>();
+        VideoList vo = null;
 
 
         File dir = new File(CrackingConstant.localstoragepath + "/" + CrackingConstant.myFolder  + CrackingConstant.noMedia);
@@ -377,15 +385,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         List<VideoList> videoDataObjects = dbHelper.getAllDownloadedVideos();
         Log.d("first","get Downloaded videos"+videoDataObjects);
         for (VideoList videoDataObject : videoDataObjects) {
-            vo = new VideoDataObject();
+            vo = new VideoList();
             vo.setVideoURL(videoDataObject.getVideoURL());
             vo.setThumbnailURL(videoDataObject.getThumbnailURL());
             vo.setDuration(videoDataObject.getDuration());
             vo.setVideoTitle(videoDataObject.getVideoTitle());
             vo.setVideoDescription(videoDataObject.getVideoDescription());
-            vo.setDateOdUploaded(videoDataObject.getUploadDate());
-            vo.setVideoType(videoDataObject.getVideoCategory());
-            vo.setId(videoDataObject.getVideoID());
+            vo.setUploadDate(videoDataObject.getUploadDate());
+            vo.setVideoCategory(videoDataObject.getVideoCategory());
+            vo.setVideoID(videoDataObject.getVideoID());
 
             mockResults.add(vo);
         }

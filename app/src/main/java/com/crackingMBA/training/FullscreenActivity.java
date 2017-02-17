@@ -101,7 +101,7 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
-        Log.d("first","Entered into full screen video activity flag..");
+        Log.d("Suresh","Entered into full screen video activity flag..");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
      /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);

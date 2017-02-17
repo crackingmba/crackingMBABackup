@@ -34,6 +34,17 @@
                 android:text="Recently Downloaded Videos"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <TextView
+                android:id="@+id/home_download_noVideos"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:gravity="center_vertical"
+                android:layout_margin="20dp"
+                android:textAlignment="center"
+                android:text="No offline videos available."
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:visibility="gone"/>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_recently_recyclerview"
                 android:layout_width="match_parent"

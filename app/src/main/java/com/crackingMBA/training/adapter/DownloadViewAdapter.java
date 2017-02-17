@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.VideoDataObject;
+import com.crackingMBA.training.pojo.VideoList;
 
 /**
  * Created by Harish on 1/31/2017.
@@ -23,7 +24,7 @@ import com.crackingMBA.training.pojo.VideoDataObject;
 public class DownloadViewAdapter extends RecyclerView
         .Adapter<DownloadViewAdapter.DataObjectHolder> {
     private static String LOG_TAG = "VideoViewAdapter";
-    private ArrayList<VideoDataObject> mDataset;
+    private ArrayList<VideoList> mDataset;
     private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -70,7 +71,7 @@ public class DownloadViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public DownloadViewAdapter(ArrayList<VideoDataObject> myDataset) {
+    public DownloadViewAdapter(ArrayList<VideoList> myDataset) {
         mDataset = myDataset;
     }
 
@@ -107,16 +108,16 @@ public class DownloadViewAdapter extends RecyclerView
 
 
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
-        holder.videoCategory.setText(mDataset.get(position).getVideoType());
+        holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.videoURL.setText(mDataset.get(position).getVideoURL());
         // holder.videoType.setText("Latest Quant Prep Videos");
        holder.thumbnailURL.setText( mDataset.get(position).getThumbnailURL());
-        holder.dateOfUploaded.setText( mDataset.get(position).getDateOdUploaded());
-        holder.id.setText( mDataset.get(position).getId());
-        holder.videoType.setText( mDataset.get(position).getVideoType());
+        holder.dateOfUploaded.setText( mDataset.get(position).getUploadDate());
+        holder.id.setText( mDataset.get(position).getVideoDescription());
+        holder.videoType.setText( mDataset.get(position).getVideoCategory());
     }
 
-    public void addItem(VideoDataObject dataObj, int index) {
+    public void addItem(VideoList dataObj, int index) {
         Log.d("VideoViewAdapter","in addItem..");
         mDataset.add(dataObj);
         notifyItemInserted(index);
