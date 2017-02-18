@@ -45,38 +45,46 @@ public class WeekVideoViewAdapter extends RecyclerView
     private static ArrayList<VideoList> mDataset;
     private static MyClickListener myClickListener;
     private static Context myContext;
-    private static Activity myActivity=new Activity();
+    private static Activity myActivity;
     private static long downloadId;
     private static DownloadManager downloadManager;
     private static DBHelper dbHelper;
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView id;
+
+        Button viewOnlineBtn;
+        Button viewOfflineBtn;
+        Button deleteOfflineBtn;
+        TextView videoID;
         TextView videoTitle;
         TextView thumbnailURL;
         TextView videoURL;
-        TextView videoType;
         TextView dateOfUploaded;
         TextView videoDescription;
         ImageView thumbnail;
         TextView duration;
-        Button viewOnlineBtn;
-        Button viewOfflineBtn;
-        Button deleteOfflineBtn;
-
+        TextView videoSubCategory;
+        TextView categoryFullName;
+        TextView subCategoryFullName;
+        TextView videoCategory;
         public DataObjectHolder(View itemView) {
             super(itemView);
 
             thumbnail = (ImageView) itemView.findViewById(R.id.week_thumbnail);
             duration = (TextView) itemView.findViewById(R.id.week_duration);
-            id = (TextView) itemView.findViewById(R.id.week_id);
+            videoID = (TextView) itemView.findViewById(R.id.week_videoID);
             videoTitle = (TextView) itemView.findViewById(R.id.week_videoTitle);
             thumbnailURL = (TextView) itemView.findViewById(R.id.week_thumbnailURL);
             videoURL = (TextView) itemView.findViewById(R.id.week_videoURL);
-            videoType = (TextView) itemView.findViewById(R.id.week_videoType);
+            videoCategory = (TextView) itemView.findViewById(R.id.week_videoCategory);
             dateOfUploaded = (TextView) itemView.findViewById(R.id.week_dateOfUploaded);
+            videoSubCategory = (TextView) itemView.findViewById(R.id.week_subCategory);
             videoDescription = (TextView) itemView.findViewById(R.id.week_videoDescription);
+            categoryFullName = (TextView) itemView.findViewById(R.id.week_categoryFullName);
+            subCategoryFullName = (TextView) itemView.findViewById(R.id.week_subCategoryFullName);
+
+
             viewOnlineBtn = (Button) itemView.findViewById(R.id.week_viewonline);
             viewOnlineBtn.setOnClickListener(this);
             viewOfflineBtn = (Button) itemView.findViewById(R.id.week_downloadnow);
@@ -156,7 +164,7 @@ public class WeekVideoViewAdapter extends RecyclerView
 
         {
             Log.d("Suresh", "Clickd on remove video");
-            deleteVideo(mDataset.get(getPosition()).getVideoURL());
+            deleteVideo(getPosition(),mDataset.get(getPosition()).getVideoURL());
         }
 
         else
@@ -209,9 +217,10 @@ public class WeekVideoViewAdapter extends RecyclerView
     }
 
 
-    public void deleteVideo(String videourl) {
+    public void deleteVideo(int position,String videourl) {
         // String fileName = "video.3gp";
-        boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videourl);
+       // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videourl);
+        boolean localavailablity =  LocalVideoCheck.verifyLocalStorageByVideoID(mDataset.get(position).getVideoID().toString(),myActivity);
         if (localavailablity)
 
         {
@@ -222,6 +231,7 @@ public class WeekVideoViewAdapter extends RecyclerView
 
 
             file.delete();
+            dbHelper.deleteVideoRecord(mDataset.get(position));
             viewOfflineBtn.setText("Download");
             deleteOfflineBtn.setEnabled(false);
             viewOfflineBtn.setEnabled(true);
@@ -238,8 +248,9 @@ public class WeekVideoViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public WeekVideoViewAdapter(ArrayList<VideoList> myDataset) {
+    public WeekVideoViewAdapter(ArrayList<VideoList> myDataset,Activity activity) {
         mDataset = myDataset;
+        myActivity=activity;
     }
 
     @Override
@@ -267,7 +278,7 @@ public class WeekVideoViewAdapter extends RecyclerView
 
 
         //holder.duration.setText("Duration : "+mDataset.get(position).getDuration()+"m");
-        holder.id.setText(mDataset.get(position).getVideoID());
+        holder.videoID.setText(mDataset.get(position).getVideoID());
 
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
@@ -275,15 +286,19 @@ public class WeekVideoViewAdapter extends RecyclerView
             holder.videoURL.setText("myvideo.mp4");
         else*/
         holder.videoURL.setText(mDataset.get(position).getVideoURL());
-        holder.videoType.setText(mDataset.get(position).getVideoSubCategory());
+        holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
+        holder.videoSubCategory.setText(mDataset.get(position).getVideoSubCategory());
+        holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
+        holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+
         holder.duration.setText(mDataset.get(position).getDuration());
         Boolean videoAvailbllity;
       /*  if(position==1)
              videoAvailbllity = LocalVideoCheck.verifyLocalStorage("myvideo.mp4");
         else*/
-         videoAvailbllity = LocalVideoCheck.verifyLocalStorage(mDataset.get(position).getVideoURL());
+         videoAvailbllity = LocalVideoCheck.verifyLocalStorageByVideoID(mDataset.get(position).getVideoID(),myActivity);
         if (videoAvailbllity) {
             holder.deleteOfflineBtn.setText("Delete");
             holder.viewOfflineBtn.setText("View Offline");

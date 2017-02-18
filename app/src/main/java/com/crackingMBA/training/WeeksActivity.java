@@ -1,6 +1,7 @@
 package com.crackingMBA.training;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -45,12 +46,14 @@ public class WeeksActivity extends AppCompatActivity {
     boolean isMock;
     String sectionSelected;
     String headerTitle;
+    String subcategoryid;
     private ProgressDialog pDialog;
     Button viewOnlineBtn;
     Button viewOfflineBtn;
     Button deleteOfflineBtn;
     DownloadManager downloadManager;
     long downloadId;
+    Activity myWeeksActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +63,12 @@ public class WeeksActivity extends AppCompatActivity {
         if (extras != null) {
             sectionSelected = extras.getString("sectionSelected");
             headerTitle = extras.getString("headerTitle");
+            subcategoryid=extras.getString("subcategoryid");
         } else {
             sectionSelected = "ratio";
             headerTitle = "CAT 2017 Prepartion Quant Section";
         }
+        myWeeksActivity=this;
         Log.d(TAG, "headerTitle" + headerTitle);
         ((TextView) findViewById(R.id.weeksTitleHeader)).setText(headerTitle.toString());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,7 +105,8 @@ public class WeeksActivity extends AppCompatActivity {
 
 
         final ArrayList<VideoListModel> results = new ArrayList<VideoListModel>();
-        String url = "http://crackingmba.com/getVideoList.php?subcategory_id=" + sectionSelected;
+        String url = "http://crackingmba.com/getVideoList.php?subcategory_id=" + subcategoryid;
+        Log.d(TAG,"Get Video List for Subcateogry url "+ url);
         try {
             AsyncHttpClient client = new AsyncHttpClient();
             client.get(url, null, new AsyncHttpResponseHandler() {
@@ -110,7 +116,7 @@ public class WeeksActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                     //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
-                    weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList());
+                    weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(),myWeeksActivity);
                     recyclerView.setAdapter(weekAdapter);
                     RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
                     recyclerView.addItemDecoration(itemDecoration);
@@ -165,11 +171,13 @@ public class WeeksActivity extends AppCompatActivity {
         TextView title = (TextView) v.findViewById(R.id.week_videoTitle);
         TextView description = (TextView) v.findViewById(R.id.week_videoDescription);
         TextView thumbnail = (TextView) v.findViewById(R.id.week_thumbnailURL);
-        TextView videoSectionTitle = (TextView) v.findViewById(R.id.weeks_TitleHeader);
-        TextView videoID = (TextView) v.findViewById(R.id.week_id);
+        TextView videoID = (TextView) v.findViewById(R.id.week_videoID);
         TextView duration = (TextView) v.findViewById(R.id.week_duration);
-        TextView subcategory = (TextView) v.findViewById(R.id.week_videoType);
+        TextView subcategory = (TextView) v.findViewById(R.id.week_subCategory);
         TextView uploadDate = (TextView) v.findViewById(R.id.week_dateOfUploaded);
+        TextView videoCategory = (TextView) v.findViewById(R.id.week_videoCategory);
+        TextView subCategoryFullName = (TextView) v.findViewById(R.id.week_subCategoryFullName);
+        TextView categoryFullName = (TextView) v.findViewById(R.id.week_categoryFullName);
         vdo.setVideoURL(videourl.getText().toString());
         vdo.setVideoTitle(title.getText().toString());
         vdo.setThumbnailURL(thumbnail.getText().toString());
@@ -178,7 +186,9 @@ public class WeeksActivity extends AppCompatActivity {
         vdo.setVideoID(videoID.getText().toString());
         vdo.setDuration(duration.getText().toString());
         vdo.setVideoSubCategory(subcategory.getText().toString());
-        vdo.setVideoSubCategory(subcategory.getText().toString());
+        vdo.setVideoCategory(videoCategory.getText().toString());
+        vdo.setCategoryFullName(categoryFullName.getText().toString());
+        vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
         vdo.setUploadDate(uploadDate.getText().toString());
         return vdo;
     }

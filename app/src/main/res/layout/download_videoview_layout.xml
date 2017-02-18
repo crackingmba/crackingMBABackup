@@ -6,12 +6,6 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/download_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/download_title"
@@ -44,14 +38,26 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <TextView
-        android:id="@+id/download_videoType"
+        android:id="@+id/download_videoID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+
+    <TextView
+        android:id="@+id/download_videoCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/download_videoSubCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     <TextView
         android:id="@+id/download_dateOfUploaded"
         android:layout_width="wrap_content"
@@ -66,7 +72,13 @@
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     <TextView
-        android:id="@+id/download_videoCategory"
+        android:id="@+id/download_categoryFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/download_subCategoryFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

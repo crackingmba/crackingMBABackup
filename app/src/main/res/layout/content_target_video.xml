@@ -36,7 +36,42 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/target_screentitle"
+                android:id="@+id/target_videoCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_subCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_thumbnailURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_categoryFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/target_subCategoryFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CAT2017 Preparation Quant Section"

@@ -32,28 +32,32 @@ public class HomeVideoViewAdapter extends RecyclerView
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView id;
+        TextView videoID;
         TextView videoTitle;
         TextView thumbnailURL;
         TextView videoURL;
-        TextView videoType;
         TextView dateOfUploaded;
         TextView videoDescription;
         ImageView thumbnail;
         TextView duration;
         TextView videoCategory;
+        TextView videoSubCategory;
+        TextView categoryFullName;
+        TextView subCategoryFullName;
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.home_thumbnail);
             duration = (TextView) itemView.findViewById(R.id.home_duration);
-            id = (TextView) itemView.findViewById(R.id.home_id);
+            videoID = (TextView) itemView.findViewById(R.id.home_videoID);
             videoTitle = (TextView) itemView.findViewById(R.id.home_videoTitle);
             thumbnailURL = (TextView) itemView.findViewById(R.id.home_thumbnailURL);
             videoURL = (TextView) itemView.findViewById(R.id.home_videoURL);
-            videoType = (TextView) itemView.findViewById(R.id.home_videoType);
+            videoCategory = (TextView) itemView.findViewById(R.id.home_videoCategory);
             dateOfUploaded = (TextView) itemView.findViewById(R.id.home_dateOfUploaded);
             videoDescription = (TextView) itemView.findViewById(R.id.home_videoDescription);
-            videoCategory = (TextView) itemView.findViewById(R.id.home_videoCategory);
+            videoSubCategory = (TextView) itemView.findViewById(R.id.home_videoSubCategory);
+            categoryFullName = (TextView) itemView.findViewById(R.id.home_categoryFullName);
+            subCategoryFullName = (TextView) itemView.findViewById(R.id.home_subCategoryFullName);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -85,19 +89,21 @@ public class HomeVideoViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        //holder.title.setText(mDataset.get(position).getVideoTitle());
-        //holder.thumbnailUrl.setImageURI(Uri.parse(mDataset.get(position).getThumbnailUrl()));
         Log.d(TAG,"in onBindViewHolder..");
-       // holder.thumbnail.setImageResource(R.drawable.img1);
-        holder.id.setText(mDataset.get(position).getVideoID());
+        holder.videoID.setText(mDataset.get(position).getVideoID());
         holder.duration.setText("Duration: "+mDataset.get(position).getDuration()+"m");
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
         holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.videoURL.setText(mDataset.get(position).getVideoURL());
-       // holder.videoType.setText("Latest Quant Prep Videos");
+        holder.videoSubCategory.setText(mDataset.get(position).getVideoSubCategory());
+        holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
+        holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+        holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+        holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
+        holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
         String thumbnailURL= mDataset.get(position).getThumbnailURL();
+        holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
         Bitmap mIcon11 = null;
-        // holder.thumbnail.setImageResource(R.drawable.img1);
         try {
             Log.d("suresh", CrackingConstant.MYPATH + thumbnailURL);
             AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
@@ -105,7 +111,6 @@ public class HomeVideoViewAdapter extends RecyclerView
         }
         catch (Exception e){
         }
-        holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
 
     }
 

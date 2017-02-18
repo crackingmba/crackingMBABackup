@@ -60,7 +60,8 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
 
 
         final ArrayList<SubCategories> results = new ArrayList<SubCategories>();
-        String url = "http://crackingmba.com/getSubCategories.php";
+        String url = "http://crackingmba.com/getSubCategories.php?category="+VideoApplication.sectionClicked;
+        Log.d(TAG,"Section Data"+url);
         try {
             AsyncHttpClient client = new AsyncHttpClient();
             client.get(url, null, new AsyncHttpResponseHandler() {
@@ -91,6 +92,7 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
                                         Intent weeksIntent=new Intent(getApplicationContext(),WeeksActivity.class);
                                        weeksIntent.putExtra("sectionSelected",scl.getName());
                                         weeksIntent.putExtra("headerTitle",headerTitle.getText());
+                                        weeksIntent.putExtra("subcategoryid",scl.getId());
                                         startActivity(weeksIntent);
                                        // Log.d(TAG, "set with week.."+scl);
                                         //VideoApplication.videoSelected = vdo;

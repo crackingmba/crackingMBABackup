@@ -53,8 +53,10 @@ public class TargetVideoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         videoList = VideoApplication.videoList;
+        Log.d(TAG, "Selected Video Details" + videoList);
         Log.d(TAG, "video url " + videoList.getVideoURL());
-        boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL().toString());
+       // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL().toString());
+        boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID().toString(),this);
         Log.d(TAG, "localavailablity in Target Video" + videoList.getVideoURL().toString());
         viewOnlineBtn = (Button) findViewById(R.id.target_viewinline);
         viewOnlineBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +121,11 @@ public class TargetVideoActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
         ((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
-        ((TextView) findViewById(R.id.target_screentitle)).setText(videoList.getVideoCategory());
+        ((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
+        ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
+        ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
+        ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
+        ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getThumbnailURL());
 
         try {
             Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
@@ -183,10 +189,9 @@ public class TargetVideoActivity extends AppCompatActivity {
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
 
 
-            boolean localavailablity = LocalVideoCheck.verifyLocalStorage(fileName);
+            boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID(),this);
 
             if (!localavailablity) {
-                // String fileName = "/video.mp4";
                 Log.d("suresh", "Entered into download video");
                 String filePath1 = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
                 File file1 = new File(filePath1);
@@ -196,12 +201,9 @@ public class TargetVideoActivity extends AppCompatActivity {
                 Uri destUri = Uri.fromFile(file);
                 request.setDestinationUri(destUri);
                 VideoList selectedVideo = VideoApplication.videoList;
-                VideoList videoDataObject = new VideoList();
-                selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getThumbnailURL());
-
+                selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getVideoURL());
                 selectedVideo.setThumbnailURL(CrackingConstant.MYPATH + "img/" + selectedVideo.getThumbnailURL());
                 selectedVideo.setVideoURL(fileName);
-                selectedVideo.setVideoID("2");
                 Log.d("suresh", "selectedVideo" + selectedVideo);
                 dbHelper.addDownloadVideo(selectedVideo);
                 viewOfflineBtn.setText("Downloading..");
@@ -232,10 +234,11 @@ public class TargetVideoActivity extends AppCompatActivity {
             request.setDestinationUri(destUri);
             VideoList selectedVideo = VideoApplication.videoList;
             VideoDataObject videoDataObject = new VideoDataObject();
-            selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getThumbnailURL());
+            selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getVideoURL());
 
             selectedVideo.setThumbnailURL(CrackingConstant.MYPATH + "img/" + selectedVideo.getThumbnailURL());
             selectedVideo.setVideoURL(file.toString());
+            dbHelper.addDownloadVideo(selectedVideo);
             viewOfflineBtn.setText("Downloading..");
             viewOfflineBtn.setEnabled(false);
             return downloadManager.enqueue(request);
@@ -247,7 +250,7 @@ public class TargetVideoActivity extends AppCompatActivity {
 
     public void deleteVideo() {
         //  String fileName = "video.3gp";
-        boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL());
+        boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID(),this);
         if (localavailablity)
 
         {

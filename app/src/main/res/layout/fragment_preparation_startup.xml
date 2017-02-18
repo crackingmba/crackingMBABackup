@@ -47,7 +47,8 @@
                     android:id="@+id/quantrow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_margin="5dp">
                     <ImageView
                         android:id="@+id/quantsection"
                         android:layout_width="80dp"
@@ -67,7 +68,8 @@
                     android:id="@+id/dirow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_margin="5dp">
                     <ImageView
                         android:id="@+id/diandlrsection"
                         android:layout_width="80dp"
@@ -88,7 +90,8 @@
                     android:id="@+id/verbalrow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_margin="5dp">
                     <ImageView
                         android:id="@+id/verbalsection"
                         android:layout_width="80dp"

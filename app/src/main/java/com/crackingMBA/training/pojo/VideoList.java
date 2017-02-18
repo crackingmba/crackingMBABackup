@@ -3,6 +3,7 @@ package com.crackingMBA.training.pojo;
 /**
  * Created by MSK on 06-02-2017.
  */
+
 public class VideoList {
 
     private String videoDescription;
@@ -22,6 +23,10 @@ public class VideoList {
     private String videoURL;
 
     private String thumbnailURL;
+
+    private String categoryFullName;
+
+    private String subCategoryFullName;
 
     public String getVideoDescription ()
     {
@@ -113,20 +118,39 @@ public class VideoList {
         this.thumbnailURL = thumbnailURL;
     }
 
+    public String getCategoryFullName() {
+        return categoryFullName;
+    }
+
+    public void setCategoryFullName(String categoryFullName) {
+        this.categoryFullName = categoryFullName;
+    }
+
+    public String getSubCategoryFullName() {
+        return subCategoryFullName;
+    }
+
+    public void setSubCategoryFullName(String subCategoryFullName) {
+        this.subCategoryFullName = subCategoryFullName;
+    }
+
     @Override
     public String toString()
     {
         return "ClassPojo [videoDescription = "+videoDescription+", videoID = "+videoID+", Duration = "+Duration+", videoSubCategory = "+videoSubCategory+", videoTitle = "+videoTitle+", videoCategory = "+videoCategory+", uploadDate = "+uploadDate+", videoURL = "+videoURL+", thumbnailURL = "+thumbnailURL+"]";
     }
-    public VideoList(String id, String videoTitle, String thumbnailURL, String videoURL, String videoType, String dateOdUploaded, String duration, String videoDescription) {
-        this.videoID = id;
+    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory,String videoSubCategory, String dateOdUploaded, String duration, String videoDescription,String categoryFullName,String subCategoryFullName) {
+        this.videoID = vidoID;
         this.videoTitle = videoTitle;
         this.thumbnailURL = thumbnailURL;
         this.videoURL = videoURL;
-        this.videoSubCategory= videoType;
+        this.videoCategory= videoCategory;
+        this.videoSubCategory= videoSubCategory;
         this.uploadDate = dateOdUploaded;
         this.Duration = duration;
         this.videoDescription = videoDescription;
+        this.categoryFullName=categoryFullName;
+        this.subCategoryFullName=subCategoryFullName;
     }
     public VideoList(){
 

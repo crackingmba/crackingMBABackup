@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
@@ -30,33 +31,33 @@ public class DownloadViewAdapter extends RecyclerView
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView title;
         ImageView thumbnailUrl;
-        TextView duration;
-        TextView id;
+        TextView videoID;
         TextView videoTitle;
         TextView thumbnailURL;
         TextView videoURL;
-        TextView videoType;
         TextView dateOfUploaded;
         TextView videoDescription;
-
-
+        ImageView thumbnail;
+        TextView duration;
+        TextView videoSubCategory;
+        TextView categoryFullName;
+        TextView subCategoryFullName;
         TextView videoCategory;
         public DataObjectHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.download_title);
-            thumbnailUrl = (ImageView) itemView.findViewById(R.id.download_thumbnail);
+            thumbnail = (ImageView) itemView.findViewById(R.id.download_thumbnail);
             duration = (TextView) itemView.findViewById(R.id.download_duration);
-
-            id = (TextView) itemView.findViewById(R.id.download_id);
-          //  videoTitle = (TextView) itemView.findViewById(R.id.download_videoTitle);
+            videoID = (TextView) itemView.findViewById(R.id.download_videoID);
+            videoTitle = (TextView) itemView.findViewById(R.id.download_title);
             thumbnailURL = (TextView) itemView.findViewById(R.id.download_thumbnailURL);
             videoURL = (TextView) itemView.findViewById(R.id.download_videoURL);
-            videoType = (TextView) itemView.findViewById(R.id.download_videoType);
+            videoCategory = (TextView) itemView.findViewById(R.id.download_videoCategory);
             dateOfUploaded = (TextView) itemView.findViewById(R.id.download_dateOfUploaded);
             videoDescription = (TextView) itemView.findViewById(R.id.download_videoDescription);
-            videoCategory = (TextView) itemView.findViewById(R.id.download_videoCategory);
+            videoSubCategory = (TextView) itemView.findViewById(R.id.download_videoSubCategory);
+            categoryFullName = (TextView) itemView.findViewById(R.id.download_categoryFullName);
+            subCategoryFullName = (TextView) itemView.findViewById(R.id.download_subCategoryFullName);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -88,33 +89,28 @@ public class DownloadViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        //holder.title.setText(mDataset.get(position).getVideoTitle());
-        //holder.thumbnailUrl.setImageURI(Uri.parse(mDataset.get(position).getThumbnailUrl()));
-        /*Log.d("DownloadviewAdapater","in onBindViewHolder..");
-        Log.d("DownloadviewAdapater",mDataset.get(position).getThumbnailURL());*/
-        File imgFile = new  File(mDataset.get(position).getThumbnailURL());
+        holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
         Bitmap myBitmap = BitmapFactory.decodeFile(mDataset.get(position).getThumbnailURL());
-
         try {
             Log.d("DownloadviewAdapater", mDataset.get(position).getThumbnailURL());
-            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnailUrl)
-                    .execute(mDataset.get(position).getThumbnailURL());
+            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
+                    .execute(/*CrackingConstant.MYPATH+"img/"+*/mDataset.get(position).getThumbnailURL());
         }
         catch (Exception e){
         }
        // holder.thumbnailUrl.setImageBitmap(myBitmap);
-        holder.title.setText(mDataset.get(position).getVideoTitle());
-        holder.duration.setText("Duration : "+mDataset.get(position).getDuration()+"m");
-
-
+        holder.videoID.setText(mDataset.get(position).getVideoID());
+        holder.duration.setText(mDataset.get(position).getDuration()+"m");
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
         holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.videoURL.setText(mDataset.get(position).getVideoURL());
-        // holder.videoType.setText("Latest Quant Prep Videos");
-       holder.thumbnailURL.setText( mDataset.get(position).getThumbnailURL());
-        holder.dateOfUploaded.setText( mDataset.get(position).getUploadDate());
-        holder.id.setText( mDataset.get(position).getVideoDescription());
-        holder.videoType.setText( mDataset.get(position).getVideoCategory());
+        holder.videoSubCategory.setText(mDataset.get(position).getVideoSubCategory());
+        holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
+        holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+    //    holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+        holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
+        holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
+
     }
 
     public void addItem(VideoList dataObj, int index) {
