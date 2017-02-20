@@ -1,0 +1,151 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.crackingMBA.training.StartMockTestActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:layout_width="90px"
+                android:layout_height="110px"
+                android:layout_gravity="left"
+                android:contentDescription="suresh"
+                android:src="@drawable/applogo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_activity_dashboard"
+                android:textSize="22sp"
+                android:textColor="@android:color/white"/>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/mocktest_test_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mock Test1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The following is the mock test for"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/mocktest_test_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ration &amp; Proportion"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User should be logged in to take this test"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rules"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/mocktest_test_noofqstns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. For each question there is 1 mark"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. For any incorrect answer there is -0.25 marks"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/mocktest_test_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5. You can view your results after clicking on Submit"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="6dp"
+                android:gravity="left"/>
+
+            <Button
+                android:id="@+id/mocktest_starttest_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/starttest_button"
+                android:textStyle="bold"
+                android:onClick="startTest"
+                android:layout_gravity="right"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invisible_button"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
