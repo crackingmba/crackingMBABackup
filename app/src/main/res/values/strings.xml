@@ -41,4 +41,27 @@
     <string name="title_activity_video_sub_category">My Sections</string>
     <string name="title_activity_weeks">List of Videos</string>
     <string name="title_activity_target_video">My Video</string>
+<string name="ask_a_qstn">Ask a Question</string>
+    <string name="enter_ur_qstn">Enter Your Question</string>
+    <string name="submit_qstn">Submit Question</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="registartion_txt">Registration</string>
+    <string name="email_txt">Email</string>
+    <string name="pwd_txt">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="register_txt">Register</string>
+    <string name="answer_heading">Here is the Reply For Your Question</string>
+    <string name="invisible_button">Invisible Button</string>
+    <string name="welcome_guest">Welcome Guest</string>
+    <string name="not_logged_in_msg">Oops! Looks like you are not yet logged in</string>
+    <string name="google_login">Google Login</string>
+    <string name="fb_login">Facebook Login</string>
+    <string name="app_login">Existing User Login</string>
+    <string name="new_user_register">New User Register</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout_txt">Logout</string>
+    <string name="my_messages">My Messages</string>
+    <string name="starttest_button">Start Test</string>
 </resources>

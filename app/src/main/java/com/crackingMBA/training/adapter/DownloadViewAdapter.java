@@ -100,7 +100,7 @@ public class DownloadViewAdapter extends RecyclerView
         }
        // holder.thumbnailUrl.setImageBitmap(myBitmap);
         holder.videoID.setText(mDataset.get(position).getVideoID());
-        holder.duration.setText(mDataset.get(position).getDuration()+"m");
+        holder.duration.setText(mDataset.get(position).getDuration());
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
         holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.videoURL.setText(mDataset.get(position).getVideoURL());

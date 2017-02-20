@@ -20,6 +20,27 @@
             android:name=".LoginActivity"
             android:label="@string/app_name" />
         <activity
+            android:name=".LogoutActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".AskQuestionActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".ShowAnswerActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".MockTestTestsActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".StartMockTestActivity"
+            android:label="@string/app_name"/>
+        <activity
             android:name=".DashboardActivity"
             android:icon="@drawable/home"
             android:logo="@drawable/home"

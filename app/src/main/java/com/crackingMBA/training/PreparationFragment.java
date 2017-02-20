@@ -9,6 +9,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -61,7 +62,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         this.inflater = inflater;
         this.container = container;
         Log.d(TAG, VideoApplication.videoSelected.getVideoType()+" is selected");
-        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         isMock = pref.getBoolean("isMock",false);
         String clicked = VideoApplication.videoSelected.getVideoType()==null ? "startup" : VideoApplication.videoSelected.getVideoType();
         if(clicked.equals("startup")){
