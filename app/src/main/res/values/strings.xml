@@ -41,7 +41,7 @@
     <string name="title_activity_video_sub_category">My Sections</string>
     <string name="title_activity_weeks">List of Videos</string>
     <string name="title_activity_target_video">My Video</string>
-<string name="ask_a_qstn">Ask a Question</string>
+    <string name="ask_a_qstn">Ask a Question</string>
     <string name="enter_ur_qstn">Enter Your Question</string>
     <string name="submit_qstn">Submit Question</string>
     <string name="first_name">First Name</string>
@@ -64,4 +64,12 @@
     <string name="logout_txt">Logout</string>
     <string name="my_messages">My Messages</string>
     <string name="starttest_button">Start Test</string>
+    <string name="submit_answer_button">Submit Answer</string>
+    <string name="skip_qstn__button">Skip &amp; Next Question</string>
+    <string name="prev_qstn__button">Previous Question</string>
+    <string name="testresult_headertxt">Congratulations! You have submitted the test. The following is your scorecard</string>
+    <string name="attempt_another_mocktest">Attempt another Mock Test</string>
+    <string name="review_answers">Review Answers</string>
+    <string name="reset_selection">Reset Selection</string>
+    <string name="view_scorecard">View ScoreCard</string>
 </resources>

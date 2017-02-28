@@ -1,0 +1,150 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.crackingMBA.training.StartMockTestActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:layout_width="90px"
+                android:layout_height="110px"
+                android:layout_gravity="left"
+                android:contentDescription="suresh"
+                android:src="@drawable/applogo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_activity_dashboard"
+                android:textSize="22sp"
+                android:textColor="@android:color/white"/>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/testresult_testTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:text="@string/testresult_headertxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/testresult_total_qstns_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/testresult_attempted_qstns_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/testresult_correcct_qstns_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/testresult_incorrect_qstns_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/testresult_totalmarks_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="left"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:stretchColumns="1">
+                <TableRow>
+                    <Button
+                        android:text="@string/attempt_another_mocktest"
+                        android:textStyle="bold"
+                        android:onClick="attemptAnotherTest"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:padding="10dip"
+                        android:layout_margin="8dip"
+                        android:layout_weight="1"
+                        android:textAlignment="viewStart"
+                        android:layout_gravity="start"
+                        />
+                    <Button
+                        android:text="@string/review_answers"
+                        android:textStyle="bold"
+                        android:onClick="reviewAnswers"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:padding="10dip"
+                        android:layout_margin="8dip"
+                        android:layout_weight="1"
+                        android:textAlignment="viewStart"
+                        android:layout_gravity="start"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invisible_button"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

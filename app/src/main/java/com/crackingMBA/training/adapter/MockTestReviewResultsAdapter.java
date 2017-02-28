@@ -1,41 +1,41 @@
 package com.crackingMBA.training.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.pojo.MockTestTest;
+import com.crackingMBA.training.pojo.ReviewResultPojo;
 
 import java.util.List;
 
 /**
  * Created by Harish on 1/31/2017.
  */
-public class MockTestTestsAdapter extends RecyclerView
-        .Adapter<MockTestTestsAdapter.DataObjectHolder> {
-    private static String LOG_TAG = "MockTestTestsAdapter";
-    private List<MockTestTest> mDataset;
+public class MockTestReviewResultsAdapter extends RecyclerView
+        .Adapter<MockTestReviewResultsAdapter.DataObjectHolder> {
+    private static String LOG_TAG = "MockTestReviewResultsAdapter";
+    private List<ReviewResultPojo> mDataset;
     private static MyClickListener myClickListener;
-    private static String TAG = "MockTestTestsAdapter";
+    private static String TAG = "MockTestReviewResultsAdapter";
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView mocktestTestId;
-        ImageView mockTestTestThumbnail;
-        TextView mocktestTestTxt;
+        TextView questionTxt;
+        TextView selectedAnswerTxt;
+        TextView correctAnswerTxt;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            mockTestTestThumbnail = (ImageView) itemView.findViewById(R.id.mocktest_test_thumbnail);
-            mocktestTestId = (TextView) itemView.findViewById(R.id.mocktest_test_id);
-            mocktestTestTxt = (TextView) itemView.findViewById(R.id.mocktest_test_title);
-            Log.i(LOG_TAG, "Adding Listener");
+            questionTxt = (TextView) itemView.findViewById(R.id.reviewanswers_questionTxt);
+            selectedAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_selectedAnswerTxt);
+            correctAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_correctAnswerTxt);
             itemView.setOnClickListener(this);
         }
 
@@ -49,7 +49,7 @@ public class MockTestTestsAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public MockTestTestsAdapter(List<MockTestTest> myDataset) {
+    public MockTestReviewResultsAdapter(List<ReviewResultPojo> myDataset) {
         mDataset = myDataset;
     }
 
@@ -58,7 +58,7 @@ public class MockTestTestsAdapter extends RecyclerView
                                                int viewType) {
         Log.d(TAG,"in onCreateViewHolder..");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.mocktest_testsview_layout, parent, false);
+                .inflate(R.layout.mocktest_reviewresultsview_layout, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -67,22 +67,16 @@ public class MockTestTestsAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(TAG,"in onBindViewHolder..");
-        holder.mocktestTestId.setText(mDataset.get(position).getTestId());
-        String mocktestTestThumbnailURL = mDataset.get(position).getTestThumbnailUrl();
-        holder.mocktestTestTxt.setText(mDataset.get(position).getTestTitle());
-
-        /*Bitmap mIcon11 = null;
-        try {
-            Log.d("suresh", CrackingConstant.MYPATH + mocktestTestThumbnailURL);
-            AsyncTask result = new DownloadImageTask((ImageView) holder.mockTestTestThumbnail)
-                    .execute(CrackingConstant.MYPATH +"img/"+mocktestTestThumbnailURL);
-        }
-        catch (Exception e){
-        }*/
-        holder.mockTestTestThumbnail.setImageResource(R.drawable.applogo);
+        holder.questionTxt.setText(mDataset.get(position).getQuestionTxt());
+        String yourAnsrTxt = mDataset.get(position).getSelectedAnswerTxt()==null ? CrackingConstant.NOT_ATTEMPTED : mDataset.get(position).getSelectedAnswerTxt()+" (Your Answer)";
+        holder.selectedAnswerTxt.setText(yourAnsrTxt);
+        //#AB0800 #3F9D2F
+        holder.selectedAnswerTxt.setTextColor(Color.rgb(171,8,0));
+        holder.correctAnswerTxt.setText(mDataset.get(position).getCorrectAnswerTxt()+" (Correct Answer)");
+        holder.correctAnswerTxt.setTextColor(Color.rgb(63,157,47));
     }
 
-    public void addItem(MockTestTest dataObj, int index) {
+    public void addItem(ReviewResultPojo dataObj, int index) {
         Log.d(TAG,"in addItem..");
         mDataset.add(dataObj);
         notifyItemInserted(index);

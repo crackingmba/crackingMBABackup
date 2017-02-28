@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.crackingMBA.training.StartMockTestActivity">
+    tools:context="com.crackingMBA.training.MockTestReviewAnswersActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -50,26 +50,28 @@
             android:layout_margin="15dp">
 
             <TextView
-                android:id="@+id/mocktest_topic_title"
+                android:id="@+id/reviewanswers_test_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="left"/>
 
+            <Button
+                android:id="@+id/reviewanswers_view_scorecard_btn"
+                style="?android:textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_scorecard"
+                android:layout_gravity="right"
+                android:onClick="viewScoreCard"/>
+
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/mocktest_test_recycler_view"
+                android:id="@+id/mocktest_reviewanswers_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textAlignment="center"
                 android:scrollbars="none" />
-
-            <TextView
-                android:id="@+id/mocktest_test_msg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="center"/>
 
         </LinearLayout>
     </ScrollView>

@@ -1,7 +1,5 @@
 package com.crackingMBA.training.pojo;
 
-import java.util.ArrayList;
-
 /**
  * Created by MSK on 06-02-2017.
  */
