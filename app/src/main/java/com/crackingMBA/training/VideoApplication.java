@@ -28,6 +28,8 @@ public class VideoApplication extends Application {
     public static MockTestQuestion selectedMockTestQuestion;
     public static VideoApplication currentInstance;
 
+    public static String subcategorySelected;
+    public static String videoURLSelected;
     @Override
     public void onCreate() {
         super.onCreate();

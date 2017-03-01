@@ -31,6 +31,7 @@ import com.crackingMBA.training.FullscreenActivity;
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.VideoApplication;
 import com.crackingMBA.training.WeeksActivity;
+import com.crackingMBA.training.YoutubeVideoActivity;
 import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
@@ -68,6 +69,8 @@ public class WeekVideoViewAdapter extends RecyclerView
         TextView categoryFullName;
         TextView subCategoryFullName;
         TextView videoCategory;
+        TextView videoYouTubeURL;
+        TextView videoDownloadURL;
         public DataObjectHolder(View itemView) {
             super(itemView);
 
@@ -83,7 +86,8 @@ public class WeekVideoViewAdapter extends RecyclerView
             videoDescription = (TextView) itemView.findViewById(R.id.week_videoDescription);
             categoryFullName = (TextView) itemView.findViewById(R.id.week_categoryFullName);
             subCategoryFullName = (TextView) itemView.findViewById(R.id.week_subCategoryFullName);
-
+            videoYouTubeURL = (TextView) itemView.findViewById(R.id.week_videoYouTubeURL);
+            videoDownloadURL = (TextView) itemView.findViewById(R.id.week_videoDownloadURL);
 
             viewOnlineBtn = (Button) itemView.findViewById(R.id.week_viewonline);
             viewOnlineBtn.setOnClickListener(this);
@@ -114,15 +118,18 @@ public class WeekVideoViewAdapter extends RecyclerView
         public void onClick(View v) {
             if (v.getId() == R.id.week_viewonline) {
                 Log.d("Suresh", "Clickd on View online button " + getPosition());
-                String clickedVideo = "video.mp4";
-                boolean localavailablity = LocalVideoCheck.verifyLocalStorage(clickedVideo);
 
-                Log.d("first", "Playing online..");
 
-                Intent intent = new Intent(myContext, FullscreenActivity.class);
-                intent.putExtra("clickedVideo", mDataset.get(getPosition()).getVideoURL());
+
+                Log.d("first", "Playing online.."+mDataset.get(getPosition()));
+
+                Intent intent = new Intent(myContext, YoutubeVideoActivity.class);
+
+
+                VideoApplication.videoList=mDataset.get(getPosition());
+                VideoApplication.videoList.setVideoYouTubeURL(mDataset.get(getPosition()).getVideoYouTubeURL());
                 boolean internetAvailblity= MyUtil.checkConnectivity(myContext);
-                Log.d("first","internet connnectivity lost");
+
                 if(internetAvailblity)
 
                     myContext.startActivity(intent);
@@ -249,7 +256,9 @@ public class WeekVideoViewAdapter extends RecyclerView
     }
 
     public WeekVideoViewAdapter(ArrayList<VideoList> myDataset,Activity activity) {
+
         mDataset = myDataset;
+        Log.d(LOG_TAG, "in WeekVideoViewAdapter.."+mDataset);
         myActivity=activity;
     }
 
@@ -271,20 +280,13 @@ public class WeekVideoViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        //holder.title.setText(mDataset.get(position).getVideoTitle());
-        //holder.thumbnailUrl.setImageURI(Uri.parse(mDataset.get(position).getThumbnailUrl()));
-        Log.d(LOG_TAG, "in onBindViewHolder..");
-        //   holder.thumbnail.setImageResource(R.drawable.img1);
 
+        Log.d(LOG_TAG, "in onBindViewHolder..mDataset.."+mDataset);
 
-        //holder.duration.setText("Duration : "+mDataset.get(position).getDuration()+"m");
         holder.videoID.setText(mDataset.get(position).getVideoID());
 
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
-       /* if(position==1)
-            holder.videoURL.setText("myvideo.mp4");
-        else*/
         holder.videoURL.setText(mDataset.get(position).getVideoURL());
         holder.videoCategory.setText(mDataset.get(position).getVideoCategory());
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
@@ -292,12 +294,11 @@ public class WeekVideoViewAdapter extends RecyclerView
         holder.videoSubCategory.setText(mDataset.get(position).getVideoSubCategory());
         holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
         holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
-
+        holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
+        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
         holder.duration.setText(mDataset.get(position).getDuration());
         Boolean videoAvailbllity;
-      /*  if(position==1)
-             videoAvailbllity = LocalVideoCheck.verifyLocalStorage("myvideo.mp4");
-        else*/
+
          videoAvailbllity = LocalVideoCheck.verifyLocalStorageByVideoID(mDataset.get(position).getVideoID(),myActivity);
         if (videoAvailbllity) {
             holder.deleteOfflineBtn.setText("Delete");

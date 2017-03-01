@@ -28,6 +28,17 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center"/>
 
+
+        <TextView
+
+            android:id="@+id/SubCatNotAvailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Currently No video available in this category"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/section_recycler_view2"
             android:layout_width="match_parent"

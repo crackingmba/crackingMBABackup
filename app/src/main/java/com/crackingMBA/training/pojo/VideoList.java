@@ -28,6 +28,11 @@ public class VideoList {
 
     private String subCategoryFullName;
 
+    private String videoDownloadURL;
+
+    private String videoYouTubeURL;
+
+
     public String getVideoDownloadURL() {
         return videoDownloadURL;
     }
@@ -43,10 +48,6 @@ public class VideoList {
     public void setVideoYouTubeURL(String videoYouTubeURL) {
         this.videoYouTubeURL = videoYouTubeURL;
     }
-
-    private String videoDownloadURL;
-
-    private String videoYouTubeURL;
 
 
     public String getVideoDescription ()
@@ -156,11 +157,25 @@ public class VideoList {
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [videoDescription = "+videoDescription+", videoID = "+videoID+", Duration = "+Duration+", videoSubCategory = "+videoSubCategory+", videoTitle = "+videoTitle+", videoCategory = "+videoCategory+", uploadDate = "+uploadDate+", videoURL = "+videoURL+", thumbnailURL = "+thumbnailURL+"]";
+    public String toString() {
+        return "VideoList{" +
+                "videoDescription='" + videoDescription + '\'' +
+                ", videoID='" + videoID + '\'' +
+                ", Duration='" + Duration + '\'' +
+                ", videoSubCategory='" + videoSubCategory + '\'' +
+                ", videoTitle='" + videoTitle + '\'' +
+                ", videoCategory='" + videoCategory + '\'' +
+                ", uploadDate='" + uploadDate + '\'' +
+                ", videoURL='" + videoURL + '\'' +
+                ", thumbnailURL='" + thumbnailURL + '\'' +
+                ", categoryFullName='" + categoryFullName + '\'' +
+                ", subCategoryFullName='" + subCategoryFullName + '\'' +
+                ", videoDownloadURL='" + videoDownloadURL + '\'' +
+                ", videoYouTubeURL='" + videoYouTubeURL + '\'' +
+                '}';
     }
-    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory,String videoSubCategory, String dateOdUploaded, String duration, String videoDescription,String categoryFullName,String subCategoryFullName,String videoYouTubeURL,String videoDownloadURL) {
+
+    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory, String videoSubCategory, String dateOdUploaded, String duration, String videoDescription, String categoryFullName, String subCategoryFullName, String videoYouTubeURL, String videoDownloadURL) {
         this.videoID = vidoID;
         this.videoTitle = videoTitle;
         this.thumbnailURL = thumbnailURL;

@@ -61,45 +61,54 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
 
         final ArrayList<SubCategories> results = new ArrayList<SubCategories>();
         String url = "http://crackingmba.com/getSubCategories.php?category="+VideoApplication.sectionClicked;
+
         Log.d(TAG,"Section Data"+url);
         try {
             AsyncHttpClient client = new AsyncHttpClient();
             client.get(url, null, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(String response) {
-                    Log.d(TAG,"Response is : "+response);
+                    Log.d(TAG, "Response is : " + response);
                     Gson gson = new Gson();
-                    SubCategories subCategories = gson.fromJson(response,SubCategories.class);
-                    Log.d(TAG,"subCategories : "+subCategories);
-                    sectionAdapter = new SectionVideoViewAdapter(subCategories.getSubCatList());
-                    recyclerView.setAdapter(sectionAdapter);
-                    RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-                    recyclerView.addItemDecoration(itemDecoration);
-                    headerTitle= ((TextView)findViewById(R.id.SubCatTitle));
-                    headerTitle.setText(subCategories.getSubCatTitle());
+                    SubCategories subCategories = gson.fromJson(response, SubCategories.class);
+                    Log.d(TAG, "subCategories : " + subCategories);
+                    if (subCategories.getSubCatList() != null) {
+                        sectionAdapter = new SectionVideoViewAdapter(subCategories.getSubCatList());
+                        recyclerView.setAdapter(sectionAdapter);
+                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+                        recyclerView.addItemDecoration(itemDecoration);
+                        headerTitle = ((TextView) findViewById(R.id.SubCatTitle));
+                        headerTitle.setText(subCategories.getSubCatTitle());
 
 
-                    if (null != sectionAdapter) {
-                        ((SectionVideoViewAdapter) sectionAdapter).setOnItemClickListener(
-                                new SectionVideoViewAdapter.MyClickListener() {
-                                    @Override
-                                    public void onItemClick(int position, View v) {
-                                        Log.d(TAG, "Video Sub Cateogry, Clicked item at position : " + position);
-                                        //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
-                                        SubCatList scl = populateSubCastList(v);
-                                        Log.d(TAG, "Selected Video Category : " + scl.getName());
+                        if (null != sectionAdapter) {
+                            ((SectionVideoViewAdapter) sectionAdapter).setOnItemClickListener(
+                                    new SectionVideoViewAdapter.MyClickListener() {
+                                        @Override
+                                        public void onItemClick(int position, View v) {
+                                            Log.d(TAG, "Video Sub Cateogry, Clicked item at position : " + position);
+                                            //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
+                                            SubCatList scl = populateSubCastList(v);
+                                            Log.d(TAG, "Selected Video Category : " + scl.getName());
 
-                                        Intent weeksIntent=new Intent(getApplicationContext(),WeeksActivity.class);
-                                       weeksIntent.putExtra("sectionSelected",scl.getName());
-                                        weeksIntent.putExtra("headerTitle",headerTitle.getText());
-                                        weeksIntent.putExtra("subcategoryid",scl.getId());
-                                        startActivity(weeksIntent);
-                                       // Log.d(TAG, "set with week.."+scl);
-                                        //VideoApplication.videoSelected = vdo;
-                                        //getFragmentManager().beginTransaction().replace(container.getId(), newFrag).commit();
+                                            Intent weeksIntent = new Intent(getApplicationContext(), WeeksActivity.class);
+                                            weeksIntent.putExtra("sectionSelected", scl.getName());
+                                            weeksIntent.putExtra("headerTitle", headerTitle.getText());
+                                            weeksIntent.putExtra("subcategoryid", scl.getId());
+                                            weeksIntent.putExtra("subcategoryid", scl.getName());
+                                            VideoApplication.subcategorySelected=scl.getName();
+                                            startActivity(weeksIntent);
+                                            // Log.d(TAG, "set with week.."+scl);
+                                            //VideoApplication.videoSelected = vdo;
+                                            //getFragmentManager().beginTransaction().replace(container.getId(), newFrag).commit();
+                                        }
                                     }
-                                }
-                        );
+                            );
+                        }
+                    }
+                    else{
+                        (( TextView) findViewById(R.id.SubCatNotAvailable)).setVisibility(View.VISIBLE);
+                        Log.d(TAG,"There is no subcategories for the category selected");
                     }
                 }
 

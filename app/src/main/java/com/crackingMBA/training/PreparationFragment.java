@@ -70,7 +70,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow);
+            TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow1);
             TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);
             TableRow verbalRow = (TableRow) rootView.findViewById(R.id.verbalrow);
             quantRow.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         Fragment newFrag = null;
         Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
         switch (v.getId()){
-            case R.id.quantrow:
+            case R.id.quantrow1:
                 VideoApplication.sectionClicked="quant";
                 dashboardIntent.putExtra("sectionaName","quant");
                 break;

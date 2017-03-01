@@ -71,6 +71,7 @@ public class WeeksActivity extends AppCompatActivity {
         myWeeksActivity=this;
         Log.d(TAG, "headerTitle" + headerTitle);
         ((TextView) findViewById(R.id.weeksTitleHeader)).setText(headerTitle.toString());
+        ((TextView) findViewById(R.id.Weeks_noVideo)).setVisibility(View.VISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -103,9 +104,10 @@ public class WeeksActivity extends AppCompatActivity {
 
     private void getWeeksData() {
 
-
+        String category=VideoApplication.sectionClicked;
+        String subcategory=VideoApplication.subcategorySelected;
         final ArrayList<VideoListModel> results = new ArrayList<VideoListModel>();
-        String url = "http://crackingmba.com/getVideoList.php?subcategory_id=" + subcategoryid;
+        String url = "http://crackingmba.com/getVideoList.php?category="+category+"&subcategory=" + subcategory;
         Log.d(TAG,"Get Video List for Subcateogry url "+ url);
         try {
             AsyncHttpClient client = new AsyncHttpClient();
@@ -116,6 +118,7 @@ public class WeeksActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                     //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
+                    if(videoListModel!=null){
                     weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(),myWeeksActivity);
                     recyclerView.setAdapter(weekAdapter);
                     RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
@@ -136,6 +139,9 @@ public class WeeksActivity extends AppCompatActivity {
                                     }
                                 }
                         );
+                    }}
+                    else{
+                        Log.d(TAG,"No videos available in this category  ");
                     }
                 }
 
@@ -178,6 +184,8 @@ public class WeeksActivity extends AppCompatActivity {
         TextView videoCategory = (TextView) v.findViewById(R.id.week_videoCategory);
         TextView subCategoryFullName = (TextView) v.findViewById(R.id.week_subCategoryFullName);
         TextView categoryFullName = (TextView) v.findViewById(R.id.week_categoryFullName);
+        TextView youtubeURL = (TextView) v.findViewById(R.id.week_videoYouTubeURL);
+        TextView downloadURL = (TextView) v.findViewById(R.id.week_videoDownloadURL);
         vdo.setVideoURL(videourl.getText().toString());
         vdo.setVideoTitle(title.getText().toString());
         vdo.setThumbnailURL(thumbnail.getText().toString());
@@ -190,6 +198,8 @@ public class WeeksActivity extends AppCompatActivity {
         vdo.setCategoryFullName(categoryFullName.getText().toString());
         vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
         vdo.setUploadDate(uploadDate.getText().toString());
+        vdo.setVideoYouTubeURL(youtubeURL.getText().toString());
+        vdo.setVideoDownloadURL(downloadURL.getText().toString());
         return vdo;
     }
 

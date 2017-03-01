@@ -65,7 +65,7 @@ public class YoutubeVideoActivity extends YouTubeBaseActivity implements
 			// Use loadVideo() method, if you want to play it automatically
 			//player.cueVideo(CrackingConstant.YOUTUBE_VIDEO_CODE);
 			VideoList videoList= VideoApplication.videoList;
-			player.cueVideo(videoList.getVideoDownloadURL());
+			player.cueVideo(videoList.getVideoYouTubeURL());
 			// Hiding player controls
 			player.setPlayerStyle(PlayerStyle.DEFAULT);
 		}

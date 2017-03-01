@@ -57,7 +57,7 @@ public class TargetVideoActivity extends AppCompatActivity {
         Log.d(TAG, "video url " + videoList.getVideoURL());
        // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL().toString());
         boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID().toString(),this);
-        Log.d(TAG, "localavailablity in Target Video" + videoList.getVideoURL().toString());
+       // Log.d(TAG, "localavailablity in Target Video" + videoList.getVideoURL().toString());
         viewOnlineBtn = (Button) findViewById(R.id.target_viewinline);
         viewOnlineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +165,7 @@ public class TargetVideoActivity extends AppCompatActivity {
 
     public void viewOnline() {
         String clickedVideo = videoList.getVideoURL();
-         boolean localavailablity = LocalVideoCheck.verifyLocalStorage(clickedVideo);
+
 
         Log.d("first", "Playing Video..videoList.getVideoYouTubeURL()" + videoList.getVideoYouTubeURL());
 
@@ -179,7 +179,7 @@ public class TargetVideoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullscreenActivity.class);
         //  intent.putExtra("localavailblity", localavailablity);
         intent.putExtra("clickedVideo", clickedVideo);*/
-        startActivity(intent);
+      //  startActivity(intent);
 
     }
 
