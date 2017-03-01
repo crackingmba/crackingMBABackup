@@ -215,7 +215,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__QUANT_SERVICE_URL, null, new AsyncHttpResponseHandler() {
+                client.get(CrackingConstant.GETVIDEOLIST_SERVICE_URL__QUANT_SERVICE_URL, null, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         Log.d(TAG, "Response is : " + response);

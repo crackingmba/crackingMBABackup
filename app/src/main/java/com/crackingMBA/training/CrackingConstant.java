@@ -14,7 +14,7 @@ public class CrackingConstant {
     public static final String QUAT_CODE="quant";
     public static final String VERBAL_CODE="verbal";
     public static final String DILR_CODE="dilr";
-    public static final String HOME_TAB_GETVIDEOLIST
+    public static final String HOME_TAB_GETVIDEOLIST="";
     public static final String GETVIDEOLIST_SERVICE_URL__QUANT_SERVICE_URL="http://www.crackingmba.com/getVideoList.php?category=quant&subcategory=recent";
     public static final String HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL="http://www.crackingmba.com/getVideoList.php?category=dilr&subcategory=recent";
     public static final String HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL="http://www.crackingmba.com/getVideoList.php?category=verbal&subcategory=recent";
