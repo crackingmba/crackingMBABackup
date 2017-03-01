@@ -1,70 +1,119 @@
 package com.crackingMBA.training;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.MockTestTestsAdapter;
 import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.MockTestTestsModel;
-import com.crackingMBA.training.pojo.VideoListModel;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MockTestTestsActivity extends AppCompatActivity {
     private static String TAG = "MockTestTestsActivity";
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
+    private TextView msg;
     boolean isMock;
     private static List<MockTestTest> tests;
-    public static Map<String,MockTestTest> mockTestsMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mocktest_tests);
-        ((TextView) findViewById(R.id.mocktest_topic_title)).setText("CAT2017 Mock Test for "+VideoApplication.selectedMockTestTopic.getMocktestTopicTxt());
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        isMock = pref.getBoolean("isMock", false);
+
+        ((TextView) findViewById(R.id.mocktest_topic_title)).setText(VideoApplication.selectedMockTestTopicTitle);
+        msg = (TextView) findViewById(R.id.mocktest_test_msg);
         recyclerView=(RecyclerView)findViewById(R.id.mocktest_test_recycler_view);
         recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
-        getMockTestTestsData(VideoApplication.selectedMockTestTopic.getMocktestTopicId());
+        getMockTestTestsData(VideoApplication.selectedMockTestTopic.getId());
     }
 
     private void getMockTestTestsData(String topicId) {
 
-        isMock = true;
+        Log.d(TAG,"isMock="+isMock);
         if(isMock){
             populateMockMockTestsData();
+            mAdapter = new MockTestTestsAdapter(tests);
+            recyclerView.setAdapter(mAdapter);
+            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+            recyclerView.addItemDecoration(itemDecoration);
+
+            if (null != mAdapter) {
+                ((MockTestTestsAdapter) mAdapter).setOnItemClickListener(
+                        new MockTestTestsAdapter.MyClickListener() {
+                            @Override
+                            public void onItemClick(int position, View v) {
+                                Log.d(TAG, "MockTestTestsAdapter, Clicked item at position : " + position);
+                                VideoApplication.selectedMockTestTest = tests.get(position);
+                                //Populate allQuestions for this test -- code to be changes according to service
+                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                                startActivity(startIntent);
+                                Log.d(TAG, "MockTestTest.." + VideoApplication.selectedMockTestTest);
+                            }
+                        }
+                );
+            }
         }else {
-            String url = "http://crackingmba.com/getVideoList.php?subcategory_id=ratio";
+            //Populate request parameters
+            RequestParams params = new RequestParams();
+            params.add("subcatID",topicId);
             try {
+                Log.d(TAG,"serviceUrl="+CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL);
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(url, null, new AsyncHttpResponseHandler() {
+                client.get(CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         Log.d(TAG, "Response is : " + response);
                         Gson gson = new Gson();
                         MockTestTestsModel model = gson.fromJson(response, MockTestTestsModel.class);
-                        tests = model.getTests();
+                        Log.d(TAG,"model retrieved is "+model);
+                        if(null == model || model.getMockTestList().size()==0){
+                            msg.setText("No Tests are available under this topic..");
+                            return;
+                        }
+                        tests = model.getMockTestList();
                         Log.d(TAG, "MockTestTests : " + tests);
+                        mAdapter = new MockTestTestsAdapter(tests);
+                        recyclerView.setAdapter(mAdapter);
+                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+                        recyclerView.addItemDecoration(itemDecoration);
+
+                        if (null != mAdapter) {
+                            ((MockTestTestsAdapter) mAdapter).setOnItemClickListener(
+                                    new MockTestTestsAdapter.MyClickListener() {
+                                        @Override
+                                        public void onItemClick(int position, View v) {
+                                            Log.d(TAG, "MockTestTestsAdapter, Clicked item at position : " + position);
+                                            VideoApplication.selectedMockTestTest = tests.get(position);
+                                            //Populate allQuestions for this test -- code to be changes according to service
+                                            Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                                            startActivity(startIntent);
+                                            Log.d(TAG, "MockTestTest.." + VideoApplication.selectedMockTestTest);
+                                        }
+                                    }
+                            );
+                        }
                     }
 
                     @Override
@@ -84,45 +133,14 @@ public class MockTestTestsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-        populateMockTestsMap();
-
-        mAdapter = new MockTestTestsAdapter(tests);
-        recyclerView.setAdapter(mAdapter);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
-
-        if (null != mAdapter) {
-            ((MockTestTestsAdapter) mAdapter).setOnItemClickListener(
-                    new MockTestTestsAdapter.MyClickListener() {
-                        @Override
-                        public void onItemClick(int position, View v) {
-                            Log.d(TAG, "MockTestTestsAdapter, Clicked item at position : " + position);
-                            Log.d(TAG,mockTestsMap.toString());
-                            String testId = ((TextView)v.findViewById(R.id.mocktest_test_id)).getText().toString();
-                            Log.d(TAG,"Test Id = "+testId);
-                            VideoApplication.selectedMockTestTest = mockTestsMap.get(testId);
-                            Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                            startActivity(startIntent);
-                            Log.d(TAG, "MockTestTest.." + VideoApplication.selectedMockTestTest);
-                        }
-                    }
-            );
-        }
     }
 
     private void populateMockMockTestsData(){
         tests = new ArrayList<>();
-        MockTestTest test1 = new MockTestTest("test1","","Mock Test1","Ratio & Proportion","10","10");
-        MockTestTest test2 = new MockTestTest("test2","","Mock Test2","Simple Interest","10","10");
+        MockTestTest test1 = new MockTestTest("test1","","Mock Test1","Ratio & Proportion");
+        MockTestTest test2 = new MockTestTest("test2","","Mock Test2","Simple Interest");
         tests.add(test1);
         tests.add(test2);
     }
 
-    private void populateMockTestsMap(){
-        mockTestsMap = new HashMap<>();
-        for(MockTestTest test : tests){
-            mockTestsMap.put(test.getMocktestTestId(),test);
-        }
-    }
 }

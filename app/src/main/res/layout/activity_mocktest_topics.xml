@@ -50,14 +50,14 @@
             android:layout_margin="15dp">
 
             <TextView
-                android:id="@+id/mocktest_topic_title"
+                android:id="@+id/mocktest_topic_sectiontitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="left"/>
+                android:gravity="center"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/mocktest_test_recycler_view"
+                android:id="@+id/mocktest_topics_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -65,7 +65,7 @@
                 android:scrollbars="none" />
 
             <TextView
-                android:id="@+id/mocktest_test_msg"
+                android:id="@+id/mocktest_topic_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"

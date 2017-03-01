@@ -5,71 +5,61 @@ package com.crackingMBA.training.pojo;
  */
 public class MockTestTest {
 
-    private String mocktestTestId;
-    private String mocktestTestThumbnailURL;
-    private String mocktestTestTitle;
-    private String mockTestTopicTxt;
-    private String mockTestNoOfQstns;
-    private String mockTestDuration;
+    private String testId;
+    private String mtSubCatId;
+    private String testThumbnailUrl;
+    private String testTitle;
 
     public MockTestTest(){
 
     }
 
-    public MockTestTest(String mocktestTestId, String mocktestTestThumbnailURL, String mocktestTestTitle, String mockTestTopicTxt, String mockTestNoOfQstns, String mockTestDuration) {
-        this.mocktestTestId = mocktestTestId;
-        this.mocktestTestThumbnailURL = mocktestTestThumbnailURL;
-        this.mocktestTestTitle = mocktestTestTitle;
-        this.mockTestTopicTxt = mockTestTopicTxt;
-        this.mockTestNoOfQstns = mockTestNoOfQstns;
-        this.mockTestDuration = mockTestDuration;
+    public MockTestTest(String testId, String mtSubCatId, String testThumbnailUrl, String testTitle) {
+        this.testId = testId;
+        this.mtSubCatId = mtSubCatId;
+        this.testThumbnailUrl = testThumbnailUrl;
+        this.testTitle = testTitle;
     }
 
-    public String getMocktestTestId() {
-        return mocktestTestId;
+    public String getTestId() {
+        return testId;
     }
 
-    public void setMocktestTestId(String mocktestTestId) {
-        this.mocktestTestId = mocktestTestId;
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 
-    public String getMocktestTestThumbnailURL() {
-        return mocktestTestThumbnailURL;
+    public String getMtSubCatId() {
+        return mtSubCatId;
     }
 
-    public void setMocktestTestThumbnailURL(String mocktestTestThumbnailURL) {
-        this.mocktestTestThumbnailURL = mocktestTestThumbnailURL;
+    public void setMtSubCatId(String mtSubCatId) {
+        this.mtSubCatId = mtSubCatId;
     }
 
-    public String getMocktestTestTitle() {
-        return mocktestTestTitle;
+    public String getTestThumbnailUrl() {
+        return testThumbnailUrl;
     }
 
-    public void setMocktestTestTitle(String mocktestTestTitle) {
-        this.mocktestTestTitle = mocktestTestTitle;
+    public void setTestThumbnailUrl(String testThumbnailUrl) {
+        this.testThumbnailUrl = testThumbnailUrl;
     }
 
-    public String getMockTestTopicTxt() {
-        return mockTestTopicTxt;
+    public String getTestTitle() {
+        return testTitle;
     }
 
-    public void setMockTestTopicTxt(String mockTestTopicTxt) {
-        this.mockTestTopicTxt = mockTestTopicTxt;
+    public void setTestTitle(String testTitle) {
+        this.testTitle = testTitle;
     }
 
-    public String getMockTestNoOfQstns() {
-        return mockTestNoOfQstns;
-    }
-
-    public void setMockTestNoOfQstns(String mockTestNoOfQstns) {
-        this.mockTestNoOfQstns = mockTestNoOfQstns;
-    }
-
-    public String getMockTestDuration() {
-        return mockTestDuration;
-    }
-
-    public void setMockTestDuration(String mockTestDuration) {
-        this.mockTestDuration = mockTestDuration;
+    @Override
+    public String toString() {
+        return "MockTestTest{" +
+                "testId='" + testId + '\'' +
+                ", mtSubCatId='" + mtSubCatId + '\'' +
+                ", testThumbnailUrl='" + testThumbnailUrl + '\'' +
+                ", testTitle='" + testTitle + '\'' +
+                '}';
     }
 }

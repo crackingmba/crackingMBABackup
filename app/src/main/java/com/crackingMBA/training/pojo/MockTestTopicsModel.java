@@ -6,13 +6,30 @@ import java.util.ArrayList;
  * Created by Harish on 2/18/2017.
  */
 public class MockTestTopicsModel {
-    private ArrayList<MockTestTopic> topics;
+    private String mTSubCatTitle;
+    private ArrayList<MockTestTopic> mTSubCatList;
 
-    public ArrayList<MockTestTopic> getTopics() {
-        return topics;
+    public String getmTSubCatTitle() {
+        return mTSubCatTitle;
     }
 
-    public void setTopics(ArrayList<MockTestTopic> topics) {
-        this.topics = topics;
+    public void setmTSubCatTitle(String mTSubCatTitle) {
+        this.mTSubCatTitle = mTSubCatTitle;
+    }
+
+    public ArrayList<MockTestTopic> getmTSubCatList() {
+        return mTSubCatList;
+    }
+
+    public void setmTSubCatList(ArrayList<MockTestTopic> mTSubCatList) {
+        this.mTSubCatList = mTSubCatList;
+    }
+
+    @Override
+    public String toString() {
+        return "MockTestTopicsModel{" +
+                "mTSubCatTitle='" + mTSubCatTitle + '\'' +
+                ", mTSubCatList=" + mTSubCatList +
+                '}';
     }
 }

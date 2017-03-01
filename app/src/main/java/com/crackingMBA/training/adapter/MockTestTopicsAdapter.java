@@ -1,7 +1,5 @@
 package com.crackingMBA.training.adapter;
 
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
-import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.MockTestTopic;
-import com.crackingMBA.training.pojo.VideoList;
+
+import java.util.List;
 
 /**
  * Created by Harish on 1/31/2017.
@@ -71,9 +67,9 @@ public class MockTestTopicsAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(TAG,"in onBindViewHolder..");
-        holder.mocktestTopicId.setText(mDataset.get(position).getMocktestTopicId());
-        String mocktestTopicThumbnailURL = mDataset.get(position).getMocktestTopicThumbnailURL();
-        holder.mocktestTopicTxt.setText(mDataset.get(position).getMocktestTopicTxt());
+        holder.mocktestTopicId.setText(mDataset.get(position).getId());
+        String mocktestTopicThumbnailURL = mDataset.get(position).getThumbnail();
+        holder.mocktestTopicTxt.setText(mDataset.get(position).getName());
 
         /*Bitmap mIcon11 = null;
         try {
@@ -83,7 +79,7 @@ public class MockTestTopicsAdapter extends RecyclerView
         }
         catch (Exception e){
         }*/
-        holder.mockTestTopicThumbnail.setImageResource(R.drawable.img1);
+        holder.mockTestTopicThumbnail.setImageResource(R.drawable.applogo);
     }
 
     public void addItem(MockTestTopic dataObj, int index) {

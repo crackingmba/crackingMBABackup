@@ -1,55 +1,68 @@
 package com.crackingMBA.training.pojo;
 
-import android.widget.TextView;
-
 /**
  * Created by MSK on 06-02-2017.
  */
 public class MockTestTopic {
 
-    private String mocktestTopicId;
+    private String id;
 
-    private String mocktestTopicThumbnailURL;
+    private String category_name;
 
-    private String mocktestTopicTxt;
+    private String name;
+
+    private String thumbnail;
 
     public MockTestTopic(){
 
     }
 
-    public MockTestTopic(String mocktestTopicId, String mocktestTopicThumbnailURL, String mocktestTopicTxt) {
-        this.mocktestTopicId = mocktestTopicId;
-        this.mocktestTopicThumbnailURL = mocktestTopicThumbnailURL;
-        this.mocktestTopicTxt = mocktestTopicTxt;
+    public MockTestTopic(String id, String category_name, String name, String thumbnail) {
+        this.id = id;
+        this.category_name = category_name;
+        this.name = name;
+        this.thumbnail = thumbnail;
     }
 
-    public String getMocktestTopicId() {
-        return mocktestTopicId;
+    public String getId() {
+        return id;
     }
 
-    public void setMocktestTopicId(String mocktestTopicId) {
-        this.mocktestTopicId = mocktestTopicId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getMocktestTopicThumbnailURL() {
-        return mocktestTopicThumbnailURL;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setMocktestTopicThumbnailURL(String mocktestTopicThumbnailURL) {
-        this.mocktestTopicThumbnailURL = mocktestTopicThumbnailURL;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
-    public String getMocktestTopicTxt() {
-        return mocktestTopicTxt;
+    public String getName() {
+        return name;
     }
 
-    public void setMocktestTopicTxt(String mocktestTopicTxt) {
-        this.mocktestTopicTxt = mocktestTopicTxt;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     @Override
-    public String toString()
-    {
-        return "MockTestTopic [mocktestTopicId = "+mocktestTopicId+", mocktestTopicThumbnailURL = "+mocktestTopicThumbnailURL+", mocktestTopicTxt = "+mocktestTopicTxt+"]";
+    public String toString() {
+        return "MockTestTopic{" +
+                "id='" + id + '\'' +
+                ", category_name='" + category_name + '\'' +
+                ", name='" + name + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                '}';
     }
 }

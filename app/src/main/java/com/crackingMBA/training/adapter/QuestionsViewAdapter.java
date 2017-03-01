@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.Qstns;
+
+import java.util.List;
 
 /**
  * Created by Harish on 1/31/2017.
