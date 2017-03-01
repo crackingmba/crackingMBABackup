@@ -8,10 +8,9 @@
 
 
 
-            <VideoView
-                android:id="@+id/surfacevideo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
+          <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_view1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+             />
 </LinearLayout>

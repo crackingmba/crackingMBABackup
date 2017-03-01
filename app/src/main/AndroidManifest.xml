@@ -38,6 +38,14 @@
             android:name=".MockTestTestsActivity"
             android:label="@string/app_name"/>
         <activity
+            android:name=".YoutubeVideoActivity"
+            android:label="@string/app_name"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".TargetVideoActivity"/></activity>
+        <activity
             android:name=".StartMockTestActivity"
             android:label="@string/app_name"/>
         <activity

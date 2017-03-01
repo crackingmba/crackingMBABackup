@@ -19,6 +19,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import java.io.File;
 
 import com.crackingMBA.training.validator.LocalVideoCheck;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -45,6 +46,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     MediaController controller;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -115,10 +117,10 @@ public class FullscreenActivity extends AppCompatActivity {
         Log.d("first","clickedVideo flag.."+fileName);
 
         Boolean videoAvailbllity = LocalVideoCheck.verifyLocalStorage(fileName);
-
+        videoAvailbllity=true;
         Log.d("first","Video availibity flag.."+videoAvailbllity);
 
-        String filePath=null;
+        String filePath="x";
         if (videoAvailbllity){
              filePath = CrackingConstant.localstoragepath+CrackingConstant.myFolder+CrackingConstant.noMedia+fileName;
 
@@ -131,7 +133,7 @@ public class FullscreenActivity extends AppCompatActivity {
         {
             filePath=CrackingConstant.MYPATH+"videos/"+fileName;
            // filePath="http://3gp.telugump4.org/med/Chikki_Chikki_Bam_Bam_-_Aadhi_(HD_DTH_Rip).3gp";
-       filePath="http://crackingmba.com/videos/video.mp4";
+     //  filePath="http://crackingmba.com/videos/video.mp4";
             Uri fullUri = Uri.parse(filePath);
             surfaceView.setVideoURI(fullUri);
 

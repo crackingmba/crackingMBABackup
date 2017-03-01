@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.crackingMBA.training.pojo.VideoList;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.crackingMBA.training.pojo.VideoDataObject;
-import com.crackingMBA.training.pojo.VideoList;
 
 /**
  * Created by MSK on 05-02-2017.
@@ -20,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "CrackingMBA";
@@ -29,26 +28,29 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_DOWNLOAD = "DownloadVideosTable";
 
     // Contacts Table Columns names
-    private String id="videoID";
-    private String videoTitle="videoTitle";
-    private String thumbnailURL="thumbnailURL";
-    private String videoURL="videoURL";
-    private String videoCategory="videoCategory";
-    private String videoSubCategory="videoSubCategory";
-    private String uploadedDate="uploadedDate";
-    private String duration="duration";
-    private String videoDescription="videoDescription";
-    private String categoryFullName="categoryFullName";
-    private String subCategoryFullName="subCategoryFullName";
+    private String id = "videoID";
+    private String videoTitle = "videoTitle";
+    private String thumbnailURL = "thumbnailURL";
+    private String videoURL = "videoURL";
+    private String videoCategory = "videoCategory";
+    private String videoSubCategory = "videoSubCategory";
+    private String uploadedDate = "uploadedDate";
+    private String duration = "duration";
+    private String videoDescription = "videoDescription";
+    private String categoryFullName = "categoryFullName";
+    private String subCategoryFullName = "subCategoryFullName";
+    private String videoYouTubeURL = "videoYouTubeURL";
+    private String videoDownloadURL = "videoDownloadURL";
     private static DBHelper dbInstance = null;
     private static String TAG = "DBHelper";
+
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public static DBHelper getInstance(Context mContext) {
         if (dbInstance == null) {
-            Log.d(TAG,"db has been created");
+            Log.d(TAG, "db has been created");
             dbInstance = new DBHelper(mContext);
         }
 
@@ -60,9 +62,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_DOWNLOADVIDEO_TABLE = "CREATE TABLE " + TABLE_DOWNLOAD + "("
                 + id + " INTEGER PRIMARY KEY," + videoTitle + " TEXT,"
-                + thumbnailURL + " TEXT," + videoURL + " TEXT," + videoCategory + " TEXT," +  videoSubCategory + " TEXT," + uploadedDate + " TEXT," + duration + " TEXT," + videoDescription + " TEXT," + categoryFullName + " TEXT," + subCategoryFullName + " TEXT" + ")";
+                + thumbnailURL + " TEXT," + videoURL + " TEXT," + videoCategory + " TEXT," + videoSubCategory + " TEXT," + uploadedDate + " TEXT," + duration + " TEXT," + videoDescription + " TEXT," + categoryFullName + " TEXT," + subCategoryFullName + " TEXT," + videoYouTubeURL + " TEXT,"  +videoDownloadURL + " TEXT" + ")";
         db.execSQL(CREATE_DOWNLOADVIDEO_TABLE);
-        Log.d(TAG,"data base created scesfully");
+        Log.d(TAG, "data base created scesfully");
     }
 
     // Upgrading database
@@ -80,7 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void addDownloadVideo(VideoList videoList) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(TAG,"inserting video record"+videoList);
+        Log.d(TAG, "inserting video record" + videoList);
         ContentValues values = new ContentValues();
         values.put(id, videoList.getVideoID()); // video id
         values.put(videoTitle, videoList.getVideoTitle()); // Contact Phone Number
@@ -93,9 +95,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(videoDescription, videoList.getVideoDescription());
         values.put(categoryFullName, videoList.getCategoryFullName());
         values.put(subCategoryFullName, videoList.getSubCategoryFullName());
+        values.put(videoYouTubeURL, videoList.getVideoYouTubeURL());
+        values.put(videoDownloadURL, videoList.getVideoDownloadURL());
         // Inserting Row
         db.insert(TABLE_DOWNLOAD, null, values);
-        Log.d(TAG,"data inserted succesfully");
+        Log.d(TAG, "data inserted succesfully");
         db.close(); // Closing database connection
 
     }
@@ -111,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         VideoList videoDataObject = new VideoList(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
+                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12));
         // return videoDataObject
         return videoDataObject;
     }
@@ -129,15 +133,15 @@ public class DBHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               // VideoList videoDataObject = new VideoList();
-                VideoList    videoDataObject = new VideoList(cursor.getString(0),
+                // VideoList videoDataObject = new VideoList();
+                VideoList videoDataObject = new VideoList(cursor.getString(0),
                         cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(10), cursor.getString(11));
                 // Adding contact to list
                 videoDataObjects.add(videoDataObject);
             } while (cursor.moveToNext());
         }
-        Log.d(TAG,"fetched  all video records succesfully");
+        Log.d(TAG, "fetched  all video records succesfully");
         // return contact list
         return videoDataObjects;
     }
@@ -161,10 +165,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Deleting single VideoRecord
     public void deleteVideoRecord(VideoList videoDataObject) {
-        Log.d("first","videoDataObject.getVideoURL()"+videoDataObject.getVideoURL());
+        Log.d("first", "videoDataObject.getVideoURL()" + videoDataObject.getVideoURL());
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DOWNLOAD, id + " = ?",
-                new String[] { String.valueOf(videoDataObject.getVideoID()) });
+                new String[]{String.valueOf(videoDataObject.getVideoID())});
         db.close();
     }
 }

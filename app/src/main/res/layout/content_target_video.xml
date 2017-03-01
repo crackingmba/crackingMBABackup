@@ -63,6 +63,24 @@
                 android:gravity="center"
                 android:visibility="gone"/>
             <TextView
+                android:id="@+id/target_videoYouTubeURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_videoDownloadURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
                 android:id="@+id/target_categoryFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

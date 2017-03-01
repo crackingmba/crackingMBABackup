@@ -98,12 +98,15 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
         switch (v.getId()){
             case R.id.quantrow:
+                VideoApplication.sectionClicked="quant";
                 dashboardIntent.putExtra("sectionaName","quant");
                 break;
             case R.id.dirow:
+                VideoApplication.sectionClicked="dilr";
                 dashboardIntent.putExtra("sectionaName","dilr");
                 break;
             case R.id.verbalrow:
+                VideoApplication.sectionClicked="verbal";
                 dashboardIntent.putExtra("sectionaName","verbal");
                 break;
             default:

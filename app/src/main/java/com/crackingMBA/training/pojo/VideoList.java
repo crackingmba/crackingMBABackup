@@ -28,6 +28,27 @@ public class VideoList {
 
     private String subCategoryFullName;
 
+    public String getVideoDownloadURL() {
+        return videoDownloadURL;
+    }
+
+    public void setVideoDownloadURL(String videoDownloadURL) {
+        this.videoDownloadURL = videoDownloadURL;
+    }
+
+    public String getVideoYouTubeURL() {
+        return videoYouTubeURL;
+    }
+
+    public void setVideoYouTubeURL(String videoYouTubeURL) {
+        this.videoYouTubeURL = videoYouTubeURL;
+    }
+
+    private String videoDownloadURL;
+
+    private String videoYouTubeURL;
+
+
     public String getVideoDescription ()
     {
         return videoDescription;
@@ -139,7 +160,7 @@ public class VideoList {
     {
         return "ClassPojo [videoDescription = "+videoDescription+", videoID = "+videoID+", Duration = "+Duration+", videoSubCategory = "+videoSubCategory+", videoTitle = "+videoTitle+", videoCategory = "+videoCategory+", uploadDate = "+uploadDate+", videoURL = "+videoURL+", thumbnailURL = "+thumbnailURL+"]";
     }
-    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory,String videoSubCategory, String dateOdUploaded, String duration, String videoDescription,String categoryFullName,String subCategoryFullName) {
+    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory,String videoSubCategory, String dateOdUploaded, String duration, String videoDescription,String categoryFullName,String subCategoryFullName,String videoYouTubeURL,String videoDownloadURL) {
         this.videoID = vidoID;
         this.videoTitle = videoTitle;
         this.thumbnailURL = thumbnailURL;
@@ -151,6 +172,8 @@ public class VideoList {
         this.videoDescription = videoDescription;
         this.categoryFullName=categoryFullName;
         this.subCategoryFullName=subCategoryFullName;
+        this.videoYouTubeURL=videoYouTubeURL;
+        this.videoDownloadURL=videoDownloadURL;
     }
     public VideoList(){
 

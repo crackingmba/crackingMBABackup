@@ -81,7 +81,7 @@ public class TargetVideoActivity extends AppCompatActivity {
                 if (viewOfflineBtn.getText().toString().equalsIgnoreCase("View Offline")) {
 
 
-                    viewOnline();
+                    viewOffline();
 
 
                 } else {
@@ -125,7 +125,9 @@ public class TargetVideoActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
         ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
         ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
-        ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getThumbnailURL());
+        ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
+        ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
+        ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
 
         try {
             Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
@@ -163,9 +165,33 @@ public class TargetVideoActivity extends AppCompatActivity {
 
     public void viewOnline() {
         String clickedVideo = videoList.getVideoURL();
-        // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(clickedVideo);
+         boolean localavailablity = LocalVideoCheck.verifyLocalStorage(clickedVideo);
 
-        Log.d("first", "Playing Video..videoList.getVideoURL()" + videoList.getVideoURL());
+        Log.d("first", "Playing Video..videoList.getVideoYouTubeURL()" + videoList.getVideoYouTubeURL());
+
+
+        Intent intent = new Intent(this, YoutubeVideoActivity.class);
+        //  intent.putExtra("localavailblity", localavailablity);
+        intent.putExtra("clickedVideo", clickedVideo);
+        startActivity(intent);
+
+     /*
+        Intent intent = new Intent(this, FullscreenActivity.class);
+        //  intent.putExtra("localavailblity", localavailablity);
+        intent.putExtra("clickedVideo", clickedVideo);*/
+        startActivity(intent);
+
+    }
+
+    public void viewOffline() {
+        String clickedVideo = videoList.getVideoDownloadURL();
+        boolean localavailablity = LocalVideoCheck.verifyLocalStorage(clickedVideo);
+
+        Log.d("first", "Playing Video..videoList.getVideoURL()" + videoList.getVideoDownloadURL());
+
+
+
+
 
         Intent intent = new Intent(this, FullscreenActivity.class);
         //  intent.putExtra("localavailblity", localavailablity);
@@ -179,9 +205,10 @@ public class TargetVideoActivity extends AppCompatActivity {
     }
 
     private long downloadData() {
-        String fileName = videoList.getVideoURL();
+        VideoList selectedVideo = VideoApplication.videoList;
+        String fileName = selectedVideo.getVideoDownloadURL();
         downloadManager = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(CrackingConstant.MYPATH + "videos/" + videoList.getVideoURL()));
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(CrackingConstant.MYPATH + "videos/" + videoList.getVideoDownloadURL()));
         request.setTitle("crackingMBA.com");
         request.setDescription("Downloading Video..");
         int permissionCheck = ContextCompat.checkSelfPermission(this,
@@ -200,7 +227,7 @@ public class TargetVideoActivity extends AppCompatActivity {
                 File file = new File(filePath);
                 Uri destUri = Uri.fromFile(file);
                 request.setDestinationUri(destUri);
-                VideoList selectedVideo = VideoApplication.videoList;
+
                 selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getVideoURL());
                 selectedVideo.setThumbnailURL(CrackingConstant.MYPATH + "img/" + selectedVideo.getThumbnailURL());
                 selectedVideo.setVideoURL(fileName);
@@ -232,7 +259,6 @@ public class TargetVideoActivity extends AppCompatActivity {
             File file = new File(filePath);
             Uri destUri = Uri.fromFile(file);
             request.setDestinationUri(destUri);
-            VideoList selectedVideo = VideoApplication.videoList;
             VideoDataObject videoDataObject = new VideoDataObject();
             selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getVideoURL());
 
