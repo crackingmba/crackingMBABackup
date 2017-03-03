@@ -301,10 +301,17 @@ public class WeekVideoViewAdapter extends RecyclerView
 
          videoAvailbllity = LocalVideoCheck.verifyLocalStorageByVideoID(mDataset.get(position).getVideoID(),myActivity);
         if (videoAvailbllity) {
-            holder.deleteOfflineBtn.setText("Delete");
-            holder.viewOfflineBtn.setText("View Offline");
-            holder.deleteOfflineBtn.setEnabled(true);
-            holder.viewOfflineBtn.setEnabled(true);
+            if(mDataset.get(position).isDownloading()){
+                holder.viewOfflineBtn.setText("Downloading..");
+                holder.viewOfflineBtn.setEnabled(false);
+                holder.deleteOfflineBtn.setText("Delete");
+                holder.deleteOfflineBtn.setEnabled(false);
+            }else {
+                holder.deleteOfflineBtn.setText("Delete");
+                holder.viewOfflineBtn.setText("View Offline");
+                holder.deleteOfflineBtn.setEnabled(true);
+                holder.viewOfflineBtn.setEnabled(true);
+            }
         } else {
             holder.viewOfflineBtn.setText("Download");
             holder.deleteOfflineBtn.setEnabled(false);

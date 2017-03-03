@@ -130,6 +130,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
             prevBtn.setVisibility(View.VISIBLE);
         }
         VideoApplication.selectedMockTestQuestion.setSelectedOption(null);
+        ((RadioGroup) findViewById(R.id.mocktest_qstn_radiogroup)).clearCheck();
         if(currentQstnIndex == VideoApplication.allMockQstns.size()-1){
             countDownTimer.cancel();
             Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);

@@ -55,9 +55,9 @@ public class TargetVideoActivity extends AppCompatActivity {
         videoList = VideoApplication.videoList;
         Log.d(TAG, "Selected Video Details" + videoList);
         Log.d(TAG, "video url " + videoList.getVideoURL());
-       // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL().toString());
+        // boolean localavailablity = LocalVideoCheck.verifyLocalStorage(videoList.getVideoURL().toString());
         boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID().toString(),this);
-       // Log.d(TAG, "localavailablity in Target Video" + videoList.getVideoURL().toString());
+        // Log.d(TAG, "localavailablity in Target Video" + videoList.getVideoURL().toString());
         viewOnlineBtn = (Button) findViewById(R.id.target_viewinline);
         viewOnlineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +78,12 @@ public class TargetVideoActivity extends AppCompatActivity {
         viewOfflineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viewOfflineBtn.getText().toString().equalsIgnoreCase("View Offline")) {
+                if(videoList.isDownloading()){
+                    viewOfflineBtn.setText("Downloading..");
+                    viewOfflineBtn.setEnabled(false);
+                    deleteOfflineBtn.setText("Delete");
+                    deleteOfflineBtn.setEnabled(false);
+                } else if (viewOfflineBtn.getText().toString().equalsIgnoreCase("View Offline")) {
 
 
                     viewOffline();
@@ -96,67 +101,76 @@ public class TargetVideoActivity extends AppCompatActivity {
                         toast.show();
                     }
                 }
-
             }
-        });
-        deleteOfflineBtn = (Button) findViewById(R.id.target_deletevideo);
-        deleteOfflineBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    });
+    deleteOfflineBtn = (Button) findViewById(R.id.target_deletevideo);
+    deleteOfflineBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
 
-                deleteVideo();
+            deleteVideo();
 
-            }
-        });
-        if (localavailablity) {
+        }
+    });
+    if (localavailablity) {
+        if(videoList.isDownloading()){
+            viewOfflineBtn.setText("Downloading..");
+            viewOfflineBtn.setEnabled(false);
+            deleteOfflineBtn.setText("Delete");
+            deleteOfflineBtn.setEnabled(false);
+        }else {
             deleteOfflineBtn.setText("Delete");
             viewOfflineBtn.setText("View Offline");
             deleteOfflineBtn.setEnabled(true);
             viewOfflineBtn.setEnabled(true);
-        } else {
-            viewOfflineBtn.setText("Download");
-            deleteOfflineBtn.setEnabled(false);
-            viewOfflineBtn.setEnabled(true);
         }
-
-        ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-        ((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
-        ((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
-        ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
-        ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
-        ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
-        ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
-        ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
-        ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
-
-        try {
-            Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
-            AsyncTask result = new DownloadImageTask((ImageView) findViewById(R.id.target_detailthumbnail))
-                    .execute(CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
-        } catch (Exception e) {
-        }
-
-        ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-        final IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Video Download Complete", Toast.LENGTH_LONG);
-                deleteOfflineBtn.setText("Delete");
-                viewOfflineBtn.setText("View Offline");
-                deleteOfflineBtn.setEnabled(true);
-                viewOfflineBtn.setEnabled(true);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
-            }
-
-
-        };
-        this.registerReceiver(downloadReceiver, filter);
-
-        //download code ends here
-
+    } else {
+        viewOfflineBtn.setText("Download");
+        deleteOfflineBtn.setEnabled(false);
+        viewOfflineBtn.setEnabled(true);
     }
+
+    ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+    ((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
+    ((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
+    ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
+    ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
+    ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
+    ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
+    ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
+    ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
+
+    try {
+        Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
+        AsyncTask result = new DownloadImageTask((ImageView) findViewById(R.id.target_detailthumbnail))
+                .execute(CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
+    } catch (Exception e) {
+    }
+
+    ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+    final IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+    final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Video Download Complete", Toast.LENGTH_LONG);
+            deleteOfflineBtn.setText("Delete");
+            viewOfflineBtn.setText("View Offline");
+            deleteOfflineBtn.setEnabled(true);
+            viewOfflineBtn.setEnabled(true);
+            videoList.setDownloading(false);
+            VideoApplication.downloadingVideoIds.remove(videoList.getVideoID());
+            //dbHelper.updateVideoRecord(videoList);
+            toast.setGravity(Gravity.TOP, 25, 400);
+            toast.show();
+        }
+
+
+    };
+    this.registerReceiver(downloadReceiver, filter);
+
+    //download code ends here
+
+}
 
     @Override
     public void onResume() {
@@ -179,7 +193,7 @@ public class TargetVideoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullscreenActivity.class);
         //  intent.putExtra("localavailblity", localavailablity);
         intent.putExtra("clickedVideo", clickedVideo);*/
-      //  startActivity(intent);
+        //  startActivity(intent);
 
     }
 
@@ -234,6 +248,9 @@ public class TargetVideoActivity extends AppCompatActivity {
                 Log.d("suresh", "selectedVideo" + selectedVideo);
                 dbHelper.addDownloadVideo(selectedVideo);
                 viewOfflineBtn.setText("Downloading..");
+                viewOfflineBtn.setEnabled(false);
+                videoList.setDownloading(true);
+                VideoApplication.downloadingVideoIds.add(videoList.getVideoID());
 
                 return downloadManager.enqueue(request);
             }

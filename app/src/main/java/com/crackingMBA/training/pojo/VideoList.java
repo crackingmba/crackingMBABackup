@@ -32,6 +32,8 @@ public class VideoList {
 
     private String videoYouTubeURL;
 
+    private boolean downloading;
+
 
     public String getVideoDownloadURL() {
         return videoDownloadURL;
@@ -156,6 +158,14 @@ public class VideoList {
         this.subCategoryFullName = subCategoryFullName;
     }
 
+    public boolean isDownloading() {
+        return downloading;
+    }
+
+    public void setDownloading(boolean downloading) {
+        this.downloading = downloading;
+    }
+
     @Override
     public String toString() {
         return "VideoList{" +
@@ -172,6 +182,7 @@ public class VideoList {
                 ", subCategoryFullName='" + subCategoryFullName + '\'' +
                 ", videoDownloadURL='" + videoDownloadURL + '\'' +
                 ", videoYouTubeURL='" + videoYouTubeURL + '\'' +
+                ", downloading=" + downloading +
                 '}';
     }
 

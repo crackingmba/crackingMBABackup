@@ -10,7 +10,9 @@ import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Harish on 2/3/2017.
@@ -26,6 +28,13 @@ public class VideoApplication extends Application {
     public static MockTestTest selectedMockTestTest;
     public static List<MockTestQuestion> allMockQstns = new ArrayList<>();
     public static MockTestQuestion selectedMockTestQuestion;
+
+    public static List<VideoList> allQuantVideos;
+    public static List<VideoList> allDilrVideos;
+    public static List<VideoList> allVerbalVideos;
+    public static List<VideoList> allDownloadedVideos;
+    public static Set<String> downloadingVideoIds = new HashSet<>();
+
     public static VideoApplication currentInstance;
 
     public static String subcategorySelected;

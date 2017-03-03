@@ -26,9 +26,11 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crackingMBA.training.adapter.DILRHomeVideoViewAdapter;
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.DownloadViewAdapter;
-import com.crackingMBA.training.adapter.HomeVideoViewAdapter;
+import com.crackingMBA.training.adapter.QuantHomeVideoViewAdapter;
+import com.crackingMBA.training.adapter.VerbalHomeVideoViewAdapter;
 import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
@@ -61,14 +63,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     DownloadManager downloadManager;
     String fullPath = "http://www.crackingmba.com/video.mp4";
     long downloadId;
-    RecyclerView recyclerView;
-    RecyclerView recyclerView1;
-    RecyclerView recyclerView2;
-    RecyclerView recyclerView3;
-    RecyclerView.Adapter mAdapter;
-    RecyclerView.Adapter downloadAdapter;
-    LinearLayoutManager mLayoutManager;
-    LinearLayoutManager mLayoutManager1;
+    RecyclerView recentRecyclerView;
+    RecyclerView quantRecyclerView;
+    RecyclerView dilrRecyclerView;
+    RecyclerView verbalRecyclerView;
+    RecyclerView.Adapter recentAdapter;
+    RecyclerView.Adapter quantAdapter;
+    RecyclerView.Adapter dilrAdapter;
+    RecyclerView.Adapter verbalAdapter;
     boolean isMock;
     private DBHelper dbHelper;
 
@@ -95,39 +97,46 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
         isMock = pref.getBoolean("isMock", false);
         dbHelper = DBHelper.getInstance(getContext());
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
-        recyclerView1 = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview);
-        recyclerView2 = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
-        recyclerView3 = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
-        recyclerView.setHasFixedSize(true);
+        recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview);
+        quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
+        dilrRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
+        verbalRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
+        recentRecyclerView.setHasFixedSize(true);
+        quantRecyclerView.setHasFixedSize(true);
+        dilrRecyclerView.setHasFixedSize(true);
+        verbalRecyclerView.setHasFixedSize(true);
+
         getDataSet();
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-        recyclerView1.setHasFixedSize(true);
-        mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView1.setLayoutManager(mLayoutManager1);
+
+        RecyclerView.ItemDecoration recentItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager recentLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         ArrayList<VideoList> downloadedList = getDataSetDownloadedVideos();
-        DownloadViewAdapter downloadAdapter = new DownloadViewAdapter(downloadedList);
+        recentAdapter = new DownloadViewAdapter(downloadedList);
         if (downloadedList.size() == 0) {
 
             rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.VISIBLE);
         } else {
+            VideoApplication.allDownloadedVideos = downloadedList;
             rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.GONE);
         }
-        recyclerView1.setAdapter(downloadAdapter);
-        recyclerView1.addItemDecoration(itemDecoration);
+        recentRecyclerView.setAdapter(recentAdapter);
+        recentRecyclerView.setLayoutManager(recentLayoutManager);
+        recentRecyclerView.addItemDecoration(recentItemDecoration);
 
-        ((DownloadViewAdapter) downloadAdapter).setOnItemClickListener(
+        ((DownloadViewAdapter) recentAdapter).setOnItemClickListener(
                 new DownloadViewAdapter.MyClickListener() {
                     @Override
                     public void onItemClick(int position, View v) {
                         Log.d(TAG, "Clicked item at position : " + position);
-                        VideoList vdo = populateDownloadVideoDataObject(v);//new VideoDataObject();
+                        VideoList vdo = VideoApplication.allDownloadedVideos.get(position);//populateDownloadVideoDataObject(v);//new VideoDataObject();
                         vdo.setVideoSubCategory("video");
+                        if(VideoApplication.downloadingVideoIds.contains(vdo.getVideoID())){
+                            vdo.setDownloading(true);
+                        }else{
+                            vdo.setDownloading(false);
+                        }
                         Log.d(TAG, "set with video..");
                         VideoApplication.videoList = vdo;
-                        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
-                        Log.d(TAG, "selecting tab 1");
-                        //tabLayout.getTabAt(1).select();
                         Intent targetIntent = new Intent(getActivity(), TargetVideoActivity.class);
                         startActivity(targetIntent);
                     }
@@ -142,7 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
     }
 
-    private VideoList populateVideoDataObject(View v) {
+    /*private VideoList populateVideoDataObject(View v) {
         Log.d(TAG, "Populating videoDataObject..");
         VideoList vdo = new VideoList();
         TextView duration = (TextView) v.findViewById(R.id.home_duration);
@@ -174,7 +183,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         vdo.setVideoDownloadURL(videoDownloadURL.getText().toString());
         return vdo;
     }
-
+*/
     private VideoList populateDownloadVideoDataObject(View v) {
         Log.d(TAG, "Populating videoDataObject..");
         VideoList vdo = new VideoList();
@@ -229,13 +238,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                         rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.VISIBLE);
                                     else {
                                         rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.GONE);
-                                        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
-                                        recyclerView.setLayoutManager(mLayoutManager);
-                                        mAdapter = new HomeVideoViewAdapter(quant);
-                                        recyclerView.setAdapter(mAdapter);
-                                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                        recyclerView.addItemDecoration(itemDecoration);
+                                        VideoApplication.allQuantVideos = quant;
+                                        RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                        LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                        quantRecyclerView.setLayoutManager(quantLayoutManager);
+                                        quantAdapter = new QuantHomeVideoViewAdapter(quant);
+                                        quantRecyclerView.setAdapter(quantAdapter);
+                                        quantRecyclerView.addItemDecoration(quantItemDecoration);
+                                        ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
+                                                new QuantHomeVideoViewAdapter.MyClickListener() {
+                                                    @Override
+                                                    public void onItemClick(int position, View v) {
+                                                        Log.d(TAG, "Clicked item at position : " + position);
+                                                        VideoList vdo = VideoApplication.allQuantVideos.get(position);
+                                                        vdo.setVideoSubCategory("video");
+                                                        Log.d(TAG, "set with video..");
+                                                        VideoApplication.videoList = vdo;
+                                                        Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
+                                                        startActivity(weeksIntent);
+                                                    }
+                                                }
+                                        );
                                     }
                                 }
                             } catch (Exception e) {
@@ -282,13 +306,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     else {
                                         rootView.findViewById(R.id.home_latest_dilr_noVideos).setVisibility(View.GONE);
 
-                                        LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                        recyclerView2.setLayoutManager(mLayoutManager2);
-                                        mAdapter = new HomeVideoViewAdapter(dr);
-                                        recyclerView2.setAdapter(mAdapter);
-                                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-
-                                        recyclerView2.addItemDecoration(itemDecoration);
+                                        VideoApplication.allDilrVideos = dr;
+                                        RecyclerView.ItemDecoration dilrItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                        LinearLayoutManager dilrLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                        dilrRecyclerView.setLayoutManager(dilrLayoutManager);
+                                        dilrAdapter = new DILRHomeVideoViewAdapter(dr);
+                                        dilrRecyclerView.setAdapter(dilrAdapter);
+                                        dilrRecyclerView.addItemDecoration(dilrItemDecoration);
+                                        ((DILRHomeVideoViewAdapter) dilrAdapter).setOnItemClickListener(
+                                                new DILRHomeVideoViewAdapter.MyClickListener() {
+                                                    @Override
+                                                    public void onItemClick(int position, View v) {
+                                                        Log.d(TAG, "Clicked item at position : " + position);
+                                                        VideoList vdo = VideoApplication.allDilrVideos.get(position);
+                                                        vdo.setVideoSubCategory("video");
+                                                        Log.d(TAG, "set with video..");
+                                                        VideoApplication.videoList = vdo;
+                                                        Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
+                                                        startActivity(weeksIntent);
+                                                    }
+                                                }
+                                        );
                                     }
                                 }
 
@@ -322,24 +360,23 @@ try{
                                     rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.VISIBLE);
                                 else {
                                     rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.GONE);
-                                    LinearLayoutManager mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                    recyclerView3.setLayoutManager(mLayoutManager3);
-                                    mAdapter = new HomeVideoViewAdapter(verbal);
-                                    recyclerView3.setAdapter(mAdapter);
-                                    RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                    recyclerView3.addItemDecoration(itemDecoration);
-                                    ((HomeVideoViewAdapter) mAdapter).setOnItemClickListener(
-                                            new HomeVideoViewAdapter.MyClickListener() {
+
+                                    VideoApplication.allVerbalVideos = verbal;
+                                    RecyclerView.ItemDecoration verbalItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                    LinearLayoutManager verbalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                    verbalRecyclerView.setLayoutManager(verbalLayoutManager);
+                                    verbalAdapter = new VerbalHomeVideoViewAdapter(verbal);
+                                    verbalRecyclerView.setAdapter(verbalAdapter);
+                                    verbalRecyclerView.addItemDecoration(verbalItemDecoration);
+                                    ((VerbalHomeVideoViewAdapter) verbalAdapter).setOnItemClickListener(
+                                            new VerbalHomeVideoViewAdapter.MyClickListener() {
                                                 @Override
                                                 public void onItemClick(int position, View v) {
                                                     Log.d(TAG, "Clicked item at position : " + position);
-                                                    VideoList vdo = populateVideoDataObject(v);//new VideoDataObject();
+                                                    VideoList vdo = VideoApplication.allVerbalVideos.get(position);
                                                     vdo.setVideoSubCategory("video");
                                                     Log.d(TAG, "set with video..");
                                                     VideoApplication.videoList = vdo;
-                                                    TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
-                                                    Log.d(TAG, "selecting tab 1");
-                                                    //tabLayout.getTabAt(1).select();
                                                     Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
                                                     startActivity(weeksIntent);
                                                 }
@@ -388,6 +425,7 @@ try{
                 vo.setVideoSubCategory(videoDataObject.getVideoSubCategory());
                 vo.setCategoryFullName(videoDataObject.getCategoryFullName());
                 vo.setSubCategoryFullName(videoDataObject.getSubCategoryFullName());
+                vo.setDownloading(videoDataObject.isDownloading());
 
 
                 mockResults.add(vo);
@@ -415,55 +453,53 @@ try{
             switch (view.getId()) {
                 case R.id.gotoquant3:
                     Log.d(TAG, "selecting Quant section..");
-                    tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
                     subsIntent = new Intent(getActivity(), VideoSubCategoryActivity.class);
                     VideoApplication.sectionClicked = "quant";
-                    Log.d(TAG, "selecting tab 1");
                     subsIntent.putExtra("sectionSelected", "quant");
                     subsIntent.putExtra("headerTitle", "CAT 2017 Preparation Quant Section");
                     startActivity(subsIntent);
                     break;
                 case R.id.gotodi3:
-                    tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
                     subsIntent = new Intent(getActivity(), VideoSubCategoryActivity.class);
                     Log.d(TAG, "selecting DI and LR section..");
                     VideoApplication.sectionClicked = "dilr";
-                    Log.d(TAG, "selecting tab 1");
                     subsIntent.putExtra("sectionSelected", "dilr");
                     subsIntent.putExtra("headerTitle", "CAT 2017 Preparation DI and LR Section");
                     startActivity(subsIntent);
                     break;
                 case R.id.gotolatest3:
-                    tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
                     subsIntent = new Intent(getActivity(), VideoSubCategoryActivity.class);
                     Log.d(TAG, "selecting latest articles tab..");
                     VideoApplication.sectionClicked = "verbal";
-                    Log.d(TAG, "selecting tab 1");
                     subsIntent.putExtra("sectionSelected", "verbal");
                     subsIntent.putExtra("headerTitle", "CAT 2017 Preparation Verbal Section");
                     startActivity(subsIntent);
                     break;
                 case R.id.home_refresh:
                     Log.d(TAG, "refresh clicked..");
-                    ArrayList<VideoList> downloadedList = getDataSetDownloadedVideos();
-                    DownloadViewAdapter downloadAdapter = new DownloadViewAdapter(downloadedList);
-                    recyclerView1.setAdapter(downloadAdapter);
-                    RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-
-                    recyclerView1.addItemDecoration(itemDecoration);
+                    final ArrayList<VideoList> downloadedList = getDataSetDownloadedVideos();
+                    VideoApplication.allDownloadedVideos = downloadedList;
+                    RecyclerView.Adapter downloadAdapter = new DownloadViewAdapter(downloadedList);
+                    RecyclerView.ItemDecoration downloadItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                    LinearLayoutManager downloadLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                    recentRecyclerView.setAdapter(downloadAdapter);
+                    recentRecyclerView.setLayoutManager(downloadLayoutManager);
+                    recentRecyclerView.addItemDecoration(downloadItemDecoration);
 
                     ((DownloadViewAdapter) downloadAdapter).setOnItemClickListener(
                             new DownloadViewAdapter.MyClickListener() {
                                 @Override
                                 public void onItemClick(int position, View v) {
                                     Log.d(TAG, "Clicked item at position : " + position);
-                                    VideoList vdo = populateDownloadVideoDataObject(v);//new VideoDataObject();
+                                    VideoList vdo = VideoApplication.allDownloadedVideos.get(position);
+                                    if(VideoApplication.downloadingVideoIds.contains(vdo.getVideoID())){
+                                        vdo.setDownloading(true);
+                                    }else{
+                                        vdo.setDownloading(false);
+                                    }
                                     vdo.setVideoSubCategory("video");
                                     Log.d(TAG, "set with video..");
                                     VideoApplication.videoList = vdo;
-                                    TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
-                                    Log.d(TAG, "selecting tab 1");
-                                    //tabLayout.getTabAt(1).select();
                                     Intent targetIntent = new Intent(getActivity(), TargetVideoActivity.class);
                                     startActivity(targetIntent);
                                 }

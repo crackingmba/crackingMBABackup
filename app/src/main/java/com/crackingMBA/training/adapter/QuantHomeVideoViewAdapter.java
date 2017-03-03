@@ -1,7 +1,6 @@
 package com.crackingMBA.training.adapter;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,27 +10,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
+
+import java.util.List;
 
 /**
  * Created by Harish on 1/31/2017.
  */
-public class DownloadViewAdapter extends RecyclerView
-        .Adapter<DownloadViewAdapter.DataObjectHolder> {
-    private static String LOG_TAG = "VideoViewAdapter";
-    private ArrayList<VideoList> mDataset;
+public class QuantHomeVideoViewAdapter extends RecyclerView
+        .Adapter<QuantHomeVideoViewAdapter.DataObjectHolder> {
+    private static String LOG_TAG = "HomeVideoViewAdapter";
+    private List<VideoList> mDataset;
     private static MyClickListener myClickListener;
+    private static String TAG = "HomeVideoViewAdapter";
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        ImageView thumbnailUrl;
         TextView videoID;
         TextView videoTitle;
         TextView thumbnailURL;
@@ -40,24 +37,28 @@ public class DownloadViewAdapter extends RecyclerView
         TextView videoDescription;
         ImageView thumbnail;
         TextView duration;
+        TextView videoCategory;
         TextView videoSubCategory;
         TextView categoryFullName;
         TextView subCategoryFullName;
-        TextView videoCategory;
+        TextView videoYouTubeURL;
+        TextView videoDownloadURL;
         public DataObjectHolder(View itemView) {
             super(itemView);
-            thumbnail = (ImageView) itemView.findViewById(R.id.download_thumbnail);
-            duration = (TextView) itemView.findViewById(R.id.download_duration);
-            videoID = (TextView) itemView.findViewById(R.id.download_videoID);
-            videoTitle = (TextView) itemView.findViewById(R.id.download_title);
-            thumbnailURL = (TextView) itemView.findViewById(R.id.download_thumbnailURL);
-            videoURL = (TextView) itemView.findViewById(R.id.download_videoURL);
-            videoCategory = (TextView) itemView.findViewById(R.id.download_videoCategory);
-            dateOfUploaded = (TextView) itemView.findViewById(R.id.download_dateOfUploaded);
-            videoDescription = (TextView) itemView.findViewById(R.id.download_videoDescription);
-            videoSubCategory = (TextView) itemView.findViewById(R.id.download_videoSubCategory);
-            categoryFullName = (TextView) itemView.findViewById(R.id.download_categoryFullName);
-            subCategoryFullName = (TextView) itemView.findViewById(R.id.download_subCategoryFullName);
+            thumbnail = (ImageView) itemView.findViewById(R.id.home_thumbnail);
+            duration = (TextView) itemView.findViewById(R.id.home_duration);
+            videoID = (TextView) itemView.findViewById(R.id.home_videoID);
+            videoTitle = (TextView) itemView.findViewById(R.id.home_videoTitle);
+            thumbnailURL = (TextView) itemView.findViewById(R.id.home_thumbnailURL);
+            videoURL = (TextView) itemView.findViewById(R.id.home_videoURL);
+            videoCategory = (TextView) itemView.findViewById(R.id.home_videoCategory);
+            dateOfUploaded = (TextView) itemView.findViewById(R.id.home_dateOfUploaded);
+            videoDescription = (TextView) itemView.findViewById(R.id.home_videoDescription);
+            videoSubCategory = (TextView) itemView.findViewById(R.id.home_videoSubCategory);
+            categoryFullName = (TextView) itemView.findViewById(R.id.home_categoryFullName);
+            subCategoryFullName = (TextView) itemView.findViewById(R.id.home_subCategoryFullName);
+            videoYouTubeURL = (TextView) itemView.findViewById(R.id.home_videoYouTubeURL);
+            videoDownloadURL = (TextView) itemView.findViewById(R.id.home_videoDownloadURL);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -72,16 +73,16 @@ public class DownloadViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public DownloadViewAdapter(ArrayList<VideoList> myDataset) {
+    public QuantHomeVideoViewAdapter(List<VideoList> myDataset) {
         mDataset = myDataset;
     }
 
     @Override
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
-        Log.d("VideoViewAdapter","in onCreateViewHolder..");
+        Log.d(TAG,"in onCreateViewHolder..");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.download_videoview_layout, parent, false);
+                .inflate(R.layout.quant_home_videoview_layout, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -89,16 +90,7 @@ public class DownloadViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
-        Bitmap myBitmap = BitmapFactory.decodeFile(mDataset.get(position).getThumbnailURL());
-        try {
-            Log.d("DownloadviewAdapater", mDataset.get(position).getThumbnailURL());
-            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
-                    .execute(/*CrackingConstant.MYPATH+"img/"+*/mDataset.get(position).getThumbnailURL());
-        }
-        catch (Exception e){
-        }
-       // holder.thumbnailUrl.setImageBitmap(myBitmap);
+        Log.d(TAG,"in onBindViewHolder..");
         holder.videoID.setText(mDataset.get(position).getVideoID());
         holder.duration.setText("Duration: "+mDataset.get(position).getDuration()+"m");
         holder.videoDescription.setText(mDataset.get(position).getVideoDescription());
@@ -107,20 +99,32 @@ public class DownloadViewAdapter extends RecyclerView
         holder.videoSubCategory.setText(mDataset.get(position).getVideoSubCategory());
         holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
         holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
-    //    holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
+        holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
+        holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
+        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
+        String thumbnailURL= mDataset.get(position).getThumbnailURL();
+        holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
+        Bitmap mIcon11 = null;
+        try {
+            Log.d("suresh", CrackingConstant.MYPATH + thumbnailURL);
+            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
+                    .execute(CrackingConstant.MYPATH +"img/"+thumbnailURL);
+        }
+        catch (Exception e){
+        }
 
     }
 
     public void addItem(VideoList dataObj, int index) {
-        Log.d("VideoViewAdapter","in addItem..");
+        Log.d(TAG,"in addItem..");
         mDataset.add(dataObj);
         notifyItemInserted(index);
     }
 
     public void deleteItem(int index) {
-        Log.d("VideoViewAdapter","in deleteView..");
+        Log.d(TAG,"in deleteView..");
         mDataset.remove(index);
         notifyItemRemoved(index);
     }
