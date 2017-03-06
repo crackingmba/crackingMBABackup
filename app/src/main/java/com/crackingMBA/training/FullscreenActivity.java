@@ -106,38 +106,39 @@ public class FullscreenActivity extends AppCompatActivity {
         Log.d("Suresh","Entered into full screen video activity flag..");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-     /*   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         final VideoView surfaceView;
         surfaceView = (VideoView) findViewById(R.id.surfacevideo);
         controller = new MediaController(this);
         controller.setAnchorView(surfaceView);
         surfaceView.setMediaController(controller);
         String fileName = getIntent().getStringExtra("clickedVideo");
+        fileName=VideoApplication.videoList.getVideoDownloadURL();
         Log.d("first","clickedVideo flag.."+fileName);
 
-        Boolean videoAvailbllity = LocalVideoCheck.verifyLocalStorage(fileName);
+      /*  Boolean videoAvailbllity = LocalVideoCheck.verifyLocalStorage(fileName);
         videoAvailbllity=true;
-        Log.d("first","Video availibity flag.."+videoAvailbllity);
+      */ // Log.d("first","Video availibity flag.."+videoAvailbllity);
 
-        String filePath="x";
-        if (videoAvailbllity){
+        String filePath="";
+       // if (videoAvailbllity){
              filePath = CrackingConstant.localstoragepath+CrackingConstant.myFolder+CrackingConstant.noMedia+fileName;
 
             Log.d("first","file:"+filePath);
             File file = new File(filePath);
             Uri fullUri = Uri.fromFile(file);
             surfaceView.setVideoURI(fullUri);
-        }
-        else
-        {
+      //  }
+      /*    else
+      {
             filePath=CrackingConstant.MYPATH+"videos/"+fileName;
            // filePath="http://3gp.telugump4.org/med/Chikki_Chikki_Bam_Bam_-_Aadhi_(HD_DTH_Rip).3gp";
      //  filePath="http://crackingmba.com/videos/video.mp4";
             Uri fullUri = Uri.parse(filePath);
             surfaceView.setVideoURI(fullUri);
 
-        }
+        }*/
 
 
       /*  surfaceView.setVideoURI(fullUri);

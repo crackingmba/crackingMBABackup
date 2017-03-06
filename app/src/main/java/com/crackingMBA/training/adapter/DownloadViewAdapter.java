@@ -44,6 +44,8 @@ public class DownloadViewAdapter extends RecyclerView
         TextView categoryFullName;
         TextView subCategoryFullName;
         TextView videoCategory;
+        TextView videoYouTubeURL;
+        TextView videoDownloadURL;
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.download_thumbnail);
@@ -58,6 +60,8 @@ public class DownloadViewAdapter extends RecyclerView
             videoSubCategory = (TextView) itemView.findViewById(R.id.download_videoSubCategory);
             categoryFullName = (TextView) itemView.findViewById(R.id.download_categoryFullName);
             subCategoryFullName = (TextView) itemView.findViewById(R.id.download_subCategoryFullName);
+            videoYouTubeURL = (TextView) itemView.findViewById(R.id.home_videoYouTubeURL);
+            videoDownloadURL = (TextView) itemView.findViewById(R.id.home_videoDownloadURL);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -110,6 +114,8 @@ public class DownloadViewAdapter extends RecyclerView
     //    holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
+        holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
+        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
 
     }
 

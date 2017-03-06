@@ -143,7 +143,7 @@ public class TargetVideoActivity extends AppCompatActivity {
     try {
         Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
         AsyncTask result = new DownloadImageTask((ImageView) findViewById(R.id.target_detailthumbnail))
-                .execute(CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
+                .execute( videoList.getThumbnailURL());
     } catch (Exception e) {
     }
 
@@ -233,7 +233,7 @@ public class TargetVideoActivity extends AppCompatActivity {
             boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID(),this);
 
             if (!localavailablity) {
-                Log.d("suresh", "Entered into download video");
+                Log.d("suresh", "Entered into download video"+selectedVideo);
                 String filePath1 = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
                 File file1 = new File(filePath1);
                 file1.delete();
@@ -251,7 +251,7 @@ public class TargetVideoActivity extends AppCompatActivity {
                 viewOfflineBtn.setEnabled(false);
                 videoList.setDownloading(true);
                 VideoApplication.downloadingVideoIds.add(videoList.getVideoID());
-
+                dbHelper.addDownloadVideo(selectedVideo);
                 return downloadManager.enqueue(request);
             }
         } else {
@@ -267,7 +267,7 @@ public class TargetVideoActivity extends AppCompatActivity {
             startActivity(intent);*/
 
         }
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+       /* if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Log.d("suresh", "Entered into delete video");
             String filePath1 = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
             File file1 = new File(filePath1);
@@ -285,7 +285,7 @@ public class TargetVideoActivity extends AppCompatActivity {
             viewOfflineBtn.setText("Downloading..");
             viewOfflineBtn.setEnabled(false);
             return downloadManager.enqueue(request);
-        }
+        }*/
 
         return 12;
     }

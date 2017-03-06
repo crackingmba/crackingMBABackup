@@ -135,7 +135,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         }else{
                             vdo.setDownloading(false);
                         }
-                        Log.d(TAG, "set with video..");
+                        Log.d(TAG, "set with video.."+vdo);
                         VideoApplication.videoList = vdo;
                         Intent targetIntent = new Intent(getActivity(), TargetVideoActivity.class);
                         startActivity(targetIntent);
@@ -426,8 +426,8 @@ try{
                 vo.setCategoryFullName(videoDataObject.getCategoryFullName());
                 vo.setSubCategoryFullName(videoDataObject.getSubCategoryFullName());
                 vo.setDownloading(videoDataObject.isDownloading());
-
-
+                vo.setVideoDownloadURL(videoDataObject.getVideoDownloadURL());
+                vo.setVideoYouTubeURL(videoDataObject.getVideoYouTubeURL());
                 mockResults.add(vo);
             }
 
