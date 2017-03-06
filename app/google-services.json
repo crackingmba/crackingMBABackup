@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "57887891355",
+    "project_id": "firebase-crackingmba"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57887891355:android:1b4108751214f494",
+        "android_client_info": {
+          "package_name": "com.crackingMBA.training"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57887891355-ajjc7garh6rtjmg3j2nhchi7l7dbg50d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crackingMBA.training",
+            "certificate_hash": "80b02ffd93216a313eafcee5dd09daee8f0de0f4"
+          }
+        },
+        {
+          "client_id": "57887891355-gh5c1q2qshrqmro23bnvmdng4ljfi8ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFDoiRfBQcD_PtSuKWdOK8HKqH1JZEyFI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

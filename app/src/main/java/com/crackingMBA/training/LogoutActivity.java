@@ -45,7 +45,8 @@ public class LogoutActivity extends AppCompatActivity {
         editor.remove("loggedInUserName");
         editor.putBoolean("isLoggedIn",false);
         editor.commit();
-        this.finish();;
+        this.finish();
+
     }
 
 }
