@@ -1,7 +1,6 @@
 package com.crackingMBA.training.adapter;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,19 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
+
+import java.util.List;
 
 /**
  * Created by Harish on 1/31/2017.
  */
-public class HomeVideoViewAdapter extends RecyclerView
-        .Adapter<HomeVideoViewAdapter.DataObjectHolder> {
+public class DILRHomeVideoViewAdapter extends RecyclerView
+        .Adapter<DILRHomeVideoViewAdapter.DataObjectHolder> {
     private static String LOG_TAG = "HomeVideoViewAdapter";
     private List<VideoList> mDataset;
     private static MyClickListener myClickListener;
@@ -76,7 +73,7 @@ public class HomeVideoViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public HomeVideoViewAdapter(List<VideoList> myDataset) {
+    public DILRHomeVideoViewAdapter(List<VideoList> myDataset) {
         mDataset = myDataset;
     }
 
@@ -85,7 +82,7 @@ public class HomeVideoViewAdapter extends RecyclerView
                                                int viewType) {
         Log.d(TAG,"in onCreateViewHolder..");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.home_videoview_layout, parent, false);
+                .inflate(R.layout.dilr_home_videoview_layout, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
