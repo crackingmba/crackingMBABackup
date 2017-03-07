@@ -80,6 +80,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     private LinearLayout llProfileLayout;
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail, txtUser,txtNoLoggedinMsg;
+    //this is a sample comment
 
     @Nullable
     @Override
