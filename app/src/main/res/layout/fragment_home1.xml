@@ -29,23 +29,30 @@
             android:layout_marginTop="15dp">
             <LinearLayout
                 android:layout_width="match_parent"
+                android:background="#01579B"
+                android:orientation="horizontal"
+                android:padding="10dp"
                 android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/home_download_section_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recently Downloaded Videos"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/home_download_section_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Recently Downloaded Videos"
+                    android:textColor="#EDE7F6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <Button
                     android:id="@+id/home_refresh"
-                    android:layout_width="90dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@drawable/refresh"
                     android:layout_marginLeft="10dp"
                     android:text="Refresh"/>
             </LinearLayout>
+
+
             <TextView
                 android:id="@+id/home_download_noVideos"
                 android:layout_width="wrap_content"
@@ -63,47 +70,117 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
+            <!-- The Recent Quant Videos section header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#01579B"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/home_quant_section_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Quant Videos"
+                    android:textColor="#EDE7F6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <!--<Button
+                    android:id="@+id/quant_view_more"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/refresh"
+                    android:layout_marginLeft="10dp"
+                    android:text="View More"/>-->
 
-            <TextView
+                <Button
+                    android:id="@+id/gotoquant3"
+                    android:text="View More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <!--<TextView
                 android:id="@+id/home_latest_quant_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latest Quant Prep Videos"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <TextView
-                android:id="@+id/home_latest_quant_noVideos"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:textAlignment="center"
-                android:text="No latest quant videos available."
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/video_recycler_view"
+                android:textAppearance="?android:attr/textAppearanceMedium" />-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
+                android:orientation="vertical"
+                android:background="#BDBDBD"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/home_latest_quant_noVideos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="20dp"
+                    android:textAlignment="center"
+                    android:text="No latest quant videos available."
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:visibility="gone"/>
 
-            <Button
-                android:id="@+id/gotoquant3"
-                android:text="View More"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_vertical"
-                android:textAlignment="center"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/video_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal" />
 
-            <TextView
+            </LinearLayout>
+
+
+            <!-- Recent DI and LR Videos section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#01579B"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/home_dilr_section_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Recent DI and LR Videos"
+                    android:textColor="#EDE7F6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--<Button
+                    android:id="@+id/dilr_view_more"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/refresh"
+                    android:layout_marginLeft="10dp"
+                    android:text="View More"/>-->
+                <Button
+                    android:id="@+id/gotodi3"
+                    android:text="View More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <!--<TextView
                 android:id="@+id/home_latest_dilr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latest DI &amp; LR Prep Videos"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="#BDBDBD"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/home_latest_dilr_noVideos"
                 android:layout_width="wrap_content"
@@ -111,7 +188,7 @@
                 android:gravity="center_vertical"
                 android:layout_margin="20dp"
                 android:textAlignment="center"
-                android:text="No DIL&amp; videos available."
+                android:text="No DILR videos available."
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:visibility="gone"/>
             <android.support.v7.widget.RecyclerView
@@ -120,22 +197,53 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
-            <Button
-                android:id="@+id/gotodi3"
-                android:text="View More"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginBottom="20dp"
-                android:textAlignment="center"
-                android:gravity="center_vertical"/>
+        </LinearLayout>
 
-            <TextView
+
+            <!-- Recent Verbal Videos section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#01579B"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/home_verbal_section_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Verbal Videos"
+                    android:textColor="#EDE7F6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--<Button
+                    android:id="@+id/verbal_view_more"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/refresh"
+                    android:layout_marginLeft="10dp"
+                    android:text="View More"/>-->
+                <Button
+                    android:id="@+id/gotolatest3"
+                    android:text="View More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <!--<TextView
                 android:id="@+id/home_latest_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latest Verbal Videos"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="#BDBDBD"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/home_latest_other_noVideos"
                 android:layout_width="wrap_content"
@@ -152,15 +260,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
-            <Button
-                android:id="@+id/gotolatest3"
-                android:text="View More"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginBottom="20dp"
-                android:textAlignment="center"
-                android:gravity="center_vertical"/>
+        </LinearLayout>
 
             <!--<ImageView
                     android:id="@+id/Thumbnail"
