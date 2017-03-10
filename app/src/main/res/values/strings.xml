@@ -72,6 +72,7 @@
     <string name="review_answers">Review Answers</string>
     <string name="reset_selection">Reset Selection</string>
     <string name="view_scorecard">View ScoreCard</string>
+    <string name="exit_mock_test">Exit Test</string>
 
     <!-- Login Screen -->
     <string name="btn_logout_from_google">Logout from Google</string>

@@ -180,6 +180,13 @@ public class SubmitMockTestActivity extends AppCompatActivity {
         VideoApplication.selectedMockTestQuestion.setSelectedOption(null);
         ((RadioGroup) findViewById(R.id.mocktest_qstn_radiogroup)).clearCheck();
     }
+
+    public void exitTest(View v){
+        Log.d(TAG,"CLicked exitTest..");
+        setMsgText(CrackingConstant.EMPTY_TEXT);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         //Leaving intentionally blank to avoid going back to previous question
