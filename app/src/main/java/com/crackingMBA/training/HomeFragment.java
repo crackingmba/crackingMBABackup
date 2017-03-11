@@ -94,8 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         gotolatest.setOnClickListener(this);
         homeRefreshBtn = (Button) rootView.findViewById(R.id.home_refresh);
         homeRefreshBtn.setOnClickListener(this);
-        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        isMock = pref.getBoolean("isMock", false);
+        //SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        //isMock = pref.getBoolean("isMock", false);
         dbHelper = DBHelper.getInstance(getContext());
         recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview);
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
@@ -151,39 +151,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
     }
 
-    /*private VideoList populateVideoDataObject(View v) {
-        Log.d(TAG, "Populating videoDataObject..");
-        VideoList vdo = new VideoList();
-        TextView duration = (TextView) v.findViewById(R.id.home_duration);
-        TextView videoID = (TextView) v.findViewById(R.id.home_videoID);
-        TextView videoTitle = (TextView) v.findViewById(R.id.home_videoTitle);
-        TextView thumbnailURL = (TextView) v.findViewById(R.id.home_thumbnailURL);
-        TextView videoURL = (TextView) v.findViewById(R.id.home_videoURL);
-        TextView dateOfUploaded = (TextView) v.findViewById(R.id.home_dateOfUploaded);
-        TextView videoDescription = (TextView) v.findViewById(R.id.home_videoDescription);
-        TextView videoCategory = (TextView) v.findViewById(R.id.home_videoCategory);
-        TextView videoSubCategory = (TextView) v.findViewById(R.id.home_videoSubCategory);
-        TextView categoryFullName = (TextView) v.findViewById(R.id.home_categoryFullName);
-        TextView subCategoryFullName = (TextView) v.findViewById(R.id.home_subCategoryFullName);
-        TextView videoYouTubeURL = (TextView) v.findViewById(R.id.home_videoYouTubeURL);
-        TextView videoDownloadURL = (TextView) v.findViewById(R.id.home_videoDownloadURL);
-
-        vdo.setDuration(duration.getText().toString());
-        vdo.setVideoID(videoID.getText().toString());
-        vdo.setVideoTitle(videoTitle.getText().toString());
-        vdo.setThumbnailURL(thumbnailURL.getText().toString());
-        vdo.setVideoURL(videoURL.getText().toString());
-        vdo.setVideoSubCategory(videoSubCategory.getText().toString());
-        vdo.setUploadDate(dateOfUploaded.getText().toString());
-        vdo.setVideoDescription(videoDescription.getText().toString());
-        vdo.setVideoCategory(videoCategory.getText().toString());
-        vdo.setCategoryFullName(categoryFullName.getText().toString());
-        vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
-        vdo.setVideoYouTubeURL(videoYouTubeURL.getText().toString());
-        vdo.setVideoDownloadURL(videoDownloadURL.getText().toString());
-        return vdo;
-    }
-*/
     private VideoList populateDownloadVideoDataObject(View v) {
         Log.d(TAG, "Populating videoDataObject..");
         VideoList vdo = new VideoList();
@@ -341,7 +308,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 e.printStackTrace();
             }
             //verbal section
-try{
+            try{
             AsyncHttpClient client = new AsyncHttpClient();
             client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL, null, new AsyncHttpResponseHandler() {
                 @Override

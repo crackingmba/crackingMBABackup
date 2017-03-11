@@ -56,10 +56,10 @@ private  TabLayout tabLayout;
         tabIcons = getResources()
                 .obtainTypedArray(R.array.tab_icons);
 
-        SharedPreferences pref = this.getPreferences(Context.MODE_PRIVATE);
+        /*SharedPreferences pref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean("isMock",true);
-        editor.commit();
+        editor.commit();*/
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
