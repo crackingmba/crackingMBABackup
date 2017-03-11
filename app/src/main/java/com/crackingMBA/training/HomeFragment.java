@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
         //isMock = pref.getBoolean("isMock", false);
         dbHelper = DBHelper.getInstance(getContext());
-        recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview);
+        recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview); //abc
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
         dilrRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
         verbalRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
