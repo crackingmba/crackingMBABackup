@@ -19,7 +19,10 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +32,20 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.crackingMBA.training.adapter.DILRHomeVideoViewAdapter;
+import com.crackingMBA.training.adapter.DividerItemDecoration;
+import com.crackingMBA.training.adapter.QuantHomeVideoViewAdapter;
+import com.crackingMBA.training.adapter.VerbalHomeVideoViewAdapter;
+import com.crackingMBA.training.pojo.LoginResponseObject;
+import com.crackingMBA.training.pojo.Question;
+import com.crackingMBA.training.pojo.VideoDataObject;
+import com.crackingMBA.training.pojo.VideoList;
+import com.crackingMBA.training.pojo.VideoListModel;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private static String TAG = "LoginActivity";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -186,16 +204,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean("isLoggedIn",true);
-            editor.putString("loggedInUserName","Harish Ch");
-            editor.putString("loggedInUserEmail",email);
-            editor.commit();
-            Intent dashboardIntent=new Intent(this,DashboardActivity.class);
-            startActivity(dashboardIntent);
+  /*          mAuthTask = new UserLoginTask(email, password);
+            mAuthTask.execute((Void) null);*/
+            loginServiceCall();
+
+          /*  Intent dashboardIntent=new Intent(this,DashboardActivity.class);
+            startActivity(dashboardIntent);*/
+
         }
     }
 
@@ -355,5 +370,85 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    private String loginServiceCall()
+        {
+
+            RequestParams params = new RequestParams();
+            params.put("email", "suri123boss1@gmail.com");
+            params.put("password", "admin");
+            Log.d(TAG, "loginServiceCall");
+            final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
+            try {
+                AsyncHttpClient client = new AsyncHttpClient();
+/*
+                client.addHeader("Accept", "text/json");
+*/
+              //  client.addHeader("content-type", "application/x-www-form-urlencoded");
+                client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d(TAG, " Login Response is : " + response);
+                        Gson gson = new Gson();
+                        LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
+                        if (loginResponseObject != null) {
+                            String userValid = loginResponseObject.getUserValid();
+
+                            if (userValid.equalsIgnoreCase("yes")) {
+                                String userName = loginResponseObject.getUserName();
+
+                                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("isLoggedIn",true);
+                                editor.putString("loggedInUserName","Harish Ch");
+                                editor.putString("loggedInUserEmail","mttest@gmail.com");
+
+                             /*   Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
+                                startActivity(dashboardIntent);
+                              */  editor.commit();
+
+                                List<Question> questions = loginResponseObject.getUserQuestionsLlist();
+                                if (questions != null) {
+                                    for (Question question : questions) {
+                                        String quesionID = question.getQnID();
+                                        String questionText = question.getQnText();
+                                        String questionAnswer = question.getQnAnswer();
+                                        String quesionAnswerDate = question.getQnAnswerDate();
+                                        String questionDate = question.getQnDatePosted();
+                                    }
+                                }
+
+                            }else {
+                                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                                    mPasswordView.requestFocus();
+                                mEmailView.setError(getString(R.string.error_invalid_email));
+                                    showProgress(false);
+                                }
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Throwable error,
+                                          String content) {
+                        Log.d(TAG, "Status is " + statusCode + " and " + content);
+                        if (statusCode == 404) {
+                            Log.d(TAG, "Requested resource not found");
+                        } else if (statusCode == 500) {
+                            Log.d(TAG, "Something went wrong at server end");
+                        } else {
+                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        }
+                    }
+                });
+                //dilr section
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return  "true";
+        }
+
+
 }
 
