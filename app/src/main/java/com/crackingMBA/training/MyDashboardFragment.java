@@ -5,12 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -27,16 +24,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.request.RequestListener;
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.QuestionsViewAdapter;
-import com.crackingMBA.training.pojo.Qstns;
+import com.crackingMBA.training.pojo.LoginResponseObject;
+import com.crackingMBA.training.pojo.Question;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookRequestError;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
@@ -54,15 +49,10 @@ import com.google.android.gms.common.api.Status;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +72,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     RecyclerView qstnsRecyclerView;
     RecyclerView.Adapter mAdapter;
     LinearLayoutManager mLayoutManager;
-    String url = "";
 
     SharedPreferences pref;
     private static final int RC_SIGN_IN = 007;
@@ -121,7 +110,7 @@ private LoginButton fbloginButton;
             //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/1485628183722.jpg";//pref.getString("loggedInProfilePicUrl",null);
             Log.d(TAG, "loggedInUserName=" + loggedInUserName + "\n loggedInProfilePicUrl=" + loggedInProfilePicUrl);
             ((TextView) rootView.findViewById(R.id.welcomeTxt)).setText(loggedInUserName);
-                txtName=(TextView)rootView.findViewById(R.id.welcomeTxt);
+            txtName=(TextView)rootView.findViewById(R.id.welcomeTxt);
             txtEmail = (TextView) rootView.findViewById(R.id.txtEmail1);
             txtUser = (TextView) rootView.findViewById(R.id.welcomeTxt);
             btnSignOut1 = (Button) rootView.findViewById(R.id.logoutbtn);
@@ -356,9 +345,9 @@ private LoginButton fbloginButton;
     private void getQstnsDataSet() {
 
         Log.d(TAG, "isMock?" + isMock);
-        isMock = true;
         if (isMock) {
-            ArrayList<Qstns> qstns = populateMockQstnsSet();
+            final ArrayList<Question> qstns = populateMockQstnsSet();
+            VideoApplication.loggedInUserQstns = qstns;
             Log.d(TAG, "Populated qstns are " + qstns);
             mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -370,11 +359,7 @@ private LoginButton fbloginButton;
                         @Override
                         public void onItemClick(int position, View v) {
                             Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                            String qstnId = ((TextView) v.findViewById(R.id.qstnId)).getText().toString();
-                            String qstnTxt = ((TextView) v.findViewById(R.id.qstntxt)).getText().toString();
-                            String qstnDate = ((TextView) v.findViewById(R.id.datetxt)).getText().toString();
-                            Qstns selectedQstn = new Qstns(qstnId, qstnTxt, qstnDate);
-                            VideoApplication.selectedQstn = selectedQstn;
+                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
                             Log.d(TAG, "set with Qstn..");
                             Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
                             startActivity(answerIntent);
@@ -388,40 +373,53 @@ private LoginButton fbloginButton;
             Log.d(TAG, "Populated qstnsRecyclerView");
         } else {
             Log.d(TAG, "In else block");
-            final ArrayList<Qstns> results = new ArrayList<Qstns>();
+
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String email = pref.getString("loggedInUserEmail",null);
+            String pwd = pref.getString("loggedInUserPassword",null);
+            RequestParams params = new RequestParams();
+            params.put("email", email);
+            params.put("password", pwd);
+            Log.d(TAG, "loginServiceCall for populating questions..");
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(url, null, new AsyncHttpResponseHandler() {
+                client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.d(TAG, "Response is : " + response);
+                        Log.d(TAG, " Login Response is : " + response);
                         Gson gson = new Gson();
-                        List<Qstns> qstns = gson.fromJson(response, List.class);
-                        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                        LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
+                        Log.d(TAG,"Parsed response is "+loginResponseObject);
+                        if (loginResponseObject != null && loginResponseObject.getUserQuestions() != null) {
+                            (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.GONE);
+                            List<Question> questions = loginResponseObject.getUserQuestions();
 
-                        qstnsRecyclerView.setLayoutManager(mLayoutManager);
-                        mAdapter = new QuestionsViewAdapter(qstns);
+                            VideoApplication.loggedInUserQstns = questions;
+                            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                            Log.d(TAG,"Questions populated are" + questions);
+                            qstnsRecyclerView.setLayoutManager(mLayoutManager);
+                            mAdapter = new QuestionsViewAdapter(questions);
 
-                        ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
-                                new QuestionsViewAdapter.MyClickListener() {
-                                    @Override
-                                    public void onItemClick(int position, View v) {
-                                        Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                                        String qstnId = ((TextView) v.findViewById(R.id.qstnId)).getText().toString();
-                                        String qstnTxt = ((TextView) v.findViewById(R.id.qstntxt)).getText().toString();
-                                        String qstnDate = ((TextView) v.findViewById(R.id.datetxt)).getText().toString();
-                                        Qstns selectedQstn = new Qstns(qstnId, qstnTxt, qstnDate);
-                                        VideoApplication.selectedQstn = selectedQstn;
-                                        Log.d(TAG, "set with Qstn..");
-                                        Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
-                                        startActivity(answerIntent);
+                            ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
+                                    new QuestionsViewAdapter.MyClickListener() {
+                                        @Override
+                                        public void onItemClick(int position, View v) {
+                                            Log.d(TAG, "Section adapter, Clicked item at position : " + position);
+                                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
+                                            Log.d(TAG, "set with Qstn..");
+                                            Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
+                                            startActivity(answerIntent);
+                                        }
                                     }
-                                }
-                        );
+                            );
 
-                        qstnsRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-                        qstnsRecyclerView.addItemDecoration(itemDecoration);
+                            qstnsRecyclerView.setAdapter(mAdapter);
+                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                            qstnsRecyclerView.addItemDecoration(itemDecoration);
+                        }else{
+                            (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
+                            Log.d(TAG,"There is no subcategories for the category selected");
+                        }
                     }
 
                     @Override
@@ -445,12 +443,12 @@ private LoginButton fbloginButton;
 
     }
 
-    public ArrayList<Qstns> populateMockQstnsSet() {
-        ArrayList<Qstns> mockResults = new ArrayList<Qstns>();
-        Qstns vo = null;
-        vo = new Qstns("qstn1", "Can you please help me with solving this question in Quant?", "23/01/2017");
+    public ArrayList<Question> populateMockQstnsSet() {
+        ArrayList<Question> mockResults = new ArrayList<Question>();
+        Question vo = null;
+        vo = new Question("qstn1", "Can you please help me with solving this question in Quant?", "23/01/2017","This is Answer","25/01/2017");
         mockResults.add(vo);
-        vo = new Qstns("qstn2", "Are the forms for CAT released? If so, how can I apply?", "23/01/2017");
+        vo = new Question("qstn2", "Are the forms for CAT released? If so, how can I apply?", "26/01/2017","This is Another Answer","28/01/2017");
         mockResults.add(vo);
         return mockResults;
     }
@@ -473,7 +471,7 @@ private LoginButton fbloginButton;
                 });
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
-       // txtNoLoggedinMsg.setVisibility(View.VISIBLE);
+        // txtNoLoggedinMsg.setVisibility(View.VISIBLE);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         SharedPreferences.Editor editor = pref.edit();
         editor.remove("loggedInUserName");
@@ -517,7 +515,7 @@ private LoginButton fbloginButton;
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             SharedPreferences.Editor editor = pref.edit();
-        //    editor.remove("loggedInUserName");
+            //    editor.remove("loggedInUserName");
             editor.putBoolean("isLoggedIn",true);
             editor.commit();
 
@@ -549,25 +547,29 @@ private LoginButton fbloginButton;
     @Override
     public void onStart() {
         super.onStart();
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            showProgressDialog();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
-                    handleSignInResult(googleSignInResult);
-                }
-            });
+        try {
+            OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+            if (opr.isDone()) {
+                // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+                // and the GoogleSignInResult will be available instantly.
+                Log.d(TAG, "Got cached sign-in");
+                GoogleSignInResult result = opr.get();
+                handleSignInResult(result);
+            } else {
+                // If the user has not previously signed in on this device or the sign-in has expired,
+                // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+                // single sign-on will occur in this branch.
+                showProgressDialog();
+                opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                    @Override
+                    public void onResult(GoogleSignInResult googleSignInResult) {
+                        hideProgressDialog();
+                        handleSignInResult(googleSignInResult);
+                    }
+                });
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
 
@@ -597,7 +599,7 @@ private LoginButton fbloginButton;
     }
 
     private void updateUI(boolean isSignedIn) {
-   if (isSignedIn) {
+        if (isSignedIn) {
 
 
           /*  btnSignIn.setVisibility(View.GONE);

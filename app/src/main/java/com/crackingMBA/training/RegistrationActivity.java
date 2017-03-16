@@ -3,40 +3,22 @@ package com.crackingMBA.training;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * A login screen that offers login via email/password.
@@ -54,6 +36,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText mConfirmPwdView;
     private View mProgressView;
     private View mRegView;
+
+    private static String TAG = "RegistrationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,11 +120,11 @@ public class RegistrationActivity extends AppCompatActivity {
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("isLoggedIn",true);
-            editor.putString("loggedInUserName",fname+" "+lname);
+            String fullName = fname+" "+lname;
+            editor.putString("loggedInUserName",fullName);
             editor.putString("loggedInUserEmail",email);
             editor.commit();
-            Intent dashboardIntent=new Intent(this,DashboardActivity.class);
-            startActivity(dashboardIntent);
+            registrationServiceCall(fname,lname,email,pwd);
         }
     }
 
@@ -189,5 +173,55 @@ public class RegistrationActivity extends AppCompatActivity {
             mRegView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+    private void registrationServiceCall(final String firstName, final String lastName, final String email, final String password)
+    {
+
+        RequestParams params = new RequestParams();
+        params.put("firstname", firstName);
+        params.put("lastname", lastName);
+        params.put("email", email);
+        params.put("password", password);
+        Log.d(TAG, "registrationServiceCall");
+        try {
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post(CrackingConstant.REGISTRATION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(String response) {
+                    Log.d(TAG, " Registration Response is : " + response);
+
+                            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putBoolean("isLoggedIn",true);
+                            editor.putString("loggedInUserName",firstName+" "+lastName);
+                            editor.putString("loggedInUserEmail",email);
+                            editor.putString("loggedInUserPassword",password);
+                            editor.commit();
+
+                            showProgress(false);
+                            Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
+                            dashboardIntent.putExtra("gotoTab","3");
+                            startActivity(dashboardIntent);
+                            finish();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Throwable error,
+                                      String content) {
+                    Log.d(TAG, "Status is " + statusCode + " and " + content);
+                    if (statusCode == 404) {
+                        Log.d(TAG, "Requested resource not found");
+                    } else if (statusCode == 500) {
+                        Log.d(TAG, "Something went wrong at server end");
+                    } else {
+                        Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

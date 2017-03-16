@@ -1,54 +1,19 @@
 package com.crackingMBA.training;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.crackingMBA.training.adapter.DividerItemDecoration;
-import com.crackingMBA.training.adapter.QuestionsViewAdapter;
-import com.crackingMBA.training.pojo.Qstns;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import com.loopj.android.http.RequestParams;
 
 /**
  * A login screen that offers login via email/password.
@@ -57,7 +22,7 @@ public class AskQuestionActivity extends AppCompatActivity {
 
     EditText qstnTxt;
     TextView msg;
-    String url;
+    String email;
     boolean isMock;
     static String TAG = "AskQuestionActivvity";
 
@@ -68,6 +33,7 @@ public class AskQuestionActivity extends AppCompatActivity {
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isMock = pref.getBoolean("isMock",false);
+        email = pref.getString("loggedInUserEmail",null);
         qstnTxt = (EditText) findViewById(R.id.askqstn_qstntxt);
         msg = (TextView) findViewById(R.id.askqstn_msg);
 
@@ -75,23 +41,30 @@ public class AskQuestionActivity extends AppCompatActivity {
 
     public void submitQuestion(View v){
         String qstnStr = qstnTxt.getText().toString();
-        String dateStr = String.valueOf(DateFormat.format("dd/MM/yyyy",new Date()));
-        Log.d(TAG,"Submitting qstn "+qstnStr+" On "+dateStr);
-        isMock = true;
+        Log.d(TAG,"Submitting qstn "+qstnStr);
         if(isMock){
             Log.d(TAG,"Submitted qstn mocked..");
             msg.setText("Your Question is Submitted Successfully");
             msg.setTextColor(Color.BLUE);
         }else {
             Log.d(TAG, "In else block");
+            final RequestParams params = new RequestParams();
+            params.put("email", email);
+            params.put("qnText", qstnStr);
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(url, null, new AsyncHttpResponseHandler() {
+                client.get(CrackingConstant.ADD_QUESTION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.d(TAG, "Qstn submitted successfully..");
-                        msg.setText("Your Question is Submitted Successfully");
-                        msg.setTextColor(Color.BLUE);
+                        if(response.contains("pass")) {
+                            Log.d(TAG, "Qstn submitted successfully for.."+params);
+                            msg.setText("Your Question is Submitted Successfully");
+                            msg.setTextColor(Color.BLUE);
+                        }else{
+                            Log.d(TAG, "Qstn submission failed..");
+                            msg.setText("Problem occured while submitting question");
+                            msg.setTextColor(Color.RED);
+                        }
                     }
 
                     @Override
@@ -114,6 +87,9 @@ public class AskQuestionActivity extends AppCompatActivity {
                 ;
             }
         }
+        Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
+        dashboardIntent.putExtra("gotoTab","3");
+        startActivity(dashboardIntent);
     }
 
 }

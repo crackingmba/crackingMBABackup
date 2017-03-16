@@ -1,30 +1,16 @@
 package com.crackingMBA.training;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.TextView;
-import android.graphics.PorterDuff;
-
-import com.crackingMBA.training.db.DBHelper;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -42,6 +28,8 @@ public class DashboardActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Integer gotoTab;
+
 private  TabLayout tabLayout;
     private String[] tabTitles;
     private TypedArray tabIcons;
@@ -51,6 +39,12 @@ private  TabLayout tabLayout;
         setContentView(R.layout.activity_dashboard);
         //initilizing db
 
+        if(null != getIntent() && null!=getIntent().getExtras()){
+            String tab = getIntent().getExtras().getString("gotoTab");
+            if(null!=tab && ""!=tab){
+                gotoTab = Integer.parseInt(tab);
+            }
+        }
 
         tabTitles = getResources().getStringArray(R.array.tab_items);
         tabIcons = getResources()
@@ -74,6 +68,10 @@ private  TabLayout tabLayout;
 
          tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        if(null != gotoTab){
+            tabLayout.getTabAt(gotoTab).select();
+            gotoTab = null;
+        }
         setupTabIcons();
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

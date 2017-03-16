@@ -19,8 +19,6 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -33,15 +31,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.crackingMBA.training.adapter.DILRHomeVideoViewAdapter;
-import com.crackingMBA.training.adapter.DividerItemDecoration;
-import com.crackingMBA.training.adapter.QuantHomeVideoViewAdapter;
-import com.crackingMBA.training.adapter.VerbalHomeVideoViewAdapter;
 import com.crackingMBA.training.pojo.LoginResponseObject;
 import com.crackingMBA.training.pojo.Question;
 import com.crackingMBA.training.pojo.VideoDataObject;
-import com.crackingMBA.training.pojo.VideoList;
-import com.crackingMBA.training.pojo.VideoListModel;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -206,7 +198,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
   /*          mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);*/
-            loginServiceCall();
+            loginServiceCall(email,password);
 
           /*  Intent dashboardIntent=new Intent(this,DashboardActivity.class);
             startActivity(dashboardIntent);*/
@@ -371,12 +363,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private String loginServiceCall()
+    private String loginServiceCall(final String email, final String password)
         {
 
             RequestParams params = new RequestParams();
-            params.put("email", "suri123boss1@gmail.com");
-            params.put("password", "admin");
+            params.put("email", email);
+            params.put("password", password);
             Log.d(TAG, "loginServiceCall");
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
             try {
@@ -400,28 +392,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putBoolean("isLoggedIn",true);
-                                editor.putString("loggedInUserName","Harish Ch");
-                                editor.putString("loggedInUserEmail","mttest@gmail.com");
+                                editor.putString("loggedInUserName",loginResponseObject.getUserName());
+                                editor.putString("loggedInUserEmail",email);
+                                editor.putString("loggedInUserPassword",password);
 
                              /*   Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
                                 startActivity(dashboardIntent);
                               */  editor.commit();
 
-                                List<Question> questions = loginResponseObject.getUserQuestionsLlist();
-                                if (questions != null) {
-                                    for (Question question : questions) {
-                                        String quesionID = question.getQnID();
-                                        String questionText = question.getQnText();
-                                        String questionAnswer = question.getQnAnswer();
-                                        String quesionAnswerDate = question.getQnAnswerDate();
-                                        String questionDate = question.getQnDatePosted();
-                                    }
-                                }
-
+                                List<Question> questions = loginResponseObject.getUserQuestions();
+                                VideoApplication.loggedInUserQstns = questions;
+                                showProgress(false);
+                                Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
+                                dashboardIntent.putExtra("gotoTab","3");
+                                startActivity(dashboardIntent);
+                                finish();
                             }else {
                                     mPasswordView.setError(getString(R.string.error_incorrect_password));
                                     mPasswordView.requestFocus();
-                                mEmailView.setError(getString(R.string.error_invalid_email));
+                                    mEmailView.setError(getString(R.string.error_invalid_email));
                                     showProgress(false);
                                 }
 

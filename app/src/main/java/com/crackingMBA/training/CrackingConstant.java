@@ -19,6 +19,8 @@ public class CrackingConstant {
     public static final String HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL="http://www.crackingmba.com/getVideoList.php?category=dilr&subcategory=recent";
     public static final String HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL="http://www.crackingmba.com/getVideoList.php?category=verbal&subcategory=recent";
     public static final String LOGIN_SERVICE_URL="http://crackingmba.com/validateUser.php";
+    public static final String REGISTRATION_SERVICE_URL="http://crackingmba.com/registerUser.php";
+    public static final String ADD_QUESTION_SERVICE_URL="http://crackingmba.com/addQuestion.php";
 
     public static final String DEVELOPER_KEY = "AIzaSyAlp1g-Ywycw2hqEJnpoU73NHLBF9akfJo";
 

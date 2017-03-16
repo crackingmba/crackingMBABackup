@@ -57,9 +57,4 @@ public class MockTestResultActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(getApplicationContext(),MockTestReviewAnswersActivity.class);
         startActivity(mainIntent);
     }
-
-    @Override
-    public void onBackPressed() {
-        //Leaving intentionally blank to avoid going back to previous question
-    }
 }

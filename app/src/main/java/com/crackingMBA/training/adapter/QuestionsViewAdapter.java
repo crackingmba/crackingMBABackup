@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.pojo.Qstns;
+import com.crackingMBA.training.pojo.Question;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class QuestionsViewAdapter extends RecyclerView
         .Adapter<QuestionsViewAdapter.DataObjectHolder> {
-    private List<Qstns> mDataset;
+    private List<Question> mDataset;
     private static MyClickListener myClickListener;
     private static String TAG = "QuestionsViewAdapter";
 
@@ -47,7 +47,7 @@ public class QuestionsViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public QuestionsViewAdapter(List<Qstns> myDataset) {
+    public QuestionsViewAdapter(List<Question> myDataset) {
         mDataset = myDataset;
     }
 
@@ -65,13 +65,13 @@ public class QuestionsViewAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(TAG,"in onBindViewHolder..");
-        holder.qstnId.setText(mDataset.get(position).getQstnId());
-        holder.qstn.setText(mDataset.get(position).getQstn());
-        holder.date.setText(mDataset.get(position).getDate());
+        holder.qstnId.setText(mDataset.get(position).getQnID());
+        holder.qstn.setText(mDataset.get(position).getQnText());
+        holder.date.setText(mDataset.get(position).getQnDatePosted());
         Log.d(TAG, holder.qstn.getText()+" "+holder.date.getText());
     }
 
-    public void addItem(Qstns dataObj, int index) {
+    public void addItem(Question dataObj, int index) {
         Log.d(TAG,"in addItem..");
         mDataset.add(dataObj);
         notifyItemInserted(index);

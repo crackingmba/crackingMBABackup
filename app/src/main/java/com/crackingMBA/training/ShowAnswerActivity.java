@@ -1,23 +1,12 @@
 package com.crackingMBA.training;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import java.util.Date;
-
-import com.crackingMBA.training.pojo.Qstns;
+import com.crackingMBA.training.pojo.Question;
 
 /**
  * A login screen that offers login via email/password.
@@ -43,10 +32,10 @@ public class ShowAnswerActivity extends AppCompatActivity {
         qstnDate = (TextView) findViewById(R.id.answer_qstnDate);
         answerTxt = (TextView) findViewById(R.id.answer_answerTxt);
 
-        Qstns askedQstn = VideoApplication.selectedQstn;
-        qstnTxt.setText(askedQstn.getQstn());
-        qstnDate.setText(askedQstn.getDate());
-        answerTxt.setText(getAnswerForQstn(askedQstn.getQstnId()));
+        Question askedQstn = VideoApplication.selectedQstn;
+        qstnTxt.setText(askedQstn.getQnText());
+        qstnDate.setText(askedQstn.getQnAnswerDate());
+        answerTxt.setText(getAnswerForQstn(askedQstn.getQnAnswer()));
 
     }
 

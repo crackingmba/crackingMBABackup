@@ -70,6 +70,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
             public void onFinish() {
                 Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
                 startActivity(mainIntent);
+                finish();
             }
         };
         countDownTimer.start();
@@ -135,6 +136,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
             countDownTimer.cancel();
             Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
             startActivity(mainIntent);
+            finish();
             return;
         }
         currentQstnIndex += 1;
@@ -155,6 +157,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
                 countDownTimer.cancel();
                 Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
                 startActivity(mainIntent);
+                finish();
                 return;
             }
             currentQstnIndex += 1;

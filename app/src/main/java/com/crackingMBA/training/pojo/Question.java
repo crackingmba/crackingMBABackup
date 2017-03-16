@@ -50,6 +50,14 @@ public class Question {
         this.qnAnswerDate = qnAnswerDate;
     }
 
+    public Question(String qnID, String qnText, String qnDatePosted, String qnAnswer, String qnAnswerDate) {
+        this.qnID = qnID;
+        this.qnText = qnText;
+        this.qnDatePosted = qnDatePosted;
+        this.qnAnswer = qnAnswer;
+        this.qnAnswerDate = qnAnswerDate;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

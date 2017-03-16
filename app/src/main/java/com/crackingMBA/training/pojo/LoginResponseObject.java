@@ -9,7 +9,7 @@ public class LoginResponseObject {
 
     private String userValid;
     private String userName;
-    private List<Question> userQuestionsLlist;
+    private List<Question> userQuestions;
 
     public String getUserValid() {
         return userValid;
@@ -27,12 +27,12 @@ public class LoginResponseObject {
         this.userName = userName;
     }
 
-    public List<Question> getUserQuestionsLlist() {
-        return userQuestionsLlist;
+    public List<Question> getUserQuestions() {
+        return userQuestions;
     }
 
-    public void setUserQuestionsLlist(List<Question> userQuestionsLlist) {
-        this.userQuestionsLlist = userQuestionsLlist;
+    public void setUserQuestions(List<Question> userQuestions) {
+        this.userQuestions = userQuestions;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LoginResponseObject {
         return "LoginResponseObject{" +
                 "userValid='" + userValid + '\'' +
                 ", userName='" + userName + '\'' +
-                ", userQuestionsLlist=" + userQuestionsLlist +
+                ", userQuestions=" + userQuestions +
                 '}';
     }
 }

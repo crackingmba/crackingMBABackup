@@ -79,6 +79,14 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="left"/>
 
+            <TextView
+                android:id="@+id/qstns_not_available"
+                android:text="@string/qstns_not_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mydashboard_recycler_qstns"
