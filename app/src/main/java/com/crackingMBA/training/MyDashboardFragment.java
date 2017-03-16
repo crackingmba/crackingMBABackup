@@ -27,10 +27,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.request.RequestListener;
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.QuestionsViewAdapter;
 import com.crackingMBA.training.pojo.Qstns;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookRequestError;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -45,9 +55,14 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +96,12 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail, txtUser,txtNoLoggedinMsg;
     //this is a sample comment
+
+    //fb variables
+private LoginButton fbloginButton;
+    CallbackManager callbackManager;
+
+
 
     @Nullable
     @Override
@@ -142,7 +163,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         } else {
             rootView = inflater.inflate(R.layout.fragment_mydashboard, container, false);
             // ((Button) rootView.findViewById(R.id.googlelogin)).setOnClickListener(this);
-            ((Button) rootView.findViewById(R.id.fblogin)).setOnClickListener(this);
+          //  ((Button) rootView.findViewById(R.id.fblogin)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.applogin)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.register)).setOnClickListener(this);
 
@@ -178,6 +199,68 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             // Customizing G+ button
             btnSignIn.setSize(SignInButton.SIZE_STANDARD);
             btnSignIn.setScopes(gso.getScopeArray());
+
+
+
+            //fb login
+
+            fbloginButton = (LoginButton) rootView.findViewById(R.id.login_button);
+            fbloginButton.setReadPermissions("email");
+            // If using in a fragment
+            fbloginButton.setFragment(this);
+            // Other app specific specialization
+            callbackManager = CallbackManager.Factory.create();
+            // Callback registration
+            fbloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.d(TAG,"onSuccess RESPONSE:");
+
+                    GraphRequest request = GraphRequest.newMeRequest(
+                            loginResult.getAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(
+                                        JSONObject object,
+                                        GraphResponse response) {
+                                   Log.d(TAG,"FB RESPONSE:"+response);
+                                    try {
+                                        //txtNoLoggedinMsg.setVisibility(View.GONE);
+                                        txtName.setText(response.getJSONObject().getString("name"));
+                                        txtEmail.setText(response.getJSONObject().getString("email"));
+
+                                        txtUser.setText(response.getJSONObject().getString("name"));
+                                    }
+                                    catch (Exception e){
+
+                                    }
+                                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    //    editor.remove("loggedInUserName");
+                                    editor.putBoolean("isLoggedIn",true);
+                                    editor.commit();
+                                }
+                            });
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id,name,link,email");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+
+                }
+
+                @Override
+                public void onCancel() {
+                    Log.d(TAG,"onSuccess onCancel:");
+                    // App code
+                }
+
+                @Override
+                public void onError(FacebookException exception) {
+                    Log.d(TAG,"onSuccess onError:");
+                    // App code
+                }
+            });
+
 
 
         }
@@ -225,10 +308,10 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         Intent gotoIntent = null;
         switch (v.getId()) {
 
-            case R.id.fblogin:
+        /*    case R.id.fblogin:
                 gotoIntent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(gotoIntent);
-                break;
+                break;*/
             case R.id.applogin:
                 gotoIntent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(gotoIntent);
@@ -458,6 +541,9 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
+      else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -526,4 +612,55 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         }
     }
 
+
+
 }
+
+/* fb profile inforamtion**//*
+
+    public void getProfileInformation() {
+        mAsyncRunner.request("me", new RequestListener() {
+            @Override
+            public void onComplete(String response, Object state) {
+                Log.d("Profile", response);
+                String json = response;
+                try {
+                    JSONObject profile = new JSONObject(json);
+                    // getting name of the user
+                    String name = profile.getString("name");
+                    // getting email of the user
+                    String email = profile.getString("email");
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(), "Name: " + name + "\nEmail: " + email, Toast.LENGTH_LONG).show();
+                        }
+
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onIOException(IOException e, Object state) {
+            }
+
+            @Override
+            public void onFileNotFoundException(FileNotFoundException e,
+                                                Object state) {
+            }
+
+            @Override
+            public void onMalformedURLException(MalformedURLException e,
+                                                Object state) {
+            }
+
+            @Override
+            public void onFacebookError(FacebookRequestError e, Object state) {
+            }
+        });
+    }*/
