@@ -53,7 +53,7 @@ public class AskQuestionActivity extends AppCompatActivity {
             params.put("qnText", qstnStr);
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(CrackingConstant.ADD_QUESTION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                client.post(CrackingConstant.ADD_QUESTION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         if(response.contains("pass")) {
