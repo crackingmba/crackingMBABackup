@@ -20,11 +20,13 @@ import com.crackingMBA.training.util.SectionEnum;
 public class MockTestFragment extends Fragment implements View.OnClickListener {
 View rootView;
     private static String TAG = "MockTestFragment";
-
+    LayoutInflater inflater;
+    ViewGroup container;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        this.inflater = inflater;
+        this.container = container;
         rootView = inflater.inflate(R.layout.fragment_mocktest_startup, container, false);
         TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow);
         TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);

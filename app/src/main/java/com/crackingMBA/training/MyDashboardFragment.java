@@ -110,7 +110,6 @@ private LoginButton fbloginButton;
             String loggedInProfilePicUrl = pref.getString("loggedInProfilePicUrl", null);
             String loggedInUserEmail = pref.getString("loggedInUserEmail",null);
             String loggedInUserPassword = pref.getString("loggedInUserPassword",null);
-            //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/1485628183722.jpg";//pref.getString("loggedInProfilePicUrl",null);
             Log.d(TAG, "loggedInUserName=" + loggedInUserName + "\n loggedInProfilePicUrl=" + loggedInProfilePicUrl);
             ((TextView) rootView.findViewById(R.id.welcomeTxt)).setText(loggedInUserName);
             txtName=(TextView)rootView.findViewById(R.id.welcomeTxt);
@@ -577,7 +576,7 @@ private LoginButton fbloginButton;
                 // If the user has not previously signed in on this device or the sign-in has expired,
                 // this asynchronous branch will attempt to sign in the user silently.  Cross-device
                 // single sign-on will occur in this branch.
-                showProgressDialog();
+               // showProgressDialog();
                 opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                     @Override
                     public void onResult(GoogleSignInResult googleSignInResult) {
