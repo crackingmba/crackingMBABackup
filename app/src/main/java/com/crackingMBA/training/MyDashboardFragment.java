@@ -430,7 +430,7 @@ private LoginButton fbloginButton;
                             RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
                             qstnsRecyclerView.addItemDecoration(itemDecoration);
                         }else{
-                            (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
+                          //  (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
                             Log.d(TAG,"There is no subcategories for the category selected");
                         }
                     }
