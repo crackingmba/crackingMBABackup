@@ -34,6 +34,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -107,11 +108,14 @@ private LoginButton fbloginButton;
 
             String loggedInUserName = pref.getString("loggedInUserName", "Guest");
             String loggedInProfilePicUrl = pref.getString("loggedInProfilePicUrl", null);
+            String loggedInUserEmail = pref.getString("loggedInUserEmail",null);
+            String loggedInUserPassword = pref.getString("loggedInUserPassword",null);
             //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/1485628183722.jpg";//pref.getString("loggedInProfilePicUrl",null);
             Log.d(TAG, "loggedInUserName=" + loggedInUserName + "\n loggedInProfilePicUrl=" + loggedInProfilePicUrl);
             ((TextView) rootView.findViewById(R.id.welcomeTxt)).setText(loggedInUserName);
             txtName=(TextView)rootView.findViewById(R.id.welcomeTxt);
             txtEmail = (TextView) rootView.findViewById(R.id.txtEmail1);
+            ((TextView) rootView.findViewById(R.id.txtEmail1)).setText(loggedInUserEmail);
             txtUser = (TextView) rootView.findViewById(R.id.welcomeTxt);
             btnSignOut1 = (Button) rootView.findViewById(R.id.logoutbtn);
             btnSignOut1.setOnClickListener(this);
@@ -130,7 +134,7 @@ private LoginButton fbloginButton;
 */
 
             ((ImageButton) rootView.findViewById(R.id.plusbtn)).setOnClickListener(this);
-            ((Button) rootView.findViewById(R.id.editprofilebtn)).setOnClickListener(this);
+           // ((Button) rootView.findViewById(R.id.editprofilebtn)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.logoutbtn)).setOnClickListener(this);
 
             qstnsRecyclerView = (RecyclerView) rootView.findViewById(R.id.mydashboard_recycler_qstns);
@@ -219,15 +223,20 @@ private LoginButton fbloginButton;
                                         txtEmail.setText(response.getJSONObject().getString("email"));
 
                                         txtUser.setText(response.getJSONObject().getString("name"));
+                                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        //    editor.remove("loggedInUserName");
+                                        editor.putBoolean("isLoggedIn",true);
+                                        editor.putString("loggedInUserName",response.getJSONObject().getString("name"));
+                                        editor.putString("loggedInUserEmail",response.getJSONObject().getString("email"));
+                                        editor.commit();
+                                        fblogginFragment();
                                     }
                                     catch (Exception e){
 
                                     }
-                                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                                    SharedPreferences.Editor editor = pref.edit();
-                                    //    editor.remove("loggedInUserName");
-                                    editor.putBoolean("isLoggedIn",true);
-                                    editor.commit();
+
+
                                 }
                             });
                     Bundle parameters = new Bundle();
@@ -257,6 +266,10 @@ private LoginButton fbloginButton;
         return rootView;
     }
 
+    private void fblogginFragment(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+    }
     private boolean mayRequestReadAccess() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -313,10 +326,10 @@ private LoginButton fbloginButton;
                 gotoIntent = new Intent(getActivity(), AskQuestionActivity.class);
                 startActivity(gotoIntent);
                 break;
-            case R.id.editprofilebtn:
+          /*  case R.id.editprofilebtn:
                 gotoIntent = new Intent(getActivity(), EditProfileActivity.class);
                 startActivity(gotoIntent);
-                break;
+                break;*/
             case R.id.logoutbtn:
                 /*gotoIntent = new Intent(getActivity(), LogoutActivity.class);
                 startActivity(gotoIntent);*/
@@ -380,7 +393,7 @@ private LoginButton fbloginButton;
             RequestParams params = new RequestParams();
             params.put("email", email);
             params.put("password", pwd);
-            Log.d(TAG, "loginServiceCall for populating questions..");
+            Log.d(TAG, "loginServiceCall for populating questions..params.."+ params);
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
@@ -391,7 +404,7 @@ private LoginButton fbloginButton;
                         LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
                         Log.d(TAG,"Parsed response is "+loginResponseObject);
                         if (loginResponseObject != null && loginResponseObject.getUserQuestions() != null) {
-                            (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.GONE);
+                            //(( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.GONE);
                             List<Question> questions = loginResponseObject.getUserQuestions();
 
                             VideoApplication.loggedInUserQstns = questions;
@@ -471,6 +484,7 @@ private LoginButton fbloginButton;
                 });
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
+        LoginManager.getInstance().logOut();
         // txtNoLoggedinMsg.setVisibility(View.VISIBLE);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         SharedPreferences.Editor editor = pref.edit();
@@ -518,8 +532,10 @@ private LoginButton fbloginButton;
             //    editor.remove("loggedInUserName");
             editor.putBoolean("isLoggedIn",true);
             editor.commit();
-
-
+         /*   Intent dashboardIntent=new Intent(getActivity(),DashboardActivity.class);
+            dashboardIntent.putExtra("gotoTab","3");
+            startActivity(dashboardIntent);*/
+            registrationServiceCall(personName,personName,email,"google1");
 
         } else {
             // Signed out, show unauthenticated UI.
@@ -538,6 +554,8 @@ private LoginButton fbloginButton;
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
         }
       else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -613,7 +631,50 @@ private LoginButton fbloginButton;
             llProfileLayout.setVisibility(View.GONE);*/
         }
     }
+    private void registrationServiceCall(final String firstName, final String lastName, final String email, final String password)
+    {
 
+        RequestParams params = new RequestParams();
+        params.put("firstname", firstName);
+        params.put("lastname", lastName);
+        params.put("email", email);
+        params.put("password", password);
+        Log.d(TAG, "registrationServiceCall..params.."+params);
+        try {
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post(CrackingConstant.REGISTRATION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(String response) {
+                    Log.d(TAG, " Registration Response is : " + response);
+
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putBoolean("isLoggedIn",true);
+                    editor.putString("loggedInUserName",firstName+" "+lastName);
+                    editor.putString("loggedInUserEmail",email);
+                    editor.putString("loggedInUserPassword",password);
+                    editor.commit();
+
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Throwable error,
+                                      String content) {
+                    Log.d(TAG, "Status is " + statusCode + " and " + content);
+                    if (statusCode == 404) {
+                        Log.d(TAG, "Requested resource not found");
+                    } else if (statusCode == 500) {
+                        Log.d(TAG, "Something went wrong at server end");
+                    } else {
+                        Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

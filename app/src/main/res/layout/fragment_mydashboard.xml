@@ -27,38 +27,33 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_margin="15dp">
+        android:layout_margin="5dp">
 
         <ImageView
             android:id="@+id/guestprofile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/img1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/mydashboard"
             android:adjustViewBounds="true" />
 
         <TextView
             android:id="@+id/welcome_User"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/welcome_guest"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/txtEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textSize="18dp" />
+
 
         <TextView
             android:id="@+id/no_login_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:text="@string/not_logged_in_msg"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="left"/>
 
 
@@ -66,10 +61,14 @@
         <!--google login-->
 
         <com.google.android.gms.common.SignInButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/btn_sign_in"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp" />
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+
+
+            />
 
 
         <Button
@@ -78,7 +77,14 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_logout_from_google"
             android:visibility="gone"
-            android:layout_marginBottom="10dp"/>
+           />
+        <TextView
+            android:id="@+id/OrId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Or"
+         />
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
@@ -98,12 +104,16 @@
 
 
         <com.facebook.login.widget.LoginButton
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
             android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="50px"
+            facebook:com_facebook_login_text="Login With Facebook"
+            />
 
 <!--
         <Button
@@ -112,20 +122,32 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />-->
-
+        <TextView
+            android:id="@id/OrId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Or"
+            />
         <Button
             android:id="@+id/applogin"
             android:text="@string/app_login"
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"/>
 
         <Button
             android:id="@+id/register"
             android:text="@string/new_user_register"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="7dp"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"/>
 
 
         <ImageView
@@ -169,7 +191,12 @@
                     android:layout_weight="2"
                     android:orientation="vertical">
 
-
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
 
 
                 </LinearLayout>

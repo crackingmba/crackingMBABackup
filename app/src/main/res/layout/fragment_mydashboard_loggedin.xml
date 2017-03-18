@@ -39,7 +39,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/mydashboard"/>
 
             <TextView
                 android:id="@+id/welcomeTxt"
@@ -52,23 +53,27 @@
                 android:id="@+id/txtEmail1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:padding="5dp"
+                android:layout_gravity="center_horizontal"
                 android:textSize="18dp" />
 
-            <Button
+      <!--      <Button
                 android:id="@+id/editprofilebtn"
                 android:text="@string/edit_profile"
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"/>
-
+-->
             <Button
                 android:id="@+id/logoutbtn"
                 android:text="@string/logout_txt"
                 android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
@@ -79,6 +84,15 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="left"/>
 
+            <ImageButton
+                android:id="@+id/plusbtn"
+                android:adjustViewBounds="true"
+                android:src="@drawable/plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:background="#0000"
+                />
             <TextView
                 android:id="@+id/qstns_not_available"
                 android:text="@string/qstns_not_available"
@@ -91,20 +105,10 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mydashboard_recycler_qstns"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textAlignment="center"
-                android:scrollbars="none" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"/>
 
-            <ImageButton
-                android:id="@+id/plusbtn"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/preparation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:gravity="right|bottom"
-                android:layout_gravity="right"
-                android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

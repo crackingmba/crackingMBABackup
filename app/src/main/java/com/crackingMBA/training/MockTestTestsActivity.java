@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.MockTestTestsAdapter;
 import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.MockTestTestsModel;
+import com.crackingMBA.training.pojo.MockTestTopic;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -36,7 +38,10 @@ public class MockTestTestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mocktest_tests);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isMock = pref.getBoolean("isMock", false);
 
@@ -142,5 +147,13 @@ public class MockTestTestsActivity extends AppCompatActivity {
         tests.add(test1);
         tests.add(test2);
     }
+
+    private MockTestTopic populateMockTestTopic(View v){
+        MockTestTopic mockTestTopic = new MockTestTopic();
+        mockTestTopic.setId(((TextView)v.findViewById(R.id.mocktest_topic_id)).getText().toString());
+        mockTestTopic.setName(((TextView)v.findViewById(R.id.mocktest_topic_txt)).getText().toString());
+        return mockTestTopic;
+    }
+
 
 }

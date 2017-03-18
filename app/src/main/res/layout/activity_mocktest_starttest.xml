@@ -22,7 +22,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="90px"
                 android:layout_height="110px"
                 android:layout_gravity="left"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title_activity_dashboard"
                 android:textSize="22sp"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"/>-->
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

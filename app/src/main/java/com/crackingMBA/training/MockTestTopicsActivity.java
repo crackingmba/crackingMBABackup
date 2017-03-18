@@ -7,7 +7,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,7 +42,10 @@ public class MockTestTopicsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mocktest_topics);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isMock = pref.getBoolean("isMock", false);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         msg = (TextView)findViewById(R.id.mocktest_topic_msg);
         recyclerView = (RecyclerView) findViewById(R.id.mocktest_topics_recycler_view);
@@ -164,6 +169,18 @@ public class MockTestTopicsActivity extends AppCompatActivity {
         mockTestTopic.setId(((TextView)v.findViewById(R.id.mocktest_topic_id)).getText().toString());
         mockTestTopic.setName(((TextView)v.findViewById(R.id.mocktest_topic_txt)).getText().toString());
         return mockTestTopic;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

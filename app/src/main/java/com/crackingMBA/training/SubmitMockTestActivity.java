@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -38,7 +40,10 @@ public class SubmitMockTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mocktest_submittest);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         msg = (TextView) findViewById(R.id.mocktest_qstn_msg);
 
         if(VideoApplication.allMockQstns.isEmpty()){
@@ -194,4 +199,17 @@ public class SubmitMockTestActivity extends AppCompatActivity {
     public void onBackPressed() {
         //Leaving intentionally blank to avoid going back to previous question
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

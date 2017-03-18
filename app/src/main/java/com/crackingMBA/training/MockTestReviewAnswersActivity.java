@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +31,10 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mocktest_reviewanswers);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.mocktest_reviewanswers_recycler_view);
         recyclerView.setHasFixedSize(true);
 
@@ -75,5 +80,17 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),MockTestResultActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

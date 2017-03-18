@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.crackingMBA.training.pojo.Question;
@@ -24,7 +26,10 @@ public class ShowAnswerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showanswer);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isMock = pref.getBoolean("isMock",false);
 
@@ -35,12 +40,12 @@ public class ShowAnswerActivity extends AppCompatActivity {
         Question askedQstn = VideoApplication.selectedQstn;
         qstnTxt.setText(askedQstn.getQnText());
         qstnDate.setText(askedQstn.getQnAnswerDate());
-        answerTxt.setText(getAnswerForQstn(askedQstn.getQnAnswer()));
-
+      //  answerTxt.setText(getAnswerForQstn(askedQstn.getQnAnswer()));
+        answerTxt.setText(askedQstn.getQnAnswer());
     }
 
     private String getAnswerForQstn(String qstnId){
-        isMock = true;
+        isMock = false;
         if(isMock){
             return "This is a mock answer for the selected question. Actual answers may vary.";
         }else{
@@ -48,6 +53,16 @@ public class ShowAnswerActivity extends AppCompatActivity {
         }
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
 

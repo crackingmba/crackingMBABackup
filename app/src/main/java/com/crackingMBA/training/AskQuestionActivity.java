@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +32,10 @@ public class AskQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_askquestion);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isMock = pref.getBoolean("isMock",false);
@@ -90,6 +96,17 @@ public class AskQuestionActivity extends AppCompatActivity {
         Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
         dashboardIntent.putExtra("gotoTab","3");
         startActivity(dashboardIntent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

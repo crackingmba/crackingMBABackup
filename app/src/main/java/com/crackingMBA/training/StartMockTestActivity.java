@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +37,10 @@ public class StartMockTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mocktest_starttest);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         MockTestTest test = VideoApplication.selectedMockTestTest;
         ((TextView) findViewById(R.id.mocktest_test_title)).setText(test.getTestTitle());
         ((TextView) findViewById(R.id.mocktest_test_topic)).setText(VideoApplication.selectedMockTestTopic.getName());
@@ -103,5 +108,16 @@ public class StartMockTestActivity extends AppCompatActivity {
         Log.d(TAG,"CLicked startTest..");
         Intent submitIntent=new Intent(getApplicationContext(),SubmitMockTestActivity.class);
         startActivity(submitIntent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
