@@ -548,6 +548,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Toast toast = Toast.makeText(getActivity(), "Video has been deleted", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP, 25, 400);
         toast.show();
+        //this is Vijender's new comment
     }
 
 }
