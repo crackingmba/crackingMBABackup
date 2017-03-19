@@ -159,13 +159,14 @@ public class TargetVideoActivity extends AppCompatActivity {
         // Execute the task
         task.execute(new String[] { URL });
 
+        /*
     try {
         Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
         AsyncTask result = new DownloadImageTask((ImageView) findViewById(R.id.target_detailthumbnail))
                 .execute( videoList.getThumbnailURL());
 
     } catch (Exception e) {
-    }
+    }*/
 
     ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
     final IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
