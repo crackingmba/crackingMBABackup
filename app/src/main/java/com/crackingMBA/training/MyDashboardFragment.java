@@ -28,6 +28,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.crackingMBA.training.adapter.DividerItemDecoration;
+import com.crackingMBA.training.adapter.QuestionsViewAdapter;
 import com.crackingMBA.training.pojo.LoginResponseObject;
 import com.crackingMBA.training.pojo.Question;
 import com.facebook.CallbackManager;
@@ -403,6 +405,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                             //  (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
                             Log.d(TAG,"There is no subcategories for the category selected");
                         }
+                        hideProgressDialog();
                     }
 
                     @Override
@@ -416,6 +419,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                         } else {
                             Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
                         }
+                        hideProgressDialog();
                     }
                 });
             } catch (Exception e) {
