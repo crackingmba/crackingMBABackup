@@ -69,13 +69,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-// Suresh Added comments
-        //Vijender comment added
-        //added one more comments by Suresh
-        //added one new comment by Vijendert
-        //third comments addedby suresh
-        //added one new comment by Vijender
-        //adding the test comment to check Merge Activity
 
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
         gotoquantBtn = (Button) rootView.findViewById(R.id.gotoquant3);
