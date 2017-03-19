@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+// Suresh Added comments
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
         gotoquantBtn = (Button) rootView.findViewById(R.id.gotoquant3);
         gotoquantBtn.setOnClickListener(this);
