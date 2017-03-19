@@ -48,6 +48,21 @@ import java.util.List;
  * Created by MSK on 24-01-2017.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
+
+    Button btn;
+    Button viewonlineButton;
+    Button FullVideoBtn;
+    Button downloadBtn;
+    Button deleteBtn;
+    String urlTxt;
+    EditText edit;
+    MediaController controller;
+    //VideoView surfaceView;
+
+    ImageView mImg;
+    DownloadManager downloadManager;
+    String fullPath = "http://www.crackingmba.com/video.mp4";
+    long downloadId;
     RecyclerView recentRecyclerView;
     RecyclerView quantRecyclerView;
     RecyclerView dilrRecyclerView;
@@ -79,6 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         gotolatest.setOnClickListener(this);
         homeRefreshBtn = (Button) rootView.findViewById(R.id.home_refresh);
         homeRefreshBtn.setOnClickListener(this);
+        //SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        //isMock = pref.getBoolean("isMock", false);
         dbHelper = DBHelper.getInstance(getContext());
         recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview); //abc
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
@@ -132,6 +149,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    private VideoList populateDownloadVideoDataObject(View v) {
+        Log.d(TAG, "Populating videoDataObject..");
+        VideoList vdo = new VideoList();
+        TextView duration = (TextView) v.findViewById(R.id.download_duration);
+        TextView id = (TextView) v.findViewById(R.id.download_videoID);
+        TextView videoTitle = (TextView) v.findViewById(R.id.download_title);
+        TextView thumbnailURL = (TextView) v.findViewById(R.id.download_thumbnailURL);
+        TextView videoURL = (TextView) v.findViewById(R.id.download_videoURL);
+        TextView videoCategory = (TextView) v.findViewById(R.id.download_videoCategory);
+        TextView dateOfUploaded = (TextView) v.findViewById(R.id.download_dateOfUploaded);
+        TextView videoDescription = (TextView) v.findViewById(R.id.download_videoDescription);
+        TextView videoSubCategory = (TextView) v.findViewById(R.id.download_videoSubCategory);
+        TextView categoryFullName = (TextView) v.findViewById(R.id.download_categoryFullName);
+        TextView subCategoryFullName = (TextView) v.findViewById(R.id.download_subCategoryFullName);
+        vdo.setDuration(duration.getText().toString());
+        vdo.setVideoID(id.getText().toString());
+        vdo.setVideoTitle(videoTitle.getText().toString());
+        vdo.setThumbnailURL(thumbnailURL.getText().toString());
+        vdo.setVideoURL(videoURL.getText().toString());
+        vdo.setVideoSubCategory(videoSubCategory.getText().toString());
+        vdo.setUploadDate(dateOfUploaded.getText().toString());
+        vdo.setVideoDescription(videoDescription.getText().toString());
+        vdo.setVideoCategory(videoCategory.getText().toString());
+        vdo.setCategoryFullName(categoryFullName.getText().toString());
+        vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
+        return vdo;
     }
 
 
@@ -462,5 +507,47 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // permissions this app might request
             }
         }
+
+
+    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
+            throws Throwable {
+        Bitmap bitmap = null;
+        MediaMetadataRetriever mediaMetadataRetriever = null;
+        try {
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            if (Build.VERSION.SDK_INT >= 14)
+                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+            else
+                mediaMetadataRetriever.setDataSource(videoPath);
+            //   mediaMetadataRetriever.setDataSource(videoPath);
+            bitmap = mediaMetadataRetriever.getFrameAtTime(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Throwable(
+                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                            + e.getMessage());
+
+        } finally {
+            if (mediaMetadataRetriever != null) {
+                mediaMetadataRetriever.release();
+            }
+        }
+        return bitmap;
+    }
+
+    public void deleteVideo(View view) {
+        String fileName = "/video.mp4";
+        Log.d("suresh", "Entered into delete video");
+        String filePath = CrackingConstant.localstoragepath + fileName;
+        File file = new File(filePath);
+
+
+        file.delete();
+
+        Log.d("suresh", "Exit into delete video");
+        Toast toast = Toast.makeText(getActivity(), "Video has been deleted", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 25, 400);
+        toast.show();
+    }
 
 }

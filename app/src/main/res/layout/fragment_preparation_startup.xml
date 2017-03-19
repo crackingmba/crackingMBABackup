@@ -110,29 +110,6 @@
             </TableLayout>
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="top"
-        android:layout_margin="15dp"
-        android:id="@+id/mylean1"
-        android:visibility="invisible">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CAT2017 Preparation Quant Section"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/section_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:scrollbars="horizontal" />
-    </LinearLayout>
 
 
 
