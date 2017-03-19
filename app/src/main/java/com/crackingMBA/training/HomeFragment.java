@@ -48,21 +48,6 @@ import java.util.List;
  * Created by MSK on 24-01-2017.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
-
-    Button btn;
-    Button viewonlineButton;
-    Button FullVideoBtn;
-    Button downloadBtn;
-    Button deleteBtn;
-    String urlTxt;
-    EditText edit;
-    MediaController controller;
-    //VideoView surfaceView;
-
-    ImageView mImg;
-    DownloadManager downloadManager;
-    String fullPath = "http://www.crackingmba.com/video.mp4";
-    long downloadId;
     RecyclerView recentRecyclerView;
     RecyclerView quantRecyclerView;
     RecyclerView dilrRecyclerView;
@@ -94,8 +79,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         gotolatest.setOnClickListener(this);
         homeRefreshBtn = (Button) rootView.findViewById(R.id.home_refresh);
         homeRefreshBtn.setOnClickListener(this);
-        //SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        //isMock = pref.getBoolean("isMock", false);
         dbHelper = DBHelper.getInstance(getContext());
         recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview); //abc
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
@@ -507,48 +490,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // permissions this app might request
             }
         }
-
-
-    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
-            throws Throwable {
-        Bitmap bitmap = null;
-        MediaMetadataRetriever mediaMetadataRetriever = null;
-        try {
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            if (Build.VERSION.SDK_INT >= 14)
-                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-            else
-                mediaMetadataRetriever.setDataSource(videoPath);
-            //   mediaMetadataRetriever.setDataSource(videoPath);
-            bitmap = mediaMetadataRetriever.getFrameAtTime(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Throwable(
-                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
-                            + e.getMessage());
-
-        } finally {
-            if (mediaMetadataRetriever != null) {
-                mediaMetadataRetriever.release();
-            }
-        }
-        return bitmap;
-    }
-
-    public void deleteVideo(View view) {
-        String fileName = "/video.mp4";
-        Log.d("suresh", "Entered into delete video");
-        String filePath = CrackingConstant.localstoragepath + fileName;
-        File file = new File(filePath);
-
-
-        file.delete();
-
-        Log.d("suresh", "Exit into delete video");
-        Toast toast = Toast.makeText(getActivity(), "Video has been deleted", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP, 25, 400);
-        toast.show();
-        //this is Vijender's new comment
-    }
-
 }
