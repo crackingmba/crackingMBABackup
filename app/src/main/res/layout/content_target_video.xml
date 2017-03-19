@@ -11,19 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.crackingMBA.training.TargetVideoActivity"
     tools:showIn="@layout/activity_target_video">
-  <!--  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/emptyvideotext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_alignParentBottom="true" >
 
-        <Button
-            android:text="Invisible Button"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>-->
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -129,6 +117,7 @@
                     android:text ="View Online"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     />
 
                 <Button
@@ -136,12 +125,14 @@
                     android:text ="Download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     />
                 <Button
                     android:id="@+id/target_deletevideo"
                     android:text ="DELETE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     />
             </LinearLayout>
         </LinearLayout>

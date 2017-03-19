@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +33,11 @@ import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.validator.LocalVideoCheck;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class TargetVideoActivity extends AppCompatActivity {
 
@@ -42,6 +49,7 @@ public class TargetVideoActivity extends AppCompatActivity {
     DownloadManager downloadManager;
     long downloadId;
     VideoList videoList;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,10 +148,24 @@ public class TargetVideoActivity extends AppCompatActivity {
     ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
     ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
 
+    imageView = (ImageView)findViewById(R.id.target_detailthumbnail);
+    imageView.setImageResource(R.drawable.mocktest);
+
+    // Create an object for subclass of AsyncTask
+        String URL =
+                "http://theopentutorials.com/totwp331/wp-content/uploads/totlogo.png";
+        GetXMLTask task = new GetXMLTask();
+        // Execute the task
+        task.execute(new String[] { URL });
+
+
+
+
     try {
         Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
         AsyncTask result = new DownloadImageTask((ImageView) findViewById(R.id.target_detailthumbnail))
                 .execute( videoList.getThumbnailURL());
+
     } catch (Exception e) {
     }
 
@@ -159,7 +181,6 @@ public class TargetVideoActivity extends AppCompatActivity {
             viewOfflineBtn.setEnabled(true);
             videoList.setDownloading(false);
             VideoApplication.downloadingVideoIds.remove(videoList.getVideoID());
-            //dbHelper.updateVideoRecord(videoList);
             toast.setGravity(Gravity.TOP, 25, 400);
             toast.show();
         }
@@ -171,6 +192,64 @@ public class TargetVideoActivity extends AppCompatActivity {
     //download code ends here
 
 }
+
+    //Creating a new class for downloading the image
+    private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap map = null;
+            for (String url : urls) {
+                map = downloadImage(url);
+            }
+            return map;
+        }
+
+        // Sets the Bitmap returned by doInBackground
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
+        }
+
+        // Creates Bitmap from InputStream and returns it
+        private Bitmap downloadImage(String url) {
+            Bitmap bitmap = null;
+            InputStream stream = null;
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inSampleSize = 1;
+
+            try {
+                stream = getHttpConnection(url);
+                bitmap = BitmapFactory.
+                        decodeStream(stream, null, bmOptions);
+                stream.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        // Makes HttpURLConnection and returns InputStream
+        private InputStream getHttpConnection(String urlString)
+                throws IOException {
+            InputStream stream = null;
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+
+            try {
+                HttpURLConnection httpConnection = (HttpURLConnection) connection;
+                httpConnection.setRequestMethod("GET");
+                httpConnection.connect();
+
+                if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    stream = httpConnection.getInputStream();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return stream;
+        }
+    }
+
 
     @Override
     public void onResume() {
@@ -185,15 +264,8 @@ public class TargetVideoActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, YoutubeVideoActivity.class);
-        //  intent.putExtra("localavailblity", localavailablity);
         intent.putExtra("clickedVideo", clickedVideo);
         startActivity(intent);
-
-     /*
-        Intent intent = new Intent(this, FullscreenActivity.class);
-        //  intent.putExtra("localavailblity", localavailablity);
-        intent.putExtra("clickedVideo", clickedVideo);*/
-        //  startActivity(intent);
 
     }
 
@@ -267,32 +339,14 @@ public class TargetVideoActivity extends AppCompatActivity {
             startActivity(intent);*/
 
         }
-       /* if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d("suresh", "Entered into delete video");
-            String filePath1 = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
-            File file1 = new File(filePath1);
-            file1.delete();
-            String filePath = CrackingConstant.localstoragepath + CrackingConstant.myFolder + CrackingConstant.noMedia + fileName;
-            File file = new File(filePath);
-            Uri destUri = Uri.fromFile(file);
-            request.setDestinationUri(destUri);
-            VideoDataObject videoDataObject = new VideoDataObject();
-            selectedVideo.setVideoURL(CrackingConstant.MYPATH + "videos/" + selectedVideo.getVideoURL());
 
-            selectedVideo.setThumbnailURL(CrackingConstant.MYPATH + "img/" + selectedVideo.getThumbnailURL());
-            selectedVideo.setVideoURL(file.toString());
-            dbHelper.addDownloadVideo(selectedVideo);
-            viewOfflineBtn.setText("Downloading..");
-            viewOfflineBtn.setEnabled(false);
-            return downloadManager.enqueue(request);
-        }*/
 
         return 12;
     }
 
 
     public void deleteVideo() {
-        //  String fileName = "video.3gp";
+
         boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID(),this);
         if (localavailablity)
 
