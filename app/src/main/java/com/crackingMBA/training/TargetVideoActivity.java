@@ -149,17 +149,15 @@ public class TargetVideoActivity extends AppCompatActivity {
     ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
 
     imageView = (ImageView)findViewById(R.id.target_detailthumbnail);
-    imageView.setImageResource(R.drawable.mocktest);
+    //imageView.setImageResource(R.drawable.mocktest);
 
     // Create an object for subclass of AsyncTask
-        String URL =
-                "http://theopentutorials.com/totwp331/wp-content/uploads/totlogo.png";
+        //String URL = "http://crackingmba.com/img/piechart.jpg";
+        String URL = CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL();
+        //String URL = videoList.getThumbnailURL();
         GetXMLTask task = new GetXMLTask();
         // Execute the task
         task.execute(new String[] { URL });
-
-
-
 
     try {
         Log.d("suresh", CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL());
