@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,6 +24,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.crackingMBA.training.adapter.DividerItemDecoration;
@@ -70,10 +73,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     boolean isMock;
     View rootView;
 
-    RecyclerView qstnsRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    LinearLayoutManager mLayoutManager;
-
     SharedPreferences pref;
     private static final int RC_SIGN_IN = 007;
 
@@ -88,7 +87,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     //this is a sample comment
 
     //fb variables
-private LoginButton fbloginButton;
+    private LoginButton fbloginButton;
     CallbackManager callbackManager;
 
 
@@ -133,11 +132,10 @@ private LoginButton fbloginButton;
 */
 
             ((ImageButton) rootView.findViewById(R.id.plusbtn)).setOnClickListener(this);
-           // ((Button) rootView.findViewById(R.id.editprofilebtn)).setOnClickListener(this);
+            // ((Button) rootView.findViewById(R.id.editprofilebtn)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.logoutbtn)).setOnClickListener(this);
 
-            qstnsRecyclerView = (RecyclerView) rootView.findViewById(R.id.mydashboard_recycler_qstns);
-            qstnsRecyclerView.setHasFixedSize(true);
+            showProgressDialog();
             getQstnsDataSet();
 
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -155,7 +153,7 @@ private LoginButton fbloginButton;
         } else {
             rootView = inflater.inflate(R.layout.fragment_mydashboard, container, false);
             // ((Button) rootView.findViewById(R.id.googlelogin)).setOnClickListener(this);
-          //  ((Button) rootView.findViewById(R.id.fblogin)).setOnClickListener(this);
+            //  ((Button) rootView.findViewById(R.id.fblogin)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.applogin)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.register)).setOnClickListener(this);
 
@@ -215,13 +213,13 @@ private LoginButton fbloginButton;
                                 public void onCompleted(
                                         JSONObject object,
                                         GraphResponse response) {
-                                   Log.d(TAG,"FB RESPONSE:"+response);
+                                    Log.d(TAG,"FB RESPONSE:"+response);
                                     try {
                                         //txtNoLoggedinMsg.setVisibility(View.GONE);
-                                        txtName.setText(response.getJSONObject().getString("name"));
+                                     /*   txtName.setText(response.getJSONObject().getString("name"));
                                         txtEmail.setText(response.getJSONObject().getString("email"));
 
-                                        txtUser.setText(response.getJSONObject().getString("name"));
+                                        txtUser.setText(response.getJSONObject().getString("name"));*/
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                                         SharedPreferences.Editor editor = pref.edit();
                                         //    editor.remove("loggedInUserName");
@@ -265,7 +263,7 @@ private LoginButton fbloginButton;
         return rootView;
     }
 
-    private void fblogginFragment(){
+    private void    fblogginFragment(){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
@@ -356,46 +354,18 @@ private LoginButton fbloginButton;
 
     private void getQstnsDataSet() {
 
-        Log.d(TAG, "isMock?" + isMock);
-        if (isMock) {
-            final ArrayList<Question> qstns = populateMockQstnsSet();
-            VideoApplication.loggedInUserQstns = qstns;
-            Log.d(TAG, "Populated qstns are " + qstns);
-            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-            qstnsRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new QuestionsViewAdapter(qstns);
-
-            ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
-                    new QuestionsViewAdapter.MyClickListener() {
-                        @Override
-                        public void onItemClick(int position, View v) {
-                            Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
-                            Log.d(TAG, "set with Qstn..");
-                            Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
-                            startActivity(answerIntent);
-                        }
-                    }
-            );
-
-            qstnsRecyclerView.setAdapter(mAdapter);
-            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-            qstnsRecyclerView.addItemDecoration(itemDecoration);
-            Log.d(TAG, "Populated qstnsRecyclerView");
-        } else {
-            Log.d(TAG, "In else block");
+        Log.d(TAG, "inside getQstnsDataSet..");
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             String email = pref.getString("loggedInUserEmail",null);
             String pwd = pref.getString("loggedInUserPassword",null);
             RequestParams params = new RequestParams();
             params.put("email", email);
-            params.put("password", pwd);
+
             Log.d(TAG, "loginServiceCall for populating questions..params.."+ params);
             try {
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                client.post(CrackingConstant.MY_QUESTIONLIST, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         Log.d(TAG, " Login Response is : " + response);
@@ -407,31 +377,35 @@ private LoginButton fbloginButton;
                             List<Question> questions = loginResponseObject.getUserQuestions();
 
                             VideoApplication.loggedInUserQstns = questions;
-                            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                            Log.d(TAG,"Questions populated are" + questions);
-                            qstnsRecyclerView.setLayoutManager(mLayoutManager);
-                            mAdapter = new QuestionsViewAdapter(questions);
-
-                            ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
-                                    new QuestionsViewAdapter.MyClickListener() {
-                                        @Override
-                                        public void onItemClick(int position, View v) {
-                                            Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
-                                            Log.d(TAG, "set with Qstn..");
-                                            Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
-                                            startActivity(answerIntent);
-                                        }
+                            TableLayout table = (TableLayout) rootView.findViewById(R.id.mydashboard_recycler_qstns);
+                            for(final Question question : questions){
+                                TableRow row = new TableRow(getActivity());
+                                TextView txt = new TextView(getActivity());
+                                txt.setText(question.getQnText()+"\n"+question.getQnDatePosted());
+                                txt.setTextAppearance(android.R.style.TextAppearance_Medium);
+                                txt.setPadding(5,5,5,5);
+                                row.addView(txt);
+                                row.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Log.d(TAG, "Clicked qstn : " +question.getQnText());
+                                        VideoApplication.selectedQstn = question;
+                                        Log.d(TAG, "set with Qstn..");
+                                        Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
+                                        startActivity(answerIntent);
                                     }
-                            );
-
-                            qstnsRecyclerView.setAdapter(mAdapter);
-                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-                            qstnsRecyclerView.addItemDecoration(itemDecoration);
+                                });
+                                table.addView(row);
+                                TableRow dividerRow = new TableRow(getActivity());
+                                dividerRow.setPadding(1,1,1,1);
+                                dividerRow.setBackgroundColor(Color.LTGRAY);
+                                table.addView(dividerRow);
+                            }
                         }else{
-                          //  (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
+                            //  (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
                             Log.d(TAG,"There is no subcategories for the category selected");
                         }
+                        hideProgressDialog();
                     }
 
                     @Override
@@ -445,14 +419,13 @@ private LoginButton fbloginButton;
                         } else {
                             Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
                         }
+                        hideProgressDialog();
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
                 ;
             }
-        }
-
     }
 
     public ArrayList<Question> populateMockQstnsSet() {
@@ -522,19 +495,19 @@ private LoginButton fbloginButton;
             txtEmail.setText(email);
 
             txtUser.setText(personName);
-
-            //txtNoLoggedinMsg.setVisibility(View.GONE);
             updateUI(true);
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             SharedPreferences.Editor editor = pref.edit();
-            //    editor.remove("loggedInUserName");
+            editor.putBoolean("isLoggedIn",true);
+            editor.putString("loggedInUserName",acct.getDisplayName());
+            editor.putString("loggedInUserEmail", acct.getEmail());
             editor.putBoolean("isLoggedIn",true);
             editor.commit();
          /*   Intent dashboardIntent=new Intent(getActivity(),DashboardActivity.class);
             dashboardIntent.putExtra("gotoTab","3");
             startActivity(dashboardIntent);*/
-            registrationServiceCall(personName,personName,email,"google1");
+
 
         } else {
             // Signed out, show unauthenticated UI.
@@ -555,8 +528,10 @@ private LoginButton fbloginButton;
             handleSignInResult(result);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.detach(this).attach(this).commit();
+            showProgressDialog();
         }
-      else {
+        else {
+            showProgressDialog();
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -576,7 +551,7 @@ private LoginButton fbloginButton;
                 // If the user has not previously signed in on this device or the sign-in has expired,
                 // this asynchronous branch will attempt to sign in the user silently.  Cross-device
                 // single sign-on will occur in this branch.
-               // showProgressDialog();
+                // showProgressDialog();
                 opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                     @Override
                     public void onResult(GoogleSignInResult googleSignInResult) {
@@ -630,99 +605,6 @@ private LoginButton fbloginButton;
             llProfileLayout.setVisibility(View.GONE);*/
         }
     }
-    private void registrationServiceCall(final String firstName, final String lastName, final String email, final String password)
-    {
-
-        RequestParams params = new RequestParams();
-        params.put("firstname", firstName);
-        params.put("lastname", lastName);
-        params.put("email", email);
-        params.put("password", password);
-        Log.d(TAG, "registrationServiceCall..params.."+params);
-        try {
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.post(CrackingConstant.REGISTRATION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(String response) {
-                    Log.d(TAG, " Registration Response is : " + response);
-
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean("isLoggedIn",true);
-                    editor.putString("loggedInUserName",firstName+" "+lastName);
-                    editor.putString("loggedInUserEmail",email);
-                    editor.putString("loggedInUserPassword",password);
-                    editor.commit();
-
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Throwable error,
-                                      String content) {
-                    Log.d(TAG, "Status is " + statusCode + " and " + content);
-                    if (statusCode == 404) {
-                        Log.d(TAG, "Requested resource not found");
-                    } else if (statusCode == 500) {
-                        Log.d(TAG, "Something went wrong at server end");
-                    } else {
-                        Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
-                    }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
-
-/* fb profile inforamtion**//*
-
-    public void getProfileInformation() {
-        mAsyncRunner.request("me", new RequestListener() {
-            @Override
-            public void onComplete(String response, Object state) {
-                Log.d("Profile", response);
-                String json = response;
-                try {
-                    JSONObject profile = new JSONObject(json);
-                    // getting name of the user
-                    String name = profile.getString("name");
-                    // getting email of the user
-                    String email = profile.getString("email");
-
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(), "Name: " + name + "\nEmail: " + email, Toast.LENGTH_LONG).show();
-                        }
-
-                    });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onIOException(IOException e, Object state) {
-            }
-
-            @Override
-            public void onFileNotFoundException(FileNotFoundException e,
-                                                Object state) {
-            }
-
-            @Override
-            public void onMalformedURLException(MalformedURLException e,
-                                                Object state) {
-            }
-
-            @Override
-            public void onFacebookError(FacebookRequestError e, Object state) {
-            }
-        });
-    }*/
