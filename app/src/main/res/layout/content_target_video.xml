@@ -69,12 +69,6 @@
                 android:gravity="center"
                 android:visibility="gone"/>
 
-            <ImageView
-                android:id="@+id/prep_section_header"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@drawable/di_lr_section_header"/>
             <TextView
                 android:id="@+id/target_categoryFullName"
                 android:layout_width="wrap_content"
@@ -100,6 +94,12 @@
                 android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:src="@android:drawable/ic_media_play"/>
+
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:id="@+id/youtube_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/target_videotitle"

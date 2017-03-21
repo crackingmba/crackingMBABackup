@@ -31,6 +31,11 @@ import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.validator.LocalVideoCheck;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +44,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class TargetVideoActivity extends AppCompatActivity {
+public class TargetVideoActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
+
+
+    private static final int RECOVERY_REQUEST = 1;
+    private YouTubePlayerView youTubeView;
+
 
     private static String TAG = "TargetVideo Activity";
     Button viewOnlineBtn;
@@ -58,6 +68,14 @@ public class TargetVideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_target_video);
         dbHelper = DBHelper.getInstance(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //youTubeView=(YouTubePlayerView)findViewById(R.id.youtube_view);
+        //youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
+
+        YouTubePlayerSupportFragment frag =
+                (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
+        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -193,6 +211,24 @@ public class TargetVideoActivity extends AppCompatActivity {
     //download code ends here
 
 } //the OnCreate code completes here
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if (!wasRestored) {
+            player.cueVideo("fhWaJi1Hsfo"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+        }
+
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
+        } else {
+            String error = String.format(getString(R.string.player_error), errorReason.toString());
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        }
+    }
 
     //Creating a new class for downloading the image
     private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
