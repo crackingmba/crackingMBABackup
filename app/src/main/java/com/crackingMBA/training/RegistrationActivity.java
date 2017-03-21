@@ -18,6 +18,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.crackingMBA.training.pojo.LoginResponseObject;
+import com.crackingMBA.training.pojo.RegisrationResponseObject;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -196,22 +199,35 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String response) {
                     Log.d(TAG, " Registration Response is : " + response);
+                    Gson gson = new Gson();
+                    RegisrationResponseObject regisrationResponseObject = gson.fromJson(response, RegisrationResponseObject.class);
+                    if (regisrationResponseObject != null) {
+                        String regisrationStatus = regisrationResponseObject.getStatus();
+
+                        if (regisrationStatus.equalsIgnoreCase("pass")) {
 
                             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = pref.edit();
-                            editor.putBoolean("isLoggedIn",true);
-                            editor.putString("loggedInUserName",firstName+" "+lastName);
-                            editor.putString("loggedInUserEmail",email);
-                            editor.putString("loggedInUserPassword",password);
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.putString("loggedInUserName", firstName + " " + lastName);
+                            editor.putString("loggedInUserEmail", email);
+                            editor.putString("loggedInUserPassword", password);
                             editor.commit();
 
                             showProgress(false);
-                            Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
-                            dashboardIntent.putExtra("gotoTab","3");
+                            Intent dashboardIntent = new Intent(getApplicationContext(), DashboardActivity.class);
+                            dashboardIntent.putExtra("gotoTab", "3");
                             startActivity(dashboardIntent);
                             finish();
+                        } else {
+                            mEmailView.setError("Email Already registered");
+                            showProgress(false);
+                            View focusView = null;
+                            focusView=mEmailView;
+                            focusView.requestFocus();
+                        }
+                    }
                 }
-
                 @Override
                 public void onFailure(int statusCode, Throwable error,
                                       String content) {
