@@ -68,6 +68,7 @@
                 android:layout_margin="5dp"
                 android:gravity="center"
                 android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/target_categoryFullName"
                 android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
                 android:text="CAT2017 Preparation Quant Section"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_margin="5dp"
+                android:textStyle="bold"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/target_subCategoryFullName"
@@ -84,6 +86,21 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_margin="5dp"
                 android:gravity="center"/>
+
+
+            <ImageView
+                android:id="@+id/target_detailthumbnail"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_media_play"/>
+
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:id="@+id/youtube_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <TextView
                 android:id="@+id/target_videotitle"
                 android:layout_width="wrap_content"
@@ -93,11 +110,6 @@
                 android:layout_margin="5dp"
                 android:gravity="left"/>
 
-            <ImageView
-                android:id="@+id/target_detailthumbnail"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@android:drawable/ic_media_play"/>
             <TextView
                 android:id="@+id/target_description"
                 android:layout_width="wrap_content"
@@ -108,29 +120,14 @@
                 android:gravity="left"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/target_viewinline"
                     android:text ="View Online"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    />
-
-                <Button
-                    android:id="@+id/target_downloadnow"
-                    android:text ="Download"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    />
-                <Button
-                    android:id="@+id/target_deletevideo"
-                    android:text ="DELETE"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     />

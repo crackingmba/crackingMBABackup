@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,6 +24,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.crackingMBA.training.adapter.DividerItemDecoration;
@@ -69,10 +72,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     private static String TAG = "MyDashboardFragment";
     boolean isMock;
     View rootView;
-
-    RecyclerView qstnsRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    LinearLayoutManager mLayoutManager;
 
     SharedPreferences pref;
     private static final int RC_SIGN_IN = 007;
@@ -136,9 +135,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             // ((Button) rootView.findViewById(R.id.editprofilebtn)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.logoutbtn)).setOnClickListener(this);
 
-            qstnsRecyclerView = (RecyclerView) rootView.findViewById(R.id.mydashboard_recycler_qstns);
-            qstnsRecyclerView.setHasFixedSize(true);
-
+            showProgressDialog();
             getQstnsDataSet();
 
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -357,35 +354,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
 
     private void getQstnsDataSet() {
 
-        Log.d(TAG, "isMock?" + isMock);
-        if (isMock) {
-            final ArrayList<Question> qstns = populateMockQstnsSet();
-            VideoApplication.loggedInUserQstns = qstns;
-            Log.d(TAG, "Populated qstns are " + qstns);
-            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-            qstnsRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new QuestionsViewAdapter(qstns);
-
-            ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
-                    new QuestionsViewAdapter.MyClickListener() {
-                        @Override
-                        public void onItemClick(int position, View v) {
-                            Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
-                            Log.d(TAG, "set with Qstn..");
-                            Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
-                            startActivity(answerIntent);
-                        }
-                    }
-            );
-
-            qstnsRecyclerView.setAdapter(mAdapter);
-            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-            qstnsRecyclerView.addItemDecoration(itemDecoration);
-            Log.d(TAG, "Populated qstnsRecyclerView");
-        } else {
-            Log.d(TAG, "In else block");
+        Log.d(TAG, "inside getQstnsDataSet..");
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             String email = pref.getString("loggedInUserEmail",null);
@@ -408,27 +377,30 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                             List<Question> questions = loginResponseObject.getUserQuestions();
 
                             VideoApplication.loggedInUserQstns = questions;
-                            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                            Log.d(TAG,"Questions populated are" + questions);
-                            qstnsRecyclerView.setLayoutManager(mLayoutManager);
-                            mAdapter = new QuestionsViewAdapter(questions);
-
-                            ((QuestionsViewAdapter) mAdapter).setOnItemClickListener(
-                                    new QuestionsViewAdapter.MyClickListener() {
-                                        @Override
-                                        public void onItemClick(int position, View v) {
-                                            Log.d(TAG, "Section adapter, Clicked item at position : " + position);
-                                            VideoApplication.selectedQstn = VideoApplication.loggedInUserQstns.get(position);
-                                            Log.d(TAG, "set with Qstn..");
-                                            Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
-                                            startActivity(answerIntent);
-                                        }
+                            TableLayout table = (TableLayout) rootView.findViewById(R.id.mydashboard_recycler_qstns);
+                            for(final Question question : questions){
+                                TableRow row = new TableRow(getActivity());
+                                TextView txt = new TextView(getActivity());
+                                txt.setText(question.getQnText()+"\n"+question.getQnDatePosted());
+                                txt.setTextAppearance(android.R.style.TextAppearance_Medium);
+                                txt.setPadding(5,5,5,5);
+                                row.addView(txt);
+                                row.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Log.d(TAG, "Clicked qstn : " +question.getQnText());
+                                        VideoApplication.selectedQstn = question;
+                                        Log.d(TAG, "set with Qstn..");
+                                        Intent answerIntent = new Intent(getActivity(), ShowAnswerActivity.class);
+                                        startActivity(answerIntent);
                                     }
-                            );
-
-                            qstnsRecyclerView.setAdapter(mAdapter);
-                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-                            qstnsRecyclerView.addItemDecoration(itemDecoration);
+                                });
+                                table.addView(row);
+                                TableRow dividerRow = new TableRow(getActivity());
+                                dividerRow.setPadding(1,1,1,1);
+                                dividerRow.setBackgroundColor(Color.LTGRAY);
+                                table.addView(dividerRow);
+                            }
                         }else{
                             //  (( TextView) rootView.findViewById(R.id.qstns_not_available)).setVisibility(View.VISIBLE);
                             Log.d(TAG,"There is no subcategories for the category selected");
@@ -454,8 +426,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                 e.printStackTrace();
                 ;
             }
-        }
-
     }
 
     public ArrayList<Question> populateMockQstnsSet() {

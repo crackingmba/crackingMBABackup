@@ -85,6 +85,7 @@ public class DILRHomeVideoViewAdapter extends RecyclerView
                 .inflate(R.layout.dilr_home_videoview_layout, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
+        //adding a new comment here
         return dataObjectHolder;
     }
 
