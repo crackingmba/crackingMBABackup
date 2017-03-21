@@ -48,21 +48,17 @@ import java.util.List;
  * Created by MSK on 24-01-2017.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
-    RecyclerView recentRecyclerView;
     RecyclerView quantRecyclerView;
     RecyclerView dilrRecyclerView;
     RecyclerView verbalRecyclerView;
-    RecyclerView.Adapter recentAdapter;
     RecyclerView.Adapter quantAdapter;
     RecyclerView.Adapter dilrAdapter;
     RecyclerView.Adapter verbalAdapter;
     boolean isMock;
-    private DBHelper dbHelper;
 
     Button gotoquantBtn;
     Button gotodi;
     Button gotolatest;
-    Button homeRefreshBtn;
     View rootView;
     private static String TAG = "HomeFragment";
 
@@ -77,54 +73,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         gotodi.setOnClickListener(this);
         gotolatest = (Button) rootView.findViewById(R.id.gotolatest3);
         gotolatest.setOnClickListener(this);
-        homeRefreshBtn = (Button) rootView.findViewById(R.id.home_refresh);
-        homeRefreshBtn.setOnClickListener(this);
-        dbHelper = DBHelper.getInstance(getContext());
-        recentRecyclerView = (RecyclerView) rootView.findViewById(R.id.home_recently_recyclerview); //abc
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
         dilrRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
         verbalRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
-        recentRecyclerView.setHasFixedSize(true);
         quantRecyclerView.setHasFixedSize(true);
         dilrRecyclerView.setHasFixedSize(true);
         verbalRecyclerView.setHasFixedSize(true);
 
         getDataSet();
-
-        RecyclerView.ItemDecoration recentItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-        LinearLayoutManager recentLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        ArrayList<VideoList> downloadedList = getDataSetDownloadedVideos();
-        recentAdapter = new DownloadViewAdapter(downloadedList);
-        if (downloadedList.size() == 0) {
-
-            rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.VISIBLE);
-        } else {
-            VideoApplication.allDownloadedVideos = downloadedList;
-            rootView.findViewById(R.id.home_download_noVideos).setVisibility(View.GONE);
-        }
-        recentRecyclerView.setAdapter(recentAdapter);
-        recentRecyclerView.setLayoutManager(recentLayoutManager);
-        recentRecyclerView.addItemDecoration(recentItemDecoration);
-
-        ((DownloadViewAdapter) recentAdapter).setOnItemClickListener(
-                new DownloadViewAdapter.MyClickListener() {
-                    @Override
-                    public void onItemClick(int position, View v) {
-                        Log.d(TAG, "Clicked item at position : " + position);
-                        VideoList vdo = VideoApplication.allDownloadedVideos.get(position);//populateDownloadVideoDataObject(v);//new VideoDataObject();
-                        vdo.setVideoSubCategory("video");
-                        if(VideoApplication.downloadingVideoIds.contains(vdo.getVideoID())){
-                            vdo.setDownloading(true);
-                        }else{
-                            vdo.setDownloading(false);
-                        }
-                        Log.d(TAG, "set with video.."+vdo);
-                        VideoApplication.videoList = vdo;
-                        Intent targetIntent = new Intent(getActivity(), TargetVideoActivity.class);
-                        startActivity(targetIntent);
-                    }
-                }
-        );
 
         return rootView;
     }
@@ -132,34 +88,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    private VideoList populateDownloadVideoDataObject(View v) {
-        Log.d(TAG, "Populating videoDataObject..");
-        VideoList vdo = new VideoList();
-        TextView duration = (TextView) v.findViewById(R.id.download_duration);
-        TextView id = (TextView) v.findViewById(R.id.download_videoID);
-        TextView videoTitle = (TextView) v.findViewById(R.id.download_title);
-        TextView thumbnailURL = (TextView) v.findViewById(R.id.download_thumbnailURL);
-        TextView videoURL = (TextView) v.findViewById(R.id.download_videoURL);
-        TextView videoCategory = (TextView) v.findViewById(R.id.download_videoCategory);
-        TextView dateOfUploaded = (TextView) v.findViewById(R.id.download_dateOfUploaded);
-        TextView videoDescription = (TextView) v.findViewById(R.id.download_videoDescription);
-        TextView videoSubCategory = (TextView) v.findViewById(R.id.download_videoSubCategory);
-        TextView categoryFullName = (TextView) v.findViewById(R.id.download_categoryFullName);
-        TextView subCategoryFullName = (TextView) v.findViewById(R.id.download_subCategoryFullName);
-        vdo.setDuration(duration.getText().toString());
-        vdo.setVideoID(id.getText().toString());
-        vdo.setVideoTitle(videoTitle.getText().toString());
-        vdo.setThumbnailURL(thumbnailURL.getText().toString());
-        vdo.setVideoURL(videoURL.getText().toString());
-        vdo.setVideoSubCategory(videoSubCategory.getText().toString());
-        vdo.setUploadDate(dateOfUploaded.getText().toString());
-        vdo.setVideoDescription(videoDescription.getText().toString());
-        vdo.setVideoCategory(videoCategory.getText().toString());
-        vdo.setCategoryFullName(categoryFullName.getText().toString());
-        vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
-        return vdo;
     }
 
 
@@ -355,46 +283,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
 
 
-        public ArrayList<VideoList> getDataSetDownloadedVideos () {
-
-            ArrayList<VideoList> mockResults = new ArrayList<VideoList>();
-            VideoList vo = null;
-
-            List<VideoList> videoDataObjects = dbHelper.getAllDownloadedVideos();
-            Log.d(TAG, "get Downloaded videos" + videoDataObjects);
-            for (VideoList videoDataObject : videoDataObjects) {
-                vo = new VideoList();
-                vo.setVideoURL(videoDataObject.getVideoURL());
-                vo.setThumbnailURL(videoDataObject.getThumbnailURL());
-                vo.setDuration(videoDataObject.getDuration());
-                vo.setVideoTitle(videoDataObject.getVideoTitle());
-                vo.setVideoDescription(videoDataObject.getVideoDescription());
-                vo.setUploadDate(videoDataObject.getUploadDate());
-                vo.setVideoCategory(videoDataObject.getVideoCategory());
-                vo.setVideoID(videoDataObject.getVideoID());
-                vo.setVideoSubCategory(videoDataObject.getVideoSubCategory());
-                vo.setCategoryFullName(videoDataObject.getCategoryFullName());
-                vo.setSubCategoryFullName(videoDataObject.getSubCategoryFullName());
-                vo.setDownloading(videoDataObject.isDownloading());
-                vo.setVideoDownloadURL(videoDataObject.getVideoDownloadURL());
-                vo.setVideoYouTubeURL(videoDataObject.getVideoYouTubeURL());
-                mockResults.add(vo);
-            }
-
-
-            return mockResults;
-        }
-
-        public ArrayList<VideoDataObject> populateMockGetVideoList () {
-            ArrayList<VideoDataObject> mockResults = new ArrayList<VideoDataObject>();
-            VideoDataObject vo = null;
-            for (int i = 0; i < 10; i++) {
-                vo = new VideoDataObject("1", "Ratio & Proportion Day 1", "http://crackingmba.com/video.3gp", "http://crackingmba.com/video.3gp", "video", "02-01-2017", "325", "This is the first day tutorial of Ratio and Proportion");
-                mockResults.add(vo);
-            }
-            return mockResults;
-        }
-
         @Override
         public void onClick (View view){
             Log.d(TAG, "Inonlicklistener" + view.getId());
@@ -425,36 +313,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     subsIntent.putExtra("headerTitle", "CAT 2017 Preparation Verbal Section");
                     startActivity(subsIntent);
                     break;
-                case R.id.home_refresh:
-                    Log.d(TAG, "refresh clicked..");
-                    final ArrayList<VideoList> downloadedList = getDataSetDownloadedVideos();
-                    VideoApplication.allDownloadedVideos = downloadedList;
-                    RecyclerView.Adapter downloadAdapter = new DownloadViewAdapter(downloadedList);
-                    RecyclerView.ItemDecoration downloadItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                    LinearLayoutManager downloadLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                    recentRecyclerView.setAdapter(downloadAdapter);
-                    recentRecyclerView.setLayoutManager(downloadLayoutManager);
-                    recentRecyclerView.addItemDecoration(downloadItemDecoration);
 
-                    ((DownloadViewAdapter) downloadAdapter).setOnItemClickListener(
-                            new DownloadViewAdapter.MyClickListener() {
-                                @Override
-                                public void onItemClick(int position, View v) {
-                                    Log.d(TAG, "Clicked item at position : " + position);
-                                    VideoList vdo = VideoApplication.allDownloadedVideos.get(position);
-                                    if(VideoApplication.downloadingVideoIds.contains(vdo.getVideoID())){
-                                        vdo.setDownloading(true);
-                                    }else{
-                                        vdo.setDownloading(false);
-                                    }
-                                    vdo.setVideoSubCategory("video");
-                                    Log.d(TAG, "set with video..");
-                                    VideoApplication.videoList = vdo;
-                                    Intent targetIntent = new Intent(getActivity(), TargetVideoActivity.class);
-                                    startActivity(targetIntent);
-                                }
-                            }
-                    );
                 default:
                     Log.d(TAG, "Unknown button clicked..");
 
@@ -475,7 +334,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                         // permission was granted, yay! Do the
-                        // contacts-related task you need to do.
+                        // contacts-related task you need to do
 
 
                     } else {

@@ -34,50 +34,6 @@
                 android:padding="10dp"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/home_download_section_title"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Recently Downloaded Videos"
-                    android:textColor="#EDE7F6"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <Button
-                    android:id="@+id/home_refresh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/refresh"
-                    android:layout_marginLeft="10dp"
-                    android:text="Refresh"/>
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/home_download_noVideos"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:textAlignment="center"
-                android:text="No offline videos available."
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/home_recently_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
-
-            <!-- The Recent Quant Videos section header -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:background="#01579B"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:layout_height="match_parent">
-                <TextView
                     android:id="@+id/home_quant_section_title"
                     android:layout_width="0dp"
                     android:layout_weight="1"
