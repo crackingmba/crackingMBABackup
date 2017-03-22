@@ -86,4 +86,8 @@
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="seek_to">Jump To</string>
     <string name="seek_to_hint">Seconds</string>
+
+    <!-- OTP Validation -->
+    <string name="enter_otp_txt">Enter the received OTP</string>
+    <string name="btn_validate_otp">Validate OTP</string>
 </resources>

@@ -390,7 +390,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
                         if (loginResponseObject != null) {
                             String userValid = loginResponseObject.getUserValid();
-
+                            userValid = "otpuser";
                             if (userValid.equalsIgnoreCase("yes")) {
                                 String userName = loginResponseObject.getUserName();
 
@@ -411,6 +411,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
                                 dashboardIntent.putExtra("gotoTab","3");
                                 startActivity(dashboardIntent);
+                                finish();
+                            }else if(userValid.equalsIgnoreCase("otpuser")){
+                                VideoApplication.registeringUserName = loginResponseObject.getUserName();
+                                VideoApplication.registeringUserEmail = email;
+                                VideoApplication.registeringUserPwd = password;
+                                Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
+                                startActivity(otpIntent);
                                 finish();
                             }else {
                                     mPasswordView.setError(getString(R.string.error_incorrect_password));

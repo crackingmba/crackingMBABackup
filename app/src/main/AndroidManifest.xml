@@ -63,6 +63,9 @@
             android:name=".MockTestReviewAnswersActivity"
             android:label="Mock Test Review Answer"/>
         <activity
+            android:name=".OTPValidationActivity"
+            android:label="OTP Validation"/>
+        <activity
             android:name=".DashboardActivity"
             android:icon="@drawable/home"
             android:logo="@drawable/home"

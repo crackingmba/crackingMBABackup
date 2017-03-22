@@ -42,6 +42,10 @@ public class VideoApplication extends Application {
 
     public static String subcategorySelected;
     public static String videoURLSelected;
+    public static String registeringUserName;
+    public static String registeringUserEmail;
+    public static String registeringUserPwd;
+
     @Override
     public void onCreate() {
         super.onCreate();
