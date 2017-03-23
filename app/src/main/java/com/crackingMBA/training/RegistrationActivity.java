@@ -127,13 +127,6 @@ public class RegistrationActivity extends AppCompatActivity {
             // perform the user login attempt.
             showProgress(true);
             // Registration logic
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean("isLoggedIn",true);
-            String fullName = fname+" "+lname;
-            editor.putString("loggedInUserName",fullName);
-            editor.putString("loggedInUserEmail",email);
-            editor.commit();
             registrationServiceCall(fname,lname,email,pwd);
         }
     }

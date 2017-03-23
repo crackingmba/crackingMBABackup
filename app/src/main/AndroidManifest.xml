@@ -66,6 +66,12 @@
             android:name=".OTPValidationActivity"
             android:label="OTP Validation"/>
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:label="Forgot Password"/>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="Change Password"/>
+        <activity
             android:name=".DashboardActivity"
             android:icon="@drawable/home"
             android:logo="@drawable/home"
