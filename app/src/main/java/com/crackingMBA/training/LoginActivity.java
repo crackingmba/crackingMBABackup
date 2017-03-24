@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,7 +21,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -103,6 +107,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Spanned forgotPwdTxt = Html.fromHtml("<a><u>Forgot Password ?</u></a>");
+        TextView forgotPwdLnk = (TextView) findViewById(R.id.login_forgotpwd_link);
+        forgotPwdLnk.setText(forgotPwdTxt);
+        forgotPwdLnk.setMovementMethod(LinkMovementMethod.getInstance());
+        forgotPwdLnk.setTextColor(Color.BLUE);
+        forgotPwdLnk.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgotPassword();
             }
         });
 
@@ -390,7 +406,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
                         if (loginResponseObject != null) {
                             String userValid = loginResponseObject.getUserValid();
-
+                            userValid = "otpuser";
                             if (userValid.equalsIgnoreCase("yes")) {
                                 String userName = loginResponseObject.getUserName();
 
@@ -411,6 +427,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
                                 dashboardIntent.putExtra("gotoTab","3");
                                 startActivity(dashboardIntent);
+                                finish();
+                            }else if(userValid.equalsIgnoreCase("otpuser")){
+                                VideoApplication.registeringUserName = loginResponseObject.getUserName();
+                                VideoApplication.registeringUserEmail = email;
+                                VideoApplication.registeringUserPwd = password;
+                                Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
+                                startActivity(otpIntent);
                                 finish();
                             }else {
                                     mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -442,6 +465,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
             return  "true";
         }
+
+    private void forgotPassword(){
+        Intent dashboardIntent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+        if(null != mEmailView.getText() && TextUtils.isEmpty(mEmailView.getText().toString()))
+            dashboardIntent.putExtra("email",mEmailView.getText().toString());
+        startActivity(dashboardIntent);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

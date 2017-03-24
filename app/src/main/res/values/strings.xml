@@ -50,6 +50,7 @@
     <string name="registartion_txt">Registration</string>
     <string name="email_txt">Email</string>
     <string name="pwd_txt">Password</string>
+    <string name="new_pwd_txt">New Password</string>
     <string name="confirm_pwd">Confirm Password</string>
     <string name="register_txt">Register</string>
     <string name="answer_heading">Here is the Reply For Your Question</string>
@@ -86,4 +87,12 @@
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="seek_to">Jump To</string>
     <string name="seek_to_hint">Seconds</string>
+
+    <!-- OTP Validation -->
+    <string name="enter_otp_txt">Enter the received OTP</string>
+    <string name="btn_validate_otp">Validate OTP</string>
+    <string name="enter_email_txt">Enter your registered email Id</string>
+    <string name="btn_send_otp">Send OTP</string>
+    <string name="btn_change_pwd">Change Password</string>
+    <string name="forgot_pwd_txt">Forgot Password ?</string>
 </resources>
