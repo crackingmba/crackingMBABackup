@@ -202,8 +202,20 @@ public class RegistrationActivity extends AppCompatActivity {
                             VideoApplication.registeringUserName = firstName+" "+lastName;
                             VideoApplication.registeringUserEmail = email;
                             VideoApplication.registeringUserPwd = password;
-                            Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
+                            /*Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
                             startActivity(otpIntent);
+                            finish();*/
+                            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.putString("loggedInUserName", VideoApplication.registeringUserName);
+                            editor.putString("loggedInUserEmail", VideoApplication.registeringUserEmail);
+                            editor.putString("loggedInUserPassword", VideoApplication.registeringUserPwd);
+                            editor.commit();
+
+                            Intent dashboardIntent = new Intent(getApplicationContext(), DashboardActivity.class);
+                            dashboardIntent.putExtra("gotoTab", "3");
+                            startActivity(dashboardIntent);
                             finish();
                         } else {
                             mEmailView.setError("Email Already registered");

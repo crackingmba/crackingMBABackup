@@ -406,7 +406,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
                         if (loginResponseObject != null) {
                             String userValid = loginResponseObject.getUserValid();
-                            userValid = "otpuser";
+                            //userValid = "otpuser";
                             if (userValid.equalsIgnoreCase("yes")) {
                                 String userName = loginResponseObject.getUserName();
 

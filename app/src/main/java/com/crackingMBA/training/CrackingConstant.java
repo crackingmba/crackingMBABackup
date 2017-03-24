@@ -23,8 +23,8 @@ public class CrackingConstant {
     public static final String REGISTRATION_SERVICE_URL="http://crackingmba.com/registerUser.php";
     public static final String ADD_QUESTION_SERVICE_URL="http://crackingmba.com/addQuestion.php";
     public static final String VALIDATE_OTP_SERVICE_URL="http://crackingmba.com/validateOTP.php";
-    public static final String SEND_OTP_SERVICE_URL="http://crackingmba.com/sendOTP.php";
-    public static final String CHANGE_PASSWORD_SERVICE_URL="http://crackingmba.com/changePassword.php";
+    public static final String SEND_OTP_SERVICE_URL="http://crackingmba.com/forgotPassword.php";
+    public static final String CHANGE_PASSWORD_SERVICE_URL="http://crackingmba.com/forgotPassword.php";
 
     public static final String DEVELOPER_KEY = "AIzaSyAlp1g-Ywycw2hqEJnpoU73NHLBF9akfJo";
 
