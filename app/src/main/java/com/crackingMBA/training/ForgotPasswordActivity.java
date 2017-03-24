@@ -70,8 +70,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 finish();
                 return;
             }*/
-          //  showProgressDialog();
+          showProgressDialog();
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setTimeout(4000000);
             client.post(CrackingConstant.SEND_OTP_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(String response) {
@@ -128,7 +129,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void showProgressDialog() {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(getApplicationContext());
+            mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }

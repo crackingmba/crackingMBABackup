@@ -103,7 +103,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         if (isLoggedIn) {
             rootView = inflater.inflate(R.layout.fragment_mydashboard_loggedin, container, false);
 
-            mayRequestReadAccess();
+           // mayRequestReadAccess();
 
             String loggedInUserName = pref.getString("loggedInUserName", "Guest");
             String loggedInProfilePicUrl = pref.getString("loggedInProfilePicUrl", null);
@@ -267,7 +267,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
-    private boolean mayRequestReadAccess() {
+   /* private boolean mayRequestReadAccess() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
@@ -287,11 +287,11 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 0);
         }
         return false;
-    }
+    }*/
 
-    /**
+ /*   *//**
      * Callback received when a permissions request has been completed.
-     */
+     *//*
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -299,7 +299,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             }
         }
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
