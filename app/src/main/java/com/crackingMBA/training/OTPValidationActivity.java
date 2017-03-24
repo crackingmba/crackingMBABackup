@@ -60,9 +60,11 @@ public class OTPValidationActivity extends AppCompatActivity {
                 return;
             }
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setTimeout(4000000);
             client.post(CrackingConstant.VALIDATE_OTP_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(String response) {
+                    Log.d(TAG, "response.."+response);
                     response = "pass";
                     if(response.contains("pass")) {
                         Log.d(TAG, "OTP validated successfully for.."+params);

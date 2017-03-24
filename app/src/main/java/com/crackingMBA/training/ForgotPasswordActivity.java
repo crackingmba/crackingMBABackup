@@ -1,7 +1,12 @@
 package com.crackingMBA.training;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +28,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     EditText emailTxt;
     TextView msg;
     static String TAG = "ForgotPasswordActivity";
-
+    private ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         msg.setTextColor(Color.RED);
     }
 
-    public void validateOTP(View v){
+    public void sendOTP(View v){
         final String emailStr = emailTxt.getText().toString();
         if(TextUtils.isEmpty(emailStr)){
             msg.setText("Please enter Email Id");
@@ -54,17 +59,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
         Log.d(TAG,"Email entered is "+emailStr);
         final RequestParams params = new RequestParams();
+        params.put("action", "sendOTP");
         params.put("email", emailStr);
         try {
-            if(true){
+        /*    if(true){
 
                 Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 intent.putExtra("email",emailStr);
                 startActivity(intent);
                 finish();
                 return;
-            }
+            }*/
+          showProgressDialog();
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setTimeout(4000000);
             client.post(CrackingConstant.SEND_OTP_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(String response) {
@@ -83,6 +91,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         Log.d(TAG, "OTP validation failed..");
                         msg.setText("Please enter a valid Email Id..");
                     }
+                    hideProgressDialog();
                 }
 
                 @Override
@@ -97,6 +106,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
                     }
                     msg.setText("Ooops!! There is some problem in sending OTP..");
+                    hideProgressDialog();
                 }
             });
         } catch (Exception e) {
@@ -114,6 +124,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
         }
     }
 

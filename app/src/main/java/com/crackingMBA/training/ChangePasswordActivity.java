@@ -172,12 +172,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         {
 
             RequestParams params = new RequestParams();
-            params.put("otp", otp);
+            params.put("action", "validateOTP");
             params.put("email", email);
-            params.put("password", password);
+            params.put("newpwd", password);
+            params.put("otp", otp);
             Log.d(TAG, "changePwdServiceCall");
             try {
-                if(true){
+             /*   if(true){
                     Log.d(TAG, "Password Changed successfully for.."+email);
                     showProgress(false);
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -187,13 +188,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     toast.show();
                     finish();
                     return;
-                }
+                }*/
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.post(CrackingConstant.CHANGE_PASSWORD_SERVICE_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         Log.d(TAG, " Change Pwd Response is : " + response);
-                        if(response.contains("pass")) {
+                        if(response.contains("pass")||response.contains("success")) {
                             Log.d(TAG, "Password Changed successfully for.."+email);
                             showProgress(false);
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
