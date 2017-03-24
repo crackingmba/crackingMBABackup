@@ -84,9 +84,9 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         Log.d(TAG, "video url " + videoList.getVideoURL());
 
         //boolean localavailablity = LocalVideoCheck.verifyLocalStorageByVideoID(videoList.getVideoID().toString(),this);
-        viewOnlineBtn = (Button) findViewById(R.id.target_viewinline);
+        //viewOnlineBtn = (Button) findViewById(R.id.target_viewinline);
         //some sample code here;
-        viewOnlineBtn.setOnClickListener(new View.OnClickListener() {
+        /*viewOnlineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean internetAvailblity = MyUtil.checkConnectivity(getApplicationContext());
@@ -100,7 +100,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
                     toast.show();
                 }
             }
-        });
+        });*/
         /*viewOfflineBtn = (Button) findViewById(R.id.target_downloadnow);
         viewOfflineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +167,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
     ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
     ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
 
-    imageView = (ImageView)findViewById(R.id.target_detailthumbnail);
+    //imageView = (ImageView)findViewById(R.id.target_detailthumbnail);
     //imageView.setImageResource(R.drawable.mocktest);
 
     // Create an object for subclass of AsyncTask
@@ -215,7 +215,8 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            player.cueVideo("fhWaJi1Hsfo"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            //player.cueVideo("fg9EqZGv9_s"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.cueVideo(videoList.getVideoYouTubeURL()); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
 
     }
@@ -244,7 +245,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         // Sets the Bitmap returned by doInBackground
         @Override
         protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
+            //imageView.setImageBitmap(result);
         }
 
         // Creates Bitmap from InputStream and returns it
@@ -293,7 +294,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         super.onResume();
     }
 
-    public void viewOnline() {
+ /*   public void viewOnline() {
         String clickedVideo = videoList.getVideoURL();
 
 
@@ -304,7 +305,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         intent.putExtra("clickedVideo", clickedVideo);
         startActivity(intent);
 
-    }
+    }*/
 
 /*    public void viewOffline() {
         String clickedVideo = videoList.getVideoDownloadURL();

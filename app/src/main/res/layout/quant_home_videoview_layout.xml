@@ -2,23 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_margin="10dp"
     android:orientation="vertical">
-
-    <!-- android:background="?android:attr/selectableItemBackground" -->
 
     <TextView
         android:id="@+id/home_videoID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/home_videoTitle"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -68,12 +60,21 @@
         android:adjustViewBounds="true" />
 
     <TextView
+        android:id="@+id/home_videoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
         android:id="@+id/home_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Duration"
         android:layout_margin="3dp"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <TextView
         android:id="@+id/home_categoryFullName"
         android:layout_width="wrap_content"
