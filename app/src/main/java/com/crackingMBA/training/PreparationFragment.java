@@ -37,7 +37,6 @@ import com.crackingMBA.training.pojo.VideoDataObject;
  */
 public class PreparationFragment extends Fragment implements View.OnClickListener{
 
-    TextView prepMsg;
     private static String TAG = "PreparationFragment";
     View rootView;
     LayoutInflater inflater;
@@ -62,8 +61,8 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         this.inflater = inflater;
         this.container = container;
         Log.d(TAG, VideoApplication.videoSelected.getVideoType()+" is selected");
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        isMock = pref.getBoolean("isMock",false);
+        //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        //isMock = pref.getBoolean("isMock",false);
         String clicked = VideoApplication.videoSelected.getVideoType()==null ? "startup" : VideoApplication.videoSelected.getVideoType();
         if(clicked.equals("startup")){
             VideoApplication.videoSelected.setVideoType("startup");

@@ -7,14 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true">
 
-
+<!--
         <Button
             android:text="Invisible Button"
             android:visibility="invisible"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
     </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,7 +54,7 @@
                         android:id="@+id/quantsection"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/applogo"
+                        android:src="@drawable/quant"
                         android:adjustViewBounds="true" />
 
                     <TextView
@@ -65,6 +66,28 @@
                         android:gravity="center_vertical"/>
                 </TableRow>
                 <TableRow
+                    android:id="@+id/verbalrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+                    <ImageView
+                        android:id="@+id/verbalsection"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/verbal"
+                        android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Verbal Section"
+                        android:layout_margin="5dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </TableRow>
+
+                <TableRow
                     android:id="@+id/dirow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,7 +97,7 @@
                         android:id="@+id/diandlrsection"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                       android:src="@drawable/applogo"
+                       android:src="@drawable/dilr"
                         android:adjustViewBounds="true" />
 
                     <TextView
@@ -86,32 +109,8 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </TableRow>
-                <TableRow
-                    android:id="@+id/verbalrow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_margin="5dp">
-                    <ImageView
-                        android:id="@+id/verbalsection"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/applogo"
-                        android:adjustViewBounds="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Verbal Section"
-                        android:layout_margin="5dp"
-                        android:gravity="center_vertical"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </TableRow>
             </TableLayout>
         </LinearLayout>
-
-
-
-
 
 </RelativeLayout>

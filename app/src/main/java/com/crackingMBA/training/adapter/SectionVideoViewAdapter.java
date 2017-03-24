@@ -39,11 +39,9 @@ public class SectionVideoViewAdapter extends RecyclerView
         TextView name;
         ImageView thumbnail;
 
-
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.section_thumbnail);
-
             id = (TextView) itemView.findViewById(R.id.section_id);
             name = (TextView) itemView.findViewById(R.id.section_name);
             category_name = (TextView) itemView.findViewById(R.id.section_category_name);
@@ -80,8 +78,6 @@ public class SectionVideoViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        //holder.title.setText(mDataset.get(position).getVideoTitle());
-        //holder.thumbnailUrl.setImageURI(Uri.parse(mDataset.get(position).getThumbnailUrl()));
         Log.d(LOG_TAG,"in onBindViewHolder..");
        String thumbnailURL= mDataset.get(position).getThumbnail();
 
