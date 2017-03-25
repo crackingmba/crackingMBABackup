@@ -1,5 +1,6 @@
 package com.crackingMBA.training.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -106,14 +107,10 @@ public class VerbalHomeVideoViewAdapter extends RecyclerView
         holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
         String thumbnailURL= mDataset.get(position).getThumbnailURL();
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
-        Bitmap mIcon11 = null;
-        try {
-            Log.d("suresh", CrackingConstant.MYPATH + thumbnailURL);
-            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
-                    .execute(CrackingConstant.MYPATH +"img/"+thumbnailURL);
-        }
-        catch (Exception e){
-        }
+        Context context= holder.thumbnail.getContext();
+        //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
+        int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
+        holder.thumbnail.setImageResource(id);
 
     }
 

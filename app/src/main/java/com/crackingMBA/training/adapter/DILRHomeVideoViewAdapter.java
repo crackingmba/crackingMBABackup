@@ -1,5 +1,6 @@
 package com.crackingMBA.training.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -103,18 +104,23 @@ public class DILRHomeVideoViewAdapter extends RecyclerView
         holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
+        holder.thumbnail.setImageResource(R.drawable.quant);
         holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
         holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
         String thumbnailURL= mDataset.get(position).getThumbnailURL();
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
-        Bitmap mIcon11 = null;
-        try {
+        Context context= holder.thumbnail.getContext();
+        //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
+        int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
+        holder.thumbnail.setImageResource(id);
+
+        /*  try {
             Log.d("suresh", CrackingConstant.MYPATH + thumbnailURL);
             AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
                     .execute(CrackingConstant.MYPATH +"img/"+thumbnailURL);
         }
         catch (Exception e){
-        }
+        }*/
 
     }
 

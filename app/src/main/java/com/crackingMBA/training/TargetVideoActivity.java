@@ -172,11 +172,11 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
 
     // Create an object for subclass of AsyncTask
         //String URL = "http://crackingmba.com/img/piechart.jpg";
-        String URL = CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL();
+        //String URL = CrackingConstant.MYPATH + "img/" + videoList.getThumbnailURL();
         //String URL = videoList.getThumbnailURL();
-        GetXMLTask task = new GetXMLTask();
+        //GetXMLTask task = new GetXMLTask();
         // Execute the task
-        task.execute(new String[] { URL });
+        //task.execute(new String[] { URL });
 
         /*
     try {

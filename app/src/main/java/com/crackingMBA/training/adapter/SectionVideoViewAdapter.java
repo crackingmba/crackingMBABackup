@@ -1,7 +1,9 @@
 package com.crackingMBA.training.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -79,18 +81,14 @@ public class SectionVideoViewAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(LOG_TAG,"in onBindViewHolder..");
-       String thumbnailURL= mDataset.get(position).getThumbnail();
-
-        try {
-            Log.d("suresh", thumbnailURL);
-            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
-                    .execute(thumbnailURL);
-        }
-        catch (Exception e){
-        }
         holder.id.setText(mDataset.get(position).getId());
         holder.name.setText(mDataset.get(position).getName());
         holder.category_name.setText(mDataset.get(position).getCategory_name());
+        //holder.thumbnail.setImageResource(mDataset.get(position).getThumbnail());
+        //holder.thumbnail.setImageResource(mDataset.get(position).getThumbnail());
+        Context context= holder.thumbnail.getContext();
+        int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
+        holder.thumbnail.setImageResource(id);
 
     }
 
