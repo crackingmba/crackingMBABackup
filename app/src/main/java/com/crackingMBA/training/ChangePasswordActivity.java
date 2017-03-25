@@ -57,7 +57,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         changePwdBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                changePassword();
+                changePassword(view);
             }
         });
 
@@ -69,7 +69,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     }
 
-    private void changePassword() {
+    public void changePassword(View v) {
 
         // Reset errors.
         mOTPView.setError(null);
