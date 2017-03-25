@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         forgotPwdLnk.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                forgotPassword();
+                forgotPassword(v);
             }
         });
 
@@ -466,9 +466,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return  "true";
         }
 
-    private void forgotPassword(){
+    public void forgotPassword(View v){
         Intent dashboardIntent=new Intent(getApplicationContext(),ForgotPasswordActivity.class);
-        if(null != mEmailView.getText() && TextUtils.isEmpty(mEmailView.getText().toString()))
+        if(null != mEmailView.getText() && !TextUtils.isEmpty(mEmailView.getText().toString()))
             dashboardIntent.putExtra("email",mEmailView.getText().toString());
         startActivity(dashboardIntent);
     }

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -57,7 +58,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         changePwdBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                changePassword();
+                changePassword(view);
             }
         });
 
@@ -67,9 +68,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if(null != getIntent() && null!=getIntent().getExtras()){
             email = getIntent().getExtras().getString("email");
         }
+
+        msg = (TextView) findViewById(R.id.changepwd_msg);
     }
 
-    private void changePassword() {
+    public void changePassword(View v) {
 
         // Reset errors.
         mOTPView.setError(null);
@@ -206,6 +209,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         }else{
                             Log.d(TAG, "Change pwd failed..");
                             msg.setText("Please enter valid details..");
+                            msg.setTextColor(Color.RED);
+                            showProgress(false);
                         }
                     }
 
