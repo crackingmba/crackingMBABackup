@@ -2,43 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="80dp"
-    android:background="?android:attr/selectableItemBackground"
     android:layout_margin="5dp"
     android:orientation="horizontal"
     android:gravity="left">
+        <!--android:background="?android:attr/selectableItemBackground"-->
 
         <ImageView
             android:id="@+id/section_thumbnail"
-            android:layout_width="180dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:adjustViewBounds="true"
             android:gravity="left"/>
-        <TextView
-            android:id="@+id/section_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:gravity="center"
-            android:visibility="gone"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        <TextView
-            android:id="@+id/section_category_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:gravity="bottom"
-            android:textAlignment="center"
-            android:visibility="gone"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
         <TextView
             android:id="@+id/section_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large Text"
             android:gravity="left"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="-25dp"
-            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <!-- These are deprecated view elements -->
+    <TextView
+        android:id="@+id/section_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/section_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:gravity="bottom"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

@@ -38,14 +38,14 @@ public class SectionVideoViewAdapter extends RecyclerView
             .OnClickListener {
         TextView id;
         TextView category_name;
-        TextView name;
+        TextView sub_category_name;
         ImageView thumbnail;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.section_thumbnail);
             id = (TextView) itemView.findViewById(R.id.section_id);
-            name = (TextView) itemView.findViewById(R.id.section_name);
+            sub_category_name = (TextView) itemView.findViewById(R.id.section_name);
             category_name = (TextView) itemView.findViewById(R.id.section_category_name);
 
             itemView.setOnClickListener(this);
@@ -82,10 +82,8 @@ public class SectionVideoViewAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(LOG_TAG,"in onBindViewHolder..");
         holder.id.setText(mDataset.get(position).getId());
-        holder.name.setText(mDataset.get(position).getName());
+        holder.sub_category_name.setText(mDataset.get(position).getName());
         holder.category_name.setText(mDataset.get(position).getCategory_name());
-        //holder.thumbnail.setImageResource(mDataset.get(position).getThumbnail());
-        //holder.thumbnail.setImageResource(mDataset.get(position).getThumbnail());
         Context context= holder.thumbnail.getContext();
         int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
         holder.thumbnail.setImageResource(id);

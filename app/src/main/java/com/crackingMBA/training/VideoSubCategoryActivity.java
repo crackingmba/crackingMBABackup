@@ -52,7 +52,7 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
     }
 
     private void getSectionDataSet() {
-        String url = "http://crackingmba.com/getSubCategories.php?category="+VideoApplication.sectionClicked;
+        String url = "http://www.crackingmba.com/getSubCategories.php?category="+VideoApplication.sectionClicked;
 
         Log.d(TAG,"Section Data"+url);
         try {
@@ -69,7 +69,7 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
                         recyclerView.setAdapter(sectionAdapter);
                         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
                         recyclerView.addItemDecoration(itemDecoration);
-                        headerTitle = ((TextView) findViewById(R.id.SubCatTitle));
+                        headerTitle = ((TextView) findViewById(R.id.CategoryTitle));
                         headerTitle.setText(subCategories.getSubCatTitle());
 
 

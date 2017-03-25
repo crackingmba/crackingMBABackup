@@ -20,10 +20,9 @@
         android:layout_margin="15dp">
 
         <TextView
-            android:id="@+id/SubCatTitle"
+            android:id="@+id/CategoryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CAT2017 Preparation Quant Section"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center"/>
 
@@ -37,6 +36,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:layout_marginTop="15dp"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/section_recycler_view2"
             android:layout_width="match_parent"
