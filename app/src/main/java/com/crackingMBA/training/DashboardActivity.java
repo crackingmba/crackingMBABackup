@@ -65,8 +65,8 @@ private  TabLayout tabLayout;
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        mViewPager.setOffscreenPageLimit(3);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         if(null != gotoTab){
             tabLayout.getTabAt(gotoTab).select();

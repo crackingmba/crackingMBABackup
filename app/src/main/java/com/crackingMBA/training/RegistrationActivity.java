@@ -218,7 +218,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             startActivity(dashboardIntent);
                             finish();
                         } else {
-                            mEmailView.setError("Email Already registered");
+                            mEmailView.setError("Email Already registered. Login using Existing User");
                             showProgress(false);
                             View focusView = null;
                             focusView=mEmailView;

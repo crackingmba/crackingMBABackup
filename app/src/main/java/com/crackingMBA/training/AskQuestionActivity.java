@@ -48,6 +48,7 @@ public class AskQuestionActivity extends AppCompatActivity {
     public void submitQuestion(View v){
         String qstnStr = qstnTxt.getText().toString();
         Log.d(TAG,"Submitting qstn "+qstnStr);
+
         if(isMock){
             Log.d(TAG,"Submitted qstn mocked..");
             msg.setText("Your Question is Submitted Successfully");
@@ -66,6 +67,9 @@ public class AskQuestionActivity extends AppCompatActivity {
                             Log.d(TAG, "Qstn submitted successfully for.."+params);
                             msg.setText("Your Question is Submitted Successfully");
                             msg.setTextColor(Color.BLUE);
+                            Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
+                            dashboardIntent.putExtra("gotoTab","3");
+                            startActivity(dashboardIntent);
                         }else{
                             Log.d(TAG, "Qstn submission failed..");
                             msg.setText("Problem occured while submitting question");
@@ -93,9 +97,7 @@ public class AskQuestionActivity extends AppCompatActivity {
                 ;
             }
         }
-        Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
-        dashboardIntent.putExtra("gotoTab","3");
-        startActivity(dashboardIntent);
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
