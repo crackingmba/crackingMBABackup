@@ -39,7 +39,7 @@ public class YoutubeVideoActivity extends YouTubeBaseActivity implements
 		youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view1);
 
 		// Initializing video player with developer key
-		youTubeView.initialize(CrackingConstant.DEVELOPER_KEY, this);
+		youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
 
 	}
 
@@ -65,7 +65,7 @@ public class YoutubeVideoActivity extends YouTubeBaseActivity implements
 			// Use loadVideo() method, if you want to play it automatically
 			//player.cueVideo(CrackingConstant.YOUTUBE_VIDEO_CODE);
 			VideoList videoList= VideoApplication.videoList;
-			player.cueVideo(videoList.getVideoYouTubeURL());
+			player.loadVideo(videoList.getVideoYouTubeURL());
 			// Hiding player controls
 			player.setPlayerStyle(PlayerStyle.DEFAULT);
 		}
@@ -75,7 +75,7 @@ public class YoutubeVideoActivity extends YouTubeBaseActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == RECOVERY_DIALOG_REQUEST) {
 			// Retry initialization if user performed a recovery action
-			getYouTubePlayerProvider().initialize(CrackingConstant.DEVELOPER_KEY, this);
+			getYouTubePlayerProvider().initialize(MyConfig.YOUTUBE_API_KEY, this);
 		}
 	}
 

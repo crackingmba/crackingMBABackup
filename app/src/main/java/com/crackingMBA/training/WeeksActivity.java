@@ -82,7 +82,7 @@ public class WeeksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 
         getWeeksData();
-
+/*
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -96,9 +96,9 @@ public class WeeksActivity extends AppCompatActivity {
                             .permission.WRITE_EXTERNAL_STORAGE},
                     1);
           /*  finish();
-            startActivity(getIntent());*/
+            startActivity(getIntent());
 
-        }
+        }*/
 
 }
 

@@ -26,7 +26,6 @@ public class CrackingConstant {
     public static final String SEND_OTP_SERVICE_URL="http://crackingmba.com/forgotPassword.php";
     public static final String CHANGE_PASSWORD_SERVICE_URL="http://crackingmba.com/forgotPassword.php";
 
-    public static final String DEVELOPER_KEY = "AIzaSyDm5HEV0z1Wh06-mpnExOFY3GGnCN98eRQ";
 
     public static final String GET_MOCKTEST_TOPICS_SERVICE_URL="http://crackingmba.com/getMTSubCategories.php";
     public static final String GET_MOCKTEST_TESTS_SERVICE_URL="http://crackingmba.com/getMockTestList.php";
