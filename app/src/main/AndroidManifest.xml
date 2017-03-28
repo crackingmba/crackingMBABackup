@@ -92,6 +92,7 @@
             android:name=".DashboardActivity"
             android:icon="@mipmap/ic_launcher"
             android:logo="@mipmap/ic_launcher"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
