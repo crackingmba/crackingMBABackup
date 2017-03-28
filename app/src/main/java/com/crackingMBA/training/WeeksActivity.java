@@ -82,8 +82,8 @@ public class WeeksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 
         getWeeksData();
-/*
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
+
+/*        int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
 
@@ -95,8 +95,8 @@ public class WeeksActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
                             .permission.WRITE_EXTERNAL_STORAGE},
                     1);
-          /*  finish();
-            startActivity(getIntent());
+          *//*  finish();
+            startActivity(getIntent());*//*
 
         }*/
 
@@ -119,13 +119,13 @@ public class WeeksActivity extends AppCompatActivity {
                     VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                     //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
                     if(videoListModel!=null){
-                    for(VideoList v : videoListModel.getVideoList()){
+                /*    for(VideoList v : videoListModel.getVideoList()){
                         if(VideoApplication.downloadingVideoIds.contains(v.getVideoID())){
                             v.setDownloading(true);
                         }else{
                             v.setDownloading(false);
                         }
-                    }
+                    }*/
                     weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(),myWeeksActivity);
                     recyclerView.setAdapter(weekAdapter);
                     RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
@@ -167,7 +167,6 @@ public class WeeksActivity extends AppCompatActivity {
             });
         } catch (Exception e) {
             e.printStackTrace();
-            ;
         }
     }
 

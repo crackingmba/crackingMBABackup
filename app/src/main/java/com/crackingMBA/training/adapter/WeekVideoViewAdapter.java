@@ -50,6 +50,7 @@ public class WeekVideoViewAdapter extends RecyclerView
     private static long downloadId;
     private static DownloadManager downloadManager;
     private static DBHelper dbHelper;
+
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
@@ -71,6 +72,7 @@ public class WeekVideoViewAdapter extends RecyclerView
         TextView videoCategory;
         TextView videoYouTubeURL;
         TextView videoDownloadURL;
+
         public DataObjectHolder(View itemView) {
             super(itemView);
 
@@ -89,14 +91,14 @@ public class WeekVideoViewAdapter extends RecyclerView
             videoYouTubeURL = (TextView) itemView.findViewById(R.id.week_videoYouTubeURL);
             videoDownloadURL = (TextView) itemView.findViewById(R.id.week_videoDownloadURL);
 
-            viewOnlineBtn = (Button) itemView.findViewById(R.id.week_viewonline);
-            viewOnlineBtn.setOnClickListener(this);
-            viewOfflineBtn = (Button) itemView.findViewById(R.id.week_downloadnow);
-            viewOfflineBtn.setOnClickListener(this);
-            deleteOfflineBtn = (Button) itemView.findViewById(R.id.week_deletevideo);
-            deleteOfflineBtn.setOnClickListener(this);
-            final IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-            final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+            //viewOnlineBtn = (Button) itemView.findViewById(R.id.week_viewonline);
+            //viewOnlineBtn.setOnClickListener(this);
+            //viewOfflineBtn = (Button) itemView.findViewById(R.id.week_downloadnow);
+            //viewOfflineBtn.setOnClickListener(this);
+            //deleteOfflineBtn = (Button) itemView.findViewById(R.id.week_deletevideo);
+            //deleteOfflineBtn.setOnClickListener(this);
+            //final IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        /*    final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     Toast toast = Toast.makeText(myContext, "Video Download Complete", Toast.LENGTH_LONG);
@@ -110,14 +112,15 @@ public class WeekVideoViewAdapter extends RecyclerView
 
 
             };
-            myContext.registerReceiver(downloadReceiver, filter);
+            myContext.registerReceiver(downloadReceiver, filter);*/
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.week_viewonline) {
-                Log.d("Suresh", "Clickd on View online button " + getPosition());
+            //if (v.getId() == R.id.week_viewonline) {
+            if (1==2) {
+                /*Log.d("Suresh", "Clickd on View online button " + getPosition());
 
 
 
@@ -139,9 +142,9 @@ public class WeekVideoViewAdapter extends RecyclerView
 
                     toast.setGravity(Gravity.BOTTOM, 25, 400);
                     toast.show();
-                }
+                }*/
 
-            } else if (v.getId() == R.id.week_downloadnow) {
+            } /*else if (v.getId() == R.id.week_downloadnow) {
                 Log.d("Suresh", "Clickd on download");
                 if (viewOfflineBtn.getText().toString().equalsIgnoreCase("View Offline")) {
                     boolean localavailablity = LocalVideoCheck.verifyLocalStorage(mDataset.get(getPosition()).getVideoID());
@@ -172,7 +175,7 @@ public class WeekVideoViewAdapter extends RecyclerView
         {
             Log.d("Suresh", "Clickd on remove video");
             deleteVideo(getPosition(),mDataset.get(getPosition()).getVideoURL());
-        }
+        }*/
 
         else
 
@@ -297,7 +300,7 @@ public class WeekVideoViewAdapter extends RecyclerView
         holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
         holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
         holder.duration.setText(mDataset.get(position).getDuration());
-        Boolean videoAvailbllity;
+        /*Boolean videoAvailbllity;
 
          videoAvailbllity = LocalVideoCheck.verifyLocalStorageByVideoID(mDataset.get(position).getVideoID(),myActivity);
         if (videoAvailbllity) {
@@ -316,7 +319,7 @@ public class WeekVideoViewAdapter extends RecyclerView
             holder.viewOfflineBtn.setText("Download");
             holder.deleteOfflineBtn.setEnabled(false);
             holder.viewOfflineBtn.setEnabled(true);
-        }
+        }*/
 
         try {
             Log.d("suresh", CrackingConstant.MYPATH + "img/" + mDataset.get(position).getThumbnailURL());
