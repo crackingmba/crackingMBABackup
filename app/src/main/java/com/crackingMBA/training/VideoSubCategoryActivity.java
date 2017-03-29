@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -55,70 +57,81 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
         String url = "http://www.crackingmba.com/getSubCategories.php?category="+VideoApplication.sectionClicked;
 
         Log.d(TAG,"Section Data"+url);
-        try {
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(url, null, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(String response) {
-                    Log.d(TAG, "Response is : " + response);
-                    Gson gson = new Gson();
-                    SubCategories subCategories = gson.fromJson(response, SubCategories.class);
-                    Log.d(TAG, "subCategories : " + subCategories);
-                    if (subCategories.getSubCatList() != null) {
-                        sectionAdapter = new SectionVideoViewAdapter(subCategories.getSubCatList());
-                        recyclerView.setAdapter(sectionAdapter);
-                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-                        recyclerView.addItemDecoration(itemDecoration);
-                        headerTitle = ((TextView) findViewById(R.id.CategoryTitle));
-                        headerTitle.setText(subCategories.getSubCatTitle());
+        if(MyUtil.checkConnectivity(getApplicationContext())) {
+            try {
+
+                AsyncHttpClient client = new AsyncHttpClient();
+                MyUtil.showProgressDialog(this);
+                client.get(url, null, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d(TAG, "Response is : " + response);
+                        Gson gson = new Gson();
+                        SubCategories subCategories = gson.fromJson(response, SubCategories.class);
+                        Log.d(TAG, "subCategories : " + subCategories);
+                        if (subCategories.getSubCatList() != null) {
+                            sectionAdapter = new SectionVideoViewAdapter(subCategories.getSubCatList());
+                            recyclerView.setAdapter(sectionAdapter);
+                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+                            recyclerView.addItemDecoration(itemDecoration);
+                            headerTitle = ((TextView) findViewById(R.id.CategoryTitle));
+                            headerTitle.setText(subCategories.getSubCatTitle());
 
 
-                        if (null != sectionAdapter) {
-                            ((SectionVideoViewAdapter) sectionAdapter).setOnItemClickListener(
-                                    new SectionVideoViewAdapter.MyClickListener() {
-                                        @Override
-                                        public void onItemClick(int position, View v) {
-                                            Log.d(TAG, "Video Sub Cateogry, Clicked item at position : " + position);
-                                            //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
-                                            SubCatList scl = populateSubCatList(v);
-                                            Log.d(TAG, "Selected Video Category : " + scl.getName());
+                            if (null != sectionAdapter) {
+                                ((SectionVideoViewAdapter) sectionAdapter).setOnItemClickListener(
+                                        new SectionVideoViewAdapter.MyClickListener() {
+                                            @Override
+                                            public void onItemClick(int position, View v) {
+                                                Log.d(TAG, "Video Sub Cateogry, Clicked item at position : " + position);
+                                                //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
+                                                SubCatList scl = populateSubCatList(v);
+                                                Log.d(TAG, "Selected Video Category : " + scl.getName());
 
-                                            Intent weeksIntent = new Intent(getApplicationContext(), WeeksActivity.class);
-                                            weeksIntent.putExtra("sectionSelected", scl.getName());
-                                            weeksIntent.putExtra("headerTitle", headerTitle.getText());
-                                            weeksIntent.putExtra("subcategoryid", scl.getId());
-                                            weeksIntent.putExtra("subcategoryid", scl.getName());
-                                            VideoApplication.subcategorySelected=scl.getName();
-                                            startActivity(weeksIntent);
+                                                Intent weeksIntent = new Intent(getApplicationContext(), WeeksActivity.class);
+                                                weeksIntent.putExtra("sectionSelected", scl.getName());
+                                                weeksIntent.putExtra("headerTitle", headerTitle.getText());
+                                                weeksIntent.putExtra("subcategoryid", scl.getId());
+                                                weeksIntent.putExtra("subcategoryid", scl.getName());
+                                                VideoApplication.subcategorySelected = scl.getName();
+                                                startActivity(weeksIntent);
+                                            }
                                         }
-                                    }
-                            );
+                                );
+                            }
+                        } else {
+                            ((TextView) findViewById(R.id.SubCatNotAvailable)).setVisibility(View.VISIBLE);
+                            Log.d(TAG, "There is no subcategories for the category selected");
                         }
+                        MyUtil.hideProgressDialog();
                     }
-                    else{
-                        (( TextView) findViewById(R.id.SubCatNotAvailable)).setVisibility(View.VISIBLE);
-                        Log.d(TAG,"There is no subcategories for the category selected");
-                    }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Throwable error,
-                                      String content) {
-                    Log.d(TAG,"Status is "+statusCode+ " and "+content);
-                    if (statusCode == 404) {
-                        Log.d(TAG,"Requested resource not found");
+                    @Override
+                    public void onFailure(int statusCode, Throwable error,
+                                          String content) {
+                        Log.d(TAG, "Status is " + statusCode + " and " + content);
+                        if (statusCode == 404) {
+                            Log.d(TAG, "Requested resource not found");
+                        } else if (statusCode == 500) {
+                            Log.d(TAG, "Something went wrong at server end");
+                        } else {
+                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        }
+                        MyUtil.hideProgressDialog();
                     }
-                    else if (statusCode == 500) {
-                        Log.d(TAG, "Something went wrong at server end");
-                    }
-                    else {
-                        Log.d(TAG,"Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
-                    }
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();;
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                ;
+            }
         }
+            else{
+                 int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+                toast.show();
+                TextView textView=(TextView)findViewById(R.id.networkstatus);
+                textView.setVisibility(View.VISIBLE);
+            }
 
 
 

@@ -1,7 +1,9 @@
 package com.crackingMBA.training.util;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +20,7 @@ import java.io.File;
 
 import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.FullscreenActivity;
+import com.crackingMBA.training.R;
 import com.crackingMBA.training.VideoApplication;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
@@ -27,7 +30,7 @@ import com.crackingMBA.training.validator.LocalVideoCheck;
  * Created by MSK on 05-02-2017.
  */
 public class MyUtil {
-
+    public static  ProgressDialog mProgressDialog;
 public static boolean checkConnectivity(Context context) {
     ConnectivityManager cm =
             (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -36,6 +39,23 @@ public static boolean checkConnectivity(Context context) {
     boolean isConnected = activeNetwork != null &&
             activeNetwork.isConnectedOrConnecting();
     Log.d("first","internet connectivtiy status "+isConnected);
+
     return isConnected;
 }
+    public static void showProgressDialog(Activity activity) {
+
+            mProgressDialog = new ProgressDialog(activity);
+            mProgressDialog.setMessage("loading");
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+
+        mProgressDialog.show();
+    }
+
+    public static void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
+        }
+    }
+
 }

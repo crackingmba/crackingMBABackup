@@ -36,10 +36,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.pojo.LoginResponseObject;
 import com.crackingMBA.training.pojo.Question;
 import com.crackingMBA.training.pojo.VideoDataObject;
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -85,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -126,48 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
-        }
 
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
-    }
 
 
     /**
@@ -216,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+
   /*          mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);*/
             loginServiceCall(email,password);
@@ -392,50 +353,54 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             params.put("password", password);
             Log.d(TAG, "loginServiceCall");
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
-            try {
-                AsyncHttpClient client = new AsyncHttpClient();
+
+            if(MyUtil.checkConnectivity(getApplicationContext())) {
+                showProgress(true);
+                try {
+                    AsyncHttpClient client = new AsyncHttpClient();
 /*
                 client.addHeader("Accept", "text/json");
 */
-              //  client.addHeader("content-type", "application/x-www-form-urlencoded");
-                client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.d(TAG, " Login Response is : " + response);
-                        Gson gson = new Gson();
-                        LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
-                        if (loginResponseObject != null) {
-                            String userValid = loginResponseObject.getUserValid();
-                            //userValid = "otpuser";
-                            if (userValid.equalsIgnoreCase("yes")) {
-                                String userName = loginResponseObject.getUserName();
+                    //  client.addHeader("content-type", "application/x-www-form-urlencoded");
+                    client.post(CrackingConstant.LOGIN_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, " Login Response is : " + response);
+                            Gson gson = new Gson();
+                            LoginResponseObject loginResponseObject = gson.fromJson(response, LoginResponseObject.class);
+                            if (loginResponseObject != null) {
+                                String userValid = loginResponseObject.getUserValid();
+                                //userValid = "otpuser";
+                                if (userValid.equalsIgnoreCase("yes")) {
+                                    String userName = loginResponseObject.getUserName();
 
-                                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putBoolean("isLoggedIn",true);
-                                editor.putString("loggedInUserName",loginResponseObject.getUserName());
-                                editor.putString("loggedInUserEmail",email);
-                                editor.putString("loggedInUserPassword",password);
+                                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putBoolean("isLoggedIn", true);
+                                    editor.putString("loggedInUserName", loginResponseObject.getUserName());
+                                    editor.putString("loggedInUserEmail", email);
+                                    editor.putString("loggedInUserPassword", password);
 
                              /*   Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
                                 startActivity(dashboardIntent);
-                              */  editor.commit();
+                              */
+                                    editor.commit();
 
-                                List<Question> questions = loginResponseObject.getUserQuestions();
-                                VideoApplication.loggedInUserQstns = questions;
-                                showProgress(false);
-                                Intent dashboardIntent=new Intent(getApplicationContext(),DashboardActivity.class);
-                                dashboardIntent.putExtra("gotoTab","3");
-                                startActivity(dashboardIntent);
-                                finish();
-                            }else if(userValid.equalsIgnoreCase("otpuser")){
-                                VideoApplication.registeringUserName = loginResponseObject.getUserName();
-                                VideoApplication.registeringUserEmail = email;
-                                VideoApplication.registeringUserPwd = password;
-                                Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
-                                startActivity(otpIntent);
-                                finish();
-                            }else {
+                                    List<Question> questions = loginResponseObject.getUserQuestions();
+                                    VideoApplication.loggedInUserQstns = questions;
+                                    showProgress(false);
+                                    Intent dashboardIntent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                    dashboardIntent.putExtra("gotoTab", "3");
+                                    startActivity(dashboardIntent);
+                                    finish();
+                                } else if (userValid.equalsIgnoreCase("otpuser")) {
+                                    VideoApplication.registeringUserName = loginResponseObject.getUserName();
+                                    VideoApplication.registeringUserEmail = email;
+                                    VideoApplication.registeringUserPwd = password;
+                                    Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
+                                    startActivity(otpIntent);
+                                    finish();
+                                } else {
                                     mPasswordView.setError(getString(R.string.error_incorrect_password));
                                     mPasswordView.requestFocus();
                                     mEmailView.setError(getString(R.string.error_invalid_email));
@@ -443,25 +408,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 }
 
 
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Throwable error,
-                                          String content) {
-                        Log.d(TAG, "Status is " + statusCode + " and " + content);
-                        if (statusCode == 404) {
-                            Log.d(TAG, "Requested resource not found");
-                        } else if (statusCode == 500) {
-                            Log.d(TAG, "Something went wrong at server end");
-                        } else {
-                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        @Override
+                        public void onFailure(int statusCode, Throwable error,
+                                              String content) {
+                            Log.d(TAG, "Status is " + statusCode + " and " + content);
+                            if (statusCode == 404) {
+                                Log.d(TAG, "Requested resource not found");
+                            } else if (statusCode == 500) {
+                                Log.d(TAG, "Something went wrong at server end");
+                            } else {
+                                Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                            }
                         }
-                    }
-                });
-                //dilr section
-            } catch (Exception e) {
-                e.printStackTrace();
+                    });
+                    //dilr section
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+                toast.show();
+                TextView textView=(TextView)findViewById(R.id.networkstatus);
+                textView.setVisibility(View.VISIBLE);
             }
             return  "true";
         }

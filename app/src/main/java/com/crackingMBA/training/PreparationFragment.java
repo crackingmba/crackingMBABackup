@@ -31,6 +31,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import com.crackingMBA.training.pojo.VideoDataObject;
+import com.crackingMBA.training.util.MyUtil;
 
 /**
  * Created by MSK on 24-01-2017.
@@ -94,6 +95,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         VideoDataObject vdo = new VideoDataObject();
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
         Fragment newFrag = null;
+
         Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
         switch (v.getId()){
             case R.id.quantrow1:
@@ -113,10 +115,11 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 break;
         }
         startActivity(dashboardIntent);
+
     }
 
 
-    private long downloadData(Uri uri) {
+    /*private long downloadData(Uri uri) {
 
         downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -184,7 +187,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     }
 
 
-   
+   */
 
 
 }

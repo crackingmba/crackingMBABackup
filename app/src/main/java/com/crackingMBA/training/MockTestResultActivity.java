@@ -53,8 +53,9 @@ public class MockTestResultActivity extends AppCompatActivity {
 
     public void attemptAnotherTest(View v){
         Log.d(TAG,"CLicked attemptAnotherTest..");
-        Intent mainIntent = new Intent(getApplicationContext(),MockTestTopicsActivity.class);
-        startActivity(mainIntent);
+       /* Intent mainIntent = new Intent(getApplicationContext(),MockTestTopicsActivity.class);
+        startActivity(mainIntent);*/
+        this.finish();
     }
 
     public void reviewAnswers(View v){

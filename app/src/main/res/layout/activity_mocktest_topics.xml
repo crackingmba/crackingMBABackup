@@ -55,6 +55,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"/>
 
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mocktest_topics_recycler_view"
                 android:layout_width="match_parent"
@@ -69,6 +70,18 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"/>
+            <TextView
+                android:id="@+id/networkstatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="monospace"
+                android:textColor="@android:color/holo_red_light"
+                android:text="@string/no_internet"
+                android:textSize="15dp"
+                android:visibility="invisible"/>
 
         </LinearLayout>
     </ScrollView>

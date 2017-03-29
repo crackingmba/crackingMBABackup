@@ -1,5 +1,8 @@
 package com.crackingMBA.training;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +38,7 @@ import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.pojo.VideoListModel;
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -61,7 +65,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button gotolatest;
     View rootView;
     private static String TAG = "HomeFragment";
-
+    private View quantProgressView;
+    private View dilrProgressView;
+    private View verbalProgressView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,7 +85,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         quantRecyclerView.setHasFixedSize(true);
         dilrRecyclerView.setHasFixedSize(true);
         verbalRecyclerView.setHasFixedSize(true);
-
+        quantProgressView = rootView.findViewById(R.id.recentquatvideos);
+        dilrProgressView = rootView.findViewById(R.id.recentdiandlrvideos);
+        verbalProgressView = rootView.findViewById(R.id.recentverbalvideos);
         getDataSet();
 
         return rootView;
@@ -100,182 +108,202 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else {
             Log.d(TAG, "In else block");
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
-            try {
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get(CrackingConstant.GETVIDEOLIST_SERVICE_URL__QUANT_SERVICE_URL, null, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.d(TAG, "Response is : " + response);
-                        Gson gson = new Gson();
-                        VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
-                        if (videoListModel != null) {
-                            List<VideoList> quant = videoListModel.getVideoList();
-                            try {
-                                if (null != quant) {
-                                    if (quant.size() == 0)
-                                        rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.VISIBLE);
-                                    else {
-                                        rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.GONE);
+            if(MyUtil.checkConnectivity(getContext())) {
+                try {
+                    showProgress(true, quantProgressView);
 
-                                        VideoApplication.allQuantVideos = quant;
-                                        RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                        LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                        quantRecyclerView.setLayoutManager(quantLayoutManager);
-                                        quantAdapter = new QuantHomeVideoViewAdapter(quant);
-                                        quantRecyclerView.setAdapter(quantAdapter);
-                                        quantRecyclerView.addItemDecoration(quantItemDecoration);
-                                        ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
-                                                new QuantHomeVideoViewAdapter.MyClickListener() {
-                                                    @Override
-                                                    public void onItemClick(int position, View v) {
-                                                        Log.d(TAG, "Clicked item at position : " + position);
-                                                        VideoList vdo = VideoApplication.allQuantVideos.get(position);
-                                                        vdo.setVideoSubCategory("video");
-                                                        Log.d(TAG, "set with video..");
-                                                        VideoApplication.videoList = vdo;
-                                                        Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
-                                                        startActivity(weeksIntent);
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    client.get(CrackingConstant.GETVIDEOLIST_SERVICE_URL__QUANT_SERVICE_URL, null, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, "Response is : " + response);
+                            Gson gson = new Gson();
+                            VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
+                            if (videoListModel != null) {
+                                List<VideoList> quant = videoListModel.getVideoList();
+                                try {
+                                    if (null != quant) {
+                                        if (quant.size() == 0)
+                                            rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.VISIBLE);
+                                        else {
+                                            rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.GONE);
+
+                                            VideoApplication.allQuantVideos = quant;
+                                            RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                            LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                            quantRecyclerView.setLayoutManager(quantLayoutManager);
+                                            quantAdapter = new QuantHomeVideoViewAdapter(quant);
+                                            quantRecyclerView.setAdapter(quantAdapter);
+                                            quantRecyclerView.addItemDecoration(quantItemDecoration);
+                                            ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
+                                                    new QuantHomeVideoViewAdapter.MyClickListener() {
+                                                        @Override
+                                                        public void onItemClick(int position, View v) {
+                                                            Log.d(TAG, "Clicked item at position : " + position);
+                                                            VideoList vdo = VideoApplication.allQuantVideos.get(position);
+                                                            vdo.setVideoSubCategory("video");
+                                                            Log.d(TAG, "set with video..");
+                                                            VideoApplication.videoList = vdo;
+                                                            Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
+                                                            startActivity(weeksIntent);
+                                                        }
                                                     }
-                                                }
-                                        );
+                                            );
+                                        }
                                     }
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Throwable error,
-                                          String content) {
-                        Log.d(TAG, "Status is " + statusCode + " and " + content);
-                        if (statusCode == 404) {
-                            Log.d(TAG, "Requested resource not found");
-                        } else if (statusCode == 500) {
-                            Log.d(TAG, "Something went wrong at server end");
-                        } else {
-                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
-                        }
-                    }
-                });
-                //dilr section
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL, null, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.d(TAG, "Response is : " + response);
-                        Gson gson = new Gson();
-                        VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
-                        if (videoListModel != null) {
-                            List<VideoList> dr = videoListModel.getVideoList();
-
-                            try {
-
-                                if (null != dr) {
-                                   // gotodi.setVisibility(View.GONE);
-                                    if (dr.size() == 0)
-                                        rootView.findViewById(R.id.home_latest_dilr_noVideos).setVisibility(View.VISIBLE);
-                                    else {
-                                        rootView.findViewById(R.id.home_latest_dilr_noVideos).setVisibility(View.GONE);
-
-                                        VideoApplication.allDilrVideos = dr;
-                                        RecyclerView.ItemDecoration dilrItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                        LinearLayoutManager dilrLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                        dilrRecyclerView.setLayoutManager(dilrLayoutManager);
-                                        dilrAdapter = new DILRHomeVideoViewAdapter(dr);
-                                        dilrRecyclerView.setAdapter(dilrAdapter);
-                                        dilrRecyclerView.addItemDecoration(dilrItemDecoration);
-                                        ((DILRHomeVideoViewAdapter) dilrAdapter).setOnItemClickListener(
-                                                new DILRHomeVideoViewAdapter.MyClickListener() {
-                                                    @Override
-                                                    public void onItemClick(int position, View v) {
-                                                        Log.d(TAG, "Clicked item at position : " + position);
-                                                        VideoList vdo = VideoApplication.allDilrVideos.get(position);
-                                                        vdo.setVideoSubCategory("video");
-                                                        Log.d(TAG, "set with video..");
-                                                        VideoApplication.videoList = vdo;
-                                                        Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
-                                                        startActivity(weeksIntent);
-                                                    }
-                                                }
-                                        );
-                                    }
-                                }
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-
-                            }
-                        }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            //verbal section
-            try{
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL, null, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(String response) {
-                    Log.d(TAG, "Response is : " + response);
-                    Gson gson = new Gson();
-                    VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
-                    if (videoListModel != null) {
-                        List<VideoList> verbal = videoListModel.getVideoList();
-
-                        try {
-
-                            if (null != verbal) {
-                              //  gotolatest.setVisibility(View.GONE);
-                                if (verbal.size() == 0)
-                                    rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.VISIBLE);
-                                else {
-                                    rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.GONE);
-
-                                    VideoApplication.allVerbalVideos = verbal;
-                                    RecyclerView.ItemDecoration verbalItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                    LinearLayoutManager verbalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                    verbalRecyclerView.setLayoutManager(verbalLayoutManager);
-                                    verbalAdapter = new VerbalHomeVideoViewAdapter(verbal);
-                                    verbalRecyclerView.setAdapter(verbalAdapter);
-                                    verbalRecyclerView.addItemDecoration(verbalItemDecoration);
-                                    ((VerbalHomeVideoViewAdapter) verbalAdapter).setOnItemClickListener(
-                                            new VerbalHomeVideoViewAdapter.MyClickListener() {
-                                                @Override
-                                                public void onItemClick(int position, View v) {
-                                                    Log.d(TAG, "Clicked item at position : " + position);
-                                                    VideoList vdo = VideoApplication.allVerbalVideos.get(position);
-                                                    vdo.setVideoSubCategory("video");
-                                                    Log.d(TAG, "set with video..");
-                                                    VideoApplication.videoList = vdo;
-                                                    Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
-                                                    startActivity(weeksIntent);
-                                                }
-                                            }
-                                    );
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
                             }
-                        } catch (Exception e) {
+                            showProgress(false, quantProgressView);
 
-                            Log.e(TAG, "Error occuring " + e.getMessage());
                         }
-                    }
+
+                        @Override
+                        public void onFailure(int statusCode, Throwable error,
+                                              String content) {
+                            Log.d(TAG, "Status is " + statusCode + " and " + content);
+                            if (statusCode == 404) {
+                                Log.d(TAG, "Requested resource not found");
+                            } else if (statusCode == 500) {
+                                Log.d(TAG, "Something went wrong at server end");
+                            } else {
+                                Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                            }
+                            showProgress(false, quantProgressView);
+                        }
+
+                    });
+
+                    //dilr section
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-}
-                    catch(Exception
-                             e){
+                try {
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    showProgress(true, dilrProgressView);
+                    client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL, null, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, "Response is : " + response);
+                            Gson gson = new Gson();
+                            VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
+                            if (videoListModel != null) {
+                                List<VideoList> dr = videoListModel.getVideoList();
 
-                    }
+                                try {
 
+                                    if (null != dr) {
+                                        // gotodi.setVisibility(View.GONE);
+                                        if (dr.size() == 0)
+                                            rootView.findViewById(R.id.home_latest_dilr_noVideos).setVisibility(View.VISIBLE);
+                                        else {
+                                            rootView.findViewById(R.id.home_latest_dilr_noVideos).setVisibility(View.GONE);
 
+                                            VideoApplication.allDilrVideos = dr;
+                                            RecyclerView.ItemDecoration dilrItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                            LinearLayoutManager dilrLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                            dilrRecyclerView.setLayoutManager(dilrLayoutManager);
+                                            dilrAdapter = new DILRHomeVideoViewAdapter(dr);
+                                            dilrRecyclerView.setAdapter(dilrAdapter);
+                                            dilrRecyclerView.addItemDecoration(dilrItemDecoration);
+                                            ((DILRHomeVideoViewAdapter) dilrAdapter).setOnItemClickListener(
+                                                    new DILRHomeVideoViewAdapter.MyClickListener() {
+                                                        @Override
+                                                        public void onItemClick(int position, View v) {
+                                                            Log.d(TAG, "Clicked item at position : " + position);
+                                                            VideoList vdo = VideoApplication.allDilrVideos.get(position);
+                                                            vdo.setVideoSubCategory("video");
+                                                            Log.d(TAG, "set with video..");
+                                                            VideoApplication.videoList = vdo;
+                                                            Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
+                                                            startActivity(weeksIntent);
+                                                        }
+                                                    }
+                                            );
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+
+                                }
+                                showProgress(false, dilrProgressView);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showProgress(false, dilrProgressView);
+                }
+                //verbal section
+                try {
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    showProgress(true, verbalProgressView);
+                    client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL, null, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, "Response is : " + response);
+                            Gson gson = new Gson();
+                            VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
+                            if (videoListModel != null) {
+                                List<VideoList> verbal = videoListModel.getVideoList();
+
+                                try {
+
+                                    if (null != verbal) {
+                                        //  gotolatest.setVisibility(View.GONE);
+                                        if (verbal.size() == 0)
+                                            rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.VISIBLE);
+                                        else {
+                                            rootView.findViewById(R.id.home_latest_other_noVideos).setVisibility(View.GONE);
+
+                                            VideoApplication.allVerbalVideos = verbal;
+                                            RecyclerView.ItemDecoration verbalItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
+                                            LinearLayoutManager verbalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                            verbalRecyclerView.setLayoutManager(verbalLayoutManager);
+                                            verbalAdapter = new VerbalHomeVideoViewAdapter(verbal);
+                                            verbalRecyclerView.setAdapter(verbalAdapter);
+                                            verbalRecyclerView.addItemDecoration(verbalItemDecoration);
+                                            ((VerbalHomeVideoViewAdapter) verbalAdapter).setOnItemClickListener(
+                                                    new VerbalHomeVideoViewAdapter.MyClickListener() {
+                                                        @Override
+                                                        public void onItemClick(int position, View v) {
+                                                            Log.d(TAG, "Clicked item at position : " + position);
+                                                            VideoList vdo = VideoApplication.allVerbalVideos.get(position);
+                                                            vdo.setVideoSubCategory("video");
+                                                            Log.d(TAG, "set with video..");
+                                                            VideoApplication.videoList = vdo;
+                                                            Intent weeksIntent = new Intent(getActivity(), TargetVideoActivity.class);
+                                                            startActivity(weeksIntent);
+                                                        }
+                                                    }
+                                            );
+                                        }
+                                    }
+                                    showProgress(false, verbalProgressView);
+                                } catch (Exception e) {
+
+                                    Log.e(TAG, "Error occuring " + e.getMessage());
+                                    showProgress(false, verbalProgressView);
+                                }
+                            }
+                        }
+                    });
+                } catch (Exception
+                        e) {
+                    Log.e(TAG, "Error occuring " + e.getMessage());
+                    showProgress(false, verbalProgressView);
+                }
+
+            }else{
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getContext(), R.string.no_internet, duration);
+                toast.show();
+               TextView textView=(TextView)rootView.findViewById(R.id.networkstatus);
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(R.string.no_internet);
+            }
 
 
                     }
@@ -322,9 +350,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         }
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show,final View showProgressSection) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
 
-        @Override
+
+            showProgressSection.setVisibility(show ? View.VISIBLE : View.GONE);
+            showProgressSection.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    showProgressSection.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            showProgressSection.setVisibility(show ? View.VISIBLE : View.GONE);
+
+        }
+    }
+
+
+      /*  @Override
         public void onRequestPermissionsResult ( int requestCode,
         String permissions[], int[] grantResults){
             switch (requestCode) {
@@ -348,5 +404,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // other 'case' lines to check for other
                 // permissions this app might request
             }
-        }
+        }*/
 }

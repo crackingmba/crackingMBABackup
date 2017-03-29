@@ -77,8 +77,8 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
 
     public void viewScoreCard(View v){
         Log.d(TAG,"Clicked viewScoreCard..");
-        Intent intent = new Intent(getApplicationContext(),MockTestResultActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(),MockTestResultActivity.class);
+//        startActivity(intent);
         finish();
     }
 

@@ -95,4 +95,6 @@
     <string name="btn_send_otp">Send OTP</string>
     <string name="btn_change_pwd">Change Password</string>
     <string name="forgot_pwd_txt">Forgot Password ?</string>
+    <string name="no_video_avilable">Currently No video available in this category</string>
+    <string name="no_internet">No internet Connectivity. Verify your Network. Please connect to internet to view this section.</string>
 </resources>

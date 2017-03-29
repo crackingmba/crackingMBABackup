@@ -17,9 +17,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.pojo.LoginResponseObject;
 import com.crackingMBA.training.pojo.RegisrationResponseObject;
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -125,7 +128,7 @@ public class RegistrationActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+
             // Registration logic
             registrationServiceCall(fname,lname,email,pwd);
         }
@@ -186,62 +189,77 @@ public class RegistrationActivity extends AppCompatActivity {
         params.put("email", email);
         params.put("password", password);
         Log.d(TAG, "registrationServiceCall");
-        try {
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.post(CrackingConstant.REGISTRATION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(String response) {
-                    Log.d(TAG, " Registration Response is : " + response);
-                    Gson gson = new Gson();
-                    RegisrationResponseObject regisrationResponseObject = gson.fromJson(response, RegisrationResponseObject.class);
-                    if (regisrationResponseObject != null) {
-                        String regisrationStatus = regisrationResponseObject.getStatus();
 
-                        if (regisrationStatus.equalsIgnoreCase("pass")) {
 
-                            VideoApplication.registeringUserName = firstName+" "+lastName;
-                            VideoApplication.registeringUserEmail = email;
-                            VideoApplication.registeringUserPwd = password;
+        if(MyUtil.checkConnectivity(getApplicationContext())) {
+            showProgress(true);
+            try {
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.post(CrackingConstant.REGISTRATION_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d(TAG, " Registration Response is : " + response);
+                        Gson gson = new Gson();
+                        RegisrationResponseObject regisrationResponseObject = gson.fromJson(response, RegisrationResponseObject.class);
+                        if (regisrationResponseObject != null) {
+                            String regisrationStatus = regisrationResponseObject.getStatus();
+
+                            if (regisrationStatus.equalsIgnoreCase("pass")) {
+
+                                VideoApplication.registeringUserName = firstName + " " + lastName;
+                                VideoApplication.registeringUserEmail = email;
+                                VideoApplication.registeringUserPwd = password;
                             /*Intent otpIntent = new Intent(getApplicationContext(), OTPValidationActivity.class);
                             startActivity(otpIntent);
                             finish();*/
-                            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putBoolean("isLoggedIn", true);
-                            editor.putString("loggedInUserName", VideoApplication.registeringUserName);
-                            editor.putString("loggedInUserEmail", VideoApplication.registeringUserEmail);
-                            editor.putString("loggedInUserPassword", VideoApplication.registeringUserPwd);
-                            editor.commit();
+                                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("isLoggedIn", true);
+                                editor.putString("loggedInUserName", VideoApplication.registeringUserName);
+                                editor.putString("loggedInUserEmail", VideoApplication.registeringUserEmail);
+                                editor.putString("loggedInUserPassword", VideoApplication.registeringUserPwd);
+                                editor.commit();
 
-                            Intent dashboardIntent = new Intent(getApplicationContext(), DashboardActivity.class);
-                            dashboardIntent.putExtra("gotoTab", "3");
-                            startActivity(dashboardIntent);
-                            finish();
-                        } else {
-                            mEmailView.setError("Email Already registered. Login using Existing User");
-                            showProgress(false);
-                            View focusView = null;
-                            focusView=mEmailView;
-                            focusView.requestFocus();
+                                Intent dashboardIntent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                dashboardIntent.putExtra("gotoTab", "3");
+                                startActivity(dashboardIntent);
+                                finish();
+                            } else {
+                                mEmailView.setError("Email Already registered. Login using Existing User");
+                                showProgress(false);
+                                View focusView = null;
+                                focusView = mEmailView;
+                                focusView.requestFocus();
+                            }
                         }
                     }
-                }
-                @Override
-                public void onFailure(int statusCode, Throwable error,
-                                      String content) {
-                    Log.d(TAG, "Status is " + statusCode + " and " + content);
-                    if (statusCode == 404) {
-                        Log.d(TAG, "Requested resource not found");
-                    } else if (statusCode == 500) {
-                        Log.d(TAG, "Something went wrong at server end");
-                    } else {
-                        Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+
+                    @Override
+                    public void onFailure(int statusCode, Throwable error,
+                                          String content) {
+                        Log.d(TAG, "Status is " + statusCode + " and " + content);
+                        if (statusCode == 404) {
+                            Log.d(TAG, "Requested resource not found");
+                        } else if (statusCode == 500) {
+                            Log.d(TAG, "Something went wrong at server end");
+                        } else {
+                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        }
                     }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+        else{
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+            toast.show();
+            TextView textView=(TextView)findViewById(R.id.networkstatus);
+            textView.setVisibility(View.VISIBLE);
+        }
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

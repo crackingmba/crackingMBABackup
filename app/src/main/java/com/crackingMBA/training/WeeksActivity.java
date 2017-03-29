@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -109,16 +110,20 @@ public class WeeksActivity extends AppCompatActivity {
         final ArrayList<VideoListModel> results = new ArrayList<VideoListModel>();
         String url = "http://crackingmba.com/getVideoList.php?category="+category+"&subcategory=" + subcategory;
         Log.d(TAG,"Get Video List for Subcateogry url "+ url);
-        try {
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(url, null, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(String response) {
-                    Log.d(TAG, "selected subcategories Response is : " + response);
-                    Gson gson = new Gson();
-                    VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
-                    //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
-                    if(videoListModel!=null){
+
+
+        if(MyUtil.checkConnectivity(getApplicationContext())) {
+            try {
+                AsyncHttpClient client = new AsyncHttpClient();
+                MyUtil.showProgressDialog(this);
+                client.get(url, null, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d(TAG, "selected subcategories Response is : " + response);
+                        Gson gson = new Gson();
+                        VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
+                        //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
+                        if (videoListModel != null) {
                 /*    for(VideoList v : videoListModel.getVideoList()){
                         if(VideoApplication.downloadingVideoIds.contains(v.getVideoID())){
                             v.setDownloading(true);
@@ -126,47 +131,57 @@ public class WeeksActivity extends AppCompatActivity {
                             v.setDownloading(false);
                         }
                     }*/
-                    weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(),myWeeksActivity);
-                    recyclerView.setAdapter(weekAdapter);
-                    RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-                    recyclerView.addItemDecoration(itemDecoration);
+                            weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(), myWeeksActivity);
+                            recyclerView.setAdapter(weekAdapter);
+                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+                            recyclerView.addItemDecoration(itemDecoration);
 
-                    if (null != weekAdapter) {
-                        ((WeekVideoViewAdapter) weekAdapter).setOnItemClickListener(
-                                new WeekVideoViewAdapter.MyClickListener() {
-                                    @Override
-                                    public void onItemClick(int position, View v) {
-                                        Log.d(TAG, "week adapter, Clicked item at position : " + position);
-                                        //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
-                                        VideoApplication.videoList = populateVideoList(v);
-                                        Intent weeksIntent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                        startActivity(weeksIntent);
-                                        Log.d(TAG, "VideoList.." + VideoApplication.videoList);
+                            if (null != weekAdapter) {
+                                ((WeekVideoViewAdapter) weekAdapter).setOnItemClickListener(
+                                        new WeekVideoViewAdapter.MyClickListener() {
+                                            @Override
+                                            public void onItemClick(int position, View v) {
+                                                Log.d(TAG, "week adapter, Clicked item at position : " + position);
+                                                //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
+                                                VideoApplication.videoList = populateVideoList(v);
+                                                Intent weeksIntent = new Intent(getApplicationContext(), TargetVideoActivity.class);
+                                                startActivity(weeksIntent);
+                                                Log.d(TAG, "VideoList.." + VideoApplication.videoList);
 
-                                    }
-                                }
-                        );
-                    }}
-                    else{
-                        Log.d(TAG,"No videos available in this category  ");
+                                            }
+                                        }
+                                );
+                            }
+                        } else {
+                            Log.d(TAG, "No videos available in this category  ");
+                        }
+                        MyUtil.hideProgressDialog();
                     }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Throwable error,
-                                      String content) {
-                    Log.d(TAG, "Status is " + statusCode + " and " + content);
-                    if (statusCode == 404) {
-                        Log.d(TAG, "Requested resource not found");
-                    } else if (statusCode == 500) {
-                        Log.d(TAG, "Something went wrong at server end");
-                    } else {
-                        Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                    @Override
+                    public void onFailure(int statusCode, Throwable error,
+                                          String content) {
+                        Log.d(TAG, "Status is " + statusCode + " and " + content);
+                        if (statusCode == 404) {
+                            Log.d(TAG, "Requested resource not found");
+                        } else if (statusCode == 500) {
+                            Log.d(TAG, "Something went wrong at server end");
+                        } else {
+                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        }
+                        MyUtil.hideProgressDialog();
                     }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+            toast.show();
+            TextView textView=(TextView)findViewById(R.id.networkstatus);
+            textView.setVisibility(View.VISIBLE);
         }
     }
 

@@ -27,15 +27,18 @@
             android:gravity="center"/>
 
 
+
+
         <TextView
             android:id="@+id/SubCatNotAvailable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Currently No video available in this category"
+            android:text="@string/no_video_avilable"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center"
             android:visibility="gone"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            tools:ignore="HardcodedText" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/section_recycler_view2"
@@ -45,6 +48,18 @@
             android:textAlignment="center"
             android:scrollbars="none" />
 
+        <TextView
+            android:id="@+id/networkstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/holo_red_light"
+            android:text="@string/no_internet"
+            android:textSize="15dp"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

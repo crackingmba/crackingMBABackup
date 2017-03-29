@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crackingMBA.training.util.MyUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -174,13 +175,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void changePwdServiceCall(final String otp,final String email, final String password)
         {
 
-            RequestParams params = new RequestParams();
-            params.put("action", "validateOTP");
-            params.put("email", email);
-            params.put("newpwd", password);
-            params.put("otp", otp);
-            Log.d(TAG, "changePwdServiceCall");
-            try {
+            if(MyUtil.checkConnectivity(getApplicationContext())) {
+                RequestParams params = new RequestParams();
+                params.put("action", "validateOTP");
+                params.put("email", email);
+                params.put("newpwd", password);
+                params.put("otp", otp);
+                Log.d(TAG, "changePwdServiceCall");
+                try {
              /*   if(true){
                     Log.d(TAG, "Password Changed successfully for.."+email);
                     showProgress(false);
@@ -192,45 +194,54 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     finish();
                     return;
                 }*/
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.post(CrackingConstant.CHANGE_PASSWORD_SERVICE_URL, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.d(TAG, " Change Pwd Response is : " + response);
-                        if(response.contains("pass")||response.contains("success")) {
-                            Log.d(TAG, "Password Changed successfully for.."+email);
-                            showProgress(false);
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                            Toast toast = Toast.makeText(getApplicationContext(), "Password changed successfully. Please Login to proceed..", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.TOP, 25, 400);
-                            toast.show();
-                            finish();
-                        }else{
-                            Log.d(TAG, "Change pwd failed..");
-                            msg.setText("Please enter valid details..");
-                            msg.setTextColor(Color.RED);
-                            showProgress(false);
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    client.post(CrackingConstant.CHANGE_PASSWORD_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, " Change Pwd Response is : " + response);
+                            if (response.contains("pass") || response.contains("success")) {
+                                Log.d(TAG, "Password Changed successfully for.." + email);
+                                showProgress(false);
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Password changed successfully. Please Login to proceed..", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.TOP, 25, 400);
+                                toast.show();
+                                finish();
+                            } else {
+                                Log.d(TAG, "Change pwd failed..");
+                                msg.setText("Please enter valid details..");
+                                msg.setTextColor(Color.RED);
+                                showProgress(false);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Throwable error,
-                                          String content) {
-                        Log.d(TAG, "Status is " + statusCode + " and " + content);
-                        if (statusCode == 404) {
-                            Log.d(TAG, "Requested resource not found");
-                        } else if (statusCode == 500) {
-                            Log.d(TAG, "Something went wrong at server end");
-                        } else {
-                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        @Override
+                        public void onFailure(int statusCode, Throwable error,
+                                              String content) {
+                            Log.d(TAG, "Status is " + statusCode + " and " + content);
+                            if (statusCode == 404) {
+                                Log.d(TAG, "Requested resource not found");
+                            } else if (statusCode == 500) {
+                                Log.d(TAG, "Something went wrong at server end");
+                            } else {
+                                Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                            }
                         }
-                    }
-                });
-                //dilr section
-            } catch (Exception e) {
-                e.printStackTrace();
+                    });
+                    //dilr section
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            else{
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+                toast.show();
+                TextView textView=(TextView)findViewById(R.id.networkstatus);
+                textView.setVisibility(View.VISIBLE);
+            }
+
         }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

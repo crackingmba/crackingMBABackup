@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/emptytext">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="15dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="#01579B"
@@ -50,7 +52,13 @@
                     android:gravity="center_vertical"
                     android:textAlignment="center"/>
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/recentquatvideos"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
+                android:visibility="gone" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -101,7 +109,13 @@
                     android:textAlignment="center"
                     android:gravity="center_vertical"/>
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/recentdiandlrvideos"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
+                android:visibility="gone" />
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -151,7 +165,13 @@
                     android:textAlignment="center"
                     android:gravity="center_vertical"/>
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/recentverbalvideos"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
+                android:visibility="gone" />
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -174,11 +194,25 @@
                 android:scrollbars="horizontal" />
 
         </LinearLayout>
-            <Button
+            <TextView
+                android:id="@+id/networkstatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="monospace"
+                android:textColor="@android:color/holo_red_light"
+                android:text=""
+                android:textSize="15dp"
+                android:visibility="invisible"/>
+       <!--     <Button
                 android:text="@string/invisible_button"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" />-->
+
         </LinearLayout>
+
     </ScrollView>
 </RelativeLayout>

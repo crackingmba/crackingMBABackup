@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.MockTestTestsAdapter;
 import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.MockTestTestsModel;
 import com.crackingMBA.training.pojo.MockTestTopic;
+import com.crackingMBA.training.util.MyUtil;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -82,62 +84,76 @@ public class MockTestTestsActivity extends AppCompatActivity {
             }
         }else {
             //Populate request parameters
-            RequestParams params = new RequestParams();
-            params.add("subcatID",topicId);
-            try {
-                Log.d(TAG,"serviceUrl="+CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL);
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get(CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.d(TAG, "Response is : " + response);
-                        Gson gson = new Gson();
-                        MockTestTestsModel model = gson.fromJson(response, MockTestTestsModel.class);
-                        Log.d(TAG,"model retrieved is "+model);
-                        if(null == model || model.getMockTestList().size()==0){
-                            msg.setText("No Tests are available under this topic..");
-                            return;
-                        }
-                        tests = model.getMockTestList();
-                        Log.d(TAG, "MockTestTests : " + tests);
-                        mAdapter = new MockTestTestsAdapter(tests);
-                        recyclerView.setAdapter(mAdapter);
-                        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-                        recyclerView.addItemDecoration(itemDecoration);
+            if(MyUtil.checkConnectivity(getApplicationContext())) {
+                RequestParams params = new RequestParams();
+                params.add("subcatID", topicId);
+                try {
+                    Log.d(TAG, "serviceUrl=" + CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL);
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    MyUtil.showProgressDialog(this);
+                    client.get(CrackingConstant.GET_MOCKTEST_TESTS_SERVICE_URL, params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(String response) {
+                            Log.d(TAG, "Response is : " + response);
+                            Gson gson = new Gson();
+                            MockTestTestsModel model = gson.fromJson(response, MockTestTestsModel.class);
+                            Log.d(TAG, "model retrieved is " + model);
+                            if (null == model || model.getMockTestList().size() == 0) {
+                                msg.setText("No Tests are available under this topic..");
+                                return;
+                            }
+                            tests = model.getMockTestList();
+                            Log.d(TAG, "MockTestTests : " + tests);
+                            mAdapter = new MockTestTestsAdapter(tests);
+                            recyclerView.setAdapter(mAdapter);
+                            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+                            recyclerView.addItemDecoration(itemDecoration);
 
-                        if (null != mAdapter) {
-                            ((MockTestTestsAdapter) mAdapter).setOnItemClickListener(
-                                    new MockTestTestsAdapter.MyClickListener() {
-                                        @Override
-                                        public void onItemClick(int position, View v) {
-                                            Log.d(TAG, "MockTestTestsAdapter, Clicked item at position : " + position);
-                                            VideoApplication.selectedMockTestTest = tests.get(position);
-                                            //Populate allQuestions for this test -- code to be changes according to service
-                                            Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                            startActivity(startIntent);
-                                            Log.d(TAG, "MockTestTest.." + VideoApplication.selectedMockTestTest);
+                            if (null != mAdapter) {
+                                ((MockTestTestsAdapter) mAdapter).setOnItemClickListener(
+                                        new MockTestTestsAdapter.MyClickListener() {
+                                            @Override
+                                            public void onItemClick(int position, View v) {
+                                                Log.d(TAG, "MockTestTestsAdapter, Clicked item at position : " + position);
+                                                VideoApplication.selectedMockTestTest = tests.get(position);
+                                                //Populate allQuestions for this test -- code to be changes according to service
+                                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                                                startActivity(startIntent);
+                                                Log.d(TAG, "MockTestTest.." + VideoApplication.selectedMockTestTest);
+                                            }
                                         }
-                                    }
-                            );
+                                );
+                            }
+                            MyUtil.hideProgressDialog();
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Throwable error,
-                                          String content) {
-                        Log.d(TAG, "Status is " + statusCode + " and " + content);
-                        if (statusCode == 404) {
-                            Log.d(TAG, "Requested resource not found");
-                        } else if (statusCode == 500) {
-                            Log.d(TAG, "Something went wrong at server end");
-                        } else {
-                            Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                        @Override
+                        public void onFailure(int statusCode, Throwable error,
+                                              String content) {
+                            Log.d(TAG, "Status is " + statusCode + " and " + content);
+                            if (statusCode == 404) {
+                                Log.d(TAG, "Requested resource not found");
+                            } else if (statusCode == 500) {
+                                Log.d(TAG, "Something went wrong at server end");
+                            } else {
+                                Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
+                            }
+                            MyUtil.hideProgressDialog();
                         }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MyUtil.hideProgressDialog();
+                }
             }
+            else{
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.no_internet, duration);
+                toast.show();
+                TextView textView=(TextView)findViewById(R.id.networkstatus);
+                textView.setVisibility(View.VISIBLE);
+            }
+
         }
     }
 
