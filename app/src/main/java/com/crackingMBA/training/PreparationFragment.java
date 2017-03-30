@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -56,9 +57,9 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow1);
-            TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);
-            TableRow verbalRow = (TableRow) rootView.findViewById(R.id.verbalrow);
+            CardView quantRow = (CardView)rootView.findViewById(R.id.quantCardView);
+            CardView diRow = (CardView) rootView.findViewById(R.id.dilrCardView);
+            CardView verbalRow = (CardView) rootView.findViewById(R.id.verbalCardView);
             quantRow.setOnClickListener(this);
             diRow.setOnClickListener(this);
             verbalRow.setOnClickListener(this);
@@ -81,15 +82,15 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
         Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
         switch (v.getId()){
-            case R.id.quantrow1:
+            case R.id.quantCardView:
                 VideoApplication.sectionClicked="quant";
                 dashboardIntent.putExtra("sectionaName","quant");
                 break;
-            case R.id.dirow:
+            case R.id.dilrCardView:
                 VideoApplication.sectionClicked="dilr";
                 dashboardIntent.putExtra("sectionaName","dilr");
                 break;
-            case R.id.verbalrow:
+            case R.id.verbalCardView:
                 VideoApplication.sectionClicked="verbal";
                 dashboardIntent.putExtra("sectionaName","verbal");
                 break;
