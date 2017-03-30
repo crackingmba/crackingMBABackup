@@ -1,58 +1,50 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/emptystartuptext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="vertical"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true">
-
-<!--
-        <Button
-            android:text="Invisible Button"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />-->
-    </LinearLayout>
+    </LinearLayout>-->
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/emptymydashlayout">
+        android:layout_height="match_parent">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_margin="15dp">
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CAT2017 Preparation"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 android:gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:text="Welcome to the CAT Preparation Material through instruction based videos. Select from any topic below to view the content."
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:gravity="left"/>
 
             <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="top"
-                android:layout_margin="15dp">
+                android:gravity="top">
                 <TableRow
                     android:id="@+id/quantrow1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_margin="5dp">
                     <ImageView
                         android:id="@+id/quantsection"
@@ -67,7 +59,7 @@
                         android:text="Quant Section"
                         android:layout_margin="5dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:gravity="center_vertical"/>
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow
                     android:id="@+id/verbalrow"

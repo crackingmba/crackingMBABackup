@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.crackingMBA.training.WeeksActivity"
     android:background="#C2CDD1"
@@ -14,16 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="top"
-        android:background="#C2CDD1"
-        android:layout_margin="5dp">
+        android:gravity="center"
+        android:background="#C2CDD1">
 
         <TextView
             android:id="@+id/weeksTitleHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CAT2017 Preparation Quant Section"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center"
+            android:text="The Category Name"
+            android:textStyle="bold"
+            android:textSize="24sp"
             android:layout_margin="5dp"
             android:gravity="center"/>
 
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/weeksSubCategoryName"
             android:layout_gravity="center"
+            android:textSize="18sp"
             android:text="The Subsection Name"
             android:layout_margin="5dp" />
 

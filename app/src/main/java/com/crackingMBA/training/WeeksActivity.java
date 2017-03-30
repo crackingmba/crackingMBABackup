@@ -36,11 +36,7 @@ import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.pojo.VideoListModel;
 
 public class WeeksActivity extends AppCompatActivity {
-    TextView prepMsg;
     private static String TAG = "Weeks Activitiy";
-    View rootView;
-    LayoutInflater inflater;
-    ViewGroup container;
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     RecyclerView.Adapter weekAdapter;
@@ -48,12 +44,6 @@ public class WeeksActivity extends AppCompatActivity {
     String sectionSelected;
     String headerTitle;
     String subcategoryid;
-    private ProgressDialog pDialog;
-    Button viewOnlineBtn;
-    Button viewOfflineBtn;
-    Button deleteOfflineBtn;
-    DownloadManager downloadManager;
-    long downloadId;
     Activity myWeeksActivity;
 
     @Override
@@ -85,23 +75,6 @@ public class WeeksActivity extends AppCompatActivity {
 
         getWeeksData();
 
-/*        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-
-            Log.d("week View Adaptor", "Storage Permission required");
-            Toast toast = Toast.makeText(this, "Storage Permission required", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM, 25, 400);
-            toast.show();
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
-                            .permission.WRITE_EXTERNAL_STORAGE},
-                    1);
-          *//*  finish();
-            startActivity(getIntent());*//*
-
-        }*/
-
 }
 
     private void getWeeksData() {
@@ -125,13 +98,7 @@ public class WeeksActivity extends AppCompatActivity {
                         VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                         //  Log.d(TAG,"converted to object of selected subcategories Response is : : "+videoListModel);
                         if (videoListModel != null) {
-                /*    for(VideoList v : videoListModel.getVideoList()){
-                        if(VideoApplication.downloadingVideoIds.contains(v.getVideoID())){
-                            v.setDownloading(true);
-                        }else{
-                            v.setDownloading(false);
-                        }
-                    }*/
+
                             weekAdapter = new WeekVideoViewAdapter(videoListModel.getVideoList(), myWeeksActivity);
                             recyclerView.setAdapter(weekAdapter);
                             RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);

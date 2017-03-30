@@ -42,28 +42,14 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    RecyclerView recyclerView;
-    LinearLayoutManager mLayoutManager;
-    RecyclerView.Adapter sectionAdapter;
-    RecyclerView.Adapter weekAdapter;
     boolean isMock;
 
-    //For Video functionality
-    MediaController controller;
-    VideoView surfaceView;
-    DownloadManager downloadManager;
-    String fullPath="http://3gp.telugump4.org/med/Chikki_Chikki_Bam_Bam_-_Aadhi_(HD_DTH_Rip).3gp";
-    long downloadId;
-    Button downloadBtn;
-    View rootview1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
         Log.d(TAG, VideoApplication.videoSelected.getVideoType()+" is selected");
-        //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        //isMock = pref.getBoolean("isMock",false);
         String clicked = VideoApplication.videoSelected.getVideoType()==null ? "startup" : VideoApplication.videoSelected.getVideoType();
         if(clicked.equals("startup")){
             VideoApplication.videoSelected.setVideoType("startup");
@@ -92,9 +78,6 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         Log.d(TAG,"Clicked a week.."+v.getId());
-        VideoDataObject vdo = new VideoDataObject();
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
-        Fragment newFrag = null;
 
         Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
         switch (v.getId()){
@@ -117,77 +100,6 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         startActivity(dashboardIntent);
 
     }
-
-
-    /*private long downloadData(Uri uri) {
-
-        downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(uri);
-        request.setTitle("crackMBA.com");
-        request.setDescription("Downloading Aptitude Video..");
-
-        String fileName = "/video.mp4";
-
-        // String fileName = "/video.mp4";
-        Log.d("suresh","Entered into delete video");
-        String filePath1 = CrackingConstant.localstoragepath + fileName;
-        File file1 = new File(filePath1);
-
-
-        file1.delete();
-
-
-        String filePath = CrackingConstant.localstoragepath+ fileName;
-        File file = new File(filePath);
-        Uri destUri = Uri.fromFile(file);
-        request.setDestinationUri(destUri);
-
-        return downloadManager.enqueue(request);
-    }
-
-    private static Bitmap retriveVideoFrameFromVideo(String videoPath)
-            throws Throwable {
-        Bitmap bitmap = null;
-        MediaMetadataRetriever mediaMetadataRetriever = null;
-        try {
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            if (Build.VERSION.SDK_INT >= 14)
-                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-            else
-                mediaMetadataRetriever.setDataSource(videoPath);
-            //   mediaMetadataRetriever.setDataSource(videoPath);
-            bitmap = mediaMetadataRetriever.getFrameAtTime(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Throwable(
-                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
-                            + e.getMessage());
-
-        } finally {
-            if (mediaMetadataRetriever != null) {
-                mediaMetadataRetriever.release();
-            }
-        }
-        return bitmap;
-    }
-
-    public void deleteVideo(View view){
-        String fileName = "/video.mp4";
-        Log.d("suresh","Entered into delete video");
-        String filePath = CrackingConstant.localstoragepath + fileName;
-        File file = new File(filePath);
-
-
-        file.delete();
-
-        Log.d("suresh","Exit into delete video");
-        Toast toast = Toast.makeText(getActivity(), "Video has been deleted", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP, 25, 400);
-        toast.show();
-    }
-
-
-   */
 
 
 }
