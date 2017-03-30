@@ -67,12 +67,13 @@ public class WeeksActivity extends AppCompatActivity {
             subcategoryid=extras.getString("subcategoryid");
         } else {
             sectionSelected = "ratio";
-            headerTitle = "CAT 2017 Prepartion Quant Section";
+            headerTitle = "CAT 2017 Preparation Quant Section";
         }
         myWeeksActivity=this;
         Log.d(TAG, "headerTitle" + headerTitle);
         ((TextView) findViewById(R.id.weeksTitleHeader)).setText(headerTitle.toString());
-        ((TextView) findViewById(R.id.Weeks_noVideo)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.weeksSubCategoryName)).setText(sectionSelected.toString());
+        //((TextView) findViewById(R.id.Weeks_noVideo)).setVisibility(View.INVISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

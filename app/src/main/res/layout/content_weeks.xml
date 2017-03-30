@@ -30,16 +30,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Week 1 (Ratio and Proportion)"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_margin="5dp"
-            android:gravity="left"/>
+            android:id="@+id/weeksSubCategoryName"
+            android:layout_gravity="center"
+            android:text="The Subsection Name"
+            android:layout_margin="5dp" />
 
         <TextView
             android:id="@+id/Weeks_noVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Available Videos"
+            android:text="No Videos Available"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_margin="10dp"
             android:gravity="left"
