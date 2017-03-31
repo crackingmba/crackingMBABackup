@@ -27,6 +27,7 @@ import com.crackingMBA.training.pojo.VideoDataObject;
 /**
  * Created by Harish on 1/31/2017.
  */
+//This is for displaying the list of subcategories after clicking on Category in Preparation Fragment
 public class SectionVideoViewAdapter extends RecyclerView
         .Adapter<SectionVideoViewAdapter.DataObjectHolder>{
     private static String LOG_TAG = "SectionVideoViewAdapter";

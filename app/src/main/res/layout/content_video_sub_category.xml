@@ -26,9 +26,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center"/>
 
-
-
-
         <TextView
             android:id="@+id/SubCatNotAvailable"
             android:layout_width="wrap_content"
