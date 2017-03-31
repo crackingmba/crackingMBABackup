@@ -73,6 +73,26 @@ private  TabLayout tabLayout;
             gotoTab = null;
         }
         setupTabIcons();
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                if(0 == position){
+                    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+                    mViewPager.setAdapter(mSectionsPagerAdapter);
+                    tabLayout.setupWithViewPager(mViewPager);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+        });
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
