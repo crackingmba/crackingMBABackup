@@ -76,6 +76,7 @@ private  TabLayout tabLayout;
                     mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
                     mViewPager.setAdapter(mSectionsPagerAdapter);
                     tabLayout.setupWithViewPager(mViewPager);
+                    setupTabIcons();
                 }
             }
 
