@@ -81,6 +81,7 @@ public class StartMockTestActivity extends AppCompatActivity {
                                 Toast noQstnsMsg = Toast.makeText(getApplicationContext(), "No Questions are available under this test..", Toast.LENGTH_SHORT);
                                 noQstnsMsg.show();
                                 ((Button) findViewById(R.id.mocktest_starttest_button)).setEnabled(false);
+                                MyUtil.hideProgressDialog();
                                 return;
                             } else {
                                 ((Button) findViewById(R.id.mocktest_starttest_button)).setEnabled(true);
