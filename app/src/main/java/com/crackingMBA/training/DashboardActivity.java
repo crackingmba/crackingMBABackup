@@ -1,6 +1,7 @@
 package com.crackingMBA.training;
 
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,8 @@ private  TabLayout tabLayout;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Drawable d=getResources().getDrawable(R.drawable.toolbar_bg);
+        //getSupportActionBar().setBackgroundDrawable(d);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

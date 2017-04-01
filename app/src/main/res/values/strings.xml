@@ -11,10 +11,10 @@
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="tab_icons">
-        <item>@drawable/home</item>
-        <item>@drawable/preparation</item>
-        <item>@drawable/mocktest</item>
-        <item>@drawable/mydashboard</item>
+        <item>@drawable/home_tab_icon</item>
+        <item>@drawable/prep_tab_icon</item>
+        <item>@drawable/mock_test_tab_icon</item>
+        <item>@drawable/dashboard_tab_icon</item>
 
     </array>
     <!-- Strings related to login -->

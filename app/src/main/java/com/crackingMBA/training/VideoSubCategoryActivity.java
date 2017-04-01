@@ -2,6 +2,7 @@ package com.crackingMBA.training;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,9 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_button);
+        /*Drawable d=getResources().getDrawable(R.drawable.toolbar_bg);
+        getSupportActionBar().setBackgroundDrawable(d);*/
 
         recyclerView=(RecyclerView)findViewById(R.id.section_recycler_view2);
         recyclerView.setHasFixedSize(true);
