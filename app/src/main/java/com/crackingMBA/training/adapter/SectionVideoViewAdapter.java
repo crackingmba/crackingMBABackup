@@ -3,6 +3,7 @@ package com.crackingMBA.training.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class SectionVideoViewAdapter extends RecyclerView
         TextView category_name;
         TextView sub_category_name;
         ImageView thumbnail;
+        LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -48,6 +51,7 @@ public class SectionVideoViewAdapter extends RecyclerView
             id = (TextView) itemView.findViewById(R.id.section_id);
             sub_category_name = (TextView) itemView.findViewById(R.id.section_name);
             category_name = (TextView) itemView.findViewById(R.id.section_category_name);
+            linlayout=(LinearLayout)itemView.findViewById(R.id.subcategory_img_bg_layout);
 
             itemView.setOnClickListener(this);
         }
@@ -57,6 +61,8 @@ public class SectionVideoViewAdapter extends RecyclerView
             myClickListener.onItemClick(getPosition(), v);
         }
     }
+
+    //The methods of the RecyclerView Adapter start here
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
         this.myClickListener = myClickListener;
@@ -81,12 +87,36 @@ public class SectionVideoViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
+        String img_resource="numbers1";
+
         Log.d(LOG_TAG,"in onBindViewHolder..");
         holder.id.setText(mDataset.get(position).getId());
         holder.sub_category_name.setText(mDataset.get(position).getName());
         holder.category_name.setText(mDataset.get(position).getCategory_name());
+
         Context context= holder.thumbnail.getContext();
-        int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
+
+        switch(mDataset.get(position).getCategory_name()){
+            case "quant":{
+                img_resource="quant";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#82B1FF"));
+                break;
+            }
+            case "dilr":{
+                img_resource="dilr";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#FFAB40"));
+                break;
+            }
+            case "verbal":{
+                img_resource="verbal";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#EF9A9A"));
+                break;
+            }
+
+        }
+
+        //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
+        int id=context.getResources().getIdentifier(img_resource, "drawable", context.getPackageName());
         holder.thumbnail.setImageResource(id);
 
     }

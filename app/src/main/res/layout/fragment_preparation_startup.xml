@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+<!-- This is the layout for the Home Page of Prep Tab -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -37,117 +38,117 @@
             android:orientation="vertical">
 
             <!-- Quant CardView -->
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/quantCardView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="2dp"
-        app:cardBackgroundColor="#C2CDD1"
-        app:cardElevation="2dp"
-        android:layout_margin="5dp"
-        >
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/quantCardView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="2dp"
+                app:cardBackgroundColor="#C2CDD1"
+                app:cardElevation="2dp"
+                android:layout_margin="5dp"
+                >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="100dp"
-                android:background="#82B1FF"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="50dp"
-                    android:src="@drawable/quant"
-                    android:adjustViewBounds="true" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:background="#82B1FF"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="50dp"
+                            android:src="@drawable/quant"
+                            android:adjustViewBounds="true" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp">
 
-                <TextView
-                    android:id="@+id/week_videoTitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quant Section"
-                    android:layout_margin="3dp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/week_videoDescription1"
-                    android:text="Details of Quant Section come here"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/week_videoTitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quant Section"
+                            android:layout_margin="3dp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/week_videoDescription1"
+                            android:text="Videos on Quant Section come here"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
             <!-- DI LR CardView -->
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/dilrCardView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardBackgroundColor="#C2CDD1"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        android:layout_margin="5dp"
-        >
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/dilrCardView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#C2CDD1"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                android:layout_margin="5dp"
+                >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="100dp"
-                android:background="#FFAB40"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="50dp"
-                    android:src="@drawable/dilr"
-                    android:adjustViewBounds="true" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp">
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:background="#FFAB40"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="50dp"
+                            android:src="@drawable/dilr"
+                            android:adjustViewBounds="true" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DI and LR Section"
-                    android:layout_margin="3dp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:text="Videos on Data Interpretation and Logical Reasoning go here"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DI and LR Section"
+                            android:layout_margin="3dp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:text="Videos on Data Interpretation and Logical Reasoning go here"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
             <!-- Verbal CardView -->
             <android.support.v7.widget.CardView
@@ -171,7 +172,7 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="100dp"
-                        android:background="#FF7043"
+                        android:background="#EF9A9A"
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:layout_height="match_parent">
@@ -192,12 +193,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="DI and LR Section"
+                            android:text="Verbal Section"
                             android:layout_margin="3dp"
                             android:textStyle="bold"
                             />
                         <TextView
-                            android:text="Videos on Data Interpretation and Logical Reasoning go here"
+                            android:text="Videos on Verbal Section go here"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>

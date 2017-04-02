@@ -78,7 +78,7 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
                             recyclerView.setAdapter(sectionAdapter);
                             RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
                             recyclerView.addItemDecoration(itemDecoration);
-                            headerTitle = ((TextView) findViewById(R.id.CategoryTitle));
+                            headerTitle = ((TextView) findViewById(R.id.SubCategoryTitle));
                             headerTitle.setText(subCategories.getSubCatTitle());
 
 
