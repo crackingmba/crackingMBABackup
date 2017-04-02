@@ -41,17 +41,22 @@ public class SectionVideoViewAdapter extends RecyclerView
             .OnClickListener {
         TextView id;
         TextView category_name;
-        TextView sub_category_name;
-        ImageView thumbnail;
+        TextView sub_category_name, subcatDateRange, subcatVideoYN, sub_category_description;
+        ImageView thumbnail, subcat_right_arrow;
         LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.section_thumbnail);
+            subcat_right_arrow = (ImageView) itemView.findViewById(R.id.subcat_right_arrow);
             id = (TextView) itemView.findViewById(R.id.section_id);
             sub_category_name = (TextView) itemView.findViewById(R.id.section_name);
+            sub_category_description = (TextView) itemView.findViewById(R.id.subcat_description);
             category_name = (TextView) itemView.findViewById(R.id.section_category_name);
+            subcatDateRange = (TextView) itemView.findViewById(R.id.subcat_date_range);
+            subcatVideoYN = (TextView) itemView.findViewById(R.id.subcat_video_yn);
             linlayout=(LinearLayout)itemView.findViewById(R.id.subcategory_img_bg_layout);
+
 
             itemView.setOnClickListener(this);
         }
@@ -91,8 +96,11 @@ public class SectionVideoViewAdapter extends RecyclerView
 
         Log.d(LOG_TAG,"in onBindViewHolder..");
         holder.id.setText(mDataset.get(position).getId());
-        holder.sub_category_name.setText(mDataset.get(position).getName());
+        holder.sub_category_name.setText(mDataset.get(position).getSubcategory_description());
+        holder.sub_category_description.setText(mDataset.get(position).getSubcat_descrip1());
         holder.category_name.setText(mDataset.get(position).getCategory_name());
+        holder.subcatDateRange.setText(mDataset.get(position).getDate_range());
+        holder.subcatVideoYN.setText(mDataset.get(position).getVideo_yn());
 
         Context context= holder.thumbnail.getContext();
 
@@ -115,9 +123,15 @@ public class SectionVideoViewAdapter extends RecyclerView
 
         }
 
+        if(mDataset.get(position).getVideo_yn().equals("y")){
+            int id1=context.getResources().getIdentifier("right_arrow", "drawable", context.getPackageName());
+            holder.subcat_right_arrow.setImageResource(id1);
+        }
+
         //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
         int id=context.getResources().getIdentifier(img_resource, "drawable", context.getPackageName());
         holder.thumbnail.setImageResource(id);
+
 
     }
 

@@ -90,15 +90,21 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
                                                 Log.d(TAG, "Video Sub Cateogry, Clicked item at position : " + position);
                                                 //VideoDataObject vdo = populateVideoDataObject(v);//new VideoDataObject();
                                                 SubCatList scl = populateSubCatList(v);
-                                                Log.d(TAG, "Selected Video Category : " + scl.getName());
+                                                String video_yn=scl.getVideo_yn();
 
-                                                Intent weeksIntent = new Intent(getApplicationContext(), WeeksActivity.class);
-                                                weeksIntent.putExtra("sectionSelected", scl.getName());
-                                                weeksIntent.putExtra("headerTitle", headerTitle.getText());
-                                                weeksIntent.putExtra("subcategoryid", scl.getId());
-                                                weeksIntent.putExtra("subcategoryid", scl.getName());
-                                                VideoApplication.subcategorySelected = scl.getName();
-                                                startActivity(weeksIntent);
+                                                if(video_yn.equals("y")){
+                                                    Intent weeksIntent = new Intent(getApplicationContext(), WeeksActivity.class);
+                                                    weeksIntent.putExtra("headerTitle", headerTitle.getText());
+                                                    weeksIntent.putExtra("subcategoryid", scl.getId());
+                                                    weeksIntent.putExtra("sectionSelected", scl.getSubcategory_description());
+                                                    //weeksIntent.putExtra("subcategoryid", scl.getName());
+                                                    VideoApplication.subcategoryID=scl.getId();
+                                                    startActivity(weeksIntent);
+                                                }else{
+                                                    //do nothing here. we only display videos for y scenario
+                                                }
+
+
                                             }
                                         }
                                 );
@@ -153,9 +159,14 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
         TextView id = (TextView) v.findViewById(R.id.section_id);
         TextView name = (TextView) v.findViewById(R.id.section_name);
         TextView category_name = (TextView) v.findViewById(R.id.section_category_name);
+        TextView subcatDateRange = (TextView) v.findViewById(R.id.subcat_date_range);
+        TextView subcatVideoYN = (TextView) v.findViewById(R.id.subcat_video_yn);
+
         vdo.setId(id.getText().toString());
-        vdo.setName(name.getText().toString());
         vdo.setCategory_name(category_name.getText().toString());
+        vdo.setSubcategory_description(name.getText().toString());
+        vdo.setDate_range(subcatDateRange.getText().toString());
+        vdo.setVideo_yn(subcatVideoYN.getText().toString());
         return vdo;
     }
 

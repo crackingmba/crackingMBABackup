@@ -82,8 +82,8 @@ public class WeeksActivity extends AppCompatActivity {
         String category=VideoApplication.sectionClicked;
         String subcategory=VideoApplication.subcategorySelected;
         final ArrayList<VideoListModel> results = new ArrayList<VideoListModel>();
-        String url = "http://crackingmba.com/getVideoList.php?category="+category+"&subcategory=" + subcategory;
-        Log.d(TAG,"Get Video List for Subcateogry url "+ url);
+        String url = "http://crackingmba.com/getVideoList.php?category="+category+"&subcategory=" + subcategoryid;
+        Log.d(TAG,"Get Video List for Subcategory url "+ url);
 
 
         if(MyUtil.checkConnectivity(getApplicationContext())) {

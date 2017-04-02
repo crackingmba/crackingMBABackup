@@ -41,6 +41,7 @@ public class VideoApplication extends Application {
     public static VideoApplication currentInstance;
 
     public static String subcategorySelected;
+    public static String subcategoryID;
     public static String videoURLSelected;
     public static String registeringUserName;
     public static String registeringUserEmail;

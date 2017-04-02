@@ -5,12 +5,36 @@ package com.crackingMBA.training.pojo;
  */
 public class SubCatList {
     private String id;
-
     private String thumbnail;
-
     private String category_name;
+    private String subcat_descrip1;
 
-    private String name;
+    public String getSubcat_descrip1() {
+        return subcat_descrip1;
+    }
+
+    public void setSubcat_descrip1(String subcat_descrip1) {
+        this.subcat_descrip1 = subcat_descrip1;
+    }
+
+
+
+    private String date_range;
+    public String getDate_range() {return date_range;}
+    public void setDate_range(String date_range) {this.date_range = date_range;}
+
+    private String video_yn;
+    public String getVideo_yn() {return video_yn;}
+    public void setVideo_yn(String video_yn) {this.video_yn = video_yn;}
+
+    private String subcat_descrip;
+
+    public String getSubcategory_description() {
+        return subcat_descrip;
+    }
+    public void setSubcategory_description(String subcategory_description) {this.subcat_descrip = subcategory_description;}
+
+
 
     public String getId ()
     {
@@ -42,20 +66,11 @@ public class SubCatList {
         this.category_name = category_name;
     }
 
-    public String getName ()
-    {
-        return name;
-    }
-
-    public void setName (String name)
-    {
-        this.name = name;
-    }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [id = "+id+", thumbnail = "+thumbnail+", category_name = "+category_name+", name = "+name+"]";
+        return "ClassPojo [id = "+id+", thumbnail = "+thumbnail+", category_name = "+category_name+"]";
     }
 
 }
