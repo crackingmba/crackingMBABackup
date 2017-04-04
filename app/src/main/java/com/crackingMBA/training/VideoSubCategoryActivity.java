@@ -101,7 +101,10 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
                                                     VideoApplication.subcategoryID=scl.getId();
                                                     startActivity(weeksIntent);
                                                 }else{
-                                                    //do nothing here. we only display videos for y scenario
+                                                    //display a Toast that Videos would be uploaded shortly
+                                                    int duration = Toast.LENGTH_SHORT;
+                                                    Toast toast = Toast.makeText(getApplicationContext(), R.string.videos_coming_soon, duration);
+                                                    toast.show();
                                                 }
 
 

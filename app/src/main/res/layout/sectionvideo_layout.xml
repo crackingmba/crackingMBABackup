@@ -19,21 +19,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-       <!-- <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CAT2017 Preparation"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Welcome to the CAT Preparation Material through instruction based videos. Select from any topic below to view the content."
-            android:gravity="left"/>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -116,7 +101,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="20dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0">
                 

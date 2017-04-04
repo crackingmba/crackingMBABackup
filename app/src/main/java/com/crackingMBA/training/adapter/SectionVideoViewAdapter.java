@@ -126,6 +126,9 @@ public class SectionVideoViewAdapter extends RecyclerView
         if(mDataset.get(position).getVideo_yn().equals("y")){
             int id1=context.getResources().getIdentifier("right_arrow", "drawable", context.getPackageName());
             holder.subcat_right_arrow.setImageResource(id1);
+        }else{
+            int id1=context.getResources().getIdentifier("under_construction", "drawable", context.getPackageName());
+            holder.subcat_right_arrow.setImageResource(id1);
         }
 
         //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnail(), "drawable", context.getPackageName());
