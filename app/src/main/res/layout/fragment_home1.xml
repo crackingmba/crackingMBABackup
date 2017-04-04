@@ -12,13 +12,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="top"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="15dp">
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#01579B"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:layout_height="match_parent">
@@ -28,36 +25,41 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Recent Quant Videos"
-                    android:textColor="#EDE7F6"
-                    android:textSize="16sp"/>
-
+                    android:textSize="16sp"
+                    android:textColor="#01579B"
+                    android:textStyle="bold"/>
+                <!--  android:background="#01579B"
+                 android:textColor="#EDE7F6"-->
                 <Button
                     android:id="@+id/gotoquant3"
                     android:text="View More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textSize="14sp"
+                    android:background="#212121"
+                    android:textSize="12sp"
                     android:textAlignment="center"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#333333"/>
             <ProgressBar
                 android:id="@+id/recentquatvideos"
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:visibility="gone" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/home_latest_quant_noVideos"
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:gravity="center_vertical"
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     android:textAlignment="center"
                     android:text="No latest quant videos available."
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -67,7 +69,6 @@
                     android:id="@+id/video_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:scrollbars="horizontal" />
 
             </LinearLayout>
@@ -76,7 +77,6 @@
             <!-- Recent DI and LR Videos section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#01579B"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:layout_height="match_parent">
@@ -86,18 +86,23 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Recent DI and LR Videos"
-                    android:textColor="#EDE7F6"
-                    android:textSize="16sp"/>
-
+                    android:textSize="16sp"
+                    android:textColor="#01579B"
+                    android:textStyle="bold"/>
                 <Button
                     android:id="@+id/gotodi3"
                     android:text="View More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
+                    android:background="#212121"
                     android:gravity="center_vertical"
-                    android:textSize="14sp"/>
+                    android:textSize="12sp"
+                    android:textAlignment="center"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#333333"/>
             <ProgressBar
                 android:id="@+id/recentdiandlrvideos"
                 style="?android:attr/progressBarStyleLarge"
@@ -108,7 +113,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -133,28 +137,33 @@
             <!-- Recent Verbal Videos section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#01579B"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/home_verbal_section_title"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Recent Verbal Videos"
-                    android:textColor="#EDE7F6"
-                    android:textSize="16sp" />
-
+                    android:textSize="16sp"
+                    android:textColor="#01579B"
+                    android:textStyle="bold"/>
                 <Button
                     android:id="@+id/gotolatest3"
                     android:text="View More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:gravity="center_vertical"
-                    android:textSize="14sp"/>
+                    android:background="#212121"
+                    android:textSize="12sp"
+                    android:textAlignment="center"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#333333"/>
             <ProgressBar
                 android:id="@+id/recentverbalvideos"
                 style="?android:attr/progressBarStyleLarge"
