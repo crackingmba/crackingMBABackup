@@ -43,7 +43,6 @@ public class VerbalHomeVideoViewAdapter extends RecyclerView
         TextView categoryFullName;
         TextView subCategoryFullName;
         TextView videoYouTubeURL;
-        TextView videoDownloadURL;
         public DataObjectHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.home_thumbnail);
@@ -59,7 +58,6 @@ public class VerbalHomeVideoViewAdapter extends RecyclerView
             categoryFullName = (TextView) itemView.findViewById(R.id.home_categoryFullName);
             subCategoryFullName = (TextView) itemView.findViewById(R.id.home_subCategoryFullName);
             videoYouTubeURL = (TextView) itemView.findViewById(R.id.home_videoYouTubeURL);
-            videoDownloadURL = (TextView) itemView.findViewById(R.id.home_videoDownloadURL);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -104,8 +102,6 @@ public class VerbalHomeVideoViewAdapter extends RecyclerView
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
         holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
-        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
-        String thumbnailURL= mDataset.get(position).getThumbnailURL();
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
         Context context= holder.thumbnail.getContext();
         //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());

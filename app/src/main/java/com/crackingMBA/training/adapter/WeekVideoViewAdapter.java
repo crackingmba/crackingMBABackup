@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
@@ -63,7 +64,6 @@ public class WeekVideoViewAdapter extends RecyclerView
         TextView subCategoryFullName;
         TextView videoCategory;
         TextView videoYouTubeURL;
-        TextView videoDownloadURL;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -81,7 +81,6 @@ public class WeekVideoViewAdapter extends RecyclerView
             categoryFullName = (TextView) itemView.findViewById(R.id.week_categoryFullName);
             subCategoryFullName = (TextView) itemView.findViewById(R.id.week_subCategoryFullName);
             videoYouTubeURL = (TextView) itemView.findViewById(R.id.week_videoYouTubeURL);
-            videoDownloadURL = (TextView) itemView.findViewById(R.id.week_videoDownloadURL);
             itemView.setOnClickListener(this);
         }
 
@@ -139,17 +138,29 @@ public class WeekVideoViewAdapter extends RecyclerView
         holder.categoryFullName.setText(mDataset.get(position).getCategoryFullName());
         holder.subCategoryFullName.setText(mDataset.get(position).getSubCategoryFullName());
         holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
-        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
         holder.duration.setText(mDataset.get(position).getDuration());
 
-        Log.d("VIDEO DESCRIPTION", mDataset.get(position).getVideoDescription());
+        String img_resource="";
 
-//        try {
-//            Log.d("VIDEO DESCRIPTION", mDataset.get(position).getVideoDescription());
-//            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
-//                    .execute(CrackingConstant.MYPATH + "img/" + mDataset.get(position).getThumbnailURL());
-//        } catch (Exception e) {
-//        }
+        switch(mDataset.get(position).getVideoCategory()){
+            case "quant":{
+                img_resource="quant";
+                break;
+            }
+            case "dilr":{
+                img_resource="dilr";
+                break;
+            }
+            case "verbal":{
+                img_resource="verbal";
+                break;
+            }
+
+        }
+
+        Context context= holder.thumbnail.getContext();
+        int id=context.getResources().getIdentifier(img_resource, "drawable", context.getPackageName());
+        holder.thumbnail.setImageResource(id);
     }
 
     public void addItem(VideoList dataObj, int index) {

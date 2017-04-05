@@ -174,7 +174,6 @@ public class WeeksActivity extends AppCompatActivity {
         TextView subCategoryFullName = (TextView) v.findViewById(R.id.week_subCategoryFullName);
         TextView categoryFullName = (TextView) v.findViewById(R.id.week_categoryFullName);
         TextView youtubeURL = (TextView) v.findViewById(R.id.week_videoYouTubeURL);
-        TextView downloadURL = (TextView) v.findViewById(R.id.week_videoDownloadURL);
         vdo.setVideoURL(videourl.getText().toString());
         vdo.setVideoTitle(title.getText().toString());
         vdo.setThumbnailURL(thumbnail.getText().toString());
@@ -188,7 +187,6 @@ public class WeeksActivity extends AppCompatActivity {
         vdo.setSubCategoryFullName(subCategoryFullName.getText().toString());
         vdo.setUploadDate(uploadDate.getText().toString());
         vdo.setVideoYouTubeURL(youtubeURL.getText().toString());
-        vdo.setVideoDownloadURL(downloadURL.getText().toString());
         return vdo;
     }
 

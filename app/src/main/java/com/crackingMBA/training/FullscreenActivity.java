@@ -114,15 +114,10 @@ public class FullscreenActivity extends AppCompatActivity {
         controller.setAnchorView(surfaceView);
         surfaceView.setMediaController(controller);
         String fileName = getIntent().getStringExtra("clickedVideo");
-        fileName=VideoApplication.videoList.getVideoDownloadURL();
         Log.d("first","clickedVideo flag.."+fileName);
 
-      /*  Boolean videoAvailbllity = LocalVideoCheck.verifyLocalStorage(fileName);
-        videoAvailbllity=true;
-      */ // Log.d("first","Video availibity flag.."+videoAvailbllity);
-
         String filePath="";
-       // if (videoAvailbllity){
+       // if (videoAvailable){
              filePath = CrackingConstant.localstoragepath+CrackingConstant.myFolder+CrackingConstant.noMedia+fileName;
 
             Log.d("first","file:"+filePath);
@@ -177,15 +172,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 toggle();
             }
         });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-        //surfaceView=(VideoView)findViewById(R.id.surfacevideo);
-
-
-       // surfaceView = (VideoView)findViewById(R.id.surfacevideo);
 
 
 // Hide both the navigation bar and the status bar.

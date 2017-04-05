@@ -28,39 +28,20 @@ public class VideoList {
 
     private String subCategoryFullName;
 
-    private String videoDownloadURL;
-
     private String videoYouTubeURL;
-
-    private boolean downloading;
-
-
-    public String getVideoDownloadURL() {
-        return videoDownloadURL;
-    }
-
-    public void setVideoDownloadURL(String videoDownloadURL) {
-        this.videoDownloadURL = videoDownloadURL;
-    }
 
     public String getVideoYouTubeURL() {
         return videoYouTubeURL;
     }
 
-    public void setVideoYouTubeURL(String videoYouTubeURL) {
-        this.videoYouTubeURL = videoYouTubeURL;
-    }
-
+    public void setVideoYouTubeURL(String videoYouTubeURL) { this.videoYouTubeURL = videoYouTubeURL;}
 
     public String getVideoDescription ()
     {
         return videoDescription;
     }
 
-    public void setVideoDescription (String videoDescription)
-    {
-        this.videoDescription = videoDescription;
-    }
+    public void setVideoDescription (String videoDescription) {this.videoDescription = videoDescription;}
 
     public String getVideoID ()
     {
@@ -87,10 +68,7 @@ public class VideoList {
         return videoSubCategory;
     }
 
-    public void setVideoSubCategory (String videoSubCategory)
-    {
-        this.videoSubCategory = videoSubCategory;
-    }
+    public void setVideoSubCategory (String videoSubCategory) {this.videoSubCategory = videoSubCategory;}
 
     public String getVideoTitle ()
     {
@@ -146,25 +124,13 @@ public class VideoList {
         return categoryFullName;
     }
 
-    public void setCategoryFullName(String categoryFullName) {
-        this.categoryFullName = categoryFullName;
-    }
+    public void setCategoryFullName(String categoryFullName) {this.categoryFullName = categoryFullName;}
 
     public String getSubCategoryFullName() {
         return subCategoryFullName;
     }
 
-    public void setSubCategoryFullName(String subCategoryFullName) {
-        this.subCategoryFullName = subCategoryFullName;
-    }
-
-    public boolean isDownloading() {
-        return downloading;
-    }
-
-    public void setDownloading(boolean downloading) {
-        this.downloading = downloading;
-    }
+    public void setSubCategoryFullName(String subCategoryFullName) {this.subCategoryFullName = subCategoryFullName;}
 
     @Override
     public String toString() {
@@ -180,13 +146,11 @@ public class VideoList {
                 ", thumbnailURL='" + thumbnailURL + '\'' +
                 ", categoryFullName='" + categoryFullName + '\'' +
                 ", subCategoryFullName='" + subCategoryFullName + '\'' +
-                ", videoDownloadURL='" + videoDownloadURL + '\'' +
                 ", videoYouTubeURL='" + videoYouTubeURL + '\'' +
-                ", downloading=" + downloading +
                 '}';
     }
 
-    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory, String videoSubCategory, String dateOdUploaded, String duration, String videoDescription, String categoryFullName, String subCategoryFullName, String videoYouTubeURL, String videoDownloadURL) {
+    public VideoList(String vidoID, String videoTitle, String thumbnailURL, String videoURL, String videoCategory, String videoSubCategory, String dateOdUploaded, String duration, String videoDescription, String categoryFullName, String subCategoryFullName, String videoYouTubeURL) {
         this.videoID = vidoID;
         this.videoTitle = videoTitle;
         this.thumbnailURL = thumbnailURL;
@@ -199,7 +163,6 @@ public class VideoList {
         this.categoryFullName=categoryFullName;
         this.subCategoryFullName=subCategoryFullName;
         this.videoYouTubeURL=videoYouTubeURL;
-        this.videoDownloadURL=videoDownloadURL;
     }
     public VideoList(){
 

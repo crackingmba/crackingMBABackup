@@ -38,9 +38,9 @@
     <string name="title_activity_fullscreen">crackingMBA.com</string>
     <string name="dummy_button"></string>
     <string name="dummy_content"></string>
-    <string name="title_activity_video_sub_category">My Sections</string>
+    <string name="title_activity_video_sub_category">List of Topics</string>
     <string name="title_activity_weeks">List of Videos</string>
-    <string name="title_activity_target_video">My Video</string>
+    <string name="title_activity_target_video">Video Details</string>
     <string name="ask_a_qstn">Ask a Question</string>
     <string name="enter_ur_qstn">Enter Your Question</string>
     <string name="submit_qstn">Submit Question</string>

@@ -115,8 +115,6 @@ public class DownloadViewAdapter extends RecyclerView
         holder.dateOfUploaded.setText(mDataset.get(position).getUploadDate());
         holder.videoTitle.setText(mDataset.get(position).getVideoTitle());
         holder.videoYouTubeURL.setText(mDataset.get(position).getVideoYouTubeURL());
-        holder.videoDownloadURL.setText(mDataset.get(position).getVideoDownloadURL());
-
     }
 
     public void addItem(VideoList dataObj, int index) {
