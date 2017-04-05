@@ -56,24 +56,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_margin="20dp">
+            android:padding="20dp">
             <!-- The Title tag -->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
-
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#333333"
-                android:layout_gravity="center"></View>
+                android:layout_height="40dp"
+                android:text="Title"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:background="#B0BEC5"/>
 
 
             <TextView
@@ -81,32 +73,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ratio and Proportion"
-                android:textColor="@color/black_overlay"
-                android:layout_margin="5dp"/>
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black_overlay"/>
 
             <!-- The Description tag -->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
-
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#333333"
-                android:layout_gravity="center"></View>
+                android:layout_height="40dp"
+                android:text="Description"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:background="#B0BEC5"
+                android:layout_marginTop="25dp"/>
+
 
             <TextView
                 android:id="@+id/target_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="This video details about the different kinds of concepts in Ratio and Proportion and  what you need to knpw about this topic for preparation"
-                android:layout_margin="5dp"
                 android:textColor="@color/black_overlay"
+                android:layout_marginTop="10dp"
                 android:gravity="left"/>
         </LinearLayout>
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CrackingMBA</string>
+    <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
         <item>Home</item>
         <item>Preparation</item>
