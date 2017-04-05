@@ -35,8 +35,6 @@ import com.crackingMBA.training.WeeksActivity;
 import com.crackingMBA.training.YoutubeVideoActivity;
 import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoList;
-import com.crackingMBA.training.util.MyUtil;
-import com.crackingMBA.training.validator.LocalVideoCheck;
 
 /**
  * Created by Harish on 1/31/2017.

@@ -31,7 +31,6 @@ import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
-import com.crackingMBA.training.validator.LocalVideoCheck;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -67,19 +66,19 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         //youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
         int orientation=this.getResources().getConfiguration().orientation;
         YouTubePlayerSupportFragment frag;
-        if(orientation==Configuration.ORIENTATION_PORTRAIT){
+       /* if(orientation==Configuration.ORIENTATION_PORTRAIT){
             //code for portrait mode
-
+*/
              frag =
                     (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
 
-        }
+      /*  }
         else{
             //code for landscape
             frag =
-                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment_land);
+                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
 
-        }
+        }*/
        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
 
         setSupportActionBar(toolbar);
@@ -194,12 +193,58 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         }
     }
 
-    @Override
+  /*  @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         Intent intent=getIntent();
         finish();
         startActivity(intent);
+     *//*   setContentView(R.layout.activity_target_video);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //youTubeView=(YouTubePlayerView)findViewById(R.id.youtube_view);
+        //youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
+        int orientation=this.getResources().getConfiguration().orientation;
+        YouTubePlayerSupportFragment frag;
+        if(orientation==Configuration.ORIENTATION_PORTRAIT){
+            //code for portrait mode
+
+            frag =
+                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
+
+        }
+        else{
+            //code for landscape
+            frag =
+                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment_land);
+
+        }
+        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        videoList = VideoApplication.videoList;
+        Log.d(TAG, "Selected Video Details" + videoList);
+        Log.d(TAG, "video url " + videoList.getVideoURL());
+
+        ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+        ((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
+        ((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
+        ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
+        ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
+        ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
+        ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
+        ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
+        ((TextView) findViewById(R.id.target_videoDownloadURL)).setText(videoList.getVideoDownloadURL());
+
+
+        ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+*//*
+
+
+
+    }*/
     }
 }

@@ -18,7 +18,6 @@ import android.widget.VideoView;
 import android.media.MediaPlayer.OnPreparedListener;
 import java.io.File;
 
-import com.crackingMBA.training.validator.LocalVideoCheck;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 /**
