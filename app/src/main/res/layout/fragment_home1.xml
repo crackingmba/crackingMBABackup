@@ -36,14 +36,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:background="#212121"
+                    android:background="#03A9F4"
                     android:textSize="12sp"
                     android:textAlignment="center"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#333333"/>
+                android:background="#455A64"/>
             <ProgressBar
                 android:id="@+id/recentquatvideos"
                 style="?android:attr/progressBarStyleLarge"
@@ -94,7 +94,7 @@
                     android:text="View More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#212121"
+                    android:background="#03A9F4"
                     android:gravity="center_vertical"
                     android:textSize="12sp"
                     android:textAlignment="center"/>
@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#333333"/>
+                android:background="#455A64"/>
             <ProgressBar
                 android:id="@+id/recentdiandlrvideos"
                 style="?android:attr/progressBarStyleLarge"
@@ -156,14 +156,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:background="#212121"
+                    android:background="#03A9F4"
                     android:textSize="12sp"
                     android:textAlignment="center"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#333333"/>
+                android:background="#455A64"/>
             <ProgressBar
                 android:id="@+id/recentverbalvideos"
                 style="?android:attr/progressBarStyleLarge"

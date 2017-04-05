@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<!--<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
@@ -19,11 +18,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <ImageView
+        android:layout_width="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_height="50dp"
         android:id="@+id/week_thumbnail"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/numbers1_youtube_thumbnail"/>
+        android:src="@drawable/quant"
+        android:adjustViewBounds="true" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,13 +46,86 @@
     </LinearLayout>
 
 
-<!--    <View
+&lt;!&ndash;    <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="#C2CDD1" />-->
+        android:background="#C2CDD1" />&ndash;&gt;
 
 </LinearLayout>
 
+
+</android.support.v7.widget.CardView>-->
+
+<android.support.v7.widget.CardView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/cardView"
+android:layout_width="match_parent"
+android:layout_height="100dp"
+android:clickable="true"
+android:focusable="true"
+app:cardCornerRadius="2dp"
+app:cardBackgroundColor="#C2CDD1"
+app:cardElevation="2dp"
+android:layout_margin="5dp"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="100dp"
+            android:background="#FF7043"
+            android:id="@+id/subcategory_img_bg_layout1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="0"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="50dp"
+                android:id="@+id/week_thumbnail"
+                android:src="@drawable/quant"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/week_videoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight="0"
+                android:text="Sub Category Name"
+                android:layout_margin="3dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/week_videoDescription"
+                android:text="Description of SubCategory come here"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+    <!-- the invisible elements go here -->
     <TextView
         android:id="@+id/weeks_TitleHeader"
         android:layout_width="wrap_content"

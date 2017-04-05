@@ -246,5 +246,4 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
 
 
     }*/
-    }
 }

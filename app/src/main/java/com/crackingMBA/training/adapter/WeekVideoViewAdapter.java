@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class WeekVideoViewAdapter extends RecyclerView
         TextView subCategoryFullName;
         TextView videoCategory;
         TextView videoYouTubeURL;
+        LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class WeekVideoViewAdapter extends RecyclerView
             categoryFullName = (TextView) itemView.findViewById(R.id.week_categoryFullName);
             subCategoryFullName = (TextView) itemView.findViewById(R.id.week_subCategoryFullName);
             videoYouTubeURL = (TextView) itemView.findViewById(R.id.week_videoYouTubeURL);
+            linlayout=(LinearLayout)itemView.findViewById(R.id.subcategory_img_bg_layout1);
             itemView.setOnClickListener(this);
         }
 
@@ -143,14 +146,17 @@ public class WeekVideoViewAdapter extends RecyclerView
         switch(mDataset.get(position).getVideoCategory()){
             case "quant":{
                 img_resource="quant";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#82B1FF"));
                 break;
             }
             case "dilr":{
                 img_resource="dilr";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#FFAB40"));
                 break;
             }
             case "verbal":{
                 img_resource="verbal";
+                holder.linlayout.setBackgroundColor(Color.parseColor("#EF9A9A"));
                 break;
             }
 
