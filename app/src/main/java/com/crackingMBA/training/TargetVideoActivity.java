@@ -31,7 +31,6 @@ import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.util.MyUtil;
-import com.crackingMBA.training.validator.LocalVideoCheck;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -74,19 +73,19 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         //youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
         int orientation=this.getResources().getConfiguration().orientation;
         YouTubePlayerSupportFragment frag;
-        if(orientation==Configuration.ORIENTATION_PORTRAIT){
+       /* if(orientation==Configuration.ORIENTATION_PORTRAIT){
             //code for portrait mode
-
+*/
              frag =
                     (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
 
-        }
+      /*  }
         else{
             //code for landscape
             frag =
-                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment_land);
+                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
 
-        }
+        }*/
        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
 
         setSupportActionBar(toolbar);
@@ -433,14 +432,14 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         }
     }
 
-    @Override
+  /*  @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         Intent intent=getIntent();
         finish();
         startActivity(intent);
-     /*   setContentView(R.layout.activity_target_video);
+     *//*   setContentView(R.layout.activity_target_video);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //youTubeView=(YouTubePlayerView)findViewById(R.id.youtube_view);
@@ -481,9 +480,9 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
 
 
         ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-*/
+*//*
 
 
 
-    }
+    }*/
 }

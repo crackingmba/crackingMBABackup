@@ -24,7 +24,6 @@ import com.crackingMBA.training.R;
 import com.crackingMBA.training.VideoApplication;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
-import com.crackingMBA.training.validator.LocalVideoCheck;
 
 /**
  * Created by MSK on 05-02-2017.
