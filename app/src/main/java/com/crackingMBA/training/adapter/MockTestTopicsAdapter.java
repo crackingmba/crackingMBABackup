@@ -1,17 +1,21 @@
 package com.crackingMBA.training.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.MockTestTopic;
 
 import java.util.List;
+
+import static com.crackingMBA.training.R.drawable.mock_test_quant_bg;
 
 /**
  * Created by Harish on 1/31/2017.
@@ -29,12 +33,14 @@ public class MockTestTopicsAdapter extends RecyclerView
         TextView mocktestTopicId;
         ImageView mockTestTopicThumbnail;
         TextView mocktestTopicTxt;
+        LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             mockTestTopicThumbnail = (ImageView) itemView.findViewById(R.id.mocktest_topic_thumbnail);
             mocktestTopicId = (TextView) itemView.findViewById(R.id.mocktest_topic_id);
             mocktestTopicTxt = (TextView) itemView.findViewById(R.id.mocktest_topic_txt);
+            linlayout=(LinearLayout)itemView.findViewById(R.id.mock_test_subcategories_list);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -68,18 +74,29 @@ public class MockTestTopicsAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(TAG,"in onBindViewHolder..");
         holder.mocktestTopicId.setText(mDataset.get(position).getId());
-        String mocktestTopicThumbnailURL = mDataset.get(position).getThumbnail();
+       //String mocktestTopicThumbnailURL = mDataset.get(position).getThumbnail();
         holder.mocktestTopicTxt.setText(mDataset.get(position).getName());
-
-        /*Bitmap mIcon11 = null;
-        try {
-            Log.d("suresh", CrackingConstant.MYPATH + mocktestTopicThumbnailURL);
-            AsyncTask result = new DownloadImageTask((ImageView) holder.mockTestTopicThumbnail)
-                    .execute(CrackingConstant.MYPATH +"img/"+mocktestTopicThumbnailURL);
-        }
-        catch (Exception e){
-        }*/
         holder.mockTestTopicThumbnail.setImageResource(R.drawable.applogo);
+
+        String category_name = mDataset.get(position).getCategory_name();
+
+        switch(category_name){
+            case "quant":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_quant_bg);
+                break;
+            }
+            case "dilr":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_dilr_bg);
+                break;
+            }
+            case "verbal":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_verbal_bg);
+                break;
+            }
+
+        }
+
+
     }
 
     public void addItem(MockTestTopic dataObj, int index) {

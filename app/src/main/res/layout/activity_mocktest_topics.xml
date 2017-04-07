@@ -20,19 +20,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
-          <!--  <ImageView
-                android:layout_width="90px"
-                android:layout_height="110px"
-                android:layout_gravity="left"
-                android:contentDescription="suresh"
-                android:src="@drawable/applogo" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_activity_dashboard"
-                android:textSize="22sp"
-                android:textColor="@android:color/white"/>-->
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -46,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="top"
-            android:layout_margin="15dp">
+            android:layout_margin="5dp">
 
             <TextView
                 android:id="@+id/mocktest_topic_sectiontitle"
@@ -61,8 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textAlignment="center"
-                android:scrollbars="none" />
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/mocktest_topic_msg"
@@ -70,18 +56,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"/>
-            <TextView
-                android:id="@+id/networkstatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="monospace"
-                android:textColor="@android:color/holo_red_light"
-                android:text="@string/no_internet"
-                android:textSize="15dp"
-                android:visibility="invisible"/>
 
         </LinearLayout>
     </ScrollView>

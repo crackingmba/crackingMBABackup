@@ -1,9 +1,11 @@
 package com.crackingMBA.training;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.crackingMBA.training.util.SectionEnum;
 
@@ -22,17 +25,39 @@ View rootView;
     private static String TAG = "MockTestFragment";
     LayoutInflater inflater;
     ViewGroup container;
+    CardView quantRow;
+    CardView dilrRow;
+    CardView verbalRow;
+    TextView quant_textView, dilr_textView, verbal_textView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
         rootView = inflater.inflate(R.layout.fragment_mocktest_startup, container, false);
-        TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow);
-        TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);
-        TableRow verbalRow = (TableRow) rootView.findViewById(R.id.verbalrow);
+        //TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow);
+        //TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);
+        //TableRow verbalRow = (TableRow) rootView.findViewById(R.id.verbalrow);
+
+        quantRow=(CardView)rootView.findViewById(R.id.mock_test_quantrow);
+        dilrRow=(CardView)rootView.findViewById(R.id.mock_test_dilrrow);
+        verbalRow=(CardView)rootView.findViewById(R.id.mock_test_verbalrow);
+
+        quant_textView=(TextView)rootView.findViewById(R.id.mock_test_quant_textview);
+        dilr_textView=(TextView)rootView.findViewById(R.id.mock_test_dilr_textview);
+        verbal_textView=(TextView)rootView.findViewById(R.id.mock_test_verbal_textview);
+
+
+
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Pacifico-Regular.ttf");
+        quant_textView.setTypeface(custom_font);
+        dilr_textView.setTypeface(custom_font);
+        verbal_textView.setTypeface(custom_font);
+
+
         quantRow.setOnClickListener(this);
-        diRow.setOnClickListener(this);
+        dilrRow.setOnClickListener(this);
         verbalRow.setOnClickListener(this);
         return rootView;
     }
@@ -50,14 +75,17 @@ View rootView;
         Log.d(TAG, "Clicked a week.." + v.getId());
         Intent mockTestTopicIntent = new Intent(getActivity(), MockTestTopicsActivity.class);
         switch (v.getId()) {
-            case R.id.quantrow:
-                VideoApplication.sectionClicked = SectionEnum.quant.key;
+            case R.id.mock_test_quantrow:
+                //VideoApplication.sectionClicked = SectionEnum.quant.key;
+                VideoApplication.sectionClicked = "quant";
                 break;
-            case R.id.dirow:
-                VideoApplication.sectionClicked = SectionEnum.dilr.key;
+            case R.id.mock_test_dilrrow:
+                //VideoApplication.sectionClicked = SectionEnum.dilr.key;
+                VideoApplication.sectionClicked = "dilr";
                 break;
-            case R.id.verbalrow:
-                VideoApplication.sectionClicked = SectionEnum.verbal.key;
+            case R.id.mock_test_verbalrow:
+                //VideoApplication.sectionClicked = SectionEnum.verbal.key;
+                VideoApplication.sectionClicked = "verbal";
                 break;
             default:
                 Log.d(TAG, "Unknown button clicked..");
