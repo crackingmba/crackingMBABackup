@@ -78,18 +78,18 @@ public class MockTestTestsAdapter extends RecyclerView
         String category_name=mDataset.get(position).getMtSubCatId();
         Log.d("MockTest_SubCategory ", category_name);
 
-        String subCatId = mDataset.get(position).getMtSubCatId();
+        String categ_name = mDataset.get(position).getCategory_name();
 
-        switch(subCatId){
-            case "1":{
+        switch(categ_name){
+            case "quant":{
                 holder.linlayout.setBackgroundResource(R.drawable.mock_test_quant_bg);
                 break;
             }
-            case "2":{
+            case "dilr":{
                 holder.linlayout.setBackgroundResource(R.drawable.mock_test_dilr_bg);
                 break;
             }
-            case "3":{
+            case "verbal":{
                 holder.linlayout.setBackgroundResource(R.drawable.mock_test_verbal_bg);
                 break;
             }

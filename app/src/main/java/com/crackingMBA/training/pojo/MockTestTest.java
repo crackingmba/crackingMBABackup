@@ -6,12 +6,21 @@ package com.crackingMBA.training.pojo;
 public class MockTestTest {
 
     private String testId;
+    private String category_name;
     private String mtSubCatId;
     private String testThumbnailUrl;
     private String testTitle;
 
     public MockTestTest(){
 
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
     public MockTestTest(String testId, String mtSubCatId, String testThumbnailUrl, String testTitle) {
