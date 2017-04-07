@@ -1,11 +1,13 @@
 package com.crackingMBA.training.adapter;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crackingMBA.training.R;
@@ -27,14 +29,16 @@ public class MockTestTestsAdapter extends RecyclerView
             implements View
             .OnClickListener {
         TextView mocktestTestId;
-        ImageView mockTestTestThumbnail;
+        //ImageView mockTestTestThumbnail;
         TextView mocktestTestTxt;
+        LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            mockTestTestThumbnail = (ImageView) itemView.findViewById(R.id.mocktest_test_thumbnail);
+            //mockTestTestThumbnail = (ImageView) itemView.findViewById(R.id.mocktest_test_thumbnail);
             mocktestTestId = (TextView) itemView.findViewById(R.id.mocktest_test_id);
             mocktestTestTxt = (TextView) itemView.findViewById(R.id.mocktest_test_title);
+            linlayout=(LinearLayout)itemView.findViewById(R.id.mock_test_tests_list);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -68,18 +72,32 @@ public class MockTestTestsAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Log.d(TAG,"in onBindViewHolder..");
         holder.mocktestTestId.setText(mDataset.get(position).getTestId());
-        String mocktestTestThumbnailURL = mDataset.get(position).getTestThumbnailUrl();
+        //String mocktestTestThumbnailURL = mDataset.get(position).getTestThumbnailUrl();
         holder.mocktestTestTxt.setText(mDataset.get(position).getTestTitle());
 
-        /*Bitmap mIcon11 = null;
-        try {
-            Log.d("suresh", CrackingConstant.MYPATH + mocktestTestThumbnailURL);
-            AsyncTask result = new DownloadImageTask((ImageView) holder.mockTestTestThumbnail)
-                    .execute(CrackingConstant.MYPATH +"img/"+mocktestTestThumbnailURL);
+        String category_name=mDataset.get(position).getMtSubCatId();
+        Log.d("MockTest_SubCategory ", category_name);
+
+        String subCatId = mDataset.get(position).getMtSubCatId();
+
+        switch(subCatId){
+            case "1":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_quant_bg);
+                break;
+            }
+            case "2":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_dilr_bg);
+                break;
+            }
+            case "3":{
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_verbal_bg);
+                break;
+            }
+
         }
-        catch (Exception e){
-        }*/
-        holder.mockTestTestThumbnail.setImageResource(R.drawable.applogo);
+
+        Typeface custom_font=Typeface.createFromAsset(holder.mocktestTestTxt.getContext().getAssets(),"fonts/Pacifico-Regular.ttf");
+        holder.mocktestTestTxt.setTypeface(custom_font);
     }
 
     public void addItem(MockTestTest dataObj, int index) {

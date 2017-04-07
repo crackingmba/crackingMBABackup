@@ -1,6 +1,7 @@
 package com.crackingMBA.training.adapter;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,6 +96,9 @@ public class MockTestTopicsAdapter extends RecyclerView
             }
 
         }
+
+        Typeface custom_font=Typeface.createFromAsset(holder.mocktestTopicTxt.getContext().getAssets(),"fonts/Pacifico-Regular.ttf");
+        holder.mocktestTopicTxt.setTypeface(custom_font);
 
 
     }

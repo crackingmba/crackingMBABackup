@@ -21,18 +21,6 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-           <!-- <ImageView
-                android:layout_width="90px"
-                android:layout_height="110px"
-                android:layout_gravity="left"
-                android:contentDescription="suresh"
-                android:src="@drawable/applogo" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_activity_dashboard"
-                android:textSize="22sp"
-                android:textColor="@android:color/white"/>-->
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
