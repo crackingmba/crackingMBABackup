@@ -13,10 +13,41 @@
       },
       "oauth_client": [
         {
+          "client_id": "649336326716-amo6hlanacscf4biic2j41maufjvsrc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw7CPChB3touecCSIsUK9R-teW24zodCw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649336326716:android:1b4108751214f494",
+        "android_client_info": {
+          "package_name": "com.crackingMBA.training"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "649336326716-a6bdoc3kc5sgt2vda37f1fvlbs1d905t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.crackingMBA",
+            "package_name": "com.crackingMBA.training",
             "certificate_hash": "1a3bbb22e401cd105b2159af7bb50cf73158125e"
           }
         },
