@@ -66,10 +66,7 @@
     <string name="my_messages">My Messages</string>
     <string name="starttest_button">Start Test</string>
     <string name="submit_answer_button">Submit Answer</string>
-    <string name="skip_qstn__button">Reset &amp; Skip Question</string>
-    <string name="prev_qstn__button">Previous Question</string>
-    <string name="testresult_headertxt">Congratulations! You have submitted the test. The following is your scorecard</string>
-    <string name="attempt_another_mocktest">Attempt another Mock Test</string>
+    <string name="skip_qstn__button">Reset and Skip Question</string>
     <string name="review_answers">Review Answers</string>
     <string name="reset_selection">Reset Selection</string>
     <string name="view_scorecard">View ScoreCard</string>

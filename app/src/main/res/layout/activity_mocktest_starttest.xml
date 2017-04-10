@@ -40,80 +40,31 @@
 
             <TextView
                 android:id="@+id/mocktest_test_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:text="Mock Test1"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="left"/>
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:gravity="center"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#C2CDD1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="The following is the mock test for"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
+            </View>
 
-            <TextView
+<!--            <TextView
                 android:id="@+id/mocktest_test_topic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ration &amp; Proportion"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="left"/>
+                android:gravity="left"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User should be logged in to take this test"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rules"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
-
-            <TextView
-                android:id="@+id/mocktest_test_noofqstns"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="left"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2. For each question there is 1 mark"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3. For any incorrect answer there is -0.25 marks"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
-
-            <TextView
-                android:id="@+id/mocktest_test_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginTop="6dp"
-                android:gravity="left"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5. You can view your results after clicking on Submit"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/quiz_rules"
                 android:layout_marginTop="6dp"
                 android:gravity="left"/>
 
@@ -138,11 +89,6 @@
                 android:textColor="@android:color/holo_red_light"
                 android:text="@string/no_internet"
                 android:textSize="15dp"
-                android:visibility="invisible"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/invisible_button"
                 android:visibility="invisible"/>
 
         </LinearLayout>

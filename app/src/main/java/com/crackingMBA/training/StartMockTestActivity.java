@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +35,7 @@ public class StartMockTestActivity extends AppCompatActivity {
     LinearLayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     boolean isMock;
+    TextView mock_test_rules;
     private static List<MockTestQuestion> qstns = new ArrayList<>();
 
     @Override
@@ -45,23 +48,24 @@ public class StartMockTestActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         MockTestTest test = VideoApplication.selectedMockTestTest;
         ((TextView) findViewById(R.id.mocktest_test_title)).setText(test.getTestTitle());
-        ((TextView) findViewById(R.id.mocktest_test_topic)).setText(VideoApplication.selectedMockTestTopic.getName());
-        ((TextView) findViewById(R.id.mocktest_test_noofqstns)).setText("1. There are "+CrackingConstant.TOTAL_NO_OF_QSTNS+" number of questions in this test");
-        ((TextView) findViewById(R.id.mocktest_test_duration)).setText("4. This is a timed test of "+CrackingConstant.TOTAL_TEST_DURATION+" minutes. After this the test will stop");
+        //((TextView) findViewById(R.id.mocktest_test_topic)).setText(VideoApplication.selectedMockTestTopic.getName());
+        //((TextView) findViewById(R.id.mocktest_test_noofqstns)).setText("1. There are "+CrackingConstant.TOTAL_NO_OF_QSTNS+" number of questions in this test");
+        //((TextView) findViewById(R.id.mocktest_test_duration)).setText("4. This is a timed test of "+CrackingConstant.TOTAL_TEST_DURATION+" minutes. After this the test will stop");
+        //((TextView) findViewById(R.id.quiz_rules)).setText("4. This is a timed test of "+CrackingConstant.TOTAL_TEST_DURATION+" minutes. After this the test will stop");
+        mock_test_rules=(TextView)findViewById(R.id.quiz_rules);
+        String htmltext="<h2>Rules</h2><p>Please follow the following instructions carefully before attempting the test</p>" +
+                "<p>1. There are 10 questions in this test.</p>" +
+                "<p>2. Each correct answer carries 1 mark</p>" +
+                "<p>3. Each incorrect answer carries -1/4 mark</p>"+
+                "<p>4. This is a timed test. After 10 minutes the test will test.</p>";
+        Spanned sp= Html.fromHtml(htmltext);
+        mock_test_rules.setText(sp);
         ((Button) findViewById(R.id.mocktest_starttest_button)).setEnabled(true);
 
         getMockTestQstnsData(test.getTestId());
     }
 
     private void getMockTestQstnsData(String testId) {
-
-        if(isMock){
-            qstns.add(new MockTestQuestion("1", "1", "What is the ratio of x:y if x is 4 and y is 32?", "1:2", "1:4", "1:7","1:8",null,"4"));
-            qstns.add(new MockTestQuestion("1", "2", "What is the ratio of x:y if x is 4 and y is 32?", "1:2", "1:4", "1:7","1:8",null,"4"));
-            qstns.add(new MockTestQuestion("1", "3", "What is the ratio of x:y if x is 4 and y is 32?", "1:2", "1:4", "1:7","1:8",null,"4"));
-            VideoApplication.allMockQstns = qstns;
-        }else {//Populate request parameters
-
 
             if(MyUtil.checkConnectivity(getApplicationContext())) {
                 RequestParams params = new RequestParams();
@@ -118,8 +122,6 @@ public class StartMockTestActivity extends AppCompatActivity {
                 TextView textView=(TextView)findViewById(R.id.networkstatus);
                 textView.setVisibility(View.VISIBLE);
             }
-
-        }
     }
 
 
