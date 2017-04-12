@@ -90,8 +90,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
     private LoginButton fbloginButton;
     CallbackManager callbackManager;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -194,14 +192,14 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
 
             //fb login
 
-            fbloginButton = (LoginButton) rootView.findViewById(R.id.login_button);
-            fbloginButton.setReadPermissions("email");
+            //fbloginButton = (LoginButton) rootView.findViewById(R.id.login_button);
+            //fbloginButton.setReadPermissions("email");
             // If using in a fragment
-            fbloginButton.setFragment(this);
+            //fbloginButton.setFragment(this);
             // Other app specific specialization
-            callbackManager = CallbackManager.Factory.create();
+            //callbackManager = CallbackManager.Factory.create();
             // Callback registration
-            fbloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            /*fbloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     Log.d(TAG,"onSuccess RESPONSE:");
@@ -216,10 +214,10 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                                     Log.d(TAG,"FB RESPONSE:"+response);
                                     try {
                                         //txtNoLoggedinMsg.setVisibility(View.GONE);
-                                     /*   txtName.setText(response.getJSONObject().getString("name"));
+                                     *//*   txtName.setText(response.getJSONObject().getString("name"));
                                         txtEmail.setText(response.getJSONObject().getString("email"));
 
-                                        txtUser.setText(response.getJSONObject().getString("name"));*/
+                                        txtUser.setText(response.getJSONObject().getString("name"));*//*
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                                         SharedPreferences.Editor editor = pref.edit();
                                         //    editor.remove("loggedInUserName");
@@ -254,7 +252,7 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
                     Log.d(TAG,"onSuccess onError:");
                     // App code
                 }
-            });
+            });*/
 
 
 

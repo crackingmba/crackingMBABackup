@@ -2,7 +2,7 @@
     <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
         <item>Home</item>
-        <item>Preparation</item>
+        <item>Videos</item>
         <item>Mock Tests</item>
         <item>Dashboard</item>
 

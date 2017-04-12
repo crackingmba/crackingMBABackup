@@ -103,7 +103,7 @@
 
 
 
-        <com.facebook.login.widget.LoginButton
+<!--        <com.facebook.login.widget.LoginButton
             xmlns:facebook="http://schemas.android.com/apk/res-auto"
             android:id="@+id/login_button"
             android:layout_width="fill_parent"
@@ -113,7 +113,7 @@
             android:layout_marginBottom="10dp"
             android:textSize="50px"
             facebook:com_facebook_login_text="Login With Facebook"
-            />
+            />-->
 
 <!--
         <Button
@@ -122,13 +122,13 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />-->
-        <TextView
+    <!--    <TextView
             android:id="@id/OrId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="Or"
-            />
+            />-->
         <Button
             android:id="@+id/applogin"
             android:text="@string/app_login"
