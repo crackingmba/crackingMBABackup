@@ -71,6 +71,7 @@
     <string name="reset_selection">Reset Selection</string>
     <string name="view_scorecard">View ScoreCard</string>
     <string name="exit_mock_test">Exit Test</string>
+    <string name="square_root_symbol">\u221a</string>
 
     <!-- Login Screen -->
     <string name="btn_logout_from_google">Logout from Google</string>

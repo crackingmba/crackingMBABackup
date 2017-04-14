@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.SectionEnum;
 
 /**
@@ -72,27 +74,38 @@ View rootView;
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "Clicked a week.." + v.getId());
-        Intent mockTestTopicIntent = new Intent(getActivity(), MockTestTopicsActivity.class);
-        switch (v.getId()) {
-            case R.id.mock_test_quantrow:
-                //VideoApplication.sectionClicked = SectionEnum.quant.key;
-                VideoApplication.sectionClicked = "quant";
-                break;
-            case R.id.mock_test_dilrrow:
-                //VideoApplication.sectionClicked = SectionEnum.dilr.key;
-                VideoApplication.sectionClicked = "dilr";
-                break;
-            case R.id.mock_test_verbalrow:
-                //VideoApplication.sectionClicked = SectionEnum.verbal.key;
-                VideoApplication.sectionClicked = "verbal";
-                break;
-            default:
-                Log.d(TAG, "Unknown button clicked..");
-                break;
+        if(MyUtil.checkConnectivity(getContext())) {
+            Log.d(TAG, "Clicked a week.." + v.getId());
+            Intent mockTestTopicIntent = new Intent(getActivity(), MockTestTopicsActivity.class);
+            switch (v.getId()) {
+                case R.id.mock_test_quantrow:
+                    //VideoApplication.sectionClicked = SectionEnum.quant.key;
+                    VideoApplication.sectionClicked = "quant";
+                    break;
+                case R.id.mock_test_dilrrow:
+                    //VideoApplication.sectionClicked = SectionEnum.dilr.key;
+                    VideoApplication.sectionClicked = "dilr";
+                    break;
+                case R.id.mock_test_verbalrow:
+                    //VideoApplication.sectionClicked = SectionEnum.verbal.key;
+                    VideoApplication.sectionClicked = "verbal";
+                    break;
+                default:
+                    Log.d(TAG, "Unknown button clicked..");
+                    break;
+            }
+            Log.d(TAG, "Section Clicked : " + VideoApplication.sectionClicked);
+            startActivity(mockTestTopicIntent);
+        }else{
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(getContext(), R.string.no_internet, duration);
+            toast.show();
+            //TextView textView=(TextView)rootView.findViewById(R.id.networkstatus);
+            //textView.setVisibility(View.VISIBLE);
+            //textView.setText(R.string.no_internet);
         }
-        Log.d(TAG, "Section Clicked : " + VideoApplication.sectionClicked);
-        startActivity(mockTestTopicIntent);
+
+
     }
 
 }

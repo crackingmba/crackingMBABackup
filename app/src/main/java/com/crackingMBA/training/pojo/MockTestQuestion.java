@@ -8,6 +8,8 @@ public class MockTestQuestion {
     private String testId;
     private String qstnNo;
     private String qstnTxt;
+    private String qstnFormula;
+    private String qstnImage;
     private String option1;
     private String option2;
     private String option3;
@@ -15,14 +17,14 @@ public class MockTestQuestion {
     private String selectedOption;
     private String answer;
 
-    public MockTestQuestion(){
+    public MockTestQuestion(){}
 
-    }
-
-    public MockTestQuestion(String testId, String qstnNo, String qstnTxt, String option1, String option2, String option3, String option4, String selectedOption, String answer) {
+    public MockTestQuestion(String testId, String qstnNo, String qstnTxt, String qstnFormula, String qstnImage, String option1, String option2, String option3, String option4, String selectedOption, String answer) {
         this.testId = testId;
         this.qstnNo = qstnNo;
         this.qstnTxt = qstnTxt;
+        this.qstnFormula = qstnFormula;
+        this.qstnImage = qstnImage;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
@@ -30,6 +32,14 @@ public class MockTestQuestion {
         this.selectedOption = selectedOption;
         this.answer = answer;
     }
+
+    public String getQstnFormula() {return qstnFormula;}
+
+    public void setQstnFormula(String qstnFormula) {this.qstnFormula = qstnFormula;}
+
+    public String getQstnImage() {return qstnImage;}
+
+    public void setQstnImage(String qstnImage) {this.qstnImage = qstnImage;}
 
     public String getTestId() {
         return testId;
