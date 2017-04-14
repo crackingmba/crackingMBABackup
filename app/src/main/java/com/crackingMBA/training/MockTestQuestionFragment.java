@@ -1,6 +1,7 @@
 package com.crackingMBA.training;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -10,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.pojo.MockTestQuestion;
 
 import io.github.kexanie.library.MathView;
@@ -27,11 +30,8 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
 
     TextView qstnTxt;
     MathView mathView;
-    MathView myMathView;
-    RadioButton option1;
-    RadioButton option2;
-    RadioButton option3;
-    RadioButton option4;
+    RadioButton option1, option2,option3,option4;
+    ImageView imageView;
 
     @Nullable
     @Override
@@ -48,7 +48,7 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
 
         //the mathjax details here
         mathView = ((MathView) rootView.findViewById(R.id.id_quiz_mathjax));
-        //String val="$${2+\\sqrt{3}*\\sqrt{8}}$$";
+        imageView=(ImageView)rootView.findViewById(R.id.mock_test_img) ;
 
         String qn_formula=selectedQstn.getQstnFormula();
 
@@ -58,6 +58,20 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
         //mathView.setText("What type of a number is the sum of the following: $${2+\\\\sqrt{3}*\\\\sqrt{8}}$$. After this add some more text in the question here");
         //mathView.setText("Test type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here");
         mathView.setText(qn_formula.toString());
+        String mocktestImg=selectedQstn.getQstnImage();
+
+        if(mocktestImg.isEmpty()){
+            //the image is not displayed here
+        }else{
+            try {
+                Log.d("mock_test_img_check", CrackingConstant.MYPATH +"img/mock_tests/"+mocktestImg);
+                AsyncTask result = new DownloadImageTask((ImageView) imageView, this.getContext())
+                        .execute(CrackingConstant.MYPATH +"img/mock_tests/"+mocktestImg);
+            }
+            catch (Exception e){
+            }
+        }
+
 
         //options go here
         option1 = ((RadioButton) rootView.findViewById(R.id.option1));

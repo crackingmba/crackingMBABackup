@@ -1,5 +1,6 @@
 package com.crackingMBA.training.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,9 +18,12 @@ public  class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     public static Boolean isException=false;
     public static Context context;
     private String DEBUG_TAG="Cartoon";
+    private ProgressDialog simpleWaitDialog;
 
-    public DownloadImageTask(ImageView bmImage) {
+
+    public DownloadImageTask(ImageView bmImage, Context context) {
         this.bmImage = bmImage;
+        this.context=context;
     }
 
 
@@ -53,8 +57,16 @@ public  class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 //      animation.setFillAfter(true);  
             bmImage.startAnimation(animation);*/
             bmImage.setImageBitmap(result);
-
+            simpleWaitDialog.dismiss();
         }
+
+    }
+
+    @Override
+    protected void onPreExecute() {
+        Log.i("Async-Example", "onPreExecute Called");
+        simpleWaitDialog = ProgressDialog.show(context,
+                "Wait", "Downloading Image");
 
     }
 }

@@ -185,28 +185,4 @@ public class VideoSubCategoryActivity extends AppCompatActivity {
         }
     }
 
-
-    private VideoDataObject populateVideoDataObject(View v){
-        Log.d(TAG,"Populating videoDataObject in Preparation Fragment..");
-        VideoDataObject vdo = new VideoDataObject();
-      /*
-        TextView duration = (TextView) v.findViewById(R.id.duration);
-        TextView id = (TextView) v.findViewById(R.id.id);
-        TextView videoTitle = (TextView) v.findViewById(R.id.videoTitle);
-        TextView thumbnailURL = (TextView) v.findViewById(R.id.thumbnailURL);
-        TextView videoURL = (TextView) v.findViewById(R.id.videoURL);
-        TextView videoType = (TextView) v.findViewById(R.id.videoType);
-        TextView dateOfUploaded = (TextView) v.findViewById(R.id.dateOfUploaded);
-        TextView videoDescription = (TextView) v.findViewById(R.id.videoDescription);
-        vdo.setDuration(duration.getText().toString());
-        vdo.setId(id.getText().toString());
-        vdo.setVideoTitle(videoTitle.getText().toString());
-        vdo.setThumbnailURL(thumbnailURL.getText().toString());
-        vdo.setVideoURL(videoURL.getText().toString());
-        vdo.setVideoType(videoType.getText().toString());
-        vdo.setDateOdUploaded(dateOfUploaded.getText().toString());
-        vdo.setVideoDescription(videoDescription.getText().toString());*/
-        return vdo;
-    }
-
 }
