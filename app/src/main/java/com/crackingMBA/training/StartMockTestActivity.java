@@ -48,10 +48,6 @@ public class StartMockTestActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         MockTestTest test = VideoApplication.selectedMockTestTest;
         ((TextView) findViewById(R.id.mocktest_test_title)).setText(test.getTestTitle());
-        //((TextView) findViewById(R.id.mocktest_test_topic)).setText(VideoApplication.selectedMockTestTopic.getName());
-        //((TextView) findViewById(R.id.mocktest_test_noofqstns)).setText("1. There are "+CrackingConstant.TOTAL_NO_OF_QSTNS+" number of questions in this test");
-        //((TextView) findViewById(R.id.mocktest_test_duration)).setText("4. This is a timed test of "+CrackingConstant.TOTAL_TEST_DURATION+" minutes. After this the test will stop");
-        //((TextView) findViewById(R.id.quiz_rules)).setText("4. This is a timed test of "+CrackingConstant.TOTAL_TEST_DURATION+" minutes. After this the test will stop");
         mock_test_rules=(TextView)findViewById(R.id.quiz_rules);
         String htmltext="<h2>Rules</h2><p>Please follow the following instructions carefully before attempting the test</p>" +
                 "<p>1. There are 10 questions in this test.</p>" +

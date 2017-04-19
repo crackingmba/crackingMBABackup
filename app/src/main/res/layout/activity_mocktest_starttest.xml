@@ -53,14 +53,6 @@
 
             </View>
 
-<!--            <TextView
-                android:id="@+id/mocktest_test_topic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ration &amp; Proportion"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="left"/>-->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

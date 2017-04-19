@@ -8,8 +8,8 @@ android {
         applicationId "com.crackingMBA.training"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.4"
     }
     buildTypes {
         release {
