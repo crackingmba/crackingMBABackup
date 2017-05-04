@@ -162,10 +162,10 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
             btnSignIn = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
             btnSignOut = (Button) rootView.findViewById(R.id.btn_sign_out);
             btnRevokeAccess = (Button) rootView.findViewById(R.id.btn_revoke_access);
-            llProfileLayout = (LinearLayout) rootView.findViewById(R.id.llProfile);
-            imgProfilePic = (ImageView) rootView.findViewById(R.id.imgProfilePic);
+            //llProfileLayout = (LinearLayout) rootView.findViewById(R.id.llProfile);
+            //imgProfilePic = (ImageView) rootView.findViewById(R.id.imgProfilePic);
             txtName = (TextView) rootView.findViewById(R.id.txtName);
-            txtEmail = (TextView) rootView.findViewById(R.id.txtEmail);
+            //txtEmail = (TextView) rootView.findViewById(R.id.txtEmail);
             txtUser = (TextView) rootView.findViewById(R.id.welcome_User);
             txtNoLoggedinMsg=(TextView)rootView.findViewById(R.id.no_login_msg);
             btnSignIn.setOnClickListener(this);
