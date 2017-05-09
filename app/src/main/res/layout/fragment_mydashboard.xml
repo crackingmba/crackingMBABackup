@@ -28,40 +28,39 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_margin="5dp">
-
-        <ImageView
-            android:id="@+id/guestprofile"
-            android:layout_marginTop="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/mydashboard"
-            android:adjustViewBounds="true" />
-
-        <TextView
-            android:id="@+id/welcome_User"
-            android:layout_width="wrap_content"
+        
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/welcome_guest"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:background="#67A0D9"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/guestprofile"
+                android:layout_marginTop="25dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mydashboard"
+                android:adjustViewBounds="true" />
+    
+            <TextView
+                android:id="@+id/welcome_User"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/welcome_guest"
+                android:textSize="20sp"
+                android:gravity="center"/>
+    
 
-
-
-        <TextView
-            android:id="@+id/no_login_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="@string/not_logged_in_msg"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="left"/>
+        </LinearLayout>
 
         <!--google login-->
         <com.google.android.gms.common.SignInButton xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/btn_sign_in"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:layout_marginBottom="10dp"/>
 
         <Button
@@ -70,12 +69,12 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_logout_from_google"
             android:visibility="gone"/>
-        <TextView
+<!--        <TextView
             android:id="@+id/OrId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Or"/>
+            android:text="Or"/>-->
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
@@ -141,27 +140,50 @@
             auto:engine="MathJax"
             >
         </io.github.kexanie.library.MathView>-->
+
+        <TextView
+            android:id="@+id/no_login_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/not_logged_in_msg"
+            android:gravity="left"/>
+
         <Button
             android:id="@+id/applogin"
             android:text="@string/app_login"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:textSize="15sp"
-            android:layout_gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:layout_height="40dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
             android:textAlignment="center"/>
 
         <Button
             android:id="@+id/register"
             android:text="@string/new_user_register"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:textSize="15sp"
+            android:layout_height="40dp"
+            android:paddingTop="5dp"
+            android:textSize="18sp"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="If you are facing any difficulty in logging in or would like to share your feedback/suggestions for this app, please drop a mail to support@crackingmba.com"
+            android:gravity="center"/>
 <!--
         <ImageView
             android:id="@+id/imgProfilePic"

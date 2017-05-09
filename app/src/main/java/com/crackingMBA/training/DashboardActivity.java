@@ -92,20 +92,6 @@ private  TabLayout tabLayout;
 
             }
         });
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-
-       /* Intent dashboardIntent=new Intent(this,FragmentDemoActivity.class);
-        startActivity(dashboardIntent);*/
-
-        // enabling action bar app icon and behaving it as toggle button
 
     }
 

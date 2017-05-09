@@ -53,7 +53,7 @@ public class StartMockTestActivity extends AppCompatActivity {
                 "<p>1. There are 10 questions in this test.</p>" +
                 "<p>2. Each correct answer carries 1 mark</p>" +
                 "<p>3. Each incorrect answer carries -1/4 mark</p>"+
-                "<p>4. This is a timed test. After 10 minutes the test will test.</p>";
+                "<p>4. This is a timed test. After 10 minutes the test will stop and your score will be displayed.</p>";
         Spanned sp= Html.fromHtml(htmltext);
         mock_test_rules.setText(sp);
         ((Button) findViewById(R.id.mocktest_starttest_button)).setEnabled(true);
