@@ -150,7 +150,7 @@ private  TabLayout tabLayout;
                             fragmentClass = MockTestFragment.class;
                             break;
                         case 3:
-                            fragmentClass = MyDashboardFragment.class;
+                            fragmentClass = MyWhatsup.class;
                             break;
                         default:
                             fragmentClass = HomeFragment.class;
