@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
-        <item>Home</item>
+        <item>Exams</item>
         <item>Videos</item>
         <item>Mock Tests</item>
         <item>Whats Up!</item>
@@ -11,10 +11,10 @@
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="tab_icons">
-        <item>@drawable/home_tab_icon</item>
-        <item>@drawable/prep_tab_icon</item>
-        <item>@drawable/mock_test_tab_icon</item>
-        <item>@drawable/dashboard_tab_icon</item>
+        <item>@drawable/exams1</item>
+        <item>@drawable/videos_img</item>
+        <item>@drawable/mock_tests_img</item>
+        <item>@drawable/whatsup_img</item>videos_img.png
 
     </array>
     <!-- Strings related to login -->

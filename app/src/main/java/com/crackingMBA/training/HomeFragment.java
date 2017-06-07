@@ -32,9 +32,11 @@ import android.widget.Toast;
 import com.crackingMBA.training.adapter.DILRHomeVideoViewAdapter;
 import com.crackingMBA.training.adapter.DividerItemDecoration;
 import com.crackingMBA.training.adapter.DownloadViewAdapter;
+import com.crackingMBA.training.adapter.ExamAdapter;
 import com.crackingMBA.training.adapter.QuantHomeVideoViewAdapter;
 import com.crackingMBA.training.adapter.VerbalHomeVideoViewAdapter;
 import com.crackingMBA.training.db.DBHelper;
+import com.crackingMBA.training.pojo.Exam;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
 import com.crackingMBA.training.pojo.VideoListModel;
@@ -73,21 +75,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
-        gotoquantBtn = (Button) rootView.findViewById(R.id.gotoquant3);
-        gotoquantBtn.setOnClickListener(this);
-        gotodi = (Button) rootView.findViewById(R.id.gotodi3);
-        gotodi.setOnClickListener(this);
-        gotolatest = (Button) rootView.findViewById(R.id.gotolatest3);
-        gotolatest.setOnClickListener(this);
+        //gotoquantBtn = (Button) rootView.findViewById(R.id.gotoquant3);
+        //gotoquantBtn.setOnClickListener(this);
+        //gotodi = (Button) rootView.findViewById(R.id.gotodi3);
+        //gotodi.setOnClickListener(this);
+        //gotolatest = (Button) rootView.findViewById(R.id.gotolatest3);
+        //gotolatest.setOnClickListener(this);
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
-        dilrRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
-        verbalRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
+        //dilrRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view2);
+        //verbalRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view3);
         quantRecyclerView.setHasFixedSize(true);
-        dilrRecyclerView.setHasFixedSize(true);
-        verbalRecyclerView.setHasFixedSize(true);
-        quantProgressView = rootView.findViewById(R.id.recentquatvideos);
-        dilrProgressView = rootView.findViewById(R.id.recentdiandlrvideos);
-        verbalProgressView = rootView.findViewById(R.id.recentverbalvideos);
+        //dilrRecyclerView.setHasFixedSize(true);
+        //verbalRecyclerView.setHasFixedSize(true);
+        //quantProgressView = rootView.findViewById(R.id.recentquatvideos);
+        //dilrProgressView = rootView.findViewById(R.id.recentdiandlrvideos);
+        //verbalProgressView = rootView.findViewById(R.id.recentverbalvideos);
         getDataSet();
 
         return rootView;
@@ -110,7 +112,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
             if(MyUtil.checkConnectivity(getContext())) {
                 try {
-                    showProgress(true, quantProgressView);
+                    //showProgress(true, quantProgressView);
 
                     AsyncHttpClient client = new AsyncHttpClient();
                     client.get(CrackingConstant.GETVIDEOLIST_SERVICE_URL__QUANT_SERVICE_URL, null, new AsyncHttpResponseHandler() {
@@ -121,6 +123,53 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                             if (videoListModel != null) {
                                 List<VideoList> quant = videoListModel.getVideoList();
+
+                                List<Exam> myVidList= new ArrayList<Exam>();
+                                Exam tempVid=new Exam();
+                                tempVid.setExam_name("CAT 2017");
+                                tempVid.setExam_description("Entrance test for admission to PGDM programmes at IIMs and other institutes");
+                                tempVid.setExam_sections("Quant, DI&LR, Verbal");
+                                tempVid.setExam_notification_date("In July");
+                                tempVid.setExam_date("Exam Date: November or December 2017");
+                                tempVid.setExam_img("cat2017");
+                                myVidList.add(tempVid);
+
+                                tempVid=new Exam();
+                                tempVid.setExam_name("IIFT 2017");
+                                tempVid.setExam_description("Entrance test for admission to post graduate management programmes at IIFT institutes");
+                                tempVid.setExam_sections("Quant, DI&LR, Verbal");
+                                tempVid.setExam_notification_date("In July");
+                                tempVid.setExam_date("Exam Date: November 2017");
+                                tempVid.setExam_img("iift2017");
+                                myVidList.add(tempVid);
+
+                                tempVid=new Exam();
+                                tempVid.setExam_name("MAT 2017");
+                                tempVid.setExam_description("Entrance test for admission to post graduate management programmes at various BSchools in India");
+                                tempVid.setExam_sections("Quant, DI&LR, Verbal");
+                                tempVid.setExam_notification_date("In July");
+                                tempVid.setExam_date("Exam Date: Paper Based Test on 3rd September 2017. Computer Based from 9th September 2017 onwards");
+                                tempVid.setExam_img("mat2017");
+                                myVidList.add(tempVid);
+
+                                tempVid=new Exam();
+                                tempVid.setExam_name("SNAP 2017");
+                                tempVid.setExam_description("Entrance test for admission to MBA programmes at Symbiosis institutes");
+                                tempVid.setExam_sections("Quant, DI&LR, Verbal");
+                                tempVid.setExam_notification_date("In July");
+                                tempVid.setExam_date("Exam Date: December 2017");
+                                tempVid.setExam_img("snap2017");
+                                myVidList.add(tempVid);
+
+                                tempVid=new Exam();
+                                tempVid.setExam_name("XAT 2018");
+                                tempVid.setExam_description("Entrance test for admission to post graduate management programmes at Xavier institutes such as XLRI");
+                                tempVid.setExam_sections("Quant, DI&LR, Verbal");
+                                tempVid.setExam_notification_date("In July");
+                                tempVid.setExam_date("Exam Date: January 2018");
+                                tempVid.setExam_img("xat2018");
+                                myVidList.add(tempVid);
+
                                 try {
                                     if (null != quant) {
                                         if (quant.size() == 0)
@@ -128,14 +177,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                         else {
                                             rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.GONE);
 
-                                            VideoApplication.allQuantVideos = quant;
-                                            RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL);
-                                            LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                            //VideoApplication.allQuantVideos = quant;
+                                            //VideoApplication.allQuantVideos = myVidList;
+                                            RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                                            LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                             quantRecyclerView.setLayoutManager(quantLayoutManager);
-                                            quantAdapter = new QuantHomeVideoViewAdapter(quant);
+                                            //quantAdapter = new QuantHomeVideoViewAdapter(quant);
+                                            quantAdapter = new ExamAdapter(myVidList);
+
                                             quantRecyclerView.setAdapter(quantAdapter);
                                             quantRecyclerView.addItemDecoration(quantItemDecoration);
-                                            ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
+         /*                                   ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
                                                     new QuantHomeVideoViewAdapter.MyClickListener() {
                                                         @Override
                                                         public void onItemClick(int position, View v) {
@@ -148,14 +200,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                                             startActivity(weeksIntent);
                                                         }
                                                     }
-                                            );
+                                            );*/
                                         }
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
-                            showProgress(false, quantProgressView);
+                            //showProgress(false, quantProgressView);
 
                         }
 
@@ -179,7 +231,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                try {
+
+
+                /*try {
                     AsyncHttpClient client = new AsyncHttpClient();
                     showProgress(true, dilrProgressView);
                     client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL, null, new AsyncHttpResponseHandler() {
@@ -235,9 +289,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                     showProgress(false, dilrProgressView);
-                }
+                }*/
                 //verbal section
-                try {
+                /*try {
                     AsyncHttpClient client = new AsyncHttpClient();
                     showProgress(true, verbalProgressView);
                     client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL, null, new AsyncHttpResponseHandler() {
@@ -294,7 +348,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         e) {
                     Log.e(TAG, "Error occuring " + e.getMessage());
                     showProgress(false, verbalProgressView);
-                }
+                }*/
 
             }else{
                 int duration = Toast.LENGTH_LONG;
@@ -316,7 +370,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Log.d(TAG, "Inonlicklistener" + view.getId());
             TabLayout tabLayout;
             Intent subsIntent;
-            switch (view.getId()) {
+            /*switch (view.getId()) {
                 case R.id.gotoquant3:
                     Log.d(TAG, "selecting Quant section..");
                     subsIntent = new Intent(getActivity(), VideoSubCategoryActivity.class);
@@ -346,7 +400,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Log.d(TAG, "Unknown button clicked..");
 
                     break;
-            }
+            }*/
 
 
         }

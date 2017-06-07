@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.crackingMBA.training.CrackingConstant;
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.VideoList;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -105,8 +106,9 @@ public class QuantHomeVideoViewAdapter extends RecyclerView
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
         Context context= holder.thumbnail.getContext();
         //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
-        int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
-        holder.thumbnail.setImageResource(id);
+        //int id=context.getResources().getIdentifier(mDataset.get(position).getThumbnailURL(), "drawable", context.getPackageName());
+        //holder.thumbnail.setImageResource(id);
+        Picasso.with(context.getApplicationContext()).load("http://www.crackingmba.com/wp-content/uploads/2017/04/badge_new.png").into(holder.thumbnail);
 
     }
 

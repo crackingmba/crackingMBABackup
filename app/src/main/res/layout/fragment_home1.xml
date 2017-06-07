@@ -24,13 +24,13 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Recent Quant Videos"
+                    android:text="MBA Admission Tests"
                     android:textSize="16sp"
                     android:textColor="#01579B"
                     android:textStyle="bold"/>
                 <!--  android:background="#01579B"
                  android:textColor="#EDE7F6"-->
-                <Button
+<!--                <Button
                     android:id="@+id/gotoquant3"
                     android:text="View More"
                     android:layout_width="wrap_content"
@@ -38,18 +38,18 @@
                     android:gravity="center_vertical"
                     android:background="#03A9F4"
                     android:textSize="12sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"/>-->
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#455A64"/>
-            <ProgressBar
+            <!--<ProgressBar
                 android:id="@+id/recentquatvideos"
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:visibility="gone" />-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -75,7 +75,7 @@
 
 
             <!-- Recent DI and LR Videos section -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:padding="10dp"
@@ -131,11 +131,11 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
 
-            <!-- Recent Verbal Videos section -->
-            <LinearLayout
+             <!--Recent Verbal Videos section-->
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:padding="10dp"
@@ -159,19 +159,18 @@
                     android:background="#03A9F4"
                     android:textSize="12sp"
                     android:textAlignment="center"/>
-            </LinearLayout>
-            <TextView
+            </LinearLayout>-->
+            <!--<TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#455A64"/>
-            <ProgressBar
-                android:id="@+id/recentverbalvideos"
+                android:background="#455A64"/>-->
+            <!-- <ProgressBar
+               android:id="@+id/recentverbalvideos"
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:visibility="gone" />
-        <LinearLayout
+                android:visibility="gone" />-->
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_marginBottom="10dp"
@@ -192,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
-        </LinearLayout>
+        </LinearLayout>-->
             <TextView
                 android:id="@+id/networkstatus"
                 android:layout_width="match_parent"
