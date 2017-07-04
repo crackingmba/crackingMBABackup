@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:textSize="24sp"
                 android:textColor="#ffffff"
-                android:text="crackingMBA.com"/>
+                android:text="crackingMBA"/>
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout

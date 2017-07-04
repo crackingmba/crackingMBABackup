@@ -33,9 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Harish on 1/31/2017.
- */
 public class ExamAdapter extends RecyclerView
         .Adapter<ExamAdapter.DataObjectHolder> {
     private List<Exam> mDataset;

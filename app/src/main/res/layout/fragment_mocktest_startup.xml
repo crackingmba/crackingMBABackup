@@ -12,13 +12,14 @@ android:padding="5dp">
     android:layout_margin="10dp"
     android:orientation="vertical">
 
-    <TextView
+<!--    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CAT2017 Sectional Mock Test"
         android:textStyle="bold"
         android:textSize="24sp"
-        android:gravity="center"/>
+        android:gravity="center"/>-->
+
 
 </LinearLayout>
 

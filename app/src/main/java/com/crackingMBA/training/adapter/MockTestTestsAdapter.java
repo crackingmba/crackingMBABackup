@@ -96,7 +96,7 @@ public class MockTestTestsAdapter extends RecyclerView
 
         }
 
-        Typeface custom_font=Typeface.createFromAsset(holder.mocktestTestTxt.getContext().getAssets(),"fonts/Pacifico-Regular.ttf");
+        Typeface custom_font=Typeface.createFromAsset(holder.mocktestTestTxt.getContext().getAssets(),"fonts/Roboto-Regular.ttf");
         holder.mocktestTestTxt.setTypeface(custom_font);
     }
 

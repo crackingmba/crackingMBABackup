@@ -101,7 +101,79 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
 
+
     private ArrayList<VideoDataObject> getDataSet() {
+
+            List<Exam> myVidList= new ArrayList<Exam>();
+            Exam tempVid=new Exam();
+            tempVid.setExam_name("CAT 2017");
+            tempVid.setExam_description("Entrance test for admission to PGDM programmes at IIMs and other institutes");
+            tempVid.setExam_sections("Quant, DI&LR, Verbal");
+            tempVid.setExam_notification_date("In July");
+            tempVid.setExam_date("Exam Date: November or December 2017");
+            tempVid.setExam_img("cat2017");
+            myVidList.add(tempVid);
+
+            tempVid=new Exam();
+            tempVid.setExam_name("IIFT 2017");
+            tempVid.setExam_description("Entrance test for admission to post graduate management programmes at IIFT institutes");
+            tempVid.setExam_sections("Quant, DI&LR, Verbal");
+            tempVid.setExam_notification_date("In July");
+            tempVid.setExam_date("Exam Date: November 2017");
+            tempVid.setExam_img("iift2017");
+            myVidList.add(tempVid);
+
+            tempVid=new Exam();
+            tempVid.setExam_name("MAT 2017");
+            tempVid.setExam_description("Entrance test for admission to post graduate management programmes at various BSchools in India");
+            tempVid.setExam_sections("Quant, DI&LR, Verbal");
+            tempVid.setExam_notification_date("In July");
+            tempVid.setExam_date("Exam Date: Paper Based Test on 3rd September 2017. Computer Based from 9th September 2017 onwards");
+            tempVid.setExam_img("mat2017");
+            myVidList.add(tempVid);
+
+            tempVid=new Exam();
+            tempVid.setExam_name("SNAP 2017");
+            tempVid.setExam_description("Entrance test for admission to MBA programmes at Symbiosis institutes");
+            tempVid.setExam_sections("Quant, DI&LR, Verbal");
+            tempVid.setExam_notification_date("In July");
+            tempVid.setExam_date("Exam Date: December 2017");
+            tempVid.setExam_img("snap2017");
+            myVidList.add(tempVid);
+
+            tempVid=new Exam();
+            tempVid.setExam_name("XAT 2018");
+            tempVid.setExam_description("Entrance test for admission to post graduate management programmes at Xavier institutes such as XLRI");
+            tempVid.setExam_sections("Quant, DI&LR, Verbal");
+            tempVid.setExam_notification_date("In July");
+            tempVid.setExam_date("Exam Date: January 2018");
+            tempVid.setExam_img("xat2018");
+            myVidList.add(tempVid);
+
+            try {
+                    if (myVidList.size() == 0)
+                        rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.VISIBLE);
+                    else {
+                        rootView.findViewById(R.id.home_latest_quant_noVideos).setVisibility(View.GONE);
+
+                        RecyclerView.ItemDecoration quantItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                        LinearLayoutManager quantLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                        quantRecyclerView.setLayoutManager(quantLayoutManager);
+                        quantAdapter = new ExamAdapter(myVidList);
+
+                        quantRecyclerView.setAdapter(quantAdapter);
+                        quantRecyclerView.addItemDecoration(quantItemDecoration);
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        return null;
+    }
+
+
+    private ArrayList<VideoDataObject> getDataSet1() {
 
         Log.d(TAG, "isMock?" + isMock);
         isMock = false;
@@ -110,6 +182,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else {
             Log.d(TAG, "In else block");
             final ArrayList<VideoDataObject> results = new ArrayList<VideoDataObject>();
+
             if(MyUtil.checkConnectivity(getContext())) {
                 try {
                     //showProgress(true, quantProgressView);
@@ -123,6 +196,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             VideoListModel videoListModel = gson.fromJson(response, VideoListModel.class);
                             if (videoListModel != null) {
                                 List<VideoList> quant = videoListModel.getVideoList();
+
 
                                 List<Exam> myVidList= new ArrayList<Exam>();
                                 Exam tempVid=new Exam();
@@ -160,7 +234,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 tempVid.setExam_date("Exam Date: December 2017");
                                 tempVid.setExam_img("snap2017");
                                 myVidList.add(tempVid);
-
                                 tempVid=new Exam();
                                 tempVid.setExam_name("XAT 2018");
                                 tempVid.setExam_description("Entrance test for admission to post graduate management programmes at Xavier institutes such as XLRI");
@@ -222,7 +295,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             } else {
                                 Log.d(TAG, "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]");
                             }
-                            showProgress(false, quantProgressView);
+                            //showProgress(false, quantProgressView);
                         }
 
                     });
@@ -367,9 +440,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onClick (View view){
-            Log.d(TAG, "Inonlicklistener" + view.getId());
-            TabLayout tabLayout;
-            Intent subsIntent;
+           // Log.d(TAG, "Inonlicklistener" + view.getId());
+            //TabLayout tabLayout;
+            //Intent subsIntent;
             /*switch (view.getId()) {
                 case R.id.gotoquant3:
                     Log.d(TAG, "selecting Quant section..");
@@ -407,7 +480,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+   /* @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show,final View showProgressSection) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
@@ -431,5 +504,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             showProgressSection.setVisibility(show ? View.VISIBLE : View.GONE);
 
         }
-    }
+    }*/
 }

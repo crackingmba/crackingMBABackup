@@ -1,6 +1,7 @@
 package com.crackingMBA.training;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.pojo.LoginResponseObject;
 import com.crackingMBA.training.pojo.Question;
@@ -50,16 +52,31 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
     private String TAG = MyWhatsup.class.getSimpleName();
     private ListView lv;
     ArrayList<HashMap<String, String>> contactList;
+    Button refresh_btn;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_whatsup, container, false);
 
         contactList = new ArrayList<>();
         lv = (ListView) rootView.findViewById(R.id.list);
 
+        //final Button button = (Button)rootView.findViewById(R.id.whatsup_refresh_btn);
+        View.OnClickListener myClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lv.invalidateViews();
+                contactList.clear();
+                new GetContacts().execute();
+            }
+        };
+
+        refresh_btn = (Button)rootView.findViewById(R.id.whatsapp_refresh_btn);
+        refresh_btn.setOnClickListener(myClickListener);
+
         new GetContacts().execute();
+
         return rootView;
     }
 
@@ -132,6 +149,13 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         //Some click activity will happen here
+        //lv.deferNotifyDataSetChanged();
+        Context context = rootView.getContext();
+        CharSequence text = "Hello toast!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
     }
 

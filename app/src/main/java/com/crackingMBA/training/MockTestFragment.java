@@ -52,7 +52,7 @@ View rootView;
 
 
 
-        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Pacifico-Regular.ttf");
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Regular.ttf");
         quant_textView.setTypeface(custom_font);
         dilr_textView.setTypeface(custom_font);
         verbal_textView.setTypeface(custom_font);
