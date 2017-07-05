@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private View quantProgressView;
     private View dilrProgressView;
     private View verbalProgressView;
+    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -90,7 +92,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //quantProgressView = rootView.findViewById(R.id.recentquatvideos);
         //dilrProgressView = rootView.findViewById(R.id.recentdiandlrvideos);
         //verbalProgressView = rootView.findViewById(R.id.recentverbalvideos);
-        getDataSet();
+        //getDataSet();
+        catLayout=(LinearLayout)rootView.findViewById(R.id.catLayout);
+        xatLayout=(LinearLayout)rootView.findViewById(R.id.xatLayout);
+        snapLayout=(LinearLayout)rootView.findViewById(R.id.snapLayout);
+        iiftLayout=(LinearLayout)rootView.findViewById(R.id.iiftLayout);
+        matLayout=(LinearLayout)rootView.findViewById(R.id.matLayout);
+
+        View.OnClickListener examOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.catLayout:{
+                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        startActivity(examDetails);
+                        break;
+                    }
+                    case R.id.xatLayout:{
+                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        startActivity(examDetails);
+                        break;
+                    }
+                    case R.id.snapLayout:{
+                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        startActivity(examDetails);
+                        break;
+                    }
+                    case R.id.iiftLayout:{
+                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        startActivity(examDetails);
+                        break;
+                    }
+                    case R.id.matLayout:{
+                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        startActivity(examDetails);
+                        break;
+                    }
+                }
+            }
+        };
+
+        catLayout.setOnClickListener(examOnClickListener);
+        xatLayout.setOnClickListener(examOnClickListener);
+        snapLayout.setOnClickListener(examOnClickListener);
+        iiftLayout.setOnClickListener(examOnClickListener);
+        matLayout.setOnClickListener(examOnClickListener);
 
         return rootView;
     }
@@ -104,7 +150,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<VideoDataObject> getDataSet() {
 
-            List<Exam> myVidList= new ArrayList<Exam>();
+           /* List<Exam> myVidList= new ArrayList<Exam>();
             Exam tempVid=new Exam();
             tempVid.setExam_name("CAT 2017");
             tempVid.setExam_description("Entrance test for admission to PGDM programmes at IIMs and other institutes");
@@ -169,13 +215,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
 
 
-        return null;
+        return null;*/
+           return null;
     }
 
 
     private ArrayList<VideoDataObject> getDataSet1() {
 
-        Log.d(TAG, "isMock?" + isMock);
+       /* Log.d(TAG, "isMock?" + isMock);
         isMock = false;
         if (isMock) {
             //  return populateMockGetVideoList();
@@ -260,7 +307,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                                             quantRecyclerView.setAdapter(quantAdapter);
                                             quantRecyclerView.addItemDecoration(quantItemDecoration);
-         /*                                   ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
+                                            ((QuantHomeVideoViewAdapter) quantAdapter).setOnItemClickListener(
                                                     new QuantHomeVideoViewAdapter.MyClickListener() {
                                                         @Override
                                                         public void onItemClick(int position, View v) {
@@ -273,7 +320,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                                             startActivity(weeksIntent);
                                                         }
                                                     }
-                                            );*/
+                                            );
                                         }
                                     }
                                 } catch (Exception e) {
@@ -306,7 +353,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
 
 
-                /*try {
+                try {
                     AsyncHttpClient client = new AsyncHttpClient();
                     showProgress(true, dilrProgressView);
                     client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__DILR_SERVICE_URL, null, new AsyncHttpResponseHandler() {
@@ -362,9 +409,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                     showProgress(false, dilrProgressView);
-                }*/
+                }
                 //verbal section
-                /*try {
+                try {
                     AsyncHttpClient client = new AsyncHttpClient();
                     showProgress(true, verbalProgressView);
                     client.get(CrackingConstant.HOME_TAB_GETVIDEOLIST__VERBAL_SERVICE_URL, null, new AsyncHttpResponseHandler() {
@@ -421,7 +468,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         e) {
                     Log.e(TAG, "Error occuring " + e.getMessage());
                     showProgress(false, verbalProgressView);
-                }*/
+                }
 
             }else{
                 int duration = Toast.LENGTH_LONG;
@@ -434,7 +481,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
                     }
-        return null;
+        return null;*/
+       return null;
                 }
 
 

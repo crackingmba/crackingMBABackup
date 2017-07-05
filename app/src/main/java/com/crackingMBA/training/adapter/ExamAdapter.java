@@ -80,19 +80,19 @@ public class ExamAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.exam_name.setText(mDataset.get(position).getExam_name());
-        holder.exam_description.setText(mDataset.get(position).getExam_description());
+        //holder.exam_name.setText(mDataset.get(position).getExam_name());
+        //holder.exam_description.setText(mDataset.get(position).getExam_description());
         //holder.exam_sections.setText(mDataset.get(position).getExam_sections());
-        holder.exam_date.setText(mDataset.get(position).getExam_date());
+        //holder.exam_date.setText(mDataset.get(position).getExam_date());
         //holder.exam_thumbnail.setText(mDataset.get(position).getExam_name());
 
         Context context= holder.exam_thumbnail.getContext();
 
-        String uri = "@drawable/"+mDataset.get(position).getExam_img();
-        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+        //String uri = "@drawable/"+mDataset.get(position).getExam_img();
+        //int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
 
-        Drawable res = context.getResources().getDrawable(imageResource);
-        holder.exam_thumbnail.setImageDrawable(res);
+        //Drawable res = context.getResources().getDrawable(imageResource);
+        //holder.exam_thumbnail.setImageDrawable(res);
 
 
         //holder.exam_thumbnail.set

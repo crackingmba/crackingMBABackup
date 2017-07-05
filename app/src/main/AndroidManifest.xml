@@ -5,8 +5,8 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <application
         android:name=".VideoApplication"
         android:allowBackup="true"
@@ -15,83 +15,85 @@
         android:logo="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".LoginActivity"
-            android:label="Login CrackingMBA"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:label="Login CrackingMBA" />
         <activity
             android:name=".LogoutActivity"
-            android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:label="@string/app_name" />
         <activity
             android:name=".RegistrationActivity"
-            android:label="Registration"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Registration" />
         <activity
             android:name=".EditProfileActivity"
-            android:label="Edit Profile"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Edit Profile" />
         <activity
             android:name=".AskQuestionActivity"
-            android:label="Ask Question"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Ask Question" />
         <activity
             android:name=".ShowAnswerActivity"
-            android:label="My Questions"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="My Questions" />
         <activity
             android:name=".MockTestTopicsActivity"
-            android:label="Mock Tests"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mock Tests" />
         <activity
             android:name=".MockTestTestsActivity"
-            android:label="Mock Tests"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mock Tests" />
         <activity
             android:name=".YoutubeVideoActivity"
-            android:label="@string/app_name"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"
             android:screenOrientation="landscape">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".TargetVideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"/></activity>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:value=".TargetVideoActivity" />
+        </activity>
         <activity
             android:name=".StartMockTestActivity"
-            android:label="Start Mock Test"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Start Mock Test" />
         <activity
             android:name=".SubmitMockTestActivity"
-            android:label="Submit Mock Tests"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Submit Mock Tests" />
         <activity
             android:name=".MockTestResultActivity"
-            android:label="Mock Tests Results"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mock Tests Results" />
         <activity
             android:name=".MockTestReviewAnswersActivity"
-            android:label="Mock Test Review Answer"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mock Test Review Answer" />
         <activity
             android:name=".OTPValidationActivity"
-            android:label="OTP Validation"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="OTP Validation" />
         <activity
             android:name=".ForgotPasswordActivity"
-            android:label="Forgot Password"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Forgot Password" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:label="Change Password"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Change Password" />
         <activity
             android:name=".DashboardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@mipmap/ic_launcher"
             android:logo="@mipmap/ic_launcher"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -107,19 +109,25 @@
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".VideoSubCategoryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_video_sub_category"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".WeeksActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_weeks"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TargetVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_target_video"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ExamDetails"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="MBA Entrance Exams"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
