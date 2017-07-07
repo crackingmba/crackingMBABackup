@@ -1,55 +1,19 @@
 package com.crackingMBA.training;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.crackingMBA.training.adapter.DILRHomeVideoViewAdapter;
-import com.crackingMBA.training.adapter.DividerItemDecoration;
-import com.crackingMBA.training.adapter.DownloadViewAdapter;
-import com.crackingMBA.training.adapter.ExamAdapter;
-import com.crackingMBA.training.adapter.QuantHomeVideoViewAdapter;
-import com.crackingMBA.training.adapter.VerbalHomeVideoViewAdapter;
-import com.crackingMBA.training.db.DBHelper;
-import com.crackingMBA.training.pojo.Exam;
 import com.crackingMBA.training.pojo.VideoDataObject;
-import com.crackingMBA.training.pojo.VideoList;
-import com.crackingMBA.training.pojo.VideoListModel;
-import com.crackingMBA.training.util.MyUtil;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by MSK on 24-01-2017.
@@ -71,10 +35,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private View quantProgressView;
     private View dilrProgressView;
     private View verbalProgressView;
-    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout;
+    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, vocabgameLayout;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
         //gotoquantBtn = (Button) rootView.findViewById(R.id.gotoquant3);
@@ -98,36 +62,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         snapLayout=(LinearLayout)rootView.findViewById(R.id.snapLayout);
         iiftLayout=(LinearLayout)rootView.findViewById(R.id.iiftLayout);
         matLayout=(LinearLayout)rootView.findViewById(R.id.matLayout);
+        vocabgameLayout=(LinearLayout)rootView.findViewById(R.id.homeVocabGame);
+
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.catLayout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
+                        examDetails.putExtra("MBA_EXAM_CODE", "CAT");
                         startActivity(examDetails);
                         break;
                     }
                     case R.id.xatLayout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
+                        examDetails.putExtra("MBA_EXAM_CODE", "XAT");
                         startActivity(examDetails);
                         break;
                     }
                     case R.id.snapLayout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
+                        examDetails.putExtra("MBA_EXAM_CODE", "SNAP");
                         startActivity(examDetails);
                         break;
                     }
                     case R.id.iiftLayout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
+                        examDetails.putExtra("MBA_EXAM_CODE", "IIFT");
                         startActivity(examDetails);
                         break;
                     }
                     case R.id.matLayout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetails.class);
+                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
+                        examDetails.putExtra("MBA_EXAM_CODE", "NMAT");
                         startActivity(examDetails);
                         break;
                     }
+
+                    case R.id.homeVocabGame:{
+                        Intent vocabGame = new Intent(getActivity(), VocabGameActivity.class);
+                        vocabGame.putExtra("VOCAB_GAME", "NMAT");
+                        startActivity(vocabGame);
+                        break;
+                    }
+
                 }
             }
         };
@@ -137,6 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         snapLayout.setOnClickListener(examOnClickListener);
         iiftLayout.setOnClickListener(examOnClickListener);
         matLayout.setOnClickListener(examOnClickListener);
+        vocabgameLayout.setOnClickListener(examOnClickListener);
 
         return rootView;
     }

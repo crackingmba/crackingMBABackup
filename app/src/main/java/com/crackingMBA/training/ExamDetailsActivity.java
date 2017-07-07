@@ -27,8 +27,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamDetails extends AppCompatActivity {
-    private static final String TAG = "ExamDetails";
+public class ExamDetailsActivity extends AppCompatActivity {
+    private static final String TAG = "ExamDetailsActivity";
     TextView exam_header, exam_details, imp_dates_details, notifications_details;
 
     @Override
@@ -72,7 +72,9 @@ public class ExamDetails extends AppCompatActivity {
                     //showProgress(true, quantProgressView);
 
                     AsyncHttpClient client = new AsyncHttpClient();
-                    client.get("http://www.crackingmba.com/getExams.php?exam_name=CAT", null, new AsyncHttpResponseHandler() {
+                    String mba_exam_code = getIntent().getStringExtra("MBA_EXAM_CODE");
+
+                    client.get("http://www.crackingmba.com/getExams.php?exam_name="+mba_exam_code, null, new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(String response) {
                             Log.d(TAG, "Response is : " + response);
@@ -89,7 +91,7 @@ public class ExamDetails extends AppCompatActivity {
 
                                     //exam_header, exam_details, imp_dates_details, notifications_details;
                                     ((TextView)findViewById(R.id.exam_header)).setText(e.getName());
-                                    ((TextView)findViewById(R.id.exam_details)).setText(e.getDescription());
+                                    ((TextView)findViewById(R.id.exam_details)).setText(Html.fromHtml(e.getDescription()));
                                     ((TextView)findViewById(R.id.imp_dates_details)).setText(Html.fromHtml(e.getDates()));
                                     ((TextView)findViewById(R.id.notifications_details)).setText(Html.fromHtml(e.getNotifications()));
                                 }

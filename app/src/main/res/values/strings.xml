@@ -13,7 +13,7 @@
     <array name="tab_icons">
         <item>@drawable/exams1</item>
         <item>@drawable/videos_img</item>
-        <item>@drawable/mock_tests_img</item>
+        <item>@drawable/mock_test_icon_1</item>
         <item>@drawable/whatsup_img</item>videos_img.png
 
     </array>

@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TabHost;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -25,19 +27,24 @@ public class DashboardActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    public ViewPager mViewPager;
     private Integer gotoTab;
 
-private  TabLayout tabLayout;
+    private  TabLayout tabLayout;
     private String[] tabTitles;
     private TypedArray tabIcons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+
+
+
 
         if(null != getIntent() && null!=getIntent().getExtras()){
             String tab = getIntent().getExtras().getString("gotoTab");
@@ -101,8 +108,19 @@ private  TabLayout tabLayout;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
        // getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        //mViewPager.setCurrentItem(1);
+/*        String mba_exam_code = getIntent().getStringExtra("DB_ACTIVITY");
+        if(mba_exam_code==null){
+
+        }else{
+            if(mba_exam_code.equals("2")){
+                this.mViewPager.setCurrentItem(2);
+            }
+        }*/
         return true;
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,6 +135,14 @@ private  TabLayout tabLayout;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void activateVideosTab(View view) {
+        mViewPager.setCurrentItem(1);
+    }
+
+    public void activateMockTestsTab(View view) {
+        mViewPager.setCurrentItem(2);
     }
 
     /**
@@ -192,6 +218,8 @@ private  TabLayout tabLayout;
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
+
 
 
 }

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.crackingMBA.training.VocabGameActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+<!--    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp">-->
+
+     <!--   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.crackingMBA.training.ExamDetailsActivity">
+-->
+            <!--<android.support.constraint.ConstraintLayout
+                android:id="@+id/VocabGamesConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/sampletextview"
+                    tools:layout_editor_absoluteY="143dp"
+                    tools:layout_editor_absoluteX="48dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="163dp" />
+
+
+                &lt;!&ndash;  <android.support.v7.widget.RecyclerView
+                      android:id="@+id/VocabGameRecyclerList"
+                      android:layout_width="368dp"
+                      android:layout_height="200dp">
+
+                  </android.support.v7.widget.RecyclerView>
+
+                  &ndash;&gt;
+
+
+
+
+            </android.support.constraint.ConstraintLayout>-->
+
+    <!--  </RelativeLayout>-->
+  <!--  </ScrollView>-->
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/VocabGamesConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/vocab_game_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Game Name"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/vocab_game_qn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Vocab Game Qn"
+            android:textSize="16sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_name" />
+
+        <TextView
+            android:id="@+id/vocab_game_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textColor="@android:color/holo_purple"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_qn" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter1"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter2"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter1"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score"
+            tools:maxLength="1" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter3"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter2"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter4"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter3"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter5"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter4"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter6"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter5"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter7"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter6"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter8"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter7"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter9"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter8"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <Button
+            android:id="@+id/vocab_game_hint1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="Hint 1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_letter1" />
+
+        <TextView
+            android:id="@+id/vocab_game_hint_textview1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_hint1"
+            app:layout_constraintRight_toLeftOf="@+id/vocab_game_message_box"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_letter4" />
+
+        <Button
+            android:id="@+id/vocab_game_hint2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/com_facebook_button_background_color_disabled"
+            android:enabled="false"
+            android:text="Hint 2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_hint1" />
+
+        <TextView
+            android:id="@+id/vocab_game_hint_textview2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_hint2"
+            app:layout_constraintRight_toLeftOf="@+id/vocab_game_message_box"
+            app:layout_constraintTop_toTopOf="@+id/vocab_game_hint2" />
+
+        <Button
+            android:id="@+id/vocab_game_hint3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/com_facebook_button_background_color_disabled"
+            android:enabled="false"
+            android:text="Hint 3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_hint2" />
+
+        <TextView
+            android:id="@+id/vocab_game_hint_textview3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_hint3"
+            app:layout_constraintRight_toLeftOf="@+id/vocab_game_message_box"
+            app:layout_constraintTop_toTopOf="@+id/vocab_game_hint3" />
+
+        <Button
+            android:id="@+id/vocab_game_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Submit"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_hint_textview3" />
+
+        <EditText
+            android:id="@+id/vocab_game_letter10"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintLeft_toRightOf="@+id/vocab_game_letter9"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_score" />
+
+        <TextView
+            android:id="@+id/vocab_game_message_box"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vocab_game_hint_textview3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vocab_game_letter10"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
