@@ -20,31 +20,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="10dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/home_quant_section_title"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_height="wrap_content"
                     android:text="MBA Exams"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_gravity="center"
                     android:gravity="center"/>
-                <!--  android:background="#01579B"
-                 android:textColor="#EDE7F6"-->
-<!--                <Button
-                    android:id="@+id/gotoquant3"
-                    android:text="View More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="#03A9F4"
-                    android:textSize="12sp"
-                    android:textAlignment="center"/>-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/blue_img"/>
+
             </LinearLayout>
 <!--            <TextView
                 android:layout_width="match_parent"
@@ -173,21 +168,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="10dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/home_prep_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content"
                     android:text="Preparation Content"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:layout_gravity="center"
                     android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/blue_img"/>
             </LinearLayout>
 
 
@@ -198,17 +198,17 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
-                android:paddingTop="10dp"
-                android:background="#f9a825">
+                android:paddingTop="10dp">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout5"
+                    android:id="@+id/gkLayout"
                     android:layout_width="100dp"
                     android:layout_height="125dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:onClick="activateVideosTab"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -216,18 +216,19 @@
                     android:paddingTop="15dp">
 
                     <ImageView
-                        android:id="@+id/gk_image"
+                        android:id="@+id/home_fragment_gk"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/gk_icon"/>
+                        app:srcCompat="@drawable/videos_img" />
 
                     <TextView
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:gravity="center_horizontal"
-                        android:text="GK Study Material"/>
+                        android:layout_gravity="center"
+                        android:text="Videos"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -242,56 +243,34 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/linearLayout5"
+                    app:layout_constraintLeft_toRightOf="@+id/gkLayout"
                     app:layout_constraintRight_toLeftOf="@+id/homeVocabGame"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:orientation="vertical">
-
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout4"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:onClick="activateVideosTab"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/videos_image"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-
-                            android:layout_gravity="center_horizontal"
-                            app:srcCompat="@drawable/videos_img" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="Videos"/>
-                    </LinearLayout>
+                    android:orientation="vertical"
+                    android:paddingTop="15dp">
 
                     <LinearLayout
                         android:id="@+id/linearLayout3"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_height="match_parent"
                         android:onClick="activateMockTestsTab"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/mock_test_image"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             app:srcCompat="@drawable/mock_test_icon_1" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Mock Tests"/>
+                            android:text="Mock Tests"
+
+                            android:textSize="14sp" />
+
                     </LinearLayout>
-
-
-
 
                 </LinearLayout>
 

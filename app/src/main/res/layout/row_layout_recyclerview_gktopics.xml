@@ -15,7 +15,7 @@
         android:background="@color/com_facebook_button_background_color_disabled">
 
         <TextView
-            android:id="@+id/vocabgamesText"
+            android:id="@+id/gkTopicsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

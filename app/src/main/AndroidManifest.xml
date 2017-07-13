@@ -126,12 +126,16 @@
             android:name=".ExamDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="MBA Entrance Exams"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".VocabGameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VocabGameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Vocabulary Games"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".GKActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="GK Study Material"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

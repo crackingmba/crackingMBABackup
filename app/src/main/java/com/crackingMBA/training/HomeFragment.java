@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private View quantProgressView;
     private View dilrProgressView;
     private View verbalProgressView;
-    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, vocabgameLayout;
+    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, vocabgameLayout, gkLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         iiftLayout=(LinearLayout)rootView.findViewById(R.id.iiftLayout);
         matLayout=(LinearLayout)rootView.findViewById(R.id.matLayout);
         vocabgameLayout=(LinearLayout)rootView.findViewById(R.id.homeVocabGame);
+        //gkLayout=(LinearLayout)rootView.findViewById(R.id.gkLayout);
 
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         iiftLayout.setOnClickListener(examOnClickListener);
         matLayout.setOnClickListener(examOnClickListener);
         vocabgameLayout.setOnClickListener(examOnClickListener);
+        //gkLayout.setOnClickListener(examOnClickListener);
 
         return rootView;
     }
