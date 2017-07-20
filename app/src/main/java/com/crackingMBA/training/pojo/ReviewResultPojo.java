@@ -4,47 +4,31 @@ package com.crackingMBA.training.pojo;
  * Created by MSK on 06-02-2017.
  */
 public class ReviewResultPojo {
-
     private String questionTxt;
-
     private String selectedAnswerTxt;
-
     private String correctAnswerTxt;
+    private String answerExplanation;
 
-    public ReviewResultPojo(){
-
+    public String getAnswerExplanation() {
+        return answerExplanation;
     }
 
-    public ReviewResultPojo(String questionTxt, String selectedAnswerTxt, String correctAnswerTxt) {
+    public ReviewResultPojo(String questionTxt, String selectedAnswerTxt, String correctAnswerTxt, String answerExplanation) {
         this.questionTxt = questionTxt;
         this.selectedAnswerTxt = selectedAnswerTxt;
         this.correctAnswerTxt = correctAnswerTxt;
+        this.answerExplanation=answerExplanation;
     }
 
     public String getQuestionTxt() {
         return questionTxt;
     }
-
-    public void setQuestionTxt(String questionTxt) {
-        this.questionTxt = questionTxt;
-    }
-
     public String getSelectedAnswerTxt() {
         return selectedAnswerTxt;
     }
-
-    public void setSelectedAnswerTxt(String selectedAnswerTxt) {
-        this.selectedAnswerTxt = selectedAnswerTxt;
-    }
-
     public String getCorrectAnswerTxt() {
         return correctAnswerTxt;
     }
-
-    public void setCorrectAnswerTxt(String correctAnswerTxt) {
-        this.correctAnswerTxt = correctAnswerTxt;
-    }
-
     @Override
     public String toString()
     {

@@ -55,7 +55,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/view_scorecard"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 android:layout_gravity="right"
+                android:textColor="#fff"
                 android:onClick="viewScoreCard"/>
 
             <android.support.v7.widget.RecyclerView
@@ -63,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:textAlignment="center"
                 android:scrollbars="none" />
 

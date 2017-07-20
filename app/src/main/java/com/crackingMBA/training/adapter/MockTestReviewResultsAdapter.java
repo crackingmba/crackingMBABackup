@@ -27,15 +27,14 @@ public class MockTestReviewResultsAdapter extends RecyclerView
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView questionTxt;
-        TextView selectedAnswerTxt;
-        TextView correctAnswerTxt;
+        TextView questionTxt, selectedAnswerTxt, correctAnswerTxt, answerExplanationTxt;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             questionTxt = (TextView) itemView.findViewById(R.id.reviewanswers_questionTxt);
             selectedAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_selectedAnswerTxt);
             correctAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_correctAnswerTxt);
+            answerExplanationTxt = (TextView) itemView.findViewById(R.id.reviewanswers_AnswerExplanation);
             itemView.setOnClickListener(this);
         }
 
@@ -74,6 +73,7 @@ public class MockTestReviewResultsAdapter extends RecyclerView
         holder.selectedAnswerTxt.setTextColor(Color.rgb(171,8,0));
         holder.correctAnswerTxt.setText(mDataset.get(position).getCorrectAnswerTxt()+" (Correct Answer)");
         holder.correctAnswerTxt.setTextColor(Color.rgb(63,157,47));
+        holder.answerExplanationTxt.setText(mDataset.get(position).getAnswerExplanation());
     }
 
     public void addItem(ReviewResultPojo dataObj, int index) {

@@ -56,7 +56,7 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
                     new MockTestReviewResultsAdapter.MyClickListener() {
                         @Override
                         public void onItemClick(int position, View v) {
-                            Log.d(TAG, "MockTestReviewResultsAdapter, Clicked item at position : " + position);
+                            //Log.d(TAG, "MockTestReviewResultsAdapter, Clicked item at position : " + position);
                         }
                     }
             );
@@ -65,18 +65,19 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
 
     private ArrayList<ReviewResultPojo> populateReviewResults() {
         ArrayList<ReviewResultPojo> results = new ArrayList<>();
-        ReviewResultPojo vo1 = null;
+        ReviewResultPojo vo1 = null; int count=1;
         for(MockTestQuestion question : VideoApplication.allMockQstns) {
-            vo1 = new ReviewResultPojo(question.getQstnTxt(),question.getSelectedOption(),question.getAnswer());
+            vo1 = new ReviewResultPojo(count+". "+question.getQstnTxt(),question.getSelectedOption(),question.getAnswer(), question.getAnswerExplanation());
             results.add(vo1);
-            Log.d(TAG,"Added : "+vo1);
+            count++;
+            //Log.d(TAG,"Added : "+vo1);
         }
-        Log.d(TAG,"Returning Review results:"+results);
+        //Log.d(TAG,"Returning Review results:"+results);
         return results;
     }
 
     public void viewScoreCard(View v){
-        Log.d(TAG,"Clicked viewScoreCard..");
+        //Log.d(TAG,"Clicked viewScoreCard..");
 //        Intent intent = new Intent(getApplicationContext(),MockTestResultActivity.class);
 //        startActivity(intent);
         finish();
