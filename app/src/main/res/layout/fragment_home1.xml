@@ -169,12 +169,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/home_prep_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content"
                     android:text="Preparation Content"
@@ -190,35 +189,25 @@
                     android:background="@drawable/blue_img"/>
             </LinearLayout>
 
-
-
-<!--Here the boxes for the icons come here -->
-            <!-- Using Constraint Layouts -->
-
-            <android.support.constraint.ConstraintLayout
+            <!-- Preparation Content Section -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:paddingTop="10dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <LinearLayout
                     android:id="@+id/gkLayout"
                     android:layout_width="100dp"
-                    android:layout_height="125dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:onClick="activateVideosTab"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:paddingTop="15dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/home_fragment_gk"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         app:srcCompat="@drawable/videos_img" />
 
@@ -227,50 +216,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
                         android:text="Videos"
                         android:textSize="14sp" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout6"
-                    android:layout_width="0dp"
-                    android:layout_height="125dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/gkLayout"
-                    app:layout_constraintRight_toLeftOf="@+id/homeVocabGame"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:orientation="vertical"
-                    android:paddingTop="15dp">
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:onClick="activateMockTestsTab"
-                        android:orientation="vertical">
+                    android:onClick="activateMockTestsTab">
 
                         <ImageView
                             android:id="@+id/mock_test_image"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             app:srcCompat="@drawable/mock_test_icon_1" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
                             android:text="Mock Tests"
-
                             android:textSize="14sp" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -279,21 +250,15 @@
                 <LinearLayout
                     android:id="@+id/homeVocabGame"
                     android:layout_width="100dp"
-                    android:layout_height="125dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5"
+                    android:visibility="invisible"
                     android:paddingTop="15dp">
 
                     <ImageView
-
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         app:srcCompat="@drawable/vocab_game"/>
 
@@ -303,14 +268,91 @@
                         android:textSize="14sp"
                         android:layout_gravity="center_horizontal"
                         android:text="Vocab Game"/>
-
-
                 </LinearLayout>
 
 
-            </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+            <!-- Preparation Support Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:id="@+id/home_prep_content1"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="Helpdesk"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/blue_img"/>
+            </LinearLayout>
+
+            <!-- Preparation Support Details -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/motivationLayout"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/home_fragment_gk1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/motivation_icon" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Motivation"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+               <!-- <LinearLayout
+                    android:id="@+id/reachoutLayout"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/mock_test_image1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/support" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Reach Out!"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14sp" />
+
+                </LinearLayout>-->
+            </LinearLayout>
 
 
+            <!-- Recycler View Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -334,125 +376,6 @@
 
             </LinearLayout>
 
-
-            <!-- Recent DI and LR Videos section -->
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/home_dilr_section_title"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Recent DI and LR Videos"
-                    android:textSize="16sp"
-                    android:textColor="#01579B"
-                    android:textStyle="bold"/>
-                <Button
-                    android:id="@+id/gotodi3"
-                    android:text="View More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#03A9F4"
-                    android:gravity="center_vertical"
-                    android:textSize="12sp"
-                    android:textAlignment="center"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#455A64"/>
-            <ProgressBar
-                android:id="@+id/recentdiandlrvideos"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:visibility="gone" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/home_latest_dilr_noVideos"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:textAlignment="center"
-                android:text="No DILR videos available."
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/video_recycler_view2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
-
-        </LinearLayout>-->
-
-
-             <!--Recent Verbal Videos section-->
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/home_verbal_section_title"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Recent Verbal Videos"
-                    android:textSize="16sp"
-                    android:textColor="#01579B"
-                    android:textStyle="bold"/>
-                <Button
-                    android:id="@+id/gotolatest3"
-                    android:text="View More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="#03A9F4"
-                    android:textSize="12sp"
-                    android:textAlignment="center"/>
-            </LinearLayout>-->
-            <!--<TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#455A64"/>-->
-            <!-- <ProgressBar
-               android:id="@+id/recentverbalvideos"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />-->
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/home_latest_other_noVideos"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:textAlignment="center"
-                android:text="No Verbal videos available."
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/video_recycler_view3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
-
-        </LinearLayout>-->
             <TextView
                 android:id="@+id/networkstatus"
                 android:layout_width="match_parent"
@@ -465,11 +388,6 @@
                 android:text=""
                 android:textSize="15dp"
                 android:visibility="invisible"/>
-       <!--     <Button
-                android:text="@string/invisible_button"
-                android:visibility="invisible"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />-->
 
         </LinearLayout>
 

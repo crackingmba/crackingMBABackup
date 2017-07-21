@@ -8,8 +8,8 @@ android {
         applicationId "com.crackingMBA.training"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 14
-        versionName "2.8.4"
+        versionCode 15
+        versionName "2.8.5"
     }
     buildTypes {
         release {
@@ -33,6 +33,7 @@ dependencies {
     compile 'io.github.kexanie.library:MathView:0.0.6'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
 }
 
 /*dependencies {
@@ -40,6 +41,12 @@ dependencies {
 }*/
 
 //apply plugin: 'com.google.gms.google-services'
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.crackingMBA.training.MotivationYoutubeDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="top">
+
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:id="@+id/youtube_motivation_video_fragment"
+                android:layout_width="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_height="250dp"/>
+
+            <TextView
+                android:id="@+id/motivation_youtube_video_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video Name"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black_overlay"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/motivation_youtube_video_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video Description"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black_overlay"
+                android:textSize="14sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="center"/>
+
+            <!--<View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#333333"
+                android:layout_gravity="center">
+            </View>
+
+            <TextView
+                android:id="@+id/target_subCategoryFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ratio and Proportion"
+                android:layout_margin="5dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="#0D47A2"
+                android:textSize="18sp"
+                android:layout_gravity="center"/>
+
+            &lt;!&ndash; the layout for the video details starts here &ndash;&gt;
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                &lt;!&ndash; The Title tag &ndash;&gt;
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Title"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:background="#B0BEC5"/>
+
+
+                <TextView
+                    android:id="@+id/target_videotitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ratio and Proportion"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black_overlay"/>
+
+                &lt;!&ndash; The Description tag &ndash;&gt;
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Description"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:background="#B0BEC5"
+                    android:layout_marginTop="25dp"/>
+
+
+                <TextView
+                    android:id="@+id/target_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This video details about the different kinds of concepts in Ratio and Proportion and  what you need to knpw about this topic for preparation"
+                    android:textColor="@color/black_overlay"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"/>
+            </LinearLayout>
+
+            &lt;!&ndash; The invisible TextViews go here &ndash;&gt;
+            <TextView
+                android:id="@+id/target_videoCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_subCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_thumbnailURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_videoYouTubeURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/target_videoDownloadURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAT2017 Preparation Quant Section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:visibility="gone"/>
+        -->
+        </LinearLayout>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

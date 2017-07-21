@@ -131,11 +131,27 @@
             android:name=".VocabGameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Vocabulary Games"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".GKActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GKActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="GK Study Material"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MotivationVideosActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Motivation and Guidance"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MotivationYoutubeDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Motivation and Guidance Video"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ReachOutActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Reach Out!"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

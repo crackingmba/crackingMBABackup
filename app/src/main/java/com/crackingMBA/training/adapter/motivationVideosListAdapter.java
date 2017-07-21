@@ -1,39 +1,37 @@
 package com.crackingMBA.training.adapter;
 
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.pojo.VocabGames;
+import com.crackingMBA.training.pojo.MotivationVideos;
 
 import java.util.List;
 
 /**
- * Created by vijayp on 7/7/17.
+ * Created by vijayp on 7/20/17.
  */
-public class VocabGamesListAdapter extends RecyclerView
-        .Adapter<VocabGamesListAdapter.DataObjectHolder> {
-    private static String LOG_TAG = "VocabGamesListAdapter";
-    private List<VocabGames> mDataset;
-    private static MyClickListener myClickListener;
+
+public class motivationVideosListAdapter extends RecyclerView
+        .Adapter<motivationVideosListAdapter.DataObjectHolder> {
+
+    private static String LOG_TAG = "motivationVideosListAdapter";
+    private List<MotivationVideos> mDataset;
+    private static motivationVideosListAdapter.MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView vocabgamesText;
+        TextView motivationVideosText;
         LinearLayout linlayout;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            vocabgamesText = (TextView) itemView.findViewById(R.id.vocabgamesText);
-            //linlayout=(LinearLayout)itemView.findViewById(R.id.mock_test_subcategories_list);
+            motivationVideosText = (TextView) itemView.findViewById(R.id.motivationText);
             itemView.setOnClickListener(this);
         }
 
@@ -43,30 +41,30 @@ public class VocabGamesListAdapter extends RecyclerView
         }
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
+    public void setOnItemClickListener(motivationVideosListAdapter.MyClickListener myClickListener) {
         this.myClickListener = myClickListener;
     }
 
-    public VocabGamesListAdapter(List<VocabGames> myDataset) {
+    public motivationVideosListAdapter(List<MotivationVideos> myDataset) {
         mDataset = myDataset;
     }
 
     @Override
-    public DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public motivationVideosListAdapter.DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //Log.d(TAG,"in onCreateViewHolder..");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_layout_recyclerview_vocabgames, parent, false);
+                .inflate(R.layout.row_layout_recyclerview_motivation, parent, false);
 
-        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
+        motivationVideosListAdapter.DataObjectHolder dataObjectHolder = new motivationVideosListAdapter.DataObjectHolder(view);
         return dataObjectHolder;
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.vocabgamesText.setText(mDataset.get(position).getName());
+    public void onBindViewHolder(motivationVideosListAdapter.DataObjectHolder holder, int position) {
+        holder.motivationVideosText.setText(mDataset.get(position).getName());
     }
 
-    public void addItem(VocabGames dataObj, int index) {
+    public void addItem(MotivationVideos dataObj, int index) {
         mDataset.add(dataObj);
         notifyItemInserted(index);
     }
@@ -85,4 +83,3 @@ public class VocabGamesListAdapter extends RecyclerView
         public void onItemClick(int position, View v);
     }
 }
-
