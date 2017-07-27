@@ -77,7 +77,7 @@ public class MockTestTopicsAdapter extends RecyclerView
         holder.mocktestTopicId.setText(mDataset.get(position).getId());
        //String mocktestTopicThumbnailURL = mDataset.get(position).getThumbnail();
         holder.mocktestTopicTxt.setText(mDataset.get(position).getName());
-        holder.mockTestTopicThumbnail.setImageResource(R.drawable.applogo);
+        holder.mockTestTopicThumbnail.setImageResource(R.drawable.logo);
 
         String category_name = mDataset.get(position).getCategory_name();
 
