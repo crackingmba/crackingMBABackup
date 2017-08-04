@@ -34,9 +34,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button gotolatest;
     View rootView;
     private static String TAG = "HomeFragment";
-    private View quantProgressView;
-    private View dilrProgressView;
-    private View verbalProgressView;
     LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, vocabgameLayout, gkLayout, motivationLayout, reachoutLayout;
     @Nullable
     @Override

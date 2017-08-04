@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
-    public static final String BASE_URL = "https://api.stackexchange.com";
+    public static final String BASE_URL = "http://www.crackingmba.com";
     private static Retrofit retrofit = null;
 
 

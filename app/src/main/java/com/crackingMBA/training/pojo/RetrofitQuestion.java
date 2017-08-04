@@ -1,28 +1,11 @@
 package com.crackingMBA.training.pojo;
 
-/**
- * Created by vijayp on 8/4/17.
- */
-
 public class RetrofitQuestion {
+    String post_title,posted_by;
     public String getTitle() {
-        return title;
+        return post_title;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    String title;
-    String link;
-
-}
+        return posted_by;
+    }}
 

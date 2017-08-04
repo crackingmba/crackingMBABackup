@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.RetrofitQuestionAdapter;
 import com.crackingMBA.training.pojo.RetrofitQuestion;
@@ -23,20 +27,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by MSK on 24-01-2017.
- */
 public class MyWhatsup extends Fragment implements View.OnClickListener {
 
-    View rootView;
-    TextView textView;
+    View rootView; Button btn, original;
 
     private String TAG = MyWhatsup.class.getSimpleName();
-    ArrayList<HashMap<String, String>> contactList;
     QuestionAPIService apiService;
     RecyclerView recyclerView;
     RetrofitQuestionAdapter adapter;
     List<RetrofitQuestion> questions = new ArrayList<>();
+    Call<RetrofitQuestionList> call;
 
 
     @Nullable
@@ -44,14 +44,47 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_whatsup, container, false);
 
-        contactList = new ArrayList<>();
-
         apiService = RestClient.getClient().create(QuestionAPIService.class);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.questionListRecyclerView);
+        //btn=(Button)rootView.findViewById(R.id.whatsup_refresh_btn);
+        //original=(Button)rootView.findViewById(R.id.whatsup_original);
+
+        Spinner spinner = (Spinner)rootView.findViewById(R.id.spinner);
+            ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
+                    R.array.exams_array, android.R.layout.simple_spinner_item);
+    // Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    // Apply the adapter to the spinner
+            spinner.setAdapter(adapter1);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new RetrofitQuestionAdapter(questions, R.layout.question_item, getContext());
         recyclerView.setAdapter(adapter);
+
+        call = apiService.fetchQuestions("cat");
+
+        View.OnClickListener myClicklistener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questions.clear();
+                call = apiService.fetchQuestions("xat");
+                fetchQuestionList();
+                //Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        View.OnClickListener originalClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questions.clear();
+                call = apiService.fetchQuestions("cat");
+                fetchQuestionList();
+            }
+        };
+
+        //btn.setOnClickListener(myClicklistener);
+        //original.setOnClickListener(originalClickListener);
 
         fetchQuestionList();
 
@@ -59,7 +92,6 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
     }
 
     private void fetchQuestionList() {
-        Call<RetrofitQuestionList> call = apiService.fetchQuestions("android");
         call.enqueue(new Callback<RetrofitQuestionList>() {
             @Override
             public void onResponse(Call<RetrofitQuestionList> call, Response<RetrofitQuestionList> response) {

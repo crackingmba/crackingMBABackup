@@ -99,4 +99,13 @@
     <string name="no_internet">No internet Connectivity. Verify your Network. Please connect to internet to view this section.</string>
 
 
+
+    <string-array name="exams_array">
+        <item>CAT</item>
+        <item>XAT</item>
+        <item>SNAP</item>
+        <item>IIFT</item>
+        <item>NMAT</item>
+        <item>Others</item>
+    </string-array>
 </resources>
