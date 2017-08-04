@@ -20,26 +20,6 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".LoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Login CrackingMBA" />
-        <activity
-            android:name=".LogoutActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".RegistrationActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Registration" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Edit Profile" />
-        <activity
-            android:name=".AskQuestionActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Ask Question" />
-        <activity
             android:name=".ShowAnswerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="My Questions" />
@@ -77,18 +57,6 @@
             android:name=".MockTestReviewAnswersActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Mock Test Review Answer" />
-        <activity
-            android:name=".OTPValidationActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="OTP Validation" />
-        <activity
-            android:name=".ForgotPasswordActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Forgot Password" />
-        <activity
-            android:name=".ChangePasswordActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Change Password" />
         <activity
             android:name=".DashboardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -133,11 +101,6 @@
             android:label="Vocabulary Games"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".GKActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="GK Study Material"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".MotivationVideosActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Motivation and Guidance"
@@ -147,11 +110,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Motivation and Guidance Video"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ReachOutActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Reach Out!"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
     </application>
 
 </manifest>

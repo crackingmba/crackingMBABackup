@@ -1,9 +1,7 @@
 package com.crackingMBA.training.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +10,9 @@ import android.widget.TextView;
 
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.Exam;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.crackingMBA.training.CrackingConstant;
-import com.crackingMBA.training.R;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class ExamAdapter extends RecyclerView
         .Adapter<ExamAdapter.DataObjectHolder> {
@@ -42,16 +23,14 @@ public class ExamAdapter extends RecyclerView
             implements View
             .OnClickListener {
         ImageView exam_thumbnail;
-        TextView exam_name, exam_description, exam_sections, exam_date;
+        TextView exam_name, exam_description, exam_date;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             exam_thumbnail = (ImageView) itemView.findViewById(R.id.exam_thumbnail);
             exam_name = (TextView) itemView.findViewById(R.id.exam_name);
             exam_description = (TextView) itemView.findViewById(R.id.exam_description);
-            //exam_sections = (TextView) itemView.findViewById(R.id.exam_sections);
             exam_date = (TextView) itemView.findViewById(R.id.exam_date);
-            //itemView.setOnClickListener(this);
         }
 
         @Override

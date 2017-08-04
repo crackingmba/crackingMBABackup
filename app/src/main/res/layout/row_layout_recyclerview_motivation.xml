@@ -12,7 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/com_facebook_button_background_color_disabled">
+        android:background="@color/black_overlay">
 
         <TextView
             android:id="@+id/motivationText"
@@ -23,7 +23,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="Vocab Games"
-            android:textColor="@color/com_facebook_button_background_color"
+            android:textColor="@color/black_overlay"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

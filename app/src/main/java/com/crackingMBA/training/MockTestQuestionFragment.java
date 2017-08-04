@@ -18,8 +18,6 @@ import android.widget.TextView;
 import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.pojo.MockTestQuestion;
 
-import io.github.kexanie.library.MathView;
-
 /**
  * Created by MSK on 24-01-2017.
  */
@@ -29,7 +27,7 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
     View rootView;
 
     TextView qstnTxt;
-    MathView mathView;
+    //MathView mathView;
     RadioButton option1, option2,option3,option4;
     ImageView imageView;
 
@@ -47,7 +45,7 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
         qstnTxt.setText(selectedQstn.getQstnNo()+". "+selectedQstn.getQstnTxt());
 
         //the mathjax details here
-        mathView = ((MathView) rootView.findViewById(R.id.id_quiz_mathjax));
+        //mathView = ((MathView) rootView.findViewById(R.id.id_quiz_mathjax));
         imageView=(ImageView)rootView.findViewById(R.id.mock_test_img) ;
 
         String qn_formula=selectedQstn.getQstnFormula();
@@ -57,7 +55,7 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
 
         //mathView.setText("What type of a number is the sum of the following: $${2+\\\\sqrt{3}*\\\\sqrt{8}}$$. After this add some more text in the question here");
         //mathView.setText("Test type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here");
-        mathView.setText(qn_formula.toString());
+        //mathView.setText(qn_formula.toString());
         String mocktestImg=selectedQstn.getQstnImage();
 
         if(mocktestImg.isEmpty()){

@@ -20,16 +20,16 @@
             android:gravity="left"/>
 
 
-        <io.github.kexanie.library.MathView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="15dp"
-            android:id="@+id/id_quiz_mathjax"
-            app:text="What type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here"
-            app:engine="MathJax">
+<!--        <io.github.kexanie.library.MathView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:id="@+id/id_quiz_mathjax"
+        app:text="What type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here"
+        app:engine="MathJax">
 
-        </io.github.kexanie.library.MathView>
+        </io.github.kexanie.library.MathView>-->
 
         <ImageView
             android:layout_width="wrap_content"

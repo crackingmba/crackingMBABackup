@@ -308,8 +308,8 @@ public class VocabGameActivity extends AppCompatActivity {
                                 vocab_game_message_box.setVisibility(View.VISIBLE);
                                 vocab_game_message_box.setBackgroundResource(android.R.color.holo_orange_light);
                                 vocab_game_message_box.setText("You have reached the end of this Vocab Game!");
-                                vocab_game_skip.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
-                                vocab_game_next.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
+                                //vocab_game_skip.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
+                                //vocab_game_next.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
                                 vocab_game_skip.setEnabled(false);
                                 vocab_game_next.setEnabled(false);
                             }
@@ -382,7 +382,7 @@ public class VocabGameActivity extends AppCompatActivity {
 
 
         vocab_game_message_box.setVisibility(View.GONE);
-        vocab_game_next.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
+        //vocab_game_next.setBackgroundResource(R.color.com_facebook_button_background_color_disabled);
         vocab_game_next.setEnabled(false);
         vocab_game_letter1.requestFocus();
 

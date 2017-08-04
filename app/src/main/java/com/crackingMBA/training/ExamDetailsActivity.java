@@ -130,7 +130,5 @@ public class ExamDetailsActivity extends AppCompatActivity {
                 //textView.setText(R.string.no_internet);
             }
 
-
-       // return null;
     }
 }

@@ -2,6 +2,7 @@ package com.crackingMBA.training;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+//import com.bumptech.glide.Glide;
 import com.crackingMBA.training.pojo.VideoDataObject;
 
 import java.util.ArrayList;

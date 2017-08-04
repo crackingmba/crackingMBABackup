@@ -36,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:textColor="@color/com_facebook_blue"
+        android:textColor="@color/black_overlay"
         android:text="Sample Answer Explanation"
         android:gravity="left"/>
 </LinearLayout>

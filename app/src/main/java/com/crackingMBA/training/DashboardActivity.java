@@ -166,8 +166,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                     switch (position){
                         case 0:
-
-                            fragmentClass = HomeFragment.class;
+                            fragmentClass = MyWhatsup.class;
                             break;
                         case 1:
                             fragmentClass = PreparationFragment.class;
@@ -176,10 +175,11 @@ public class DashboardActivity extends AppCompatActivity {
                             fragmentClass = MockTestFragment.class;
                             break;
                         case 3:
-                            fragmentClass = MyWhatsup.class;
-                            break;
-                        default:
                             fragmentClass = HomeFragment.class;
+                            break;
+
+                        default:
+                            fragmentClass = MyWhatsup.class;
                             break;
                     }
 
