@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0077c2</color>
-    <color name="colorPrimaryDark">#004ba0</color>
-    <color name="colorAccent">#FF4081</color>
-
+    <color name="colorPrimary">#424242</color><color name="colorPrimaryDark">#212121</color>
+    <color name="colorAccent">#ffab00</color>
     <color name="black_overlay">#212121</color>
-    <color name="tabBGColor">#C2CDD1</color>
-    <color name="tabFocusBGColor">#67A0D9</color>
-    <color name="tabFontColor">#000000</color>
-    <color name="tabFocusFontColor">#ffffff</color>
-
+    <color name="tabBGColor">#424242</color>
+    <color name="tabFocusBGColor">#fafafa</color>
+    <color name="tabFontColor">#ffffff</color>
+    <color name="tabFocusFontColor">#424242</color>
+    <color name="my_spinner_dd_text_color">#424242</color>
+    <color name="my_spinner_item_text_color">#424242</color>
 </resources>

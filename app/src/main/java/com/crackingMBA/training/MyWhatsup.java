@@ -2,6 +2,7 @@ package com.crackingMBA.training;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -27,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyWhatsup extends Fragment implements View.OnClickListener {
+public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedListener {
 
     View rootView; Button btn, original;
 
@@ -37,6 +39,7 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
     RetrofitQuestionAdapter adapter;
     List<RetrofitQuestion> questions = new ArrayList<>();
     Call<RetrofitQuestionList> call;
+
 
 
     @Nullable
@@ -49,13 +52,20 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
         //btn=(Button)rootView.findViewById(R.id.whatsup_refresh_btn);
         //original=(Button)rootView.findViewById(R.id.whatsup_original);
 
-        Spinner spinner = (Spinner)rootView.findViewById(R.id.spinner);
-            ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
+        Spinner spinner_appln = (Spinner)rootView.findViewById(R.id.spinner_appln);
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
                     R.array.exams_array, android.R.layout.simple_spinner_item);
-    // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    // Apply the adapter to the spinner
-            spinner.setAdapter(adapter1);
+        spinner_appln.setAdapter(adapter1);
+        spinner_appln.setOnItemSelectedListener(this);
+
+        Spinner spinner_prep = (Spinner)rootView.findViewById(R.id.spinner_prep);
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),
+                R.array.prep_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_prep.setAdapter(adapter2);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -82,6 +92,17 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
                 fetchQuestionList();
             }
         };
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab1);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Welcome to this FAB", Toast.LENGTH_SHORT).show();
+                // Click action
+                //Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
+                //startActivity(intent);
+            }
+        });
+
 
         //btn.setOnClickListener(myClicklistener);
         //original.setOnClickListener(originalClickListener);
@@ -95,10 +116,15 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<RetrofitQuestionList>() {
             @Override
             public void onResponse(Call<RetrofitQuestionList> call, Response<RetrofitQuestionList> response) {
-                Log.d(TAG, "Total number of questions fetched : " + response.body().getQuestions().size());
-                questions.addAll(response.body().getQuestions());
-                adapter.notifyDataSetChanged();
+                //Log.d(TAG, "Total number of questions fetched : " + response.body().getQuestions().size());
+                //int response_size = response.body().getQuestions().size();
 
+                if(response.body() == null){
+                    return;
+                }else{
+                    questions.addAll(response.body().getQuestions());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -108,9 +134,19 @@ public class MyWhatsup extends Fragment implements View.OnClickListener {
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String str= parent.getItemAtPosition(position).toString();
+        Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+        if(questions.size()>0){
+            questions.clear();
+        }
+        call = apiService.fetchQuestions(str);
+        fetchQuestionList();
+    }
 
     @Override
-    public void onClick(View v) {
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
