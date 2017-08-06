@@ -42,10 +42,6 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-
-
-
-
         if(null != getIntent() && null!=getIntent().getExtras()){
             String tab = getIntent().getExtras().getString("gotoTab");
             if(null!=tab && ""!=tab){
@@ -59,7 +55,10 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
+
         //Drawable d=getResources().getDrawable(R.drawable.toolbar_bg);
         //getSupportActionBar().setBackgroundDrawable(d);
 

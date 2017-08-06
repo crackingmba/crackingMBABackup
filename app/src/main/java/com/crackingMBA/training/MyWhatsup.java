@@ -1,5 +1,6 @@
 package com.crackingMBA.training;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 
 public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    View rootView; Button btn, original;
+    View rootView;
 
     private String TAG = MyWhatsup.class.getSimpleName();
     QuestionAPIService apiService;
@@ -40,8 +41,6 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
     List<RetrofitQuestion> questions = new ArrayList<>();
     Call<RetrofitQuestionList> call;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -49,9 +48,6 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
 
         apiService = RestClient.getClient().create(QuestionAPIService.class);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.questionListRecyclerView);
-
-        //btn=(Button)rootView.findViewById(R.id.whatsup_refresh_btn);
-        //original=(Button)rootView.findViewById(R.id.whatsup_original);
 
         Spinner spinner_appln = (Spinner)rootView.findViewById(R.id.spinner_appln);
 
@@ -77,6 +73,8 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                     @Override public void onItemClick(View view, int position) {
                         //Toast.makeText(getContext(), "Welcome to the Comments ection", Toast.LENGTH_SHORT).show();
                         //Start a new activity to display the comments
+                        Intent weeksIntent = new Intent(getContext(), ForumCommentsActivity.class);
+                        startActivity(weeksIntent);
 
                     }
                 })
@@ -108,10 +106,6 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                 //startActivity(intent);
             }
         });
-
-
-        //btn.setOnClickListener(myClicklistener);
-        //original.setOnClickListener(originalClickListener);
 
         fetchQuestionList();
 
