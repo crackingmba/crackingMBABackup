@@ -110,6 +110,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Motivation and Guidance Video"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ForumCommentsActivity"></activity>
     </application>
 
 </manifest>

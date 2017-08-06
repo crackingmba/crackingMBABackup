@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.RetrofitQuestionAdapter;
@@ -22,8 +21,9 @@ import com.crackingMBA.training.pojo.RetrofitQuestion;
 import com.crackingMBA.training.pojo.RetrofitQuestionList;
 import com.crackingMBA.training.restAPI.QuestionAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.util.RecyclerItemClickListener;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +49,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
 
         apiService = RestClient.getClient().create(QuestionAPIService.class);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.questionListRecyclerView);
+
         //btn=(Button)rootView.findViewById(R.id.whatsup_refresh_btn);
         //original=(Button)rootView.findViewById(R.id.whatsup_original);
 
@@ -71,6 +72,16 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
 
         adapter = new RetrofitQuestionAdapter(questions, R.layout.question_item, getContext());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        //Toast.makeText(getContext(), "Welcome to the Comments ection", Toast.LENGTH_SHORT).show();
+                        //Start a new activity to display the comments
+
+                    }
+                })
+        );
+
 
         call = apiService.fetchQuestions("cat");
 
@@ -84,14 +95,9 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
             }
         };
 
-        View.OnClickListener originalClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                questions.clear();
-                call = apiService.fetchQuestions("cat");
-                fetchQuestionList();
-            }
-        };
+
+        //comments_tv.setOnClickListener(commentsClickListener);
+
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab1);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +117,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
 
         return rootView;
     }
+
 
     private void fetchQuestionList() {
         call.enqueue(new Callback<RetrofitQuestionList>() {

@@ -12,10 +12,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Admissions: CAT"
+            android:text="Admissions Forum: CAT"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:padding="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
             android:textColor="#212121"
             android:gravity="center"/>
 
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="15dp"
-        android:background="#1976d2"
+        android:background="#848484"
         android:padding="10dp"
         >
         <LinearLayout

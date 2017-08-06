@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crackingMBA.training.R;
 import com.crackingMBA.training.pojo.RetrofitQuestion;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by vijayp on 8/4/17.
  */
 
-public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuestionAdapter.QuestionViewHolder> {
+public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuestionAdapter.QuestionViewHolder>{
     private List<RetrofitQuestion> questions;
     private int rowLayout;
     private Context context;
@@ -38,9 +39,8 @@ public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuesti
 
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
-        holder.positionNumber.setText("Question number : " + String.valueOf(position + 1));
-        holder.questionTitle.setText("Title : " + questions.get(position).getTitle());
-        holder.link.setText("Link : " + questions.get(position).getLink());
+        holder.questionTitle.setText(questions.get(position).getTitle());
+        holder.comments_tv.setText(questions.get(position).getLink());
     }
 
     @Override
@@ -49,17 +49,16 @@ public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuesti
     }
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView positionNumber;
         TextView questionTitle;
-        TextView link;
+        TextView comments_tv;
 
         public QuestionViewHolder(View v) {
             super(v);
-            positionNumber = (TextView) v.findViewById(R.id.positionNumber);
             questionTitle = (TextView) v.findViewById(R.id.title);
-            link = (TextView) v.findViewById(R.id.link);
+            comments_tv = (TextView) v.findViewById(R.id.comments_tv);
         }
     }
+
 
 
 
