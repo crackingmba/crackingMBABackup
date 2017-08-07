@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -23,10 +22,11 @@
         android:orientation="vertical"
         android:padding="10dp">
         <TextView
+            android:id="@+id/comment_postedby_tv"
             android:text="Anirudhha Malpani"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
-            android:textColor="#212121"
+            android:textColor="#424242"
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -38,16 +38,8 @@
             android:paddingRight="10dp"
             android:textSize="14sp"
             android:layout_marginTop="5dp"
-            android:textColor="#424242"
+            android:textColor="#848484"
             />
-        <TextView
-            android:id="@+id/comment_postedby_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="The comments come here"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
     </LinearLayout>
 
 

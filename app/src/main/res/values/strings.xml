@@ -99,6 +99,7 @@
     <string name="no_internet">No internet Connectivity. Verify your Network. Please connect to internet to view this section.</string>
 
     <string-array name="exams_array">
+        <item>Select Exam</item>
         <item>CAT</item>
         <item>XAT</item>
         <item>SNAP</item>
@@ -108,9 +109,10 @@
     </string-array>
 
     <string-array name="prep_array">
-        <item>Quant Prep</item>
-        <item>DI, LR Prep</item>
-        <item>Verbal Prep</item>
-        <item>GK Prep</item>
+        <item>Select Section</item>
+        <item>Quant</item>
+        <item>DI, LR</item>
+        <item>Verbal</item>
+        <item>GK</item>
     </string-array>
 </resources>

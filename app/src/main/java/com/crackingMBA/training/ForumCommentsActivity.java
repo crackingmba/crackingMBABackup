@@ -1,5 +1,6 @@
 package com.crackingMBA.training;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.RetrofitForumCommentAdapter;
@@ -23,6 +25,7 @@ import com.crackingMBA.training.pojo.RetrofitQuestionList;
 import com.crackingMBA.training.restAPI.ForumCommentsAPIService;
 import com.crackingMBA.training.restAPI.QuestionAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -38,16 +41,33 @@ public class ForumCommentsActivity extends AppCompatActivity {
     RetrofitForumCommentAdapter adapter;
     List<RetrofitForumComment> questions = new ArrayList<>();
     Call<RetrofitForumCommentList> call;
+    String posted_by, post_details, post_id;
+    TextView comments_posted_by, comments_post_details, comments_comments_not_added;
+    private ProgressDialog mProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_comments);
 
+        Intent intent = getIntent();
+        posted_by = intent.getStringExtra("POSTED_BY");
+        post_details = intent.getStringExtra("POST_DETAILS");
+        post_id= intent.getStringExtra("POST_ID");
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        comments_posted_by=(TextView)findViewById(R.id.comments_posted_by);
+        comments_post_details=(TextView)findViewById(R.id.comments_post_details);
+        comments_comments_not_added=(TextView)findViewById(R.id.comments_comments_not_added);
+
+        comments_posted_by.setText(posted_by);
+        comments_post_details.setText(post_details);
 
         apiService = RestClient.getClient().create(ForumCommentsAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.forumCommentsRecyclerView);
@@ -57,20 +77,29 @@ public class ForumCommentsActivity extends AppCompatActivity {
         adapter = new RetrofitForumCommentAdapter(questions, R.layout.retrofit_forum_post_comment, ForumCommentsActivity.this);
         recyclerView.setAdapter(adapter);
 
-        call = apiService.fetchPostComments("1");
+        call = apiService.fetchPostComments(post_id);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab2);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ForumCommentsActivity.this, "", Toast.LENGTH_SHORT).show();
-                // Click action
-                //Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
-                //startActivity(intent);
+                //Toast.makeText(ForumCommentsActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
 
-        fetchQuestionList();
+        if(MyUtil.checkConnectivity(getApplicationContext())) {
+
+            MyUtil.showProgressDialog(this);
+            fetchQuestionList();
+        }
+        else{
+            int duration = Toast.LENGTH_LONG;
+            Toast.makeText(this, "Sorry. There is no internet connection!", Toast.LENGTH_SHORT).show();
+            //TextView textView=(TextView)findViewById(R.id.networkstatus);
+            //textView.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     private void fetchQuestionList() {
@@ -79,8 +108,11 @@ public class ForumCommentsActivity extends AppCompatActivity {
             public void onResponse(Call<RetrofitForumCommentList> call, Response<RetrofitForumCommentList> response) {
                 //Log.d(TAG, "Total number of questions fetched : " + response.body().getQuestions().size());
                 //int response_size = response.body().getQuestions().size();
+                MyUtil.hideProgressDialog();
 
                 if(response.body() == null){
+                    Toast.makeText(ForumCommentsActivity.this, "There are no comments here", Toast.LENGTH_SHORT).show();
+                    comments_comments_not_added.setVisibility(View.VISIBLE);
                     return;
                 }else{
                     questions.addAll(response.body().getQuestions());

@@ -28,8 +28,6 @@ public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuesti
         this.context = context;
     }
 
-
-
     @Override
     public RetrofitQuestionAdapter.QuestionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
@@ -40,7 +38,8 @@ public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuesti
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
         holder.questionTitle.setText(questions.get(position).getTitle());
-        holder.comments_tv.setText(questions.get(position).getLink());
+        holder.post_posted_by.setText(questions.get(position).getPostedBy());
+        holder.post_comments.setText(questions.get(position).getCommentCount()+" comments");
     }
 
     @Override
@@ -49,13 +48,13 @@ public class RetrofitQuestionAdapter extends RecyclerView.Adapter<RetrofitQuesti
     }
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView questionTitle;
-        TextView comments_tv;
+        TextView questionTitle, post_posted_by, post_comments;
 
         public QuestionViewHolder(View v) {
             super(v);
             questionTitle = (TextView) v.findViewById(R.id.title);
-            comments_tv = (TextView) v.findViewById(R.id.comments_tv);
+            post_posted_by = (TextView) v.findViewById(R.id.post_posted_by);
+            post_comments = (TextView) v.findViewById(R.id.post_comments);
         }
     }
 
