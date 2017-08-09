@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#0077c2</color><color name="colorPrimaryDark">#536dfe</color>
-    <color name="colorAccent">#ffa000</color>
+    <color name="colorAccent">#1976d2</color>
     <color name="black_overlay">#212121</color>
     <color name="tabBGColor">#0077c2</color>
     <color name="tabFocusBGColor">#fafafa</color>
@@ -9,4 +9,21 @@
     <color name="tabFocusFontColor">#424242</color>
     <color name="my_spinner_dd_text_color">#424242</color>
     <color name="my_spinner_item_text_color">#424242</color>
+
+
+
+
+    <color name="bg_login">#26ae90</color>
+    <color name="bg_register">#2e3237</color>
+    <color name="bg_main">#428bca</color>
+    <color name="white">#ffffff</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#888888</color>
+    <color name="input_register_bg">#3b4148</color>
+    <color name="input_register_hint">#5e6266</color>
+    <color name="btn_login">#26ae90</color>
+    <color name="btn_login_bg">#eceef1</color>
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ff6861</color>
 </resources>

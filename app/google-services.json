@@ -1,33 +1,27 @@
 {
   "project_info": {
-    "project_number": "343997966081",
-    "project_id": "crackingmba-d137a"
+    "project_number": "978044375863",
+    "firebase_url": "https://cmba-user-registration.firebaseio.com",
+    "project_id": "cmba-user-registration",
+    "storage_bucket": "cmba-user-registration.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:343997966081:android:1b4108751214f494",
+        "mobilesdk_app_id": "1:978044375863:android:1b4108751214f494",
         "android_client_info": {
           "package_name": "com.crackingMBA.training"
         }
       },
       "oauth_client": [
         {
-          "client_id": "343997966081-27qqq5d5ag01svcud4346bo9ftj9v2pv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.crackingMBA.training",
-            "certificate_hash": "36d0c7a636b8334d5b76f2eefa175811046a5c98"
-          }
-        },
-        {
-          "client_id": "343997966081-3ht1amevlva8genagtj6t482ghn4e920.apps.googleusercontent.com",
+          "client_id": "978044375863-ep1osmeita2o1k0f69je2ehgj09phtea.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAFA-N8dY5OOIDYI6ExdGcatUN9hOa5LBM"
+          "current_key": "AIzaSyDz_pt5HRfKG3MLfnKbben2fQC5tHMJ1Hc"
         }
       ],
       "services": {
@@ -39,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
