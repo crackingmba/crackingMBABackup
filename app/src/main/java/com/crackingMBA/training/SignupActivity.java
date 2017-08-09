@@ -1,4 +1,5 @@
 package com.crackingMBA.training;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;import android.widget.EditText;import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button signup_btn;
     private ProgressBar signup_progressBar;
     private FirebaseAuth auth;
+    private TextView signup_link_login;
 
     String name;
     String email;
@@ -39,6 +42,8 @@ public class SignupActivity extends AppCompatActivity {
         signup_password = (EditText) findViewById(R.id.signup_password);
         signup_btn = (Button)findViewById(R.id.signup_btn);
         signup_progressBar = (ProgressBar) findViewById(R.id.signup_progressBar);
+        signup_link_login=(TextView)findViewById(R.id.signup_link_login);
+
 
 
         signup_btn.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +96,16 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
+            }
+        });
+
+        signup_link_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
 
             }
         });

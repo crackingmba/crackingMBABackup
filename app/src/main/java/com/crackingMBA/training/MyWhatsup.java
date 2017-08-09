@@ -27,6 +27,7 @@ import com.crackingMBA.training.restAPI.QuestionAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.RecyclerItemClickListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,7 +164,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                 //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 //boolean Islogin = prefs.getBoolean("Islogin", false); // get value of last login status
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+/*                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Boolean UserLoggedIn = prefs.getBoolean("UserLoggedIn", false);
 
                 if(UserLoggedIn){
@@ -172,6 +173,19 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                     Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), SignupActivity.class);
                     startActivity(intent);
+                }*/
+
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                if (auth.getCurrentUser() != null) {
+                    Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_SHORT).show();
+                    //Intent intent = new Intent(getContext(), LoginActivity.class);
+                    //startActivity(intent);
+                    auth.signOut();
+                }else{
+                    Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), SignupActivity.class);
+                    startActivity(intent);
+
                 }
                 //Toast.makeText(getContext(), "Welcome to this FAB", Toast.LENGTH_SHORT).show();
                 // Click action
