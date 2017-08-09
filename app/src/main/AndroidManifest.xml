@@ -120,10 +120,15 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Login/SignUp User"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Login User"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NewPostActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Submit a new post"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

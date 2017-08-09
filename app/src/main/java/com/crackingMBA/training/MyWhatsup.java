@@ -178,6 +178,8 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 if (auth.getCurrentUser() != null) {
                     Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), NewPostActivity.class);
+                    startActivity(intent);
                     //Intent intent = new Intent(getContext(), LoginActivity.class);
                     //startActivity(intent);
                     auth.signOut();

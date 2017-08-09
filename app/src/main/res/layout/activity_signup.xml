@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.crackingMBA.training.ForumCommentsActivity">
+    tools:context="com.crackingMBA.training.SignupActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -34,7 +34,7 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:text="Please login or signup to submit a new post!"
+            android:text="Please login or signup to submit a new post/comment!"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -42,6 +42,7 @@
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="#e64a19" />
 
 
@@ -126,10 +127,11 @@
             <TextView android:id="@+id/signup_link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="18dp"
+                android:textStyle="bold"
                 android:text="Already a member? Login"
                 android:gravity="center"
-                android:textSize="16dip"/>
+                android:textSize="18sp"/>
 
         </LinearLayout>
         <ProgressBar
