@@ -2,7 +2,6 @@ package com.crackingMBA.training;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +12,14 @@ import android.widget.Button;import android.widget.EditText;import android.widge
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.crackingMBA.training.pojo.RetrofitPostResponse;
+import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.restAPI.UserAPIService;
 import com.google.firebase.auth.FirebaseAuth;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
     private EditText signup_name, signup_email, signup_password;
@@ -24,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressBar signup_progressBar;
     private FirebaseAuth auth;
     private TextView signup_link_login;
+    UserAPIService apiService;
 
     String name;
     String email;
@@ -70,8 +74,9 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 signup_progressBar.setVisibility(View.VISIBLE);
+                sendPost(name,email,password);
                 //create user
-                auth.createUserWithEmailAndPassword(email, password)
+               /* auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,20 +88,26 @@ public class SignupActivity extends AppCompatActivity {
                                 ed.putBoolean("UserLoggedIn", true);
                                 ed.commit();
 
-/*                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+*//*                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                                 String username = prefs.getString(KEY_USERNAME, "Default Value if not found");
-                                String password = prefs.getString(KEY_PASSWORD, "");*/
+                                String password = prefs.getString(KEY_PASSWORD, "");*//*
 
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Intent intent = new Intent(SignupActivity.this, NewPostActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    //Intent intent = new Intent(SignupActivity.this, NewPostActivity.class);
+                                    //startActivity(intent);
+                                    Toast.makeText(SignupActivity.this, "The user is registered!", Toast.LENGTH_SHORT).show();
+
+                                    sendPost(name,email,password);
+
+                                    //intent.putExtra("USER_ID",questions.get(position).getPostedBy());
+                                    //intent.putExtra("USER_NAME",questions.get(position).getPostID());
+                                    //finish();
                                 }
                             }
-                        });
+                        });*/
 
             }
         });
@@ -115,10 +126,46 @@ public class SignupActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 
+    public void sendPost(final String name, final String email, String password) {
 
+        apiService = RestClient.getClient().create(UserAPIService.class);
+        apiService.savePost(name, email, password).enqueue(new Callback<RetrofitPostResponse>() {
+            @Override
+            public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
 
+                signup_progressBar.setVisibility(View.GONE);
 
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putBoolean("isUserLoggedIn", true);
+                ed.putString("nameofUser", name);
+                ed.putString("userEmail",email);
+                ed.commit();
+
+                RetrofitPostResponse retrofitPostResponse = response.body();
+
+                if(retrofitPostResponse.getResponse().equals("0")) {
+                    //showResponse(response.body().toString());
+                    Toast.makeText(SignupActivity.this, "The data is not saved to the server", Toast.LENGTH_SHORT).show();
+
+                    //Log.i(TAG, "post submitted to API." + response.body().toString());
+                }else{
+                    Toast.makeText(SignupActivity.this, "The data is saved to the server", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignupActivity.this, NewPostActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                //Log.e(TAG, "Unable to submit post to API.");
+                signup_progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

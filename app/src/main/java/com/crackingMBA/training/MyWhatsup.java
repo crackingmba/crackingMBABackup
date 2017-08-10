@@ -47,6 +47,8 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
     int spinner_counter=0, callingActivityFlag=0, spinner_prep_counter=0, spin_trigger_flag=0;
     Spinner spinner_appln, spinner_prep;
     TextView forum_header;
+    int spinner_appln_selected_item_position=0;
+    int spinner_prep_selected_item_position=0;
 
     @Override
     public void onResume() {
@@ -175,24 +177,43 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                     startActivity(intent);
                 }*/
 
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                if (auth.getCurrentUser() != null) {
-                    Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), NewPostActivity.class);
-                    startActivity(intent);
-                    //Intent intent = new Intent(getContext(), LoginActivity.class);
-                    //startActivity(intent);
-                    auth.signOut();
-                }else{
-                    Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), SignupActivity.class);
-                    startActivity(intent);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
 
+                spinner_appln_selected_item_position=spinner_appln.getSelectedItemPosition();
+                spinner_prep_selected_item_position=spinner_prep.getSelectedItemPosition();
+
+                if(spinner_appln_selected_item_position==0 && spinner_prep_selected_item_position==0){
+                    Toast.makeText(getContext(), "Select a category from drop down list to create a new post", Toast.LENGTH_SHORT).show();
+                }else{
+                    //Toast.makeText(getContext(), "The selected item is "+spinner_appln_selected_item_position+" second pos:  "+spinner_prep_selected_item_position, Toast.LENGTH_SHORT).show();
+                    if (isUserLoggedIn) {
+                        //Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getContext(), NewPostActivity.class);
+                        startActivity(intent);
+
+                        SharedPreferences.Editor ed = prefs.edit();
+                        ed.putBoolean("isUserLoggedIn", false);
+                        if(spinner_appln_selected_item_position>0){
+                            ed.putString("selectedCategory", spinner_appln.getSelectedItem().toString());
+                        }else if(spinner_prep_selected_item_position>0)
+                        {
+                            ed.putString("selectedCategory", spinner_prep.getSelectedItem().toString());
+                        }
+
+                        ed.commit();
+
+                    }else{
+                        //Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), SignupActivity.class);
+                        startActivity(intent);
+
+                    }
                 }
-                //Toast.makeText(getContext(), "Welcome to this FAB", Toast.LENGTH_SHORT).show();
-                // Click action
-                //Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
-                //startActivity(intent);
+
+                //FirebaseAuth auth = FirebaseAuth.getInstance();
+
             }
         });
 

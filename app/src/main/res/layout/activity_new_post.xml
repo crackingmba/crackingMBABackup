@@ -47,59 +47,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:focusableInTouchMode="true"
                 android:padding="10dp">
                 <TextView
-                    android:id="@+id/comments_posted_by"
+                    android:id="@+id/newpost_username"
                     android:text="Anirudhha Malpani"
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:textColor="#212121"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/comments_post_details"
-                    android:text="The post details come here"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:id="@+id/newpost_category"
+                    android:text="Quant"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#1976d2"
                     android:textSize="14sp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#424242"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/newpost_postdetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:inputType="textMultiLine"
+                    android:background="#9e9e9e"
+                    android:gravity="left|top"
+                    android:padding="20dp"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Your text goes here"
                     />
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/newpost_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal"
+                    android:scrollbars="vertical"
+                    android:text="Submit Post"/>
             </LinearLayout>
 
 
+
         </LinearLayout>
-        <View
+<!--        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>-->
 
-        <TextView
-            android:id="@+id/comments_comments_not_added"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:text="There are no comments for this post. Your's could be the first!"
-            android:textColor="#f44336"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/forumCommentsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add" />
 </android.support.design.widget.CoordinatorLayout>
 
