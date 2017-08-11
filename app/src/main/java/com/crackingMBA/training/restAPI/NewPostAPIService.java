@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 public interface NewPostAPIService {
     @POST("/saveNewPostDetails.php")
     @FormUrlEncoded
-    Call<RetrofitPostResponse> savePost(@Field("category") String category,
+    Call<RetrofitPostResponse> saveNewPost(@Field("category") String category,
                                         @Field("postdetails") String postdetails,
                                         @Field("useremail") String useremail);
 }

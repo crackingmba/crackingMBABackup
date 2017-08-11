@@ -114,7 +114,8 @@
             android:name=".ForumCommentsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Forum Post Comments"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".SignupActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

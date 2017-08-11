@@ -39,8 +39,8 @@ public class RetrofitForumCommentAdapter extends RecyclerView.Adapter<RetrofitFo
 
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
-        holder.comment_detail_tv.setText(questions.get(position).getComment_details());
-        holder.comment_postedby_tv.setText(questions.get(position).getPosted_by());
+        holder.comment_detail_tv.setText(questions.get(position).getCommentDetails());
+        holder.comment_postedby_tv.setText(questions.get(position).getPostedBy());
     }
 
     @Override

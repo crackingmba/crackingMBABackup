@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,9 +47,10 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
     Call<RetrofitQuestionList> call;
     int spinner_counter=0, callingActivityFlag=0, spinner_prep_counter=0, spin_trigger_flag=0;
     Spinner spinner_appln, spinner_prep;
-    TextView forum_header;
+    TextView forum_header; Button forum_logout_btn;
     int spinner_appln_selected_item_position=0;
     int spinner_prep_selected_item_position=0;
+    SharedPreferences prefs;
 
     @Override
     public void onResume() {
@@ -67,6 +69,14 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
         if(callingActivityFlag>0){
             spinner_prep_counter=1;
             callingActivityFlag=0;
+        }
+
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            forum_logout_btn.setVisibility(View.VISIBLE);
+        }else{
+            forum_logout_btn.setVisibility(View.GONE);
         }
         //spinner_appln.setSelection(0);
     }
@@ -88,6 +98,26 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
         forum_header=(TextView)rootView.findViewById(R.id.forum_header);
 
         spinner_appln = (Spinner)rootView.findViewById(R.id.spinner_appln);
+        forum_logout_btn = (Button)rootView.findViewById(R.id.forum_logout_btn);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            forum_logout_btn.setVisibility(View.VISIBLE);
+        }else{
+            forum_logout_btn.setVisibility(View.GONE);
+        }
+
+        forum_logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putBoolean("isUserLoggedIn", false);
+                ed.commit();
+                forum_logout_btn.setVisibility(View.GONE);
+            }
+        });
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
                     R.array.exams_array, android.R.layout.simple_spinner_item);
@@ -147,6 +177,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                         //Toast.makeText(getContext(), "Welcome to the Comments ection", Toast.LENGTH_SHORT).show();
                         //Start a new activity to display the comments
                         Intent forumpostIntent = new Intent(getContext(), ForumCommentsActivity.class);
+                        forumpostIntent.putExtra("POSTED_BY_ID",questions.get(position).getPostedById());
                         forumpostIntent.putExtra("POSTED_BY",questions.get(position).getPostedBy());
                         forumpostIntent.putExtra("POST_DETAILS",questions.get(position).getTitle());
                         forumpostIntent.putExtra("POST_ID",questions.get(position).getPostID());
@@ -177,11 +208,14 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                     startActivity(intent);
                 }*/
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
 
                 spinner_appln_selected_item_position=spinner_appln.getSelectedItemPosition();
                 spinner_prep_selected_item_position=spinner_prep.getSelectedItemPosition();
+
+                if(isUserLoggedIn){
+                    forum_logout_btn.setVisibility(View.VISIBLE);
+                }
 
                 if(spinner_appln_selected_item_position==0 && spinner_prep_selected_item_position==0){
                     Toast.makeText(getContext(), "Select a category from drop down list to create a new post", Toast.LENGTH_SHORT).show();
@@ -194,7 +228,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                         startActivity(intent);
 
                         SharedPreferences.Editor ed = prefs.edit();
-                        ed.putBoolean("isUserLoggedIn", false);
+                        //ed.putBoolean("isUserLoggedIn", false);
                         if(spinner_appln_selected_item_position>0){
                             ed.putString("selectedCategory", spinner_appln.getSelectedItem().toString());
                         }else if(spinner_prep_selected_item_position>0)

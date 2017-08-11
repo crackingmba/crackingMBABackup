@@ -73,14 +73,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
                     android:inputType="textMultiLine"
-                    android:background="#9e9e9e"
+                    android:background="#BBDEFB"
                     android:gravity="left|top"
                     android:padding="20dp"
                     android:textSize="15sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:hint="Your text goes here"
-                    />
+                    android:hint="Your text goes here" />
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/newpost_button"
                     android:layout_width="fill_parent"
@@ -93,7 +92,27 @@
                     android:gravity="center_horizontal"
                     android:scrollbars="vertical"
                     android:text="Submit Post"/>
+
+                <TextView
+                    android:id="@+id/newpost_successmsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2E7D32"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:padding="10dp"
+                    android:text="Your Post is successfully submitted!"/>
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/newpost_progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+
 
 
 

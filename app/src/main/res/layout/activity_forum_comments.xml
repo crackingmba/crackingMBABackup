@@ -85,20 +85,58 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:visibility="gone"
+            android:layout_marginLeft="10dp"
             android:text="There are no comments for this post. Your's could be the first!"
             android:textColor="#f44336"/>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/forumCommentsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/newcomment_details"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:inputType="textMultiLine"
+            android:background="#BBDEFB"
+            android:gravity="left|top"
+            android:padding="20dp"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Your comment goes here" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/newcomment_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal"
+            android:scrollbars="vertical"
+            android:text="Submit Comment"/>
+        <ProgressBar
+            android:id="@+id/newcomment_progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone" />
     </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add" />
+</ScrollView>
+    </LinearLayout>
+
+
+
 </android.support.design.widget.CoordinatorLayout>

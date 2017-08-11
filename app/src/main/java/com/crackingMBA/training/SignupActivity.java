@@ -141,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
                 SharedPreferences.Editor ed = prefs.edit();
                 ed.putBoolean("isUserLoggedIn", true);
                 ed.putString("nameofUser", name);
-                ed.putString("userEmail",email);
+                ed.putString("emailofUser",email);
                 ed.commit();
 
                 RetrofitPostResponse retrofitPostResponse = response.body();
