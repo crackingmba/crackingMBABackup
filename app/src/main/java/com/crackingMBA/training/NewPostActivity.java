@@ -69,7 +69,7 @@ public class NewPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(NewPostActivity.this, "Thank you! Your data will be saved!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
                 //startActivity(intent);
                 MyConfig.hideKeyboard(NewPostActivity.this);
                 newpost_progressBar.setVisibility(View.VISIBLE);

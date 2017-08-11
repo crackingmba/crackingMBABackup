@@ -115,9 +115,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Forum Post Comments"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".LoginSignupActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Login/SignUp User"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -126,10 +126,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Login User"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewPostActivity"
+        <activity
+            android:name=".NewPostActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Submit a new post"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SignupActivity"></activity>
     </application>
 
 </manifest>

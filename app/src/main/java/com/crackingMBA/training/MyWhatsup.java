@@ -28,7 +28,6 @@ import com.crackingMBA.training.restAPI.QuestionAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.RecyclerItemClickListener;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,7 +203,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                     Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), SignupActivity.class);
+                    Intent intent = new Intent(getContext(), LoginSignupActivity.class);
                     startActivity(intent);
                 }*/
 
@@ -240,7 +239,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
 
                     }else{
                         //Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(), SignupActivity.class);
+                        Intent intent = new Intent(getContext(), LoginSignupActivity.class);
                         startActivity(intent);
 
                     }

@@ -1,40 +1,30 @@
 package com.crackingMBA.training;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.RetrofitForumCommentAdapter;
-import com.crackingMBA.training.adapter.RetrofitQuestionAdapter;
 import com.crackingMBA.training.pojo.RetrofitForumComment;
 import com.crackingMBA.training.pojo.RetrofitForumCommentList;
 import com.crackingMBA.training.pojo.RetrofitPostResponse;
-import com.crackingMBA.training.pojo.RetrofitQuestion;
-import com.crackingMBA.training.pojo.RetrofitQuestionList;
 import com.crackingMBA.training.restAPI.ForumCommentsAPIService;
 import com.crackingMBA.training.restAPI.NewCommentAPIService;
-import com.crackingMBA.training.restAPI.NewPostAPIService;
-import com.crackingMBA.training.restAPI.QuestionAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
-import com.crackingMBA.training.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +41,19 @@ public class ForumCommentsActivity extends AppCompatActivity {
     List<RetrofitForumComment> questions = new ArrayList<>();
     Call<RetrofitForumCommentList> call;
     String posted_by, post_details, post_id, posted_by_id;
-    TextView comments_posted_by, comments_post_details, comments_comments_not_added, comment_postedby_tv;
-    Button newcomment_button;
+    TextView comments_posted_by, comments_post_details, comments_comments_not_added;
+    Button newcomment_button, forum_comments_signup_btn, forum_comments_login_btn;
     EditText newcomment_details;
-    private ProgressBar newcomment_progressBar;
+    SharedPreferences prefs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_comments);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(ForumCommentsActivity.this);
 
         Intent intent = getIntent();
         posted_by_id = intent.getStringExtra("POSTED_BY_ID");
@@ -78,12 +71,28 @@ public class ForumCommentsActivity extends AppCompatActivity {
         comments_post_details=(TextView)findViewById(R.id.comments_post_details);
         comments_comments_not_added=(TextView)findViewById(R.id.comments_comments_not_added);
         newcomment_button=(Button)findViewById(R.id.newcomment_button);
+        forum_comments_signup_btn=(Button)findViewById(R.id.forum_comments_signup_btn);
+        forum_comments_login_btn=(Button)findViewById(R.id.forum_comments_login_btn);
         newcomment_details=(EditText)findViewById(R.id.newcomment_details);
         //comment_postedby_tv=(TextView)findViewById(R.id.comment_postedby_tv);
 
         comments_posted_by.setText(posted_by);
         comments_post_details.setText(post_details);
         //comment_postedby_tv.setText(posted_by);
+
+
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
+            newcomment_button.setEnabled(true);
+            newcomment_button.setVisibility(View.VISIBLE);
+            //forum_logout_btn.setVisibility(View.VISIBLE);
+        }else{
+            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
+            newcomment_button.setEnabled(false);
+            //forum_logout_btn.setVisibility(View.GONE);
+        }
 
         apiService = RestClient.getClient().create(ForumCommentsAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.forumCommentsRecyclerView);
@@ -111,7 +120,7 @@ public class ForumCommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(NewPostActivity.this, "Thank you! Your data will be saved!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
                 //startActivity(intent);
                 MyConfig.hideKeyboard(ForumCommentsActivity.this);
                 //newcomment_progressBar.setVisibility(View.VISIBLE);
@@ -136,6 +145,55 @@ public class ForumCommentsActivity extends AppCompatActivity {
             }
         });
 
+        newcomment_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(ForumCommentsActivity.this, "Ouch! You just clicked the EditText", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
+                //startActivity(intent);
+
+                Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+                if(isUserLoggedIn){
+  //                  Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
+                    /*newcomment_button.setEnabled(true);
+                    newcomment_button.setVisibility(View.VISIBLE);*/
+                    //forum_logout_btn.setVisibility(View.VISIBLE);
+                }else{
+                    //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
+//                    newcomment_button.setEnabled(false);
+                    MyConfig.hideKeyboard(ForumCommentsActivity.this);
+                    newcomment_details.setText("Oops! Looks like you are not logged in!\n\n Please Sign Up or Login to continue.");
+                    newcomment_details.setTextColor(Color.RED);
+                    newcomment_details.setEnabled(false);
+                    newcomment_button.setVisibility(View.GONE);
+                    forum_comments_signup_btn.setVisibility(View.VISIBLE);
+                    forum_comments_login_btn.setVisibility(View.VISIBLE);
+
+                    //forum_logout_btn.setVisibility(View.GONE);
+                }
+
+
+
+                //newcomment_progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+
+        forum_comments_signup_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForumCommentsActivity.this, LoginSignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        forum_comments_login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForumCommentsActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -206,6 +264,26 @@ public class ForumCommentsActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
+            newcomment_button.setEnabled(true);
+            newcomment_button.setVisibility(View.VISIBLE);
+            forum_comments_signup_btn.setVisibility(View.GONE);
+            forum_comments_login_btn.setVisibility(View.GONE);
+            newcomment_details.setText("");
+            newcomment_details.setEnabled(true);
+            newcomment_details.setTextColor(Color.BLACK);
+        }else{
+            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
+            //newcomment_button.setEnabled(false);
+            //forum_logout_btn.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     @Override

@@ -1,4 +1,5 @@
 package com.crackingMBA.training;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -8,26 +9,28 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;import android.widget.EditText;import android.widget.ProgressBar;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crackingMBA.training.pojo.RetrofitPostResponse;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.restAPI.UserAPIService;
-import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
+
     private EditText signup_name, signup_email, signup_password;
     private Button signup_btn;
     private ProgressBar signup_progressBar;
-    private FirebaseAuth auth;
     private TextView signup_link_login;
     UserAPIService apiService;
+    SharedPreferences prefs;
 
     String name;
     String email;
@@ -38,8 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        prefs = PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
 
         signup_name = (EditText) findViewById(R.id.signup_name);
         signup_email = (EditText) findViewById(R.id.signup_email);
@@ -77,13 +79,13 @@ public class SignupActivity extends AppCompatActivity {
                 sendPost(name,email,password);
                 //create user
                /* auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginSignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 signup_progressBar.setVisibility(View.GONE);
 
-                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginSignupActivity.this);
                                 SharedPreferences.Editor ed = prefs.edit();
                                 ed.putBoolean("UserLoggedIn", true);
                                 ed.commit();
@@ -93,12 +95,12 @@ public class SignupActivity extends AppCompatActivity {
                                 String password = prefs.getString(KEY_PASSWORD, "");*//*
 
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
+                                    Toast.makeText(LoginSignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    //Intent intent = new Intent(SignupActivity.this, NewPostActivity.class);
+                                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
                                     //startActivity(intent);
-                                    Toast.makeText(SignupActivity.this, "The user is registered!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginSignupActivity.this, "The user is registered!", Toast.LENGTH_SHORT).show();
 
                                     sendPost(name,email,password);
 
@@ -137,7 +139,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 signup_progressBar.setVisibility(View.GONE);
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
+
                 SharedPreferences.Editor ed = prefs.edit();
                 ed.putBoolean("isUserLoggedIn", true);
                 ed.putString("nameofUser", name);
@@ -148,13 +150,14 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(retrofitPostResponse.getResponse().equals("0")) {
                     //showResponse(response.body().toString());
-                    Toast.makeText(SignupActivity.this, "The data is not saved to the server", Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(LoginSignupActivity.this, "The data is not saved to the server", Toast.LENGTH_SHORT).show();
+                    //the user is not Signed Up
                     //Log.i(TAG, "post submitted to API." + response.body().toString());
                 }else{
-                    Toast.makeText(SignupActivity.this, "The data is saved to the server", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignupActivity.this, NewPostActivity.class);
-                    startActivity(intent);
+                    //Toast.makeText(LoginSignupActivity.this, "The data is saved to the server", Toast.LENGTH_SHORT).show();
+                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
+                    //startActivity(intent);
+                    //the user is Signed Up
                     finish();
 
                 }

@@ -2,6 +2,8 @@ package com.crackingMBA.training;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,36 +17,37 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.crackingMBA.training.pojo.RetrofitPostResponse;
+import com.crackingMBA.training.restAPI.LoginAPIService;
+import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.restAPI.UserAPIService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText login_email, login_password;
     private Button login_btn;
     private ProgressBar login_progressBar;
     private FirebaseAuth auth;
+    LoginAPIService apiService;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
-
-        if (auth.getCurrentUser() != null) {
-            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            Toast.makeText(this, "The user is already logged in", Toast.LENGTH_SHORT).show();
-            //finish();
-        }
 
         login_email = (EditText) findViewById(R.id.login_email);
         login_password = (EditText) findViewById(R.id.login_password);
@@ -55,9 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideKeyboard(LoginActivity.this);
+                MyConfig.hideKeyboard(LoginActivity.this);
                 String email = login_email.getText().toString();
-                final String password = login_password.getText().toString();
+                String password = login_password.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -69,10 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                login_progressBar.setVisibility(View.VISIBLE);
+                validateLogin(email, password);
+
+                //login_progressBar.setVisibility(View.VISIBLE);
 
                 //authenticate user
-                auth.signInWithEmailAndPassword(email, password)
+               /* auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,7 +99,53 @@ public class LoginActivity extends AppCompatActivity {
                                     //finish();
                                 }
                             }
-                        });
+                        });*/
+            }
+        });
+    }
+
+    public void validateLogin(final String email, final String password) {
+
+        apiService = RestClient.getClient().create(LoginAPIService.class);
+        apiService.validateLogin(email, password).enqueue(new Callback<RetrofitPostResponse>() {
+            @Override
+            public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+
+                //signup_progressBar.setVisibility(View.GONE);
+
+
+/*                SharedPreferences.Editor ed = prefs.edit();
+                ed.putBoolean("isUserLoggedIn", true);
+                ed.putString("nameofUser", name);
+                ed.putString("emailofUser",email);
+                ed.commit();*/
+
+                RetrofitPostResponse retrofitPostResponse = response.body();
+
+                if(retrofitPostResponse.getResponse().equals("0")) {
+                    //showResponse(response.body().toString());
+                    Toast.makeText(LoginActivity.this, "The user cannot be logged in", Toast.LENGTH_SHORT).show();
+                    //the user is not Signed Up
+                    //Log.i(TAG, "post submitted to API." + response.body().toString());
+                }else{
+                    Toast.makeText(LoginActivity.this, "The user is valid", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences.Editor ed = prefs.edit();
+                    ed.putBoolean("isUserLoggedIn", true);
+                    ed.putString("emailofUser",email);
+                    ed.commit();
+                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
+                    //startActivity(intent);
+                    //the user is Signed Up
+                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                //Log.e(TAG, "Unable to submit post to API.");
+                //signup_progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -116,16 +167,5 @@ public class LoginActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
