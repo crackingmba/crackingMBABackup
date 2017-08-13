@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#F5F5F5"
+    android:background="#CFD8DC"
     tools:context="com.crackingMBA.training.ForumCommentsActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -47,7 +47,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/person_img"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,25 +136,26 @@
                     android:layout_margin="10dp"
                     android:visibility="gone"
                     android:text="Login"/>
-
             </LinearLayout>
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/newcomment_details"
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
-                android:inputType="textMultiLine"
-                android:background="#BBDEFB"
+                android:background="#B0BEC5"
                 android:gravity="left|top"
                 android:padding="20dp"
                 android:textSize="15sp"
+                android:inputType="textMultiLine"
+                android:imeOptions="actionNext"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="30dp"
                 android:hint="Your comment goes here" />
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/newcomment_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:padding="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"

@@ -48,8 +48,6 @@ public class SignupActivity extends AppCompatActivity {
         signup_password = (EditText) findViewById(R.id.signup_password);
         signup_btn = (Button)findViewById(R.id.signup_btn);
         signup_progressBar = (ProgressBar) findViewById(R.id.signup_progressBar);
-        signup_link_login=(TextView)findViewById(R.id.signup_link_login);
-
 
 
         signup_btn.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +57,11 @@ public class SignupActivity extends AppCompatActivity {
                 name = signup_name.getText().toString().trim();
                 email = signup_email.getText().toString().trim();
                 password = signup_password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(getApplicationContext(), "Enter name!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -77,50 +80,6 @@ public class SignupActivity extends AppCompatActivity {
 
                 signup_progressBar.setVisibility(View.VISIBLE);
                 sendPost(name,email,password);
-                //create user
-               /* auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(LoginSignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                signup_progressBar.setVisibility(View.GONE);
-
-                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginSignupActivity.this);
-                                SharedPreferences.Editor ed = prefs.edit();
-                                ed.putBoolean("UserLoggedIn", true);
-                                ed.commit();
-
-*//*                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                                String username = prefs.getString(KEY_USERNAME, "Default Value if not found");
-                                String password = prefs.getString(KEY_PASSWORD, "");*//*
-
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(LoginSignupActivity.this, "Authentication failed." + task.getException(),
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
-                                    //startActivity(intent);
-                                    Toast.makeText(LoginSignupActivity.this, "The user is registered!", Toast.LENGTH_SHORT).show();
-
-                                    sendPost(name,email,password);
-
-                                    //intent.putExtra("USER_ID",questions.get(position).getPostedBy());
-                                    //intent.putExtra("USER_NAME",questions.get(position).getPostID());
-                                    //finish();
-                                }
-                            }
-                        });*/
-
-            }
-        });
-
-        signup_link_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);
-
             }
         });
 
@@ -139,25 +98,20 @@ public class SignupActivity extends AppCompatActivity {
 
                 signup_progressBar.setVisibility(View.GONE);
 
-
-                SharedPreferences.Editor ed = prefs.edit();
-                ed.putBoolean("isUserLoggedIn", true);
-                ed.putString("nameofUser", name);
-                ed.putString("emailofUser",email);
-                ed.commit();
-
                 RetrofitPostResponse retrofitPostResponse = response.body();
 
                 if(retrofitPostResponse.getResponse().equals("0")) {
-                    //showResponse(response.body().toString());
-                    //Toast.makeText(LoginSignupActivity.this, "The data is not saved to the server", Toast.LENGTH_SHORT).show();
-                    //the user is not Signed Up
-                    //Log.i(TAG, "post submitted to API." + response.body().toString());
+                }else if(retrofitPostResponse.getResponse().equals("4")) {
+                    Toast.makeText(SignupActivity.this, "Sorry! A user with this email already exists!", Toast.LENGTH_SHORT).show();
                 }else{
-                    //Toast.makeText(LoginSignupActivity.this, "The data is saved to the server", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
-                    //startActivity(intent);
-                    //the user is Signed Up
+                    String user_id=retrofitPostResponse.getResponse();
+
+                    SharedPreferences.Editor ed = prefs.edit();
+                    ed.putBoolean("isUserLoggedIn", true);
+                    ed.putString("nameofUser", name);
+                    ed.putString("emailofUser",email);
+                    ed.putString("userID",user_id);
+                    ed.commit();
                     finish();
 
                 }

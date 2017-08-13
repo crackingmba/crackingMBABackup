@@ -95,17 +95,38 @@
             android:layout_marginTop="20dp"
             android:textColor="#d32f2f"
             android:text="Oops! Looks like you are offline!"/>
-        <Button
-            android:id="@+id/forum_logout_btn"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:visibility="gone"
-            android:padding="5dp"
-            android:textSize="12sp"/>
+            android:layout_marginRight="10dp"
+            >
+
+            <TextView
+                android:id="@+id/forum_user_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="#6A1B9A"
+                android:layout_marginRight="10dp"
+                android:text="Welcome Guest" />
+            <Button
+                android:id="@+id/forum_logout_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:padding="5dp"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/questionListRecyclerView"

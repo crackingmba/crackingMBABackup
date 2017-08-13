@@ -73,33 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 validateLogin(email, password);
-
-                //login_progressBar.setVisibility(View.VISIBLE);
-
-                //authenticate user
-               /* auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                login_progressBar.setVisibility(View.GONE);
-                                if (!task.isSuccessful()) {
-                                    // there was an error
-                                    if (password.length() < 6) {
-                                        login_password.setError(getString(R.string.minimum_password));
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Login is successfully completed!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, NewPostActivity.class);
-                                    startActivity(intent);
-                                    //finish();
-                                }
-                            }
-                        });*/
             }
         });
     }
@@ -111,32 +84,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
 
-                //signup_progressBar.setVisibility(View.GONE);
-
-
-/*                SharedPreferences.Editor ed = prefs.edit();
-                ed.putBoolean("isUserLoggedIn", true);
-                ed.putString("nameofUser", name);
-                ed.putString("emailofUser",email);
-                ed.commit();*/
 
                 RetrofitPostResponse retrofitPostResponse = response.body();
 
                 if(retrofitPostResponse.getResponse().equals("0")) {
-                    //showResponse(response.body().toString());
-                    Toast.makeText(LoginActivity.this, "The user cannot be logged in", Toast.LENGTH_SHORT).show();
-                    //the user is not Signed Up
-                    //Log.i(TAG, "post submitted to API." + response.body().toString());
+                    Toast.makeText(LoginActivity.this, "Sorry! Please check your login credentials", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(LoginActivity.this, "The user is valid", Toast.LENGTH_SHORT).show();
+                    String name_of_user=retrofitPostResponse.getResponse();
+                    String user_id = name_of_user.substring( 0, name_of_user.indexOf(","));
+                    String name_of_the_user = name_of_user.substring(name_of_user.indexOf(",")+1, name_of_user.length());
+                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
                     SharedPreferences.Editor ed = prefs.edit();
                     ed.putBoolean("isUserLoggedIn", true);
+                    ed.putString("nameofUser",name_of_the_user);
                     ed.putString("emailofUser",email);
+                    ed.putString("userID",user_id);
                     ed.commit();
-                    //Intent intent = new Intent(LoginSignupActivity.this, NewPostActivity.class);
-                    //startActivity(intent);
-                    //the user is Signed Up
                     finish();
 
                 }
@@ -144,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                //Log.e(TAG, "Unable to submit post to API.");
-                //signup_progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -161,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
                 this.finish();
                 return true;
             default:

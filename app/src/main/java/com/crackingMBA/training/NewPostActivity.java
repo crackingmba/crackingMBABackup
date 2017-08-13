@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -33,13 +34,14 @@ public class NewPostActivity extends AppCompatActivity {
     NewPostAPIService apiService;
     String nameofUser, emailofUser, selectedCategory;
     private ProgressBar newpost_progressBar;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         nameofUser = prefs.getString("nameofUser", "");
         emailofUser = prefs.getString("emailofUser", "");
         selectedCategory = prefs.getString("selectedCategory", "");
@@ -68,12 +70,17 @@ public class NewPostActivity extends AppCompatActivity {
         newpost_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(NewPostActivity.this, "Thank you! Your data will be saved!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
-                //startActivity(intent);
+                emailofUser = prefs.getString("emailofUser", "");
                 MyConfig.hideKeyboard(NewPostActivity.this);
-                newpost_progressBar.setVisibility(View.VISIBLE);
-                saveNewPost(selectedCategory,newpost_postdetails.getText().toString(), emailofUser);
+
+                String newcomment=newpost_postdetails.getText().toString();
+                if(TextUtils.isEmpty(newcomment)){
+                    Toast.makeText(NewPostActivity.this, "Please enter the details and submit ", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    saveNewPost(selectedCategory,newcomment, emailofUser);
+                }
+
 
             }
         });
@@ -82,7 +89,7 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     public void saveNewPost(final String category, final String postdetails, final String useremail) {
-
+        newpost_progressBar.setVisibility(View.VISIBLE);
         apiService = RestClient.getClient().create(NewPostAPIService.class);
         apiService.saveNewPost(category, postdetails, useremail).enqueue(new Callback<RetrofitPostResponse>() {
             @Override
@@ -93,19 +100,11 @@ public class NewPostActivity extends AppCompatActivity {
                 RetrofitPostResponse retrofitPostResponse = response.body();
 
                 if(retrofitPostResponse.getResponse().equals("0")) {
-                    //showResponse(response.body().toString());
-                    //Toast.makeText(NewPostActivity.this, "The data is not saved to the server", Toast.LENGTH_SHORT).show();
-
-                    //Log.i(TAG, "post submitted to API." + response.body().toString());
                 }else{
                     newpost_successmsg.setVisibility(View.VISIBLE);
                     newpost_button.setEnabled(false);
                     newpost_button.setBackgroundColor(Color.GRAY);
-                    //Toast.makeText(NewPostActivity.this, "The new post is saved to the server", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(NewPostActivity.this, NewPostActivity.class);
-                    //startActivity(intent);
-                    //finish();
-
+                    finish();
                 }
             }
 

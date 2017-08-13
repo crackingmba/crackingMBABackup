@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -44,7 +45,7 @@ public class ForumCommentsActivity extends AppCompatActivity {
     TextView comments_posted_by, comments_post_details, comments_comments_not_added;
     Button newcomment_button, forum_comments_signup_btn, forum_comments_login_btn;
     EditText newcomment_details;
-    SharedPreferences prefs;
+    SharedPreferences prefs;String userID;String nameofUser;
 
 
     @Override
@@ -55,17 +56,19 @@ public class ForumCommentsActivity extends AppCompatActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(ForumCommentsActivity.this);
 
-        Intent intent = getIntent();
-        posted_by_id = intent.getStringExtra("POSTED_BY_ID");
-        posted_by = intent.getStringExtra("POSTED_BY");
-        post_details = intent.getStringExtra("POST_DETAILS");
-        post_id= intent.getStringExtra("POST_ID");
-
+        post_id=prefs.getString("POST_ID", "");
+        post_details=prefs.getString("POST_DETAILS", "");
+        posted_by_id=prefs.getString("POSTED_BY_ID", "");
+        posted_by=prefs.getString("POSTED_BY", "");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+        nameofUser = prefs.getString("nameofUser", "");
+        userID = prefs.getString("userID", "");
 
         comments_posted_by=(TextView)findViewById(R.id.comments_posted_by);
         comments_post_details=(TextView)findViewById(R.id.comments_post_details);
@@ -78,20 +81,12 @@ public class ForumCommentsActivity extends AppCompatActivity {
 
         comments_posted_by.setText(posted_by);
         comments_post_details.setText(post_details);
-        //comment_postedby_tv.setText(posted_by);
-
-
-        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
 
         if(isUserLoggedIn){
-            Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
             newcomment_button.setEnabled(true);
             newcomment_button.setVisibility(View.VISIBLE);
-            //forum_logout_btn.setVisibility(View.VISIBLE);
         }else{
-            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
             newcomment_button.setEnabled(false);
-            //forum_logout_btn.setVisibility(View.GONE);
         }
 
         apiService = RestClient.getClient().create(ForumCommentsAPIService.class);
@@ -110,58 +105,39 @@ public class ForumCommentsActivity extends AppCompatActivity {
             fetchQuestionList();
         }
         else{
-            int duration = Toast.LENGTH_LONG;
             Toast.makeText(this, "Sorry. There is no internet connection!", Toast.LENGTH_SHORT).show();
-            //TextView textView=(TextView)findViewById(R.id.networkstatus);
-            //textView.setVisibility(View.VISIBLE);
         }
 
         newcomment_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(NewPostActivity.this, "Thank you! Your data will be saved!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
-                //startActivity(intent);
                 MyConfig.hideKeyboard(ForumCommentsActivity.this);
-                //newcomment_progressBar.setVisibility(View.VISIBLE);
-
+                userID = prefs.getString("userID", "");
 
                 if(MyUtil.checkConnectivity(ForumCommentsActivity.this)) {
-                    MyUtil.showProgressDialog(ForumCommentsActivity.this);
-                    saveNewComment(post_id, newcomment_details.getText().toString(), posted_by_id);
+
+                    String newcomment = newcomment_details.getText().toString();
+
+                    if(TextUtils.isEmpty(newcomment)){
+                        Toast.makeText(ForumCommentsActivity.this, "Please enter a comment and submit ", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else{
+                        saveNewComment(post_id, newcomment, userID);
+                    }
                 }
                 else{
                     Toast.makeText(ForumCommentsActivity.this, "Sorry. There is no internet connection!", Toast.LENGTH_SHORT).show();
-                    //((ImageView)rootView.findViewById(R.id.offline_img)).setVisibility(View.VISIBLE);
-                    //((TextView)rootView.findViewById(R.id.offline_msg_tv)).setVisibility(View.VISIBLE);
-                    //TextView textView=(TextView)findViewById(R.id.networkstatus);
-                    //textView.setVisibility(View.VISIBLE);
                 }
-
-
-
-
-
             }
         });
 
         newcomment_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(ForumCommentsActivity.this, "Ouch! You just clicked the EditText", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
-                //startActivity(intent);
-
                 Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
 
                 if(isUserLoggedIn){
-  //                  Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
-                    /*newcomment_button.setEnabled(true);
-                    newcomment_button.setVisibility(View.VISIBLE);*/
-                    //forum_logout_btn.setVisibility(View.VISIBLE);
                 }else{
-                    //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
-//                    newcomment_button.setEnabled(false);
                     MyConfig.hideKeyboard(ForumCommentsActivity.this);
                     newcomment_details.setText("Oops! Looks like you are not logged in!\n\n Please Sign Up or Login to continue.");
                     newcomment_details.setTextColor(Color.RED);
@@ -169,13 +145,7 @@ public class ForumCommentsActivity extends AppCompatActivity {
                     newcomment_button.setVisibility(View.GONE);
                     forum_comments_signup_btn.setVisibility(View.VISIBLE);
                     forum_comments_login_btn.setVisibility(View.VISIBLE);
-
-                    //forum_logout_btn.setVisibility(View.GONE);
                 }
-
-
-
-                //newcomment_progressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -194,11 +164,10 @@ public class ForumCommentsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void saveNewComment(final String post_id, final String newcomment_details, final String posted_by_id) {
+        MyUtil.showProgressDialog(ForumCommentsActivity.this);
 
         newCommentService = RestClient.getClient().create(NewCommentAPIService.class);
         newCommentService.saveNewComment(post_id, newcomment_details, posted_by_id).enqueue(new Callback<RetrofitPostResponse>() {
@@ -210,26 +179,16 @@ public class ForumCommentsActivity extends AppCompatActivity {
                 RetrofitPostResponse retrofitPostResponse = response.body();
 
                 if(retrofitPostResponse.getResponse().equals("0")) {
-                    //showResponse(response.body().toString());
-                    Toast.makeText(ForumCommentsActivity.this, "The new comment is not saved to the server", Toast.LENGTH_SHORT).show();
-
-                    //Log.i(TAG, "post submitted to API." + response.body().toString());
+                    Toast.makeText(ForumCommentsActivity.this, "Sorry! Your comment is not saved", Toast.LENGTH_SHORT).show();
                 }else{
-                    //newpost_successmsg.setVisibility(View.VISIBLE);
-                    //newpost_button.setEnabled(false);
-                    //newpost_button.setBackgroundColor(Color.GRAY);
-                    Toast.makeText(ForumCommentsActivity.this, "The new comment is saved to the server", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(NewPostActivity.this, NewPostActivity.class);
-                    //startActivity(intent);
-                    //finish();
+                    Toast.makeText(ForumCommentsActivity.this, "Thanks! Your comment is saved!", Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }
             }
 
             @Override
             public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                //Log.e(TAG, "Unable to submit post to API.");
-                //newpost_progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -238,12 +197,9 @@ public class ForumCommentsActivity extends AppCompatActivity {
         call.enqueue(new Callback<RetrofitForumCommentList>() {
             @Override
             public void onResponse(Call<RetrofitForumCommentList> call, Response<RetrofitForumCommentList> response) {
-                //Log.d(TAG, "Total number of questions fetched : " + response.body().getQuestions().size());
-                //int response_size = response.body().getQuestions().size();
                 MyUtil.hideProgressDialog();
 
                 if(response.body() == null){
-                    //Toast.makeText(ForumCommentsActivity.this, "There are no comments here", Toast.LENGTH_SHORT).show();
                     comments_comments_not_added.setVisibility(View.VISIBLE);
                     return;
                 }else{
@@ -254,7 +210,6 @@ public class ForumCommentsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RetrofitForumCommentList> call, Throwable t) {
-                //Log.e(TAG, "Got error : " + t.getLocalizedMessage());
             }
         });
     }
@@ -268,7 +223,6 @@ public class ForumCommentsActivity extends AppCompatActivity {
         Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
 
         if(isUserLoggedIn){
-            Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
             newcomment_button.setEnabled(true);
             newcomment_button.setVisibility(View.VISIBLE);
             forum_comments_signup_btn.setVisibility(View.GONE);
@@ -277,13 +231,7 @@ public class ForumCommentsActivity extends AppCompatActivity {
             newcomment_details.setEnabled(true);
             newcomment_details.setTextColor(Color.BLACK);
         }else{
-            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
-            //newcomment_button.setEnabled(false);
-            //forum_logout_btn.setVisibility(View.GONE);
         }
-
-
-
     }
 
     @Override

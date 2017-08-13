@@ -41,14 +41,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.google.firebase:firebase-auth:9.2.1'
+    compile 'com.google.firebase:firebase-messaging:9.2.1'
 }
-
-/*dependencies {
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-}*/
-
-//apply plugin: 'com.google.gms.google-services'
-
 
 apply plugin: 'com.google.gms.google-services'
 
