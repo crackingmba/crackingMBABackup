@@ -176,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content"
-                    android:text="Preparation Content"
+                    android:text="GK Study Material"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -197,6 +197,79 @@
                 android:padding="10dp">
 
                 <LinearLayout
+                    android:id="@+id/home_fragment_iift_gk_layout"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/home_fragment_iift_gk_iv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/iift2017"/>
+
+                    <TextView
+                        android:id="@+id/home_fragment_iift_gk_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="IIFT GK"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_fragment_snap_gk_layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/home_fragment_snap_gk_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/snap2017" />
+
+                <TextView
+                    android:id="@+id/home_fragment_snap_gk_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="SNAP GK"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_fragment_general_gk_layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/home_fragment_general_gk_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/vocab_game" />
+
+                <TextView
+                    android:id="@+id/home_fragment_general_gk_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="GK Study Material"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+<!--                <LinearLayout
                     android:id="@+id/gkLayout"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -219,9 +292,9 @@
                         android:layout_marginTop="10dp"
                         android:text="Videos"
                         android:textSize="14sp" />
-                </LinearLayout>
+                </LinearLayout>-->
 
-                <LinearLayout
+<!--                <LinearLayout
                     android:id="@+id/linearLayout6"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -243,11 +316,11 @@
                             android:text="Mock Tests"
                             android:textSize="14sp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:id="@+id/homeVocabGame"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -268,7 +341,7 @@
                         android:textSize="14sp"
                         android:layout_gravity="center_horizontal"
                         android:text="Vocab Game"/>
-                </LinearLayout>
+                </LinearLayout>-->
 
 
             </LinearLayout>

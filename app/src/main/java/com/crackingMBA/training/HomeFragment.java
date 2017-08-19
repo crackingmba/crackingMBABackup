@@ -22,19 +22,12 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
     RecyclerView quantRecyclerView;
-    RecyclerView dilrRecyclerView;
-    RecyclerView verbalRecyclerView;
-    RecyclerView.Adapter quantAdapter;
-    RecyclerView.Adapter dilrAdapter;
-    RecyclerView.Adapter verbalAdapter;
     boolean isMock;
 
-    Button gotoquantBtn;
-    Button gotodi;
-    Button gotolatest;
     View rootView;
     private static String TAG = "HomeFragment";
-    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, vocabgameLayout, gkLayout, motivationLayout, reachoutLayout;
+    LinearLayout catLayout, xatLayout, snapLayout, iiftLayout, matLayout, motivationLayout;
+    LinearLayout home_fragment_iift_gk_layout,home_fragment_snap_gk_layout, home_fragment_gk_layout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -47,10 +40,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         snapLayout=(LinearLayout)rootView.findViewById(R.id.snapLayout);
         iiftLayout=(LinearLayout)rootView.findViewById(R.id.iiftLayout);
         matLayout=(LinearLayout)rootView.findViewById(R.id.matLayout);
-        vocabgameLayout=(LinearLayout)rootView.findViewById(R.id.homeVocabGame);
-        vocabgameLayout=(LinearLayout)rootView.findViewById(R.id.homeVocabGame);
         motivationLayout=(LinearLayout)rootView.findViewById(R.id.motivationLayout);
-        //reachoutLayout=(LinearLayout)rootView.findViewById(R.id.reachoutLayout);
+        home_fragment_iift_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_gk_layout);
+        home_fragment_snap_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_gk_layout);
+        home_fragment_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_general_gk_layout);
 
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
@@ -88,12 +81,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     }
 
-                    case R.id.homeVocabGame:{
+     /*               case R.id.homeVocabGame:{
                         Intent vocabGame = new Intent(getActivity(), VocabGameActivity.class);
                         vocabGame.putExtra("VOCAB_GAME", "NMAT");
                         startActivity(vocabGame);
                         break;
-                    }
+                    }*/
 
                     case R.id.motivationLayout:{
                         Intent motivationIntent = new Intent(getActivity(), MotivationVideosActivity.class);
@@ -101,11 +94,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     }
 
-/*                    case R.id.reachoutLayout:{
-                        Intent reachoutIntent = new Intent(getActivity(), ReachOutActivity.class);
-                        startActivity(reachoutIntent);
+                    case R.id.home_fragment_iift_gk_layout:{
+                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
+                        intent.putExtra("PREP_CATEGORY_CODE","IIFTGK");
+                        intent.putExtra("PREP_CATEGORY_HEADER","IIFT Previous Year GK");
+                        startActivity(intent);
                         break;
-                    }*/
+                    }
+
+                    case R.id.home_fragment_snap_gk_layout:{
+                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
+                        intent.putExtra("PREP_CATEGORY_CODE","SNAPGK");
+                        intent.putExtra("PREP_CATEGORY_HEADER","SNAP Previous Year GK");
+                        startActivity(intent);
+                        break;
+                    }
+
+                    case R.id.home_fragment_general_gk_layout:{
+                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
+                        intent.putExtra("PREP_CATEGORY_CODE","GK");
+                        intent.putExtra("PREP_CATEGORY_HEADER","GK Study Material");
+                        startActivity(intent);
+                        break;
+                    }
 
                 }
             }
@@ -116,9 +127,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         snapLayout.setOnClickListener(examOnClickListener);
         iiftLayout.setOnClickListener(examOnClickListener);
         matLayout.setOnClickListener(examOnClickListener);
-        vocabgameLayout.setOnClickListener(examOnClickListener);
+        //vocabgameLayout.setOnClickListener(examOnClickListener);
         motivationLayout.setOnClickListener(examOnClickListener);
-        //reachoutLayout.setOnClickListener(examOnClickListener);
+        home_fragment_iift_gk_layout.setOnClickListener(examOnClickListener);
+        home_fragment_snap_gk_layout.setOnClickListener(examOnClickListener);
+        home_fragment_gk_layout.setOnClickListener(examOnClickListener);
 
         return rootView;
     }

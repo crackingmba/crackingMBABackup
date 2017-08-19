@@ -8,8 +8,8 @@ android {
         applicationId "com.crackingMBA.training"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 15
-        versionName "2.8.5"
+        versionCode 18
+        versionName "2.8.8"
     }
     buildTypes {
         debug {
@@ -19,9 +19,7 @@ android {
         }
 
         release {
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 }
@@ -45,6 +43,8 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+
 
 
 

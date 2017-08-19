@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
-        <item>Forum</item>
+        <item>Dashboard</item>
         <item>Videos</item>
         <item>Mock Tests</item>
-        <item>Whats Up!</item>
-
+        <item>Forum</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->

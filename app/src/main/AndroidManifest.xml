@@ -131,7 +131,20 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Submit a new post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignupActivity"></activity>
+        <activity
+            android:name=".SignupActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Submit a new post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PreparationContentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Preparation Content"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PreparationDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Preparation Content"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>
