@@ -2,9 +2,11 @@ package com.crackingMBA.training;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 //import com.bumptech.glide.Glide;
+import com.crackingMBA.training.adapter.ImageSliderAdapter;
 import com.crackingMBA.training.pojo.VideoDataObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by MSK on 24-01-2017.
@@ -23,6 +30,10 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     RecyclerView quantRecyclerView;
     boolean isMock;
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static final Integer[] XMEN= {R.drawable.motivation_img,R.drawable.motivation_img,R.drawable.motivation_img,R.drawable.motivation_img,R.drawable.motivation_img};
+    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     View rootView;
     private static String TAG = "HomeFragment";
@@ -44,6 +55,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         home_fragment_iift_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_gk_layout);
         home_fragment_snap_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_gk_layout);
         home_fragment_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_general_gk_layout);
+        if(XMENArray.size()>0){XMENArray.clear();}
+        init();
 
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
@@ -80,13 +93,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         startActivity(examDetails);
                         break;
                     }
-
-     /*               case R.id.homeVocabGame:{
-                        Intent vocabGame = new Intent(getActivity(), VocabGameActivity.class);
-                        vocabGame.putExtra("VOCAB_GAME", "NMAT");
-                        startActivity(vocabGame);
-                        break;
-                    }*/
 
                     case R.id.motivationLayout:{
                         Intent motivationIntent = new Intent(getActivity(), MotivationVideosActivity.class);
@@ -134,6 +140,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         home_fragment_gk_layout.setOnClickListener(examOnClickListener);
 
         return rootView;
+    }
+
+    private void init() {
+        for(int i=0;i<XMEN.length;i++)
+            XMENArray.add(XMEN[i]);
+
+        mPager = (ViewPager)rootView.findViewById(R.id.imagesliderViewPager);
+        mPager.setAdapter(new ImageSliderAdapter(getContext(),XMENArray));
+        CircleIndicator indicator = (CircleIndicator)rootView.findViewById(R.id.circleIndicator);
+        indicator.setViewPager(mPager);
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == XMEN.length) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+/*        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);*/
     }
 
     @Override
