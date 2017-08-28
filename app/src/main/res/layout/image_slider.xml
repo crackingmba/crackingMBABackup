@@ -11,6 +11,6 @@
         android:adjustViewBounds="true"
         android:layout_gravity="center"
         android:src="@drawable/iift2017"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"/>
 
 </FrameLayout>
