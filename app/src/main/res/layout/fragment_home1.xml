@@ -18,48 +18,90 @@
             android:gravity="top"
             android:layout_margin="5dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/home_quant_section_title"
-                    android:layout_width="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:layout_height="wrap_content"
-                    android:text="Key Offerings"
-                    android:textColor="#424242"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@drawable/blue_img"/>
-
-            </LinearLayout>
-
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="#33691E"
                 android:layout_margin="10dp">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="@drawable/notice_board"
+                    android:orientation="vertical"
+                    android:paddingTop="40dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:text="Free Online Sessions"
-                        android:textColor="#ffffff"
-                        android:gravity="center"/>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/pin_blue"
+                            />
+
+                        <TextView
+                            android:id="@+id/notice_board_tv1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="New videos added"
+                            android:textColor="#ffffff"
+                            android:gravity="left"
+                            android:textSize="12sp"
+                            android:textIsSelectable="true"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/pin_blue"
+                            />
+
+                        <TextView
+                            android:id="@+id/notice_board_tv2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="New mock tests added"
+                            android:textColor="#ffffff"
+                            android:gravity="left"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/pin_blue"
+                            />
+
+                        <TextView
+                            android:id="@+id/notice_board_tv3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Updated forum comments"
+                            android:textColor="#ffffff"
+                            android:gravity="left"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
@@ -70,6 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="#BBDEFB"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -84,8 +128,8 @@
                         android:background="#fff"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="270dp"
-                            android:layout_height="150dp"
+                            android:layout_width="180dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/online_sessions"/>
                     </LinearLayout>
@@ -97,8 +141,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="270dp"
-                            android:layout_height="150dp"
+                            android:layout_width="180dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/study_material"/>
                     </LinearLayout>
@@ -110,8 +154,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="270dp"
-                            android:layout_height="150dp"
+                            android:layout_width="180dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/videos_hor_slider"/>
                     </LinearLayout>
@@ -123,8 +167,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="270dp"
-                            android:layout_height="150dp"
+                            android:layout_width="180dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/mock_tests"/>
                     </LinearLayout>
@@ -136,8 +180,8 @@
                         android:layout_marginLeft="10dp"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="270dp"
-                            android:layout_height="150dp"
+                            android:layout_width="180dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/forum_hor_slider"/>
                     </LinearLayout>
@@ -147,114 +191,188 @@
 
             </HorizontalScrollView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="Found this app useful?"
+                    android:textColor="#212121"
+                    android:textSize="15sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/high_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toLeftOf="@+id/view"
+                        android:text="Yes! Give us a High 5"/>
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_centerHorizontal="true" />
+
+                    <Button
+                        android:id="@+id/share_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_toRightOf="@+id/view"
+                        android:padding="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="Share Feedback"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:padding="5dp"
                 android:layout_height="match_parent">
+
+
+<!--                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/blue_img"/>-->
+            </LinearLayout>
+
+            <!-- Preparation Content Section -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="#1565C0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
                 <TextView
                     android:id="@+id/home_prep_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content"
                     android:text="GK Study Material"
-                    android:textColor="#333333"
+                    android:textColor="#ffffff"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     android:gravity="center"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@drawable/blue_img"/>
-            </LinearLayout>
-
-            <!-- Preparation Content Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:padding="10dp">
-
                 <LinearLayout
-                    android:id="@+id/home_fragment_iift_gk_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
 
-                    <ImageView
-                        android:id="@+id/home_fragment_iift_gk_iv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/iift2017" />
+                    <LinearLayout
+                        android:id="@+id/home_fragment_iift_gk_layout"
+                        android:layout_width="75dp"
+                        android:layout_height="90dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_margin="10dp">
 
-                    <TextView
-                        android:id="@+id/home_fragment_iift_gk_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="IIFT GK"
-                        android:textSize="14sp" />
+                        <ImageView
+                            android:id="@+id/home_fragment_iift_gk_iv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/iift2017" />
+
+                        <TextView
+                            android:id="@+id/home_fragment_iift_gk_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:text="IIFT GK"
+                            android:textColor="#212121"
+                            android:textSize="12sp" />
+                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/home_fragment_snap_gk_layout"
+                        android:layout_width="75dp"
+                        android:layout_height="90dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:id="@+id/home_fragment_snap_gk_iv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/snap2017" />
+
+                        <TextView
+                            android:id="@+id/home_fragment_snap_gk_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:text="SNAP GK"
+                            android:textColor="#212121"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/home_fragment_general_gk_layout"
+                        android:layout_width="75dp"
+                        android:layout_height="90dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:id="@+id/home_fragment_general_gk_iv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/vocab_game" />
+
+                        <TextView
+                            android:id="@+id/home_fragment_general_gk_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:text="Current Affairs"
+                            android:textColor="#212121"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/home_fragment_snap_gk_layout"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/home_fragment_snap_gk_iv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/snap2017" />
-
-                <TextView
-                    android:id="@+id/home_fragment_snap_gk_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="SNAP GK"
-                    android:textSize="14sp" />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/home_fragment_general_gk_layout"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/home_fragment_general_gk_iv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/vocab_game" />
-
-                <TextView
-                    android:id="@+id/home_fragment_general_gk_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="GK Study Material"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            </LinearLayout>
+        </android.support.v7.widget.CardView>
             <!-- Preparation Support Section -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="match_parent"
@@ -275,10 +393,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@drawable/blue_img"/>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <!-- Preparation Support Details -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -331,7 +449,7 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
 
             <!-- Recycler View Section -->

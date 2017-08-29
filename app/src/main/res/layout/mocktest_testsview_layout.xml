@@ -57,7 +57,7 @@ android:layout_margin="5dp"
         android:textSize="20sp"
         android:layout_gravity="center_vertical"
         android:layout_margin="3dp"
-        android:textColor="#202727"
+        android:textColor="#E3F2FD"
         android:textStyle="bold"
         />
     <!-- The invisible layouts go here -->

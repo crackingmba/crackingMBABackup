@@ -87,11 +87,11 @@ public class MockTestTopicsAdapter extends RecyclerView
                 break;
             }
             case "dilr":{
-                holder.linlayout.setBackgroundResource(R.drawable.mock_test_dilr_bg);
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_quant_bg);
                 break;
             }
             case "verbal":{
-                holder.linlayout.setBackgroundResource(R.drawable.mock_test_verbal_bg);
+                holder.linlayout.setBackgroundResource(R.drawable.mock_test_quant_bg);
                 break;
             }
 

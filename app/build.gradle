@@ -8,8 +8,8 @@ android {
         applicationId "com.crackingMBA.training"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 18
-        versionName "2.8.8"
+        versionCode 20
+        versionName "2.8.9"
     }
     buildTypes {
         debug {
@@ -43,6 +43,7 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
 
 
 

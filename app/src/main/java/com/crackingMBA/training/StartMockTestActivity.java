@@ -50,7 +50,7 @@ public class StartMockTestActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.mocktest_test_title)).setText(test.getTestTitle());
         mock_test_rules=(TextView)findViewById(R.id.quiz_rules);
         String htmltext="<h2>Rules</h2><p>Please follow the following instructions carefully before attempting the test</p>" +
-                "<p>1. There are 10 questions in this test.</p>" +
+                "<p>1. Please read the question carefully and answer from the options</p>" +
                 "<p>2. Each correct answer carries 1 mark</p>" +
                 "<p>3. Each incorrect answer carries -1/4 mark</p>"+
                 "<p>4. This is a timed test. After 10 minutes the test will stop and your score will be displayed.</p>";

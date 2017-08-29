@@ -61,7 +61,7 @@ android:padding="5dp">
                         android:textSize="20sp"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="3dp"
-                        android:textColor="#202727"
+                        android:textColor="#E3F2FD"
                         />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -85,7 +85,7 @@ android:padding="5dp">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:background="@drawable/mock_test_dilr_bg"
+                android:background="@drawable/mock_test_quant_bg"
                 android:orientation="horizontal">
 
                 <TextView
@@ -96,7 +96,7 @@ android:padding="5dp">
                     android:textSize="20sp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="3dp"
-                    android:textColor="#202727"
+                    android:textColor="#E3F2FD"
                     />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -119,7 +119,7 @@ android:padding="5dp">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:background="@drawable/mock_test_verbal_bg"
+                android:background="@drawable/mock_test_quant_bg"
                 android:orientation="horizontal">
 
                 <TextView
@@ -130,7 +130,7 @@ android:padding="5dp">
                     android:textSize="20sp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="3dp"
-                    android:textColor="#202727"
+                    android:textColor="#E3F2FD"
                     />
             </LinearLayout>
         </android.support.v7.widget.CardView>

@@ -141,10 +141,15 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Preparation Content"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PreparationDetailsActivity"
+        <activity
+            android:name=".PreparationDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Preparation Content"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FeedbackActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Help us improve!"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
