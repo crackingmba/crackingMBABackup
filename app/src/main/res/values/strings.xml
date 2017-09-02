@@ -98,11 +98,9 @@
     <string-array name="exams_array">
         <item>Select Exam</item>
         <item>CAT</item>
-        <item>XAT</item>
-        <item>SNAP</item>
         <item>IIFT</item>
-        <item>NMAT</item>
-        <item>Others</item>
+        <item>SNAP</item>
+        <item>XAT</item>
     </string-array>
 
     <string-array name="prep_array">
