@@ -175,17 +175,48 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
 
 
             prep_study1_tv.setOnClickListener(this);
+            prep_study2_tv.setOnClickListener(this);
+            prep_study3_tv.setOnClickListener(this);
+            prep_study4_tv.setOnClickListener(this);
+            prep_study5_tv.setOnClickListener(this);
+            prep_study6_tv.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == prep_study1_tv.getId()){
-                Toast.makeText(v.getContext(), String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(v.getContext(), String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                    String tempStr=String.valueOf(getAdapterPosition())+"1";
+                    listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
                 }
+            if (v.getId() == prep_study2_tv.getId()){
+                //Toast.makeText(v.getContext(), String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                //listenerRef.get().onPositionClicked(22);
+                String tempStr=String.valueOf(getAdapterPosition())+"2";
+                listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
+            }
+            if (v.getId() == prep_study3_tv.getId()){
+                //Toast.makeText(v.getContext(), String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                String tempStr=String.valueOf(getAdapterPosition())+"3";
+                listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
+            }
+            if (v.getId() == prep_study4_tv.getId()){
+                String tempStr=String.valueOf(getAdapterPosition())+"4";
+                listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
+            }
+            if (v.getId() == prep_study5_tv.getId()){
+                String tempStr=String.valueOf(getAdapterPosition())+"5";
+                listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
+            }
+            if (v.getId() == prep_study6_tv.getId()){
+                String tempStr=String.valueOf(getAdapterPosition())+"6";
+                listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
+            }
+
                 //Intent intent = new Intent(v.getContext(),PreparationContentActivity.class);
                 //startActivity(intent);
-                listenerRef.get().onPositionClicked(getAdapterPosition());
+                //listenerRef.get().onPositionClicked(getAdapterPosition());
+
 
         }
         }
