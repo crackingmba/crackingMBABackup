@@ -122,7 +122,6 @@ public class StartMockTestActivity extends AppCompatActivity {
 
 
     public void startTest(View v){
-        Log.d(TAG,"CLicked startTest..");
         Intent submitIntent=new Intent(getApplicationContext(),SubmitMockTestActivity.class);
         startActivity(submitIntent);
         this.finish();

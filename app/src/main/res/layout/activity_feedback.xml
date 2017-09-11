@@ -36,6 +36,7 @@
 
 
                 <TextView
+                    android:id="@+id/feedback_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -45,6 +46,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/feedback_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -54,7 +56,18 @@
                     android:text="Thank you for taking some time out and helping to improve this app.Please let us know if you are facing any issue in using the app or require any specific feature on this app which will help your preparation. Warm Regards!"/>
 
 
-                <EditText
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#212121"
+                    android:textSize="14sp"
+                    android:layout_margin="10dp"
+                    android:text="Please leave your name and email id so that we can reach out to you if required."/>
+
+
+
+        <EditText
                     android:id="@+id/feedback_et"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
@@ -66,7 +79,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:background="#90CAF9"
-                    android:hint="Your feedback goes here" />
+                    android:hint="Type your message here" />
 
                 <Button
                     android:id="@+id/feedback_button"
@@ -91,7 +104,7 @@
                     android:textStyle="bold"
                     android:visibility="gone"
                     android:padding="10dp"
-                    android:text="Thank You! Your Feedback is successfully submitted!"/>
+                    android:text="Thank You! Your message is successfully submitted!"/>
             </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -25,7 +25,6 @@ public class SubmitMockTestActivity extends AppCompatActivity {
 
     private static String TAG = "SubmitMockTestActivity";
     private TextView msg;
-    boolean isMock;
 
     private static int currentQstnIndex = 0;
 

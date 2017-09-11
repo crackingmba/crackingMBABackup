@@ -42,12 +42,17 @@ public class PreparationContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final String prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
+        String prep_category_header = getIntent().getStringExtra("PREP_CATEGORY_HEADER");
         setContentView(R.layout.activity_preparation_content);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
         apiService = RestClient.getClient().create(PrepContentAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.prepcontentRecyclerView);
@@ -62,18 +67,50 @@ public class PreparationContentActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(PreparationContentActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         //Toast.makeText(PreparationContentActivity.this, "Hey There!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(PreparationContentActivity.this, PreparationDetailsActivity.class);
-                        intent.putExtra("PREP_CATEGORY_ID",questions.get(position).getId());
-                        intent.putExtra("PREP_CATEGORY_NAME",questions.get(position).getName());
-                        startActivity(intent);
+
+                        if(questions.get(position).getType().toString().equals("support")){
+                            Intent intent = new Intent(PreparationContentActivity.this, SupportGuidanceActivity.class);
+                            startActivity(intent);
+                        }else if(questions.get(position).getType().toString().equals("study"))
+                        {
+                            Intent intent = new Intent(PreparationContentActivity.this, PreparationHLContentActivity.class);
+                            switch(prep_category_code){
+                                case "CATPREP":{
+                                    intent.putExtra("PREP_CATEGORY_CODE","CAT");
+                                    intent.putExtra("PREP_CATEGORY_HEADER","CAT Study Material");
+                                    break;
+                                }
+
+                                case "IIFTPREP":{
+                                    intent.putExtra("PREP_CATEGORY_CODE","IIFT");
+                                    intent.putExtra("PREP_CATEGORY_HEADER","IIFT Study Material");
+                                    break;
+                                }
+
+                                case "SNAPPREP":{
+                                    intent.putExtra("PREP_CATEGORY_CODE","SNAP");
+                                    intent.putExtra("PREP_CATEGORY_HEADER","SNAP Study Material");
+                                    break;
+                                }
+
+                            }
+
+
+
+                            startActivity(intent);
+                        }
+
+                        else{
+                            Intent intent = new Intent(PreparationContentActivity.this, PreparationDetailsActivity.class);
+                            intent.putExtra("PREP_CATEGORY_ID",questions.get(position).getId());
+                            intent.putExtra("PREP_CATEGORY_NAME",questions.get(position).getName());
+                            startActivity(intent);
+                        }
 
                     }
                 })
         );
 
-
-        String prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
-        String prep_category_header = getIntent().getStringExtra("PREP_CATEGORY_HEADER");
 
         prep_content_header.setText(prep_category_header);
         call = apiService.fetchPrepContent(prep_category_code);

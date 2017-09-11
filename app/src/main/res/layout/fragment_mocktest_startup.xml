@@ -1,27 +1,10 @@
 <!-- this is the new layout for this section -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:orientation="vertical"
-android:layout_height="wrap_content"
-android:padding="5dp">
-<!-- This is the layout for the Home Page of Mock Test Tab -->
-<LinearLayout
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
-
-<!--    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CAT2017 Sectional Mock Test"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:gravity="center"/>-->
-
-
-</LinearLayout>
+    android:background="#ECEFF1"
+    android:padding="5dp">
 
 <ScrollView
     android:layout_width="match_parent"
@@ -31,6 +14,152 @@ android:padding="5dp">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ECHO!"
+                android:textSize="18sp"
+                android:textColor="#212121"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Grab your chance to be heard!"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                android:layout_margin="10dp"/>
+
+            <!-- Personal Help -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/personal_help_cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/helping_hand"
+                            android:adjustViewBounds="true" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reach OUT!"
+                            android:layout_margin="3dp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            />
+                        <TextView
+                            android:text="You know you could score that perfect percentile. If something is impacting your performance and you need some help, reach out! This is free for all our awesome users!"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#212121"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+            <!-- App Feedback -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/app_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                android:layout_margin="5dp"
+                >
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/feedback"
+                            android:adjustViewBounds="true" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="App Feedback"
+                            android:textStyle="bold"
+                            android:layout_margin="3dp"
+                            android:textColor="#212121"
+                            />
+                        <TextView
+                            android:text="Before clicking that Uninstall button, give us a chance to hear if you were expecting something and that isnt available on this app! We will try to implement your requirements!"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#212121"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!-- SNAP CardView -->
+
+
+
+        </LinearLayout>
+
+
 
         <!-- Quant CardView -->
         <android.support.v7.widget.CardView
@@ -43,8 +172,8 @@ android:padding="5dp">
             android:focusable="true"
             app:cardCornerRadius="2dp"
             app:cardElevation="2dp"
-            android:layout_margin="5dp"
-            >
+            android:visibility="gone"
+            android:layout_margin="5dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -78,8 +207,8 @@ android:padding="5dp">
             android:focusable="true"
             app:cardCornerRadius="2dp"
             app:cardElevation="2dp"
-            android:layout_margin="5dp"
-            >
+            android:visibility="gone"
+            android:layout_margin="5dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -112,8 +241,8 @@ android:padding="5dp">
             android:focusable="true"
             app:cardCornerRadius="2dp"
             app:cardElevation="2dp"
-            android:layout_margin="5dp"
-            >
+            android:visibility="gone"
+            android:layout_margin="5dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"

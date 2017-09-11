@@ -24,6 +24,7 @@ import retrofit2.Response;
 public class FeedbackActivity extends AppCompatActivity {
     Button feedback_button; EditText feedback_et;
     FeedbackAPIService apiService; TextView feedback_successmsg;
+    TextView feedback_header, feedback_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,19 @@ public class FeedbackActivity extends AppCompatActivity {
         feedback_button=(Button)findViewById(R.id.feedback_button);
         feedback_et=(EditText)findViewById(R.id.feedback_et);
         feedback_successmsg=(TextView)findViewById(R.id.feedback_successmsg);
+
+        feedback_header=(TextView)findViewById(R.id.feedback_header);
+        feedback_text=(TextView)findViewById(R.id.feedback_text);
+        String feedback_header_str="";
+        String feedback_text_str="";
+
+        feedback_header_str = getIntent().getStringExtra("FEEDBACK_HEADER");
+        feedback_text_str = getIntent().getStringExtra("FEEDBACK_TEXT");
+
+
+        feedback_header.setText(feedback_header_str);
+        feedback_text.setText(feedback_text_str);
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

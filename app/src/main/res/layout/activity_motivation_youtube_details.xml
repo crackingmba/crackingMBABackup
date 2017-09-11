@@ -22,160 +22,189 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="top">
+            android:layout_weight="1">
 
-            <fragment
-                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-                android:id="@+id/youtube_motivation_video_fragment"
+            <ImageView
+                android:id="@+id/motivation_yt_focus_img"
                 android:layout_width="match_parent"
-                android:layout_marginTop="50dp"
-                android:layout_height="250dp"/>
+                android:layout_height="125dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/focus_cat"/>
 
             <TextView
-                android:id="@+id/motivation_youtube_video_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Video Name"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black_overlay"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/motivation_youtube_video_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Video Description"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black_overlay"
-                android:textSize="14sp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_gravity="center"/>
-
-            <!--<View
+                android:id="@+id/motivation_yt_focus_tv"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="#333333"
-                android:layout_gravity="center">
-            </View>
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                android:text="At 499, for the price of a medium pan pizza, you can now crack CAT!"/>
 
             <TextView
-                android:id="@+id/target_subCategoryFullName"
-                android:layout_width="wrap_content"
+                android:id="@+id/motivation_tv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ratio and Proportion"
-                android:layout_margin="5dp"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textColor="#0D47A2"
-                android:textSize="18sp"
-                android:layout_gravity="center"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                android:text="And the best part is .. we will all work together to give you a reason to celebrate a big fat pizza party a few months from now!!"/>
 
-            &lt;!&ndash; the layout for the video details starts here &ndash;&gt;
+
+            <!-- first set of tick marks -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-                &lt;!&ndash; The Title tag &ndash;&gt;
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Title"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:background="#B0BEC5"/>
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
 
-
-                <TextView
-                    android:id="@+id/target_videotitle"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Ratio and Proportion"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black_overlay"/>
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
-                &lt;!&ndash; The Description tag &ndash;&gt;
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Description"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:background="#B0BEC5"
-                    android:layout_marginTop="25dp"/>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/tick_mark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:text="Prep Videos"/>
+
+                </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/target_description"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="This video details about the different kinds of concepts in Ratio and Proportion and  what you need to knpw about this topic for preparation"
-                    android:textColor="@color/black_overlay"
-                    android:layout_marginTop="10dp"
-                    android:gravity="left"/>
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/tick_mark"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:text="Support/Guidance"/>
+                </LinearLayout>
+
             </LinearLayout>
 
-            &lt;!&ndash; The invisible TextViews go here &ndash;&gt;
-            <TextView
-                android:id="@+id/target_videoCategory"
-                android:layout_width="wrap_content"
+            <!-- second set of tick marks -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CAT2017 Preparation Quant Section"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-            <TextView
-                android:id="@+id/target_subCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAT2017 Preparation Quant Section"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-            <TextView
-                android:id="@+id/target_thumbnailURL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAT2017 Preparation Quant Section"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-            <TextView
-                android:id="@+id/target_videoYouTubeURL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAT2017 Preparation Quant Section"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-            <TextView
-                android:id="@+id/target_videoDownloadURL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAT2017 Preparation Quant Section"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-        -->
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/tick_mark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:text="Mock Tests"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/tick_mark"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:text="Online Sessions"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+            <!--<fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:id="@+id/youtube_motivation_video_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="20dp"/>-->
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/motivateYT_details_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:layout_weight="0"
+            android:text="VIEW COURSE DETAILS"/>
+
+
+    </LinearLayout>
 
 
 

@@ -85,16 +85,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_weight="0"
-            android:layout_marginBottom="40dp"
-            android:textSize="16sp"
-            android:text="EVALUATE FOR FREE UPTO 15TH SEP!"
-            android:background="#BF360C"
-            android:gravity="center"/>
 
     </LinearLayout>
 

@@ -4,30 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
-import java.io.File;
-
-import com.crackingMBA.training.CrackingConstant;
-import com.crackingMBA.training.FullscreenActivity;
-import com.crackingMBA.training.R;
-import com.crackingMBA.training.VideoApplication;
-import com.crackingMBA.training.pojo.VideoDataObject;
-import com.crackingMBA.training.pojo.VideoList;
-
-/**
- * Created by MSK on 05-02-2017.
- */
 public class MyUtil {
     public static  ProgressDialog mProgressDialog;
 public static boolean checkConnectivity(Context context) {
@@ -56,5 +44,32 @@ public static boolean checkConnectivity(Context context) {
             mProgressDialog.hide();
         }
     }
+
+
+    public static void updateDialog(final Context context, String header, String message){
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(context);
+        }
+        builder.setTitle(header)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //the yes functionality goes here
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing here
+                        //Toast.makeText(getContext(), "Nothing much here", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+
 
 }

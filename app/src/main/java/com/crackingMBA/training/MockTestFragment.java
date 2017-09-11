@@ -27,7 +27,7 @@ View rootView;
     private static String TAG = "MockTestFragment";
     LayoutInflater inflater;
     ViewGroup container;
-    CardView quantRow;
+    CardView quantRow, personal_help_cv, app_feedback;
     CardView dilrRow;
     CardView verbalRow;
     TextView quant_textView, dilr_textView, verbal_textView;
@@ -45,6 +45,8 @@ View rootView;
         quantRow=(CardView)rootView.findViewById(R.id.mock_test_quantrow);
         dilrRow=(CardView)rootView.findViewById(R.id.mock_test_dilrrow);
         verbalRow=(CardView)rootView.findViewById(R.id.mock_test_verbalrow);
+        personal_help_cv=(CardView)rootView.findViewById(R.id.personal_help_cv);
+        app_feedback=(CardView)rootView.findViewById(R.id.app_feedback);
 
         quant_textView=(TextView)rootView.findViewById(R.id.mock_test_quant_textview);
         dilr_textView=(TextView)rootView.findViewById(R.id.mock_test_dilr_textview);
@@ -61,6 +63,8 @@ View rootView;
         quantRow.setOnClickListener(this);
         dilrRow.setOnClickListener(this);
         verbalRow.setOnClickListener(this);
+        personal_help_cv.setOnClickListener(this);
+        app_feedback.setOnClickListener(this);
         return rootView;
     }
 
@@ -90,12 +94,28 @@ View rootView;
                     //VideoApplication.sectionClicked = SectionEnum.verbal.key;
                     VideoApplication.sectionClicked = "verbal";
                     break;
+                case R.id.personal_help_cv:
+                    Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+                    intent.putExtra("FEEDBACK_HEADER", "Reach OUT!");
+                    intent.putExtra("FEEDBACK_TEXT", "You know you could score that perfect percentile. If something is impacting your performance and you need some help, reach out! This is free for all our awesome users!");
+                    startActivity(intent);
+                    //VideoApplication.sectionClicked = SectionEnum.verbal.key;
+                    //VideoApplication.sectionClicked = "verbal";
+                    break;
+                case R.id.app_feedback:
+                    intent = new Intent(getActivity(), FeedbackActivity.class);
+                    intent.putExtra("FEEDBACK_HEADER", "APP Feedback!");
+                    intent.putExtra("FEEDBACK_TEXT", "Before clicking that Uninstall button, give us a chance to hear if you were expecting something and that isnt available on this app! We will try to implement your requirements!");
+                    startActivity(intent);
+                    //VideoApplication.sectionClicked = SectionEnum.verbal.key;
+                    VideoApplication.sectionClicked = "verbal";
+                    break;
                 default:
                     Log.d(TAG, "Unknown button clicked..");
                     break;
             }
-            Log.d(TAG, "Section Clicked : " + VideoApplication.sectionClicked);
-            startActivity(mockTestTopicIntent);
+            //Log.d(TAG, "Section Clicked : " + VideoApplication.sectionClicked);
+            //startActivity(mockTestTopicIntent);
         }else{
             int duration = Toast.LENGTH_LONG;
             Toast toast = Toast.makeText(getContext(), R.string.no_internet, duration);

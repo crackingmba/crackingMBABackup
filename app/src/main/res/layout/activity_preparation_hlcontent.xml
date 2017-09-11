@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.crackingMBA.training.PreparationDetailsActivity">
+    tools:context="com.crackingMBA.training.PreparationHLContentActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -29,15 +30,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:background="#ECEFF1"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/prep_content_header"
+            android:id="@+id/prep_content_header11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GK Previous Year Papers"
+            android:text="Previous Year GK Papers"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="20dp"
@@ -52,7 +53,7 @@
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/offline"
-            android:id="@+id/prep_content_offline_img"
+            android:id="@+id/prep_content_offline_img11"
             android:layout_marginTop="50dp"/>
 
         <TextView
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:id="@+id/prep_content_offline_tv"
+            android:id="@+id/prep_content_offline_tv11"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
@@ -68,10 +69,12 @@
             android:text="Oops! Looks like you are offline!"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/prepdetailRecyclerView"
+            android:id="@+id/prepHLcontentRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="18dp">
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
+

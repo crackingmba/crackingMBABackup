@@ -54,6 +54,7 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
     private DBHelper dbHelper;
     DownloadManager downloadManager;
     VideoList videoList;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,48 +63,41 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         dbHelper = DBHelper.getInstance(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        //youTubeView=(YouTubePlayerView)findViewById(R.id.youtube_view);
-        //youTubeView.initialize(MyConfig.YOUTUBE_API_KEY, this);
-        int orientation=this.getResources().getConfiguration().orientation;
         YouTubePlayerSupportFragment frag;
-       /* if(orientation==Configuration.ORIENTATION_PORTRAIT){
-            //code for portrait mode
-*/
-             frag =
-                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
+        frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
 
-      /*  }
-        else{
-            //code for landscape
-            frag =
-                    (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
-
-        }*/
-       frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
+        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         videoList = VideoApplication.videoList;
-        Log.d(TAG, "Selected Video Details" + videoList);
-        Log.d(TAG, "video url " + videoList.getVideoURL());
 
-    ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-    ((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
-    ((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
-    ((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
-    ((TextView) findViewById(R.id.target_categoryFullName)).setText(videoList.getCategoryFullName());
-    ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(videoList.getSubCategoryFullName());
-    ((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
-    ((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
-    ((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+        String course_name="Focus Preparation Course";
+        course_name = getIntent().getStringExtra("COURSE_NAME");
+        String course_subject = "Video on specific topic";
+        course_subject = getIntent().getStringExtra("COURSE_SUBJECT");
+        url = "C4_ZRo_ipU4";
+        url = getIntent().getStringExtra("URL");
+
+    //((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
+    //((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
+    ((TextView) findViewById(R.id.target_categoryFullName)).setText(course_name);
+    ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(course_subject);
+    //((TextView) findViewById(R.id.target_videotitle)).setText(course_subject);
+    //((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
+    //((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
+
+    //((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
+    //((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
+    //((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
 } //the OnCreate code completes here
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            //player.cueVideo("fg9EqZGv9_s"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
-            player.cueVideo(videoList.getVideoYouTubeURL()); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.cueVideo(url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            //player.cueVideo(videoList.getVideoYouTubeURL()); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
 
     }

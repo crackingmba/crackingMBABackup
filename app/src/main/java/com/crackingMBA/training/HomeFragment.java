@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -35,7 +36,9 @@ import com.crackingMBA.training.util.MyUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,13 +55,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     RecyclerView quantRecyclerView;
     View rootView;
     private static String TAG = "HomeFragment";
-    LinearLayout online_sessions_layout, study_material_layout, mock_tests_layout, videos_layout, forum_layout, motivationLayout;
-    LinearLayout home_fragment_iift_gk_layout,home_fragment_snap_gk_layout, home_fragment_gk_layout;
+    //LinearLayout online_sessions_layout, study_material_layout, mock_tests_layout, videos_layout, forum_layout, motivationLayout;
+    LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout;
     NoticeBoardAPIService apiService;
     List<RetrofitNoticeBoard> boards = new ArrayList<>();
     Call<RetrofitNoticeBoardList> call;
     TextView notice_board_tv1, notice_board_tv2, notice_board_tv3;
     Button high_5, share_feedback;
+    String apk_version="2.8.10";
 
     @Nullable
     @Override
@@ -67,15 +71,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
         quantRecyclerView.setHasFixedSize(true);
-        online_sessions_layout=(LinearLayout)rootView.findViewById(R.id.online_sessions_layout);
-        study_material_layout=(LinearLayout)rootView.findViewById(R.id.study_material_layout);
-        mock_tests_layout=(LinearLayout)rootView.findViewById(R.id.mock_tests_layout);
-        videos_layout=(LinearLayout)rootView.findViewById(R.id.videos_layout);
-        forum_layout=(LinearLayout)rootView.findViewById(R.id.forum_layout);
+        //online_sessions_layout=(LinearLayout)rootView.findViewById(R.id.online_sessions_layout);
+        //study_material_layout=(LinearLayout)rootView.findViewById(R.id.study_material_layout);
+        //mock_tests_layout=(LinearLayout)rootView.findViewById(R.id.mock_tests_layout);
+        //videos_layout=(LinearLayout)rootView.findViewById(R.id.videos_layout);
+        //forum_layout=(LinearLayout)rootView.findViewById(R.id.forum_layout);
         //motivationLayout=(LinearLayout)rootView.findViewById(R.id.motivationLayout);
-        home_fragment_iift_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_gk_layout);
-        home_fragment_snap_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_gk_layout);
-        home_fragment_gk_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_general_gk_layout);
+        home_fragment_cat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_cat_layout);
+        home_fragment_iift_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_layout);
+        home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
+        //home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);
         high_5=(Button)rootView.findViewById(R.id.high_5);
         share_feedback=(Button)rootView.findViewById(R.id.share_feedback);
 
@@ -93,22 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 switch (view.getId()){
-                    case R.id.online_sessions_layout:{
-                        //Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
-                        //examDetails.putExtra("MBA_EXAM_CODE", "SESSIONS");
-                        //startActivity(examDetails);
-                        new DownloadFile().execute("http://maven.apache.org/maven-1.x/maven.pdf", "maven.pdf");
-                        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreepdf/" + "maven.pdf");  // -> filename = maven.pdf
-                        Uri path = Uri.fromFile(pdfFile);
-                        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-                        pdfIntent.setDataAndType(path, "application/pdf");
-                        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                        try{
-                            startActivity(pdfIntent);
-                        }catch(ActivityNotFoundException e){
-                            Toast.makeText(getContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
-                        }
+                    /*case R.id.online_sessions_layout:{
                         break;
                     }
                     case R.id.study_material_layout:{
@@ -133,35 +123,36 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     }
 
-                   /* case R.id.motivationLayout:{
+                    case R.id.motivationLayout:{
                         Intent motivationIntent = new Intent(getActivity(), MotivationVideosActivity.class);
                         startActivity(motivationIntent);
                         break;
                     }*/
-
-                    case R.id.home_fragment_iift_gk_layout:{
-                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
-                        intent.putExtra("PREP_CATEGORY_CODE","IIFTGK");
-                        intent.putExtra("PREP_CATEGORY_HEADER","IIFT Previous Year GK");
-                        startActivity(intent);
+                    case R.id.home_fragment_iift_layout:{
+                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
+                        viewPager.setCurrentItem(1, true);
                         break;
                     }
 
-                    case R.id.home_fragment_snap_gk_layout:{
-                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
-                        intent.putExtra("PREP_CATEGORY_CODE","SNAPGK");
-                        intent.putExtra("PREP_CATEGORY_HEADER","SNAP Previous Year GK");
-                        startActivity(intent);
+                    case R.id.home_fragment_snap_layout:{
+                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
+                        viewPager.setCurrentItem(1, true);                        break;
+                    }
+
+                    case R.id.home_fragment_cat_layout:{
+                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
+                        viewPager.setCurrentItem(1, true);
                         break;
                     }
 
-                    case R.id.home_fragment_general_gk_layout:{
+
+                    /*case R.id.home_fragment_xat_layout:{
                         Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
-                        intent.putExtra("PREP_CATEGORY_CODE","GK");
-                        intent.putExtra("PREP_CATEGORY_HEADER","GK Study Material");
+                        intent.putExtra("PREP_CATEGORY_CODE","XAT");
+                        intent.putExtra("PREP_CATEGORY_HEADER","XAT 2018 Preparation");
                         startActivity(intent);
                         break;
-                    }
+                    }*/
 
                     case R.id.high_5:{
                         Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
@@ -183,6 +174,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     case R.id.share_feedback:{
                         //Display the share feedback page here
                         Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+                        intent.putExtra("FEEDBACK_HEADER", "APP Feedback!");
+                        intent.putExtra("FEEDBACK_TEXT", "Before clicking that Uninstall button, give us a chance to hear if you were expecting something and that isnt available on this app! We will try to implement your requirements!");
                         startActivity(intent);
                     }
 
@@ -190,19 +183,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         };
 
-        online_sessions_layout.setOnClickListener(examOnClickListener);
+        //online_sessions_layout.setOnClickListener(examOnClickListener);
         //study_material_layout.setOnClickListener(examOnClickListener);
         //mock_tests_layout.setOnClickListener(examOnClickListener);
         //videos_layout.setOnClickListener(examOnClickListener);
         //forum_layout.setOnClickListener(examOnClickListener);
         //motivationLayout.setOnClickListener(examOnClickListener);
-        home_fragment_iift_gk_layout.setOnClickListener(examOnClickListener);
-        home_fragment_snap_gk_layout.setOnClickListener(examOnClickListener);
-        home_fragment_gk_layout.setOnClickListener(examOnClickListener);
+        home_fragment_cat_layout.setOnClickListener(examOnClickListener);
+        home_fragment_iift_layout.setOnClickListener(examOnClickListener);
+        home_fragment_snap_layout.setOnClickListener(examOnClickListener);
+        //home_fragment_xat_layout.setOnClickListener(examOnClickListener);
         high_5.setOnClickListener(examOnClickListener);
         share_feedback.setOnClickListener(examOnClickListener);
-
-
 
         return rootView;
     }
@@ -224,6 +216,43 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     notice_board_tv1=(TextView)rootView.findViewById(R.id.notice_board_tv1);
                     notice_board_tv2=(TextView)rootView.findViewById(R.id.notice_board_tv2);
                     notice_board_tv3=(TextView)rootView.findViewById(R.id.notice_board_tv3);
+
+                    if(boards.get(0).getAPK_Version().equals(apk_version)){
+                        //thats ok
+                    }else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("You are running an older version of this app. Download and install the latest update from Play Store")
+                                .setCancelable(false)
+                                .setPositiveButton("UPDATE NOW!", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+                                        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                                        // To count with Play market backstack, After pressing back button,
+                                        // to taken back to our application, we need to add following flags to intent.
+                                        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                        try {
+                                            startActivity(goToMarket);
+                                        } catch (ActivityNotFoundException e) {
+                                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+                                        }
+                                    }
+                                })
+                                .setNeutralButton("SOMETIME LATER!", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        //Creating dialog box
+                        AlertDialog alert = builder.create();
+                        //Setting the title manually
+                        alert.setTitle("New update available on Play Store!!");
+                        alert.show();
+                    }
 
                     notice_board_tv1.setText(boards.get(0).getBoard_name());
 
@@ -247,42 +276,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private class DownloadFile extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
-            String fileName = strings[1];  // -> maven.pdf
-            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            File folder = new File(extStorageDirectory, "testthreepdf");
-            folder.mkdir();
-
-            File pdfFile = new File(folder, fileName);
-
-            try{
-                pdfFile.createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            FileDownloader.downloadFile(fileUrl, pdfFile);
-            return null;
-        }
-    }
-
-
-
-
-
     @Override
     public void onResume() {
         super.onResume();
     }
 
-
         @Override
         public void onClick (View view){
-
-
 
         }
 }

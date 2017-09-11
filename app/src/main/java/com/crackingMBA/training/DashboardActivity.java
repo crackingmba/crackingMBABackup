@@ -44,6 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         if(null != getIntent() && null!=getIntent().getExtras()){
             String tab = getIntent().getExtras().getString("gotoTab");
+            tab = getIntent().getStringExtra("SELECTED_TAB");
             if(null!=tab && ""!=tab){
                 gotoTab = Integer.parseInt(tab);
             }

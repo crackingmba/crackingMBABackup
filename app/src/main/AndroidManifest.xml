@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.crackingMBA.training">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -14,7 +15,9 @@
         android:label="@string/app_name"
         android:logo="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:overrideLibrary="com.payumoney.sdkui"
+        tools:replace="android:allowBackup,android:theme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -108,7 +111,7 @@
         <activity
             android:name=".MotivationYoutubeDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Motivation and Guidance Video"
+            android:label="Focus Prep"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForumCommentsActivity"
@@ -144,11 +147,20 @@
         <activity
             android:name=".PreparationDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Preparation Content"
+            android:label="Preparation Details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FeedbackActivity"
+        <activity
+            android:name=".FeedbackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Help us improve!"
+            android:label="Hi There!"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PreparationHLContentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Course Study Material"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SupportGuidanceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Support"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

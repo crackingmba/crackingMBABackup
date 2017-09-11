@@ -2,16 +2,17 @@
     <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
         <item>Dashboard</item>
-        <item>Videos</item>
-        <item>Mock Tests</item>
+        <item>Focus Prep</item>
+        <item>Echo</item>
         <item>Forum</item>
     </string-array>
+
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="tab_icons">
         <item>@drawable/exams1</item>
-        <item>@drawable/videos_img</item>
+        <item>@drawable/dartboard</item>
         <item>@drawable/mock_test_icon_1</item>
         <item>@drawable/whatsup_img</item>videos_img.png
 

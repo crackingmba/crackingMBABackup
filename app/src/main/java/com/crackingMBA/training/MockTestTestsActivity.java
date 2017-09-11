@@ -46,7 +46,7 @@ public class MockTestTestsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        isMock = pref.getBoolean("isMock", false);
+        isMock = false;
 
         ((TextView) findViewById(R.id.mocktest_topic_title)).setText(VideoApplication.selectedMockTestTopicTitle);
         msg = (TextView) findViewById(R.id.mocktest_test_msg);

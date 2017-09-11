@@ -1,38 +1,18 @@
 package com.crackingMBA.training;
 
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.MediaController;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
-import java.io.File;
-import java.util.HashMap;
-
-import com.crackingMBA.training.pojo.VideoDataObject;
-import com.crackingMBA.training.util.MyUtil;
 
 /**
  * Created by MSK on 24-01-2017.
@@ -43,7 +23,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    boolean isMock;
+    CardView CATCardView, IIFTCardView, SNAPCardView;
 
     @Nullable
     @Override
@@ -57,12 +37,13 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            CardView quantRow = (CardView)rootView.findViewById(R.id.quantCardView);
-            CardView diRow = (CardView) rootView.findViewById(R.id.dilrCardView);
-            CardView verbalRow = (CardView) rootView.findViewById(R.id.verbalCardView);
-            quantRow.setOnClickListener(this);
-            diRow.setOnClickListener(this);
-            verbalRow.setOnClickListener(this);
+            CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
+            IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
+            SNAPCardView = (CardView)rootView.findViewById(R.id.SNAPCardView);
+
+            CATCardView.setOnClickListener(this);
+            IIFTCardView.setOnClickListener(this);
+            SNAPCardView.setOnClickListener(this);
         }
 
         return rootView;
@@ -71,34 +52,52 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-
-
     }
-
 
     @Override
     public void onClick(View v) {
         Log.d(TAG,"Clicked a week.."+v.getId());
 
-        Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
+        //Intent dashboardIntent=new Intent(getActivity(),VideoSubCategoryActivity.class);
+        //Intent intent=new Intent(getActivity(),MotivationYoutubeDetailsActivity.class);
         switch (v.getId()){
-            case R.id.quantCardView:
-                VideoApplication.sectionClicked="quant";
-                dashboardIntent.putExtra("sectionaName","quant");
+            case R.id.CATCardView:
+                //VideoApplication.sectionClicked="quant";
+                //intent.putExtra("sectionName","quant");
+                //Intent intent = new Intent(getActivity(), PreparationHLContentActivity.class);
+                Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
+                motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
+                motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 499, for the price of a medium pan pizza, you can now crack CAT!");
+                //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_URL", "ueLbSYiSWCs");
+                //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_NAME", "Why you need to slog your *** off and crack MBA this year!");
+                //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_DESCRIPTION", "This is a brief video to help you pull up your socks and get going. If you see a dip in your performance in the mock tests or are just not getting the right kind of motivation, this video should help you pull up your sagging spirits and enable you to keep your tempo high!");
+                startActivity(motivationVideoDetails);
                 break;
-            case R.id.dilrCardView:
-                VideoApplication.sectionClicked="dilr";
-                dashboardIntent.putExtra("sectionaName","dilr");
+                case R.id.IIFTCardView:
+                    motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
+                    motivationVideoDetails.putExtra("EXAM_NAME", "IIFT");
+                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 499, for the price of a medium pan pizza, you can now crack IIFT!");
+                    //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_URL", "ueLbSYiSWCs");
+                    //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_NAME", "Why you need to slog your *** off and crack MBA this year!");
+                    //motivationVideoDetails.putExtra("MOTIVATION_VIDEO_DESCRIPTION", "This is a brief video to help you pull up your socks and get going. If you see a dip in your performance in the mock tests or are just not getting the right kind " +
+                      //      "of motivation, this video should help you pull up your sagging spirits and enable you to keep your tempo high!");
+                    startActivity(motivationVideoDetails);
+                //VideoApplication.sectionClicked="dilr";
+                //intent.putExtra("sectionName","dilr");
                 break;
-            case R.id.verbalCardView:
-                VideoApplication.sectionClicked="verbal";
-                dashboardIntent.putExtra("sectionaName","verbal");
+            case R.id.SNAPCardView:
+                motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
+                motivationVideoDetails.putExtra("EXAM_NAME", "SNAP");
+                motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 499, for the price of a medium pan pizza, you can now crack SNAP!");
+                startActivity(motivationVideoDetails);
+                //VideoApplication.sectionClicked="verbal";
+                //intent.putExtra("sectionName","verbal");
                 break;
             default:
                 Log.d(TAG,"Unknown button clicked..");
                 break;
         }
-        startActivity(dashboardIntent);
+
 
     }
 
