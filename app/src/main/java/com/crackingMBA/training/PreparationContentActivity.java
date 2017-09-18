@@ -75,8 +75,8 @@ public class PreparationContentActivity extends AppCompatActivity {
                         {
                             Intent intent = new Intent(PreparationContentActivity.this, PreparationHLContentActivity.class);
                             switch(prep_category_code){
-                                case "CATPREP":{
-                                    intent.putExtra("PREP_CATEGORY_CODE","CAT");
+                                case "CATPREP1":{
+                                    intent.putExtra("PREP_CATEGORY_CODE","CAT1");
                                     intent.putExtra("PREP_CATEGORY_HEADER","CAT Study Material");
                                     break;
                                 }

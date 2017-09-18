@@ -47,17 +47,24 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
         holder.prep_study_day_name_tv.setText(questions.get(position).getName());
 
+
+
         if(questions.get(position).getStudy1().toString().length()>0){
-            holder.prep_study1_tv.setVisibility(View.VISIBLE);
+            setContentNames(holder.prep_study1_tv,questions.get(position).getStudy1(), questions.get(position).getStudy1Type() );
 
 
+            //holder.prep_study1_tv.setVisibility(View.VISIBLE);
+
+            //String str1 = questions.get(position).getStudy1Type();
+            //String substr1 = str1.substring(0,str1.indexOf(","));
+/*
             if(questions.get(position).getStudy1Type().toString().equals("video")||questions.get(position).getStudy1Type().toString().equals("mocktest")){
                 String str = questions.get(position).getStudy1();
                 String substr = str.substring(0,str.indexOf(","));
                 holder.prep_study1_tv.setText(substr);
             }else{
                 holder.prep_study1_tv.setText(questions.get(position).getStudy1());
-            }
+            }*/
 
 
         }else{
@@ -148,6 +155,21 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
         }else{
             holder.prep_study6_tv.setVisibility(View.GONE);
         }
+    }
+
+    private void setContentNames(TextView tv,String study, String studyType) {
+            tv.setVisibility(View.VISIBLE);
+
+            //String str1 = questions.get(position).getStudy1Type();
+            //String substr1 = str1.substring(0,str1.indexOf(","));
+
+            if (studyType.equals("video") || studyType.equals("mocktest")) {
+                String str = study;
+                String substr = str.substring(0, str.indexOf(","));
+                tv.setText(substr);
+            } else {
+                tv.setText(study);
+            }
     }
 
     @Override

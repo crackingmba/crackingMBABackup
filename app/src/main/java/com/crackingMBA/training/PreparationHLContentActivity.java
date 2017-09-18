@@ -95,6 +95,33 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
                 switch(index){
                     case 1:{
+                        processRows(questions.get(position).getStudy1(), questions.get(position).getStudy1Type());
+                        break;
+                    }
+                    case 2:{
+                        processRows(questions.get(position).getStudy2(), questions.get(position).getStudy2Type());
+                        break;
+                    }
+                    case 3:{
+                        processRows(questions.get(position).getStudy3(), questions.get(position).getStudy3Type());
+                        break;
+                    }
+                    case 4:{
+                        processRows(questions.get(position).getStudy4(), questions.get(position).getStudy4Type());
+                        break;
+                    }
+                    case 5:{
+                        processRows(questions.get(position).getStudy5(), questions.get(position).getStudy5Type());
+                        break;
+                    }
+                    case 6:{
+                        processRows(questions.get(position).getStudy6(), questions.get(position).getStudy6Type());
+                        break;
+                    }
+                }
+
+                /*switch(index){
+                    case 1:{
                         switch(questions.get(position).getStudy1Type()){
                             case "mocktest":{
                                 str = questions.get(position).getStudy1();
@@ -300,7 +327,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         break;
                     }
 
-                }
+                }*/
 
             }
 
@@ -358,6 +385,42 @@ public class PreparationHLContentActivity extends AppCompatActivity {
             public void onFailure(Call<RetrofitPrepHLContentList> call, Throwable t) {
             }
         });
+    }
+
+
+    private void processRows(String study, String studyType){
+
+                switch(studyType){
+                    case "mocktest":{
+                        str = study;
+                        String test_name = str.substring(0,str.indexOf(","));
+
+                        str= study;
+                        String test_id=str.substring(str.indexOf(",") + 1);
+
+                        MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
+                        VideoApplication.selectedMockTestTest= mockTestTest;
+
+                        Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                        startActivity(startIntent);
+                        break;
+                    }
+                    case "video":{
+                        str = study;
+                        String course_name = str.substring(0,str.indexOf(","));
+
+                        str= study;
+                        String url=str.substring(str.indexOf(",") + 1);
+
+                        Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
+                        intent.putExtra("COURSE_NAME",course_category);
+                        intent.putExtra("COURSE_SUBJECT",course_name);
+                        intent.putExtra("URL",url);
+                        startActivity(intent);
+                        break;
+                    }
+                }
+
     }
 
 

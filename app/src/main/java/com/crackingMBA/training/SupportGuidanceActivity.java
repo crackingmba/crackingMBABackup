@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ public class SupportGuidanceActivity extends AppCompatActivity {
     PaymentParams paymentParams;
     private PayuConfig payuConfig;
 
-    Button support_btn;
+    Button support_btn; WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,37 @@ public class SupportGuidanceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        support_btn=(Button)findViewById(R.id.support_btn);
+        //support_btn=(Button)findViewById(R.id.support_btn);
+        //myWebView=(WebView)findViewById(R.id.my_webview);
+
+/*        myWebView.setWebViewClient(new WebViewClient());
+        String url="https://drive.google.com/file/d/0B1TuPsj1jyhgaDFqV3JOLXA5RVk/view";
+        //String URL="https://docs.google.com/viewer?url=https://drive.google.com/file/d/0B1TuPsj1jyhgaDFqV3JOLXA5RVk/view?usp=sharing";
+        String URL="https://docs.google.com/viewer?url=http://crackingmba.com/iift_pdf_file.pdf";
+        myWebView.loadUrl(URL);*/
+
+        webview = (WebView) findViewById(R.id.my_webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+
+        /*ProgressDialog pDialog = new ProgressDialog(SupportGuidanceActivity.this);
+        pDialog.setTitle("PDF");
+        pDialog.setMessage("Loading...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);*/
+        webview.loadUrl("https://drive.google.com/file/d/0B1TuPsj1jyhgaDFqV3JOLXA5RVk/view?usp=sharing");
+
+
+
+        //webview.loadUrl("http://crackingmba.com/iift_pdf_file.pdf");
+
+
+
+/*        String myPdfUrl = "http://example.com/awesome.pdf";
+        //String url = "http://docs.google.com/gview?embedded=true&url=" + myPdfUrl;
+        String url = "https://docs.google.com/document/d/1HmLNeXhOmdyDLGDewAgydB3pLHqYSHCED8iiM3hqNiM/edit";
+        //Log.i(TAG, "Opening PDF: " + url);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.loadUrl(url);*/
 
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
@@ -119,7 +150,7 @@ public class SupportGuidanceActivity extends AppCompatActivity {
             }
         };
 
-        support_btn.setOnClickListener(examOnClickListener);
+        //support_btn.setOnClickListener(examOnClickListener);
     }
 
     public void generateHashFromServer(PaymentParams mPaymentParams) {
@@ -330,7 +361,7 @@ public class SupportGuidanceActivity extends AppCompatActivity {
         intent.putExtra(PayuConstants.PAYU_CONFIG, payuConfig);
         intent.putExtra(PayuConstants.PAYMENT_PARAMS, paymentParams);
         intent.putExtra(PayuConstants.PAYU_HASHES, payuHashes);
-        startActivityForResult(intent, PayuConstants.PAYU_REQUEST_CODE);
+        //startActivityForResult(intent, PayuConstants.PAYU_REQUEST_CODE);
 
         //Lets fetch all the one click card tokens first
         //fetchMerchantHashes(intent);

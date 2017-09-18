@@ -83,7 +83,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                         switch (sectionName){
                             case "CAT":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","CATPREP");
+                                intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus CAT Preparation Course");
                                 break;
                             }

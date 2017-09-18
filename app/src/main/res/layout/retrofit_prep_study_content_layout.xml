@@ -19,35 +19,82 @@
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/videos_img"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"/>
             <TextView
                 android:id="@+id/prep_study1_tv"
                 android:text="Quant : Numbers Basics Video"
                 android:textStyle="bold"
-                android:textColor="#FAFAFA"
-                android:background="#1E88E5"
-                android:gravity="center"
+                android:gravity="left"
                 android:textSize="14sp"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Content"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textSize="12sp"
+                android:layout_gravity="right"
+                android:background="#1E88E5"
+                android:textColor="#FAFAFA"
+                android:layout_weight="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/videos_img"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"/>
             <TextView
                 android:id="@+id/prep_study2_tv"
-                android:text="Quant : Numbers Basics Mock Test"
+                android:text="Quant : Numbers Basics Video"
                 android:textStyle="bold"
-                android:textColor="#FAFAFA"
+                android:gravity="left"
                 android:textSize="14sp"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="#1E88E5"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login/Enroll"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textSize="12sp"
+                android:layout_gravity="right"
+                android:background="#1E88E5"
+                android:textColor="#FAFAFA"
+                android:layout_weight="0"/>
+        </LinearLayout>
+
+        <TextView
                 android:id="@+id/prep_study3_tv"
                 android:text="Preparation Category"
                 android:textStyle="bold"
