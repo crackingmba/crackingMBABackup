@@ -38,13 +38,14 @@ public class PreparationContentActivity extends AppCompatActivity {
     Call<RetrofitPrepContentList> call;
     PrepContentAPIService apiService;
     TextView prep_content_header;
+    String prep_category_header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final String prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
-        String prep_category_header = getIntent().getStringExtra("PREP_CATEGORY_HEADER");
+        prep_category_header = getIntent().getStringExtra("PREP_CATEGORY_HEADER");
         setContentView(R.layout.activity_preparation_content);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -74,29 +75,9 @@ public class PreparationContentActivity extends AppCompatActivity {
                         }else if(questions.get(position).getType().toString().equals("study"))
                         {
                             Intent intent = new Intent(PreparationContentActivity.this, PreparationHLContentActivity.class);
-                            switch(prep_category_code){
-                                case "CATPREP1":{
-                                    intent.putExtra("PREP_CATEGORY_CODE","CAT1");
-                                    intent.putExtra("PREP_CATEGORY_HEADER","CAT Study Material");
-                                    break;
-                                }
-
-                                case "IIFTPREP":{
-                                    intent.putExtra("PREP_CATEGORY_CODE","IIFT");
-                                    intent.putExtra("PREP_CATEGORY_HEADER","IIFT Study Material");
-                                    break;
-                                }
-
-                                case "SNAPPREP":{
-                                    intent.putExtra("PREP_CATEGORY_CODE","SNAP");
-                                    intent.putExtra("PREP_CATEGORY_HEADER","SNAP Study Material");
-                                    break;
-                                }
-
-                            }
-
-
-
+                            intent.putExtra("PREP_CATEGORY_CODE",prep_category_code);
+                            intent.putExtra("PREP_CATEGORY_NAME",questions.get(position).getName());
+                            intent.putExtra("PREP_CATEGORY_HEADER",prep_category_header);
                             startActivity(intent);
                         }
 

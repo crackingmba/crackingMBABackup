@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#CFD8DC"
     tools:context="com.crackingMBA.training.PreparationHLContentActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -30,12 +31,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="#CFD8DC"
+        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/prep_content_header11"
+            android:id="@+id/prep_content_header889"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Previous Year GK Papers"

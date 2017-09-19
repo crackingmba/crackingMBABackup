@@ -18,7 +18,6 @@ public class ShowAnswerActivity extends AppCompatActivity {
     TextView qstnTxt;
     TextView qstnDate;
     TextView answerTxt;
-    String url;
     boolean isMock;
     static String TAG = "ShowAnswerActivity";
 

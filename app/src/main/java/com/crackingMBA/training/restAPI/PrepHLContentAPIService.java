@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface PrepHLContentAPIService {
-    @GET("/getPrepHLContent.php")
-    Call<RetrofitPrepHLContentList> fetchPrepHLContent(@Query("category") String category);
+    @GET("/getPrepHLContent1.php")
+    Call<RetrofitPrepHLContentList> fetchPrepHLContent(@Query("category") String category, @Query("category_name") String category_name);
 }

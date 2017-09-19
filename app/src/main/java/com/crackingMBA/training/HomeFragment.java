@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     View rootView;
     private static String TAG = "HomeFragment";
     //LinearLayout online_sessions_layout, study_material_layout, mock_tests_layout, videos_layout, forum_layout, motivationLayout;
-    LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout;
+    LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout, home_fragment_xat_layout;
     NoticeBoardAPIService apiService;
     List<RetrofitNoticeBoard> boards = new ArrayList<>();
     Call<RetrofitNoticeBoardList> call;
@@ -80,6 +80,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         home_fragment_cat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_cat_layout);
         home_fragment_iift_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_layout);
         home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
+        home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
+        home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);
         //home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);
         high_5=(Button)rootView.findViewById(R.id.high_5);
         share_feedback=(Button)rootView.findViewById(R.id.share_feedback);
@@ -145,6 +147,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     }
 
+                    case R.id.home_fragment_xat_layout:{
+                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
+                        viewPager.setCurrentItem(1, true);
+                        break;
+                    }
+
 
                     /*case R.id.home_fragment_xat_layout:{
                         Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
@@ -192,6 +200,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         home_fragment_cat_layout.setOnClickListener(examOnClickListener);
         home_fragment_iift_layout.setOnClickListener(examOnClickListener);
         home_fragment_snap_layout.setOnClickListener(examOnClickListener);
+        home_fragment_xat_layout.setOnClickListener(examOnClickListener);
         //home_fragment_xat_layout.setOnClickListener(examOnClickListener);
         high_5.setOnClickListener(examOnClickListener);
         share_feedback.setOnClickListener(examOnClickListener);

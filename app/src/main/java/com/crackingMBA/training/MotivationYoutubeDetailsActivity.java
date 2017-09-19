@@ -66,6 +66,13 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 //videoDescription.setText("The details for DI & LR Section Go Here!");
                 break;
             }
+            case "XAT":
+            {
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_xat);
+                imgView.setImageDrawable(myDrawable);
+                motivation_yt_focus_tv.setText(exam_name_text);
+                break;
+            }
         }
 
         //videoName=(TextView)findViewById(R.id.motivation_youtube_video_name);
@@ -89,14 +96,20 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                             }
                             case "IIFT":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP");
+                                intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus IIFT Preparation Course");
                                 break;
                             }
                             case "SNAP":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP");
+                                intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus SNAP Preparation Course");
+                                break;
+                            }
+                            case "XAT":
+                            {
+                                intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
+                                intent.putExtra("PREP_CATEGORY_HEADER","Focus XAT Preparation Course");
                                 break;
                             }
                         }

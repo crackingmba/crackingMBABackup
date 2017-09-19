@@ -1,22 +1,16 @@
 package com.crackingMBA.training.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.crackingMBA.training.PreparationContentActivity;
-import com.crackingMBA.training.PreparationHLContentActivity;
 import com.crackingMBA.training.R;
-import com.crackingMBA.training.StartMockTestActivity;
-import com.crackingMBA.training.TargetVideoActivity;
-import com.crackingMBA.training.VideoApplication;
 import com.crackingMBA.training.interfaces.ClickListener;
-import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.RetrofitPrepHLContent;
 
 import java.lang.ref.WeakReference;
@@ -46,129 +40,47 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
         holder.prep_study_day_name_tv.setText(questions.get(position).getName());
+        setContentNames(holder.prep_study1_iv, holder.prep_study1_tv,questions.get(position).getStudy1(), questions.get(position).getStudy1Type() );
+        setContentNames(holder.prep_study2_iv, holder.prep_study2_tv,questions.get(position).getStudy2(), questions.get(position).getStudy2Type() );
+        setContentNames(holder.prep_study3_iv, holder.prep_study3_tv,questions.get(position).getStudy3(), questions.get(position).getStudy3Type() );
+        setContentNames(holder.prep_study4_iv, holder.prep_study4_tv,questions.get(position).getStudy4(), questions.get(position).getStudy4Type() );
+        setContentNames(holder.prep_study5_iv, holder.prep_study5_tv,questions.get(position).getStudy5(), questions.get(position).getStudy5Type() );
+        setContentNames(holder.prep_study6_iv, holder.prep_study6_tv,questions.get(position).getStudy6(), questions.get(position).getStudy6Type() );
 
+      }
 
+    private void setContentNames(ImageView iv, TextView tv, String study, String studyType) {
+            if(study.length()>0){
 
-        if(questions.get(position).getStudy1().toString().length()>0){
-            setContentNames(holder.prep_study1_tv,questions.get(position).getStudy1(), questions.get(position).getStudy1Type() );
+                tv.setVisibility(View.VISIBLE);
+                iv.setVisibility(View.VISIBLE);
 
+                if(studyType.equals("video")){
+                    String str = study;
+                    String substr = str.substring(0, str.indexOf(","));
+                    Drawable myDrawable = iv.getResources().getDrawable(R.drawable.videos_img);
+                    iv.setImageDrawable(myDrawable);
+                    tv.setText(substr);
+                }
 
-            //holder.prep_study1_tv.setVisibility(View.VISIBLE);
+                if(studyType.equals("mocktest")){
+                    String str = study;
+                    String substr = str.substring(0, str.indexOf(","));
+                    Drawable myDrawable = iv.getResources().getDrawable(R.drawable.mock_test_icon);
+                    iv.setImageDrawable(myDrawable);
+                    tv.setText(substr);
+                }
 
-            //String str1 = questions.get(position).getStudy1Type();
-            //String substr1 = str1.substring(0,str1.indexOf(","));
-/*
-            if(questions.get(position).getStudy1Type().toString().equals("video")||questions.get(position).getStudy1Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy1();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study1_tv.setText(substr);
-            }else{
-                holder.prep_study1_tv.setText(questions.get(position).getStudy1());
-            }*/
+                if(studyType.equals("text")){
+                    Drawable myDrawable = iv.getResources().getDrawable(R.drawable.notes);
+                    iv.setImageDrawable(myDrawable);
+                    tv.setText(study);
+                }
 
-
-        }else{
-            holder.prep_study1_tv.setVisibility(View.GONE);
-        }
-
-        if(questions.get(position).getStudy2().toString().length()>0){
-            holder.prep_study2_tv.setVisibility(View.VISIBLE);
-
-
-            if(questions.get(position).getStudy2Type().toString().equals("video")||questions.get(position).getStudy2Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy2();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study2_tv.setText(substr);
-            }else{
-                holder.prep_study2_tv.setText(questions.get(position).getStudy2());
             }
-
-
-        }else{
-            holder.prep_study2_tv.setVisibility(View.GONE);
-        }
-
-        if(questions.get(position).getStudy3().toString().length()>0){
-            holder.prep_study3_tv.setVisibility(View.VISIBLE);
-
-
-            if(questions.get(position).getStudy3Type().toString().equals("video")||questions.get(position).getStudy3Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy3();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study3_tv.setText(substr);
-            }else{
-                holder.prep_study3_tv.setText(questions.get(position).getStudy3());
-            }
-
-
-        }else{
-            holder.prep_study3_tv.setVisibility(View.GONE);
-        }
-
-        if(questions.get(position).getStudy4().toString().length()>0){
-            holder.prep_study4_tv.setVisibility(View.VISIBLE);
-
-
-            if(questions.get(position).getStudy4Type().toString().equals("video")||questions.get(position).getStudy4Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy4();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study4_tv.setText(substr);
-            }else{
-                holder.prep_study4_tv.setText(questions.get(position).getStudy4());
-            }
-
-
-        }else{
-            holder.prep_study4_tv.setVisibility(View.GONE);
-        }
-
-        if(questions.get(position).getStudy5().toString().length()>0){
-            holder.prep_study5_tv.setVisibility(View.VISIBLE);
-
-
-            if(questions.get(position).getStudy5Type().toString().equals("video")||questions.get(position).getStudy5Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy5();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study5_tv.setText(substr);
-            }else{
-                holder.prep_study5_tv.setText(questions.get(position).getStudy5());
-            }
-
-
-        }else{
-            holder.prep_study5_tv.setVisibility(View.GONE);
-        }
-
-        if(questions.get(position).getStudy6().toString().length()>0){
-            holder.prep_study6_tv.setVisibility(View.VISIBLE);
-
-
-            if(questions.get(position).getStudy6Type().toString().equals("video")||questions.get(position).getStudy6Type().toString().equals("mocktest")){
-                String str = questions.get(position).getStudy6();
-                String substr = str.substring(0,str.indexOf(","));
-                holder.prep_study6_tv.setText(substr);
-            }else{
-                holder.prep_study6_tv.setText(questions.get(position).getStudy6());
-            }
-
-
-        }else{
-            holder.prep_study6_tv.setVisibility(View.GONE);
-        }
-    }
-
-    private void setContentNames(TextView tv,String study, String studyType) {
-            tv.setVisibility(View.VISIBLE);
-
-            //String str1 = questions.get(position).getStudy1Type();
-            //String substr1 = str1.substring(0,str1.indexOf(","));
-
-            if (studyType.equals("video") || studyType.equals("mocktest")) {
-                String str = study;
-                String substr = str.substring(0, str.indexOf(","));
-                tv.setText(substr);
-            } else {
-                tv.setText(study);
+            else{
+                tv.setVisibility(View.GONE);
+                iv.setVisibility(View.GONE);
             }
     }
 
@@ -180,6 +92,9 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
     public static class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView prep_study_day_name_tv, prep_study1_tv, prep_study2_tv, prep_study3_tv;
         TextView prep_study4_tv, prep_study5_tv, prep_study6_tv;
+        ImageView prep_study1_iv, prep_study2_iv, prep_study3_iv;
+        ImageView prep_study4_iv, prep_study5_iv, prep_study6_iv;
+
         private WeakReference<ClickListener> listenerRef;
 
 
@@ -194,6 +109,13 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
             prep_study4_tv = (TextView) v.findViewById(R.id.prep_study4_tv);
             prep_study5_tv = (TextView) v.findViewById(R.id.prep_study5_tv);
             prep_study6_tv = (TextView) v.findViewById(R.id.prep_study6_tv);
+
+            prep_study1_iv = (ImageView) v.findViewById(R.id.prep_study1_iv);
+            prep_study2_iv = (ImageView) v.findViewById(R.id.prep_study2_iv);
+            prep_study3_iv = (ImageView) v.findViewById(R.id.prep_study3_iv);
+            prep_study4_iv = (ImageView) v.findViewById(R.id.prep_study4_iv);
+            prep_study5_iv = (ImageView) v.findViewById(R.id.prep_study5_iv);
+            prep_study6_iv = (ImageView) v.findViewById(R.id.prep_study6_iv);
 
 
             prep_study1_tv.setOnClickListener(this);
@@ -235,33 +157,8 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
                 listenerRef.get().onPositionClicked(Integer.parseInt(tempStr));
             }
 
-                //Intent intent = new Intent(v.getContext(),PreparationContentActivity.class);
-                //startActivity(intent);
-                //listenerRef.get().onPositionClicked(getAdapterPosition());
-
-
         }
         }
-
-
-/*    public static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView prep_study_day_name_tv, prep_study1_tv, prep_study2_tv, prep_study3_tv;
-        TextView prep_study4_tv, prep_study5_tv, prep_study6_tv;
-
-        public QuestionViewHolder(View v) {
-            super(v);
-            prep_study_day_name_tv = (TextView) v.findViewById(R.id.prep_study_day_name_tv);
-            prep_study1_tv = (TextView) v.findViewById(R.id.prep_study1_tv);
-            prep_study2_tv = (TextView) v.findViewById(R.id.prep_study2_tv);
-            prep_study3_tv = (TextView) v.findViewById(R.id.prep_study3_tv);
-            prep_study4_tv = (TextView) v.findViewById(R.id.prep_study4_tv);
-            prep_study5_tv = (TextView) v.findViewById(R.id.prep_study5_tv);
-            prep_study6_tv = (TextView) v.findViewById(R.id.prep_study6_tv);
-        }
-    }*/
-
-
-
 
 }
 

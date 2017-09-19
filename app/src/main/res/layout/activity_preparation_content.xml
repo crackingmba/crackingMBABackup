@@ -92,7 +92,7 @@
             android:layout_weight="0"
             android:layout_marginBottom="40dp"
             android:textSize="16sp"
-            android:text="EVALUATE FOR FREE UPTO 15TH SEP!"
+            android:text="EVALUATE FOR FREE UPTO 22nd SEP!"
             android:background="#BF360C"
             android:gravity="center"/>
 

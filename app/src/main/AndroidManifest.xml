@@ -154,14 +154,20 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hi There!"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PreparationHLContentActivity"
+        <activity
+            android:name=".PreparationHLContentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Course Study Material"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SupportGuidanceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SupportGuidanceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Support"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ViewPDFDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Article Details"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

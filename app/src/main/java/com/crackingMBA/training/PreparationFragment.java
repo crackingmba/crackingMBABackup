@@ -23,7 +23,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    CardView CATCardView, IIFTCardView, SNAPCardView;
+    CardView CATCardView, IIFTCardView, SNAPCardView, XATCardView;
 
     @Nullable
     @Override
@@ -40,10 +40,12 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
             CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
             IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
             SNAPCardView = (CardView)rootView.findViewById(R.id.SNAPCardView);
+            XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
 
             CATCardView.setOnClickListener(this);
             IIFTCardView.setOnClickListener(this);
             SNAPCardView.setOnClickListener(this);
+            XATCardView.setOnClickListener(this);
         }
 
         return rootView;
@@ -92,6 +94,12 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 startActivity(motivationVideoDetails);
                 //VideoApplication.sectionClicked="verbal";
                 //intent.putExtra("sectionName","verbal");
+                break;
+            case R.id.XATCardView:
+                motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
+                motivationVideoDetails.putExtra("EXAM_NAME", "XAT");
+                motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 499, for the price of a medium pan pizza, you can now crack XAT!");
+                startActivity(motivationVideoDetails);
                 break;
             default:
                 Log.d(TAG,"Unknown button clicked..");

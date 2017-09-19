@@ -56,7 +56,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.prepHLcontentRecyclerView);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(PreparationHLContentActivity.this));
-        prep_content_header=(TextView)findViewById(R.id.prep_content_header11);
+        prep_content_header=(TextView)findViewById(R.id.prep_content_header889);
 
         adapter = new PreparationHLContentAdapter(questions, R.layout.retrofit_prep_study_content_layout, PreparationHLContentActivity.this, new ClickListener() {
             @Override
@@ -119,216 +119,6 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
-                /*switch(index){
-                    case 1:{
-                        switch(questions.get(position).getStudy1Type()){
-                            case "mocktest":{
-                                str = questions.get(position).getStudy1();
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy1();
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video":{
-                                str = questions.get(position).getStudy1();
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy1();
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-
-                    case 2:{
-                        switch(questions.get(position).getStudy2Type()){
-                            case "mocktest":{
-                                str = questions.get(position).getStudy2();
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy2();
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video":{
-                                str = questions.get(position).getStudy2();
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy2();
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-                    case 3:{
-                        switch(questions.get(position).getStudy3Type()){
-                            case "mocktest":{
-                                str = questions.get(position).getStudy3();
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy3();
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video":{
-                                str = questions.get(position).getStudy3();
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy3();
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-                    case 4:{
-                        switch(questions.get(position).getStudy4Type()){
-                            case "mocktest":{
-                                str = questions.get(position).getStudy4();
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy4();
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video":{
-                                str = questions.get(position).getStudy4();
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy4();
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-                    case 5:{
-                        switch(questions.get(position).getStudy5Type()){
-                            case "mocktest":{
-                                str = questions.get(position).getStudy5();
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy5();
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video":{
-                                str = questions.get(position).getStudy5();
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= questions.get(position).getStudy5();
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-
-                    case 6:{
-                        switch(questions.get(position).getStudy6Type()) {
-                            case "mocktest": {
-                                str = questions.get(position).getStudy6();
-                                String test_name = str.substring(0, str.indexOf(","));
-
-                                str = questions.get(position).getStudy6();
-                                String test_id = str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png", test_name);
-                                VideoApplication.selectedMockTestTest = mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-                            case "video": {
-                                str = questions.get(position).getStudy6();
-                                String course_name = str.substring(0, str.indexOf(","));
-
-                                str = questions.get(position).getStudy6();
-                                String url = str.substring(str.indexOf(",") + 1);
-
-                                intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME", course_category);
-                                intent.putExtra("COURSE_SUBJECT", course_name);
-                                intent.putExtra("URL", url);
-                                startActivity(intent);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-                }*/
-
             }
 
             @Override
@@ -341,19 +131,17 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(PreparationHLContentActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, final int position) {
-                        //Toast.makeText(PreparationContentActivity.this, "Hey There!", Toast.LENGTH_SHORT).show();
-                      
-
                     }
                 })
         );
 
 
         String prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
+        String prep_category_name = getIntent().getStringExtra("PREP_CATEGORY_NAME");
         String prep_category_header = getIntent().getStringExtra("PREP_CATEGORY_HEADER");
         //prep_category_code="GK";
         prep_content_header.setText(prep_category_header);
-        call = apiService.fetchPrepHLContent(prep_category_code);
+        call = apiService.fetchPrepHLContent(prep_category_code, prep_category_name);
         if(MyUtil.checkConnectivity(getApplicationContext())) {
 
             MyUtil.showProgressDialog(this);
@@ -416,6 +204,14 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         intent.putExtra("COURSE_NAME",course_category);
                         intent.putExtra("COURSE_SUBJECT",course_name);
                         intent.putExtra("URL",url);
+                        startActivity(intent);
+                        break;
+                    }
+                    case "text":{
+                        Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
+                        //intent.putExtra("COURSE_NAME",course_category);
+                        //intent.putExtra("COURSE_SUBJECT",course_name);
+                        //intent.putExtra("URL",url);
                         startActivity(intent);
                         break;
                     }
