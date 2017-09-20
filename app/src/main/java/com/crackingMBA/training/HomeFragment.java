@@ -62,7 +62,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Call<RetrofitNoticeBoardList> call;
     TextView notice_board_tv1, notice_board_tv2, notice_board_tv3;
     Button high_5, share_feedback;
-    String apk_version="2.8.10";
+    public static final String apk_version="2.8.16";
+    public static String server_apk_version;
 
     @Nullable
     @Override
@@ -225,6 +226,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     notice_board_tv1=(TextView)rootView.findViewById(R.id.notice_board_tv1);
                     notice_board_tv2=(TextView)rootView.findViewById(R.id.notice_board_tv2);
                     notice_board_tv3=(TextView)rootView.findViewById(R.id.notice_board_tv3);
+
+                    server_apk_version=boards.get(0).toString();
 
                     if(boards.get(0).getAPK_Version().equals(apk_version)){
                         //thats ok

@@ -1,15 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
-
     defaultConfig {
         applicationId "com.crackingMBA.training"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 21
-        versionName "2.8.10"
+        versionCode 22
+        versionName "2.8.16"
     }
     buildTypes {
         debug {
@@ -39,8 +42,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.google.firebase:firebase-auth:9.2.1'
     compile 'com.google.firebase:firebase-messaging:9.2.1'
-    compile 'com.payu.india:payu-sdk:4.3.9'
-    compile project(path: ':sdkui')
 }
 
 apply plugin: 'com.google.gms.google-services'

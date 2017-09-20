@@ -17,24 +17,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.payu.india.Model.PaymentParams;
-import com.payu.india.Model.PayuConfig;
-import com.payu.india.Model.PayuHashes;
-import com.payu.india.Payu.Payu;
-import com.payu.india.Payu.PayuConstants;
-import com.payu.payuui.Activity.PayUBaseActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.Iterator;
-
 public class SupportGuidanceActivity extends AppCompatActivity {
     Button support_btn;
 
@@ -42,8 +24,6 @@ public class SupportGuidanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_guidance);
-
-        Payu.setInstance(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
