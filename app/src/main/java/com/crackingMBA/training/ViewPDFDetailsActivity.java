@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.crackingMBA.training.util.MyUtil;
 
 public class ViewPDFDetailsActivity extends AppCompatActivity {
-    WebView webview;
+    WebView webview; String webview_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ViewPDFDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
+        webview_url = getIntent().getStringExtra("WEBVIEW_URL");
         webview = (WebView) findViewById(R.id.my_webview1);
         webview.getSettings().setJavaScriptEnabled(true);
 
@@ -37,7 +37,8 @@ public class ViewPDFDetailsActivity extends AppCompatActivity {
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         webview.setWebViewClient(new MyWebViewClient());
-        webview.loadUrl("https://drive.google.com/file/d/0B534aayZ5j7Yc3RhcnRlcl9maWxl/view?usp=sharing");
+        //webview.loadUrl("https://drive.google.com/file/d/0B534aayZ5j7Yc3RhcnRlcl9maWxl/view?usp=sharing");
+        webview.loadUrl("https://drive.google.com/file/d/"+webview_url+"/view?usp=sharing");
         MyUtil.hideProgressDialog();
 
     }

@@ -38,9 +38,6 @@ View rootView;
         this.inflater = inflater;
         this.container = container;
         rootView = inflater.inflate(R.layout.fragment_mocktest_startup, container, false);
-        //TableRow quantRow = (TableRow) rootView.findViewById(R.id.quantrow);
-        //TableRow diRow = (TableRow) rootView.findViewById(R.id.dirow);
-        //TableRow verbalRow = (TableRow) rootView.findViewById(R.id.verbalrow);
 
         quantRow=(CardView)rootView.findViewById(R.id.mock_test_quantrow);
         dilrRow=(CardView)rootView.findViewById(R.id.mock_test_dilrrow);

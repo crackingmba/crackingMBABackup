@@ -25,11 +25,14 @@
 
 
         <LinearLayout
+            android:id="@+id/prep_study1_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study1_iv"
@@ -48,25 +51,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-           <!-- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Free Content"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/prep_study2_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study2_iv"
@@ -85,25 +80,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login/Enroll"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/prep_study3_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study3_iv"
@@ -122,24 +109,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login/Enroll"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/prep_study4_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study4_iv"
@@ -158,24 +137,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login/Enroll"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/prep_study5_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study5_iv"
@@ -194,24 +165,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login/Enroll"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/prep_study6_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="#E3F2FD"
+            android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/prep_study6_iv"
@@ -230,17 +193,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login/Enroll"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_gravity="right"
-                android:background="#1E88E5"
-                android:textColor="#FAFAFA"
-                android:layout_weight="0"/>-->
         </LinearLayout>
     </LinearLayout>
 

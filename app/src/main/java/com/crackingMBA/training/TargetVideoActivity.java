@@ -73,31 +73,37 @@ public class TargetVideoActivity extends AppCompatActivity implements YouTubePla
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         videoList = VideoApplication.videoList;
 
-        String course_name="Focus Preparation Course";
-        course_name = getIntent().getStringExtra("COURSE_NAME");
-        String course_subject = "Video on specific topic";
-        course_subject = getIntent().getStringExtra("COURSE_SUBJECT");
-        url = "C4_ZRo_ipU4";
+        String course_name=getIntent().getStringExtra("COURSE_NAME");
+        String course_subject = getIntent().getStringExtra("COURSE_SUBJECT");
         url = getIntent().getStringExtra("URL");
 
-    //((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-    //((TextView) findViewById(R.id.target_videotitle)).setText(videoList.getVideoTitle());
-    ((TextView) findViewById(R.id.target_categoryFullName)).setText(course_name);
-    ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(course_subject);
-    //((TextView) findViewById(R.id.target_videotitle)).setText(course_subject);
-    //((TextView) findViewById(R.id.target_videoCategory)).setText(videoList.getVideoCategory());
-    //((TextView) findViewById(R.id.target_subCategory)).setText(videoList.getVideoSubCategory());
+        switch(course_name){
+            case "CATPREP1":{
+                course_name="CAT Preparation";
+                break;
+            }
+            case "IIFTPREP1":{
+                course_name="IIFT Preparation";
+                break;
+            }
+            case "SNAPPREP1":{
+                course_name="SNAP Preparation";
+                break;
+            }
+            case "XATPREP":{
+                course_name="XAT Preparation";
+                break;
+            }
+        }
 
-    //((TextView) findViewById(R.id.target_thumbnailURL)).setText(videoList.getVideoYouTubeURL());
-    //((TextView) findViewById(R.id.target_videoYouTubeURL)).setText(videoList.getThumbnailURL());
-    //((TextView) findViewById(R.id.target_description)).setText(videoList.getVideoDescription());
-} //the OnCreate code completes here
+        ((TextView) findViewById(R.id.target_categoryFullName)).setText(course_name);
+        ((TextView) findViewById(R.id.target_subCategoryFullName)).setText(course_subject);
+}
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
             player.cueVideo(url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
-            //player.cueVideo(videoList.getVideoYouTubeURL()); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
 
     }

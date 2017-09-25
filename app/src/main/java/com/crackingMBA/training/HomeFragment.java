@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Call<RetrofitNoticeBoardList> call;
     TextView notice_board_tv1, notice_board_tv2, notice_board_tv3;
     Button high_5, share_feedback;
-    public static final String apk_version="2.8.16";
+    public static final String apk_version="2.8.17";
     public static String server_apk_version;
 
     @Nullable
@@ -72,18 +72,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
         quantRecyclerView = (RecyclerView) rootView.findViewById(R.id.video_recycler_view);
         quantRecyclerView.setHasFixedSize(true);
-        //online_sessions_layout=(LinearLayout)rootView.findViewById(R.id.online_sessions_layout);
-        //study_material_layout=(LinearLayout)rootView.findViewById(R.id.study_material_layout);
-        //mock_tests_layout=(LinearLayout)rootView.findViewById(R.id.mock_tests_layout);
-        //videos_layout=(LinearLayout)rootView.findViewById(R.id.videos_layout);
-        //forum_layout=(LinearLayout)rootView.findViewById(R.id.forum_layout);
-        //motivationLayout=(LinearLayout)rootView.findViewById(R.id.motivationLayout);
         home_fragment_cat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_cat_layout);
         home_fragment_iift_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_layout);
         home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
         home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
         home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);
-        //home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);
         high_5=(Button)rootView.findViewById(R.id.high_5);
         share_feedback=(Button)rootView.findViewById(R.id.share_feedback);
 
@@ -227,7 +220,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     notice_board_tv2=(TextView)rootView.findViewById(R.id.notice_board_tv2);
                     notice_board_tv3=(TextView)rootView.findViewById(R.id.notice_board_tv3);
 
-                    server_apk_version=boards.get(0).toString();
+                    server_apk_version=boards.get(0).getAPK_Version();
 
                     if(boards.get(0).getAPK_Version().equals(apk_version)){
                         //thats ok

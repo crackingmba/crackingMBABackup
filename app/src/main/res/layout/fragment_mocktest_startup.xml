@@ -24,20 +24,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="ECHO!"
+                android:text="SAVE THE PANDA"
                 android:textSize="18sp"
                 android:textColor="#212121"
                 android:textStyle="bold"
-                android:layout_margin="10dp"/>
-
+                android:layout_marginTop="25dp"/>
+<!--
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Grab your chance to be heard!"
+                android:text="Save the panda thrice in a week and stand a chance to win Flipkart SmartBuy On the Ear Foldable Headphones!"
                 android:textSize="14sp"
                 android:textColor="#212121"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"/>-->
 
             <!-- Personal Help -->
             <android.support.v7.widget.CardView
@@ -66,7 +66,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/helping_hand"
+                            android:src="@drawable/panda"
                             android:adjustViewBounds="true" />
                     </LinearLayout>
                     <LinearLayout
@@ -78,13 +78,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Reach OUT!"
+                            android:text="The Background"
                             android:layout_margin="3dp"
                             android:textStyle="bold"
                             android:textColor="#212121"
                             />
                         <TextView
-                            android:text="You know you could score that perfect percentile. If something is impacting your performance and you need some help, reach out! This is free for all our awesome users!"
+                            android:text="Tai Lang is back to seek vengeance. Having realized he cannot beat the Kung Fu Panda at Kung Fu, he drugs his favorite food... the dumplings. Master Shifu has entrusted upon you, the responsibility of saving his dearest Panda."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#212121"/>
@@ -95,7 +95,7 @@
 
 
 
-            <!-- App Feedback -->
+            <!-- Save the Panda details -->
             <android.support.v7.widget.CardView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -124,7 +124,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/feedback"
+                            android:src="@drawable/headphones"
                             android:adjustViewBounds="true" />
                     </LinearLayout>
                     <LinearLayout
@@ -137,17 +137,48 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="App Feedback"
+                            android:text="Save the Panda and win!"
                             android:textStyle="bold"
                             android:layout_margin="3dp"
                             android:textColor="#212121"
                             />
                         <TextView
-                            android:text="Before clicking that Uninstall button, give us a chance to hear if you were expecting something and that isnt available on this app! We will try to implement your requirements!"
+                            android:text="You got just 100 seconds to answer 10 questions to save the panda. Any wrong answer and Tai Lang will devour you. If you can save the panda thrice a week, you can win these cool headphones from Flipkart."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#212121"/>
                     </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- button to start the game -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/app_feedback1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                android:layout_margin="5dp"
+                >
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Let's Save the Panda!"
+                        android:padding="20dp"
+                        android:gravity="center"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>

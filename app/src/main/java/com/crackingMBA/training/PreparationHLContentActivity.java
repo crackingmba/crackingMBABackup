@@ -14,13 +14,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crackingMBA.training.adapter.PreparationContentAdapter;
 import com.crackingMBA.training.adapter.PreparationHLContentAdapter;
 import com.crackingMBA.training.interfaces.ClickListener;
 import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.RetrofitPrepHLContent;
 import com.crackingMBA.training.pojo.RetrofitPrepHLContentList;
-import com.crackingMBA.training.restAPI.PrepContentAPIService;
 import com.crackingMBA.training.restAPI.PrepHLContentAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
@@ -40,7 +38,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     Call<RetrofitPrepHLContentList> call;
     PrepHLContentAPIService apiService;
     String course_category;String str;int index;
-    TextView prep_content_header,prep_study1_tv, prep_study2_tv, prep_study3_tv, prep_study4_tv, prep_study5_tv,prep_study6_tv;
+    TextView prep_content_header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +86,11 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
                     case "SNAP":{
                         course_category="SNAP 2017 Preparation Course";
+                        break;
+                    }
+
+                    case "XAT":{
+                        course_category="XAT 2018 Preparation Course";
                         break;
                     }
 
@@ -208,10 +211,15 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         break;
                     }
                     case "text":{
+/*                        str = study;
+                        String course_name = str.substring(0,str.indexOf(","));*/
+
+                        str= study;
+                        String webview_url=str.substring(str.indexOf(",") + 1);
                         Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
                         //intent.putExtra("COURSE_NAME",course_category);
                         //intent.putExtra("COURSE_SUBJECT",course_name);
-                        //intent.putExtra("URL",url);
+                        intent.putExtra("WEBVIEW_URL",webview_url);
                         startActivity(intent);
                         break;
                     }
