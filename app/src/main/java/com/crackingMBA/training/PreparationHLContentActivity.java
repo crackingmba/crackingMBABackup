@@ -1,8 +1,12 @@
 package com.crackingMBA.training;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +28,17 @@ import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.RecyclerItemClickListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +53,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     PrepHLContentAPIService apiService;
     String course_category;String str;int index;
     TextView prep_content_header;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +74,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         adapter = new PreparationHLContentAdapter(questions, R.layout.retrofit_prep_study_content_layout, PreparationHLContentActivity.this, new ClickListener() {
             @Override
             public void onPositionClicked(int selected_position) {
+
                 int position=0;
 
                 if(selected_position<9){
@@ -154,8 +170,6 @@ public class PreparationHLContentActivity extends AppCompatActivity {
             Toast.makeText(this, "Sorry. There is no internet connection!", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     private void fetchPrepContentList() {
         call.enqueue(new Callback<RetrofitPrepHLContentList>() {
