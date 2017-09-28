@@ -3,6 +3,7 @@ package com.crackingMBA.training;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -62,6 +63,10 @@ View rootView;
         verbalRow.setOnClickListener(this);
         personal_help_cv.setOnClickListener(this);
         app_feedback.setOnClickListener(this);
+
+        String   myAndroidDeviceId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Toast.makeText(getContext(), "The Android Device ID is "+myAndroidDeviceId, Toast.LENGTH_SHORT).show();
+
         return rootView;
     }
 
@@ -100,12 +105,13 @@ View rootView;
                     //VideoApplication.sectionClicked = "verbal";
                     break;
                 case R.id.app_feedback:
-                    intent = new Intent(getActivity(), FeedbackActivity.class);
+
+                 /*   intent = new Intent(getActivity(), FeedbackActivity.class);
                     intent.putExtra("FEEDBACK_HEADER", "APP Feedback!");
                     intent.putExtra("FEEDBACK_TEXT", "Before clicking that Uninstall button, give us a chance to hear if you were expecting something and that isnt available on this app! We will try to implement your requirements!");
                     startActivity(intent);
                     //VideoApplication.sectionClicked = SectionEnum.verbal.key;
-                    VideoApplication.sectionClicked = "verbal";
+                    VideoApplication.sectionClicked = "verbal";*/
                     break;
                 default:
                     Log.d(TAG, "Unknown button clicked..");

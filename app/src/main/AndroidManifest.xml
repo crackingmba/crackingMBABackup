@@ -164,10 +164,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Support"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewPDFDetailsActivity"
+        <activity
+            android:name=".ViewPDFDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Article Details"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PlaynWinActivity"></activity>
     </application>
 
 </manifest>
