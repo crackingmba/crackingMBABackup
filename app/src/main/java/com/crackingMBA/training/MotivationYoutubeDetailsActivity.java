@@ -52,7 +52,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 Drawable myDrawable = getResources().getDrawable(R.drawable.focus_quant);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "HeS21JBzmg4";
+                motivation_video_url = "9AzWC0TZDWo";
                 //videoName.setText("'Focus' Verbal");
                 //videoDescription.setText("The details for Verbal Section Go Here!");
                 break;
@@ -62,7 +62,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 Drawable myDrawable = getResources().getDrawable(R.drawable.focus_gk);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "AaScU2v4Uec";
+                motivation_video_url = "cJG66qbLfHU";
                 //videoName.setText("'Focus' DI & LR");
                 //videoDescription.setText("The details for DI & LR Section Go Here!");
                 break;
