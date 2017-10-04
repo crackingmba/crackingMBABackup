@@ -24,7 +24,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    CardView CATCardView, IIFTCardView, SNAPCardView, XATCardView;
+    CardView RCCardView, QuantCardView, GKCardView;
 
     @Nullable
     @Override
@@ -38,15 +38,13 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
-            IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
-            SNAPCardView = (CardView)rootView.findViewById(R.id.SNAPCardView);
-            XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
+            RCCardView = (CardView)rootView.findViewById(R.id.RCCardView);
+            QuantCardView = (CardView)rootView.findViewById(R.id.QuantCardView);
+            GKCardView = (CardView)rootView.findViewById(R.id.GKCardView);
 
-            CATCardView.setOnClickListener(this);
-            IIFTCardView.setOnClickListener(this);
-            SNAPCardView.setOnClickListener(this);
-            XATCardView.setOnClickListener(this);
+            RCCardView.setOnClickListener(this);
+            QuantCardView.setOnClickListener(this);
+            GKCardView.setOnClickListener(this);
         }
 
         return rootView;
@@ -62,11 +60,11 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.CATCardView: {
+            case R.id.RCCardView: {
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                     Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                    motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
-                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 499, for the price of a medium pan pizza, you can now crack CAT!");
+                    motivationVideoDetails.putExtra("EXAM_NAME", "RC");
+                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 250, for the price of a medium pan pizza, you can now crack the RC Section of CAT, IIFT, SNAP and XAT!");
                     startActivity(motivationVideoDetails);
                 } else {
                     //Launch the dialog to update from server
@@ -75,29 +73,29 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 }
             }
                 break;
-                case R.id.IIFTCardView: {
+                case R.id.QuantCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                        motivationVideoDetails.putExtra("EXAM_NAME", "IIFT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 499, for the price of a medium pan pizza, you can now crack IIFT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME", "QUANT");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 250, for the price of a medium pan pizza, you can now crack the Quant Section of CAT, IIFT, SNAP and XAT!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
                     }
                 }
                 break;
-            case R.id.SNAPCardView: {
+            case R.id.GKCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                        motivationVideoDetails.putExtra("EXAM_NAME", "SNAP");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 499, for the price of a medium pan pizza, you can now crack SNAP!");
+                        motivationVideoDetails.putExtra("EXAM_NAME", "GK");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 250, for the price of a medium pan pizza, you can now crack the GK Section of IIFT, SNAP and XAT!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
                     }
                 }
                 break;
-            case R.id.XATCardView: {
+  /*          case R.id.XATCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "XAT");
@@ -107,7 +105,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                         launch_update_dialog();
                     }
                 }
-                break;
+                break;*/
             default:
                 Log.d(TAG,"Unknown button clicked..");
                 break;

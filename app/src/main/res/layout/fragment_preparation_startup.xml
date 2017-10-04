@@ -6,7 +6,7 @@
     android:padding="5dp">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -17,39 +17,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Focus Prep"
+                    android:text="Focused Preparation"
                     android:textSize="18sp"
                     android:textColor="#212121"
                     android:textStyle="bold"
                     android:layout_margin="10dp"/>
 
-                <TextView
+<!--                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Select the exam which you are serious about cracking this year."
                     android:textSize="14sp"
                     android:textColor="#212121"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="10dp"/>-->
 
-                <!-- CAT CardView -->
+                <!-- RC CardView -->
                 <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/CATCardView"
+                    android:id="@+id/RCCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
-                    android:layout_margin="5dp"
-                    >
+                    android:layout_margin="5dp">
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_margin="15dp">
                         <LinearLayout
                             android:layout_width="100dp"
                             android:gravity="center"
@@ -59,7 +59,7 @@
                                 android:layout_width="50dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_height="50dp"
-                                android:src="@drawable/cat2017"
+                                android:src="@drawable/notes"
                                 android:adjustViewBounds="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -71,13 +71,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="'Focus CAT'"
+                                android:text="Focus 'RC'"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Access the focused approach for CAT exam"
+                                android:text="Improve your confidence levels and score more in RC passages of CAT, IIFT, SNAP and XAT"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -88,25 +88,26 @@
 
 
 
-                <!-- IIFT CardView -->
+                <!-- Quant CardView -->
                 <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/IIFTCardView"
+                    android:id="@+id/QuantCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:clickable="true"
                     android:focusable="true"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     android:layout_margin="5dp"
-                    >
+                    android:padding="15dp">
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_margin="15dp">
                         <LinearLayout
                             android:layout_width="100dp"
                             android:gravity="center"
@@ -116,7 +117,7 @@
                                 android:layout_width="50dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_height="50dp"
-                                android:src="@drawable/iift2017"
+                                android:src="@drawable/quant"
                                 android:adjustViewBounds="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -129,13 +130,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="'Focus IIFT'"
+                                android:text="Focus 'Quant'"
                                 android:textStyle="bold"
                                 android:layout_margin="3dp"
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Access the focused approach for IIFT exam"
+                                android:text="Ace the Quant section in CAT, IIFT, SNAP and XAT exams with our awesome study material, formulae sheets, mock tests and more."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -145,24 +146,25 @@
                 </android.support.v7.widget.CardView>
 
 
-                <!-- SNAP CardView -->
+                <!-- GK CardView -->
                 <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/SNAPCardView"
+                    android:id="@+id/GKCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     android:layout_margin="5dp"
-                    >
+                    android:padding="15dp">
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_margin="15dp">
                         <LinearLayout
                             android:layout_width="100dp"
                             android:gravity="center"
@@ -172,7 +174,7 @@
                                 android:layout_width="50dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_height="50dp"
-                                android:src="@drawable/snap2017"
+                                android:src="@drawable/vocab_game"
                                 android:adjustViewBounds="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -184,13 +186,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="'Focus SNAP'"
+                                android:text="Focus 'GK'"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Access the focused approach for SNAP exam"
+                                android:text="Boost your GK preparation and approach the GK section in IIFT, SNAP and XAT with greater confidence."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"
@@ -201,7 +203,7 @@
                 </android.support.v7.widget.CardView>
 
                 <!-- XAT CardView -->
-                <android.support.v7.widget.CardView
+                <!--<android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/XATCardView"
@@ -253,7 +255,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>-->
 
 
             </LinearLayout>

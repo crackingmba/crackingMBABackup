@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 public class MotivationYoutubeDetailsActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
     private static final int RECOVERY_REQUEST = 1;
@@ -36,43 +37,43 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         sectionName = getIntent().getStringExtra("EXAM_NAME");
         exam_name_text= getIntent().getStringExtra("EXAM_NAME_TEXT");
         switch (sectionName){
-            case "CAT":
+            case "RC":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_cat);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_rc);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                //motivation_video_url = "Bfpfm8-WZG8";
+                motivation_video_url = "dwH-dAEYgyM";
                 //videoName.setText("'Focus' Quant");
                 //videoDescription.setText("The details for Quant Section Go Here!");
                 break;
             }
-            case "IIFT":
+            case "QUANT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_iift1);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_quant);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                //motivation_video_url = "HeS21JBzmg4";
+                motivation_video_url = "HeS21JBzmg4";
                 //videoName.setText("'Focus' Verbal");
                 //videoDescription.setText("The details for Verbal Section Go Here!");
                 break;
             }
-            case "SNAP":
+            case "GK":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_snap);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_gk);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                //motivation_video_url = "AaScU2v4Uec";
+                motivation_video_url = "AaScU2v4Uec";
                 //videoName.setText("'Focus' DI & LR");
                 //videoDescription.setText("The details for DI & LR Section Go Here!");
                 break;
             }
-            case "XAT":
+/*            case "XAT":
             {
                 Drawable myDrawable = getResources().getDrawable(R.drawable.focus_xat);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
                 break;
-            }
+            }*/
         }
 
         //videoName=(TextView)findViewById(R.id.motivation_youtube_video_name);
@@ -106,12 +107,12 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus SNAP Preparation Course");
                                 break;
                             }
-                            case "XAT":
+/*                            case "XAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus XAT Preparation Course");
                                 break;
-                            }
+                            }*/
                         }
 
 
@@ -130,10 +131,9 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
 
 
 
-/*        YouTubePlayerSupportFragment frag;
-        frag =
-                (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_motivation_video_fragment);
-        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);*/
+        YouTubePlayerSupportFragment frag;
+        frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_motivation_video_fragment);
+        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -143,7 +143,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            //player.cueVideo(motivation_video_url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.cueVideo(motivation_video_url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
 
     }

@@ -21,8 +21,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -44,7 +47,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/focus_cat"/>
+                android:src="@drawable/focus_rc"/>
 
             <TextView
                 android:id="@+id/motivation_yt_focus_tv"
@@ -58,7 +61,7 @@
                 android:textColor="#212121"
                 android:text="At 499, for the price of a medium pan pizza, you can now crack CAT!"/>
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/motivation_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,10 +72,10 @@
                 android:textSize="14sp"
                 android:textColor="#212121"
                 android:text="And the best part is .. we will all work together to give you a reason to celebrate a big fat pizza party a few months from now!!"/>
-
+-->
 
             <!-- first set of tick marks -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -126,7 +129,7 @@
 
             </LinearLayout>
 
-            <!-- second set of tick marks -->
+            &lt;!&ndash; second set of tick marks &ndash;&gt;
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,18 +181,18 @@
                         android:text="Online Sessions"/>
                 </LinearLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
-
-
-
-
-            <!--<fragment
+            <fragment
                 android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
                 android:id="@+id/youtube_motivation_video_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="20dp"/>-->
+                android:layout_height="175dp"
+                android:layout_margin="20dp"/>
+
+
+
+
 
         </LinearLayout>
 
@@ -205,6 +208,8 @@
 
 
     </LinearLayout>
+
+</ScrollView>
 
 
 

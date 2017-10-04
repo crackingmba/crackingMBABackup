@@ -57,6 +57,8 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
 
                 ll.setVisibility(View.VISIBLE);
 
+                //just a simple comment here
+
                 if(studyType.equals("video")){
                     String str = study;
                     String substr = str.substring(0, str.indexOf(","));

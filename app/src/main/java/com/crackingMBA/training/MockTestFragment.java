@@ -64,8 +64,8 @@ View rootView;
         personal_help_cv.setOnClickListener(this);
         app_feedback.setOnClickListener(this);
 
-        String   myAndroidDeviceId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Toast.makeText(getContext(), "The Android Device ID is "+myAndroidDeviceId, Toast.LENGTH_SHORT).show();
+        //String   myAndroidDeviceId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        //Toast.makeText(getContext(), "The Android Device ID is "+myAndroidDeviceId, Toast.LENGTH_SHORT).show();
 
         return rootView;
     }
