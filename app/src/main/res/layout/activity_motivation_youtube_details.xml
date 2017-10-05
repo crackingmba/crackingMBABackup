@@ -47,7 +47,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/focus_rc"/>
+                android:src="@drawable/focus_cat"/>
 
             <TextView
                 android:id="@+id/motivation_yt_focus_tv"

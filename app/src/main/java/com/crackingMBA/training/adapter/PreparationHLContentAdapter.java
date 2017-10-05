@@ -59,7 +59,7 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
 
                 //just a simple comment here
 
-                if(studyType.equals("video")){
+                if(studyType.equals("video")||studyType.equals("pvideo")){
                     String str = study;
                     String substr = str.substring(0, str.indexOf(","));
                     Drawable myDrawable = iv.getResources().getDrawable(R.drawable.videos_img);
@@ -67,7 +67,7 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
                     tv.setText(substr);
                 }
 
-                if(studyType.equals("mocktest")){
+                if(studyType.equals("mocktest")||studyType.equals("pmocktest")){
                     String str = study;
                     String substr = str.substring(0, str.indexOf(","));
                     Drawable myDrawable = iv.getResources().getDrawable(R.drawable.mock_test_icon);
@@ -75,7 +75,7 @@ public class PreparationHLContentAdapter extends RecyclerView.Adapter<Preparatio
                     tv.setText(substr);
                 }
 
-                if(studyType.equals("text")){
+                if(studyType.equals("text")||studyType.equals("ptext")){
                     String str = study;
                     String substr = str.substring(0, str.indexOf(","));
                     Drawable myDrawable = iv.getResources().getDrawable(R.drawable.notes);

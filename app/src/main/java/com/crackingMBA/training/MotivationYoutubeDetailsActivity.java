@@ -37,9 +37,9 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         sectionName = getIntent().getStringExtra("EXAM_NAME");
         exam_name_text= getIntent().getStringExtra("EXAM_NAME_TEXT");
         switch (sectionName){
-            case "RC":
+            case "CAT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_rc);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_cat);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
                 motivation_video_url = "dwH-dAEYgyM";
@@ -47,9 +47,9 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 //videoDescription.setText("The details for Quant Section Go Here!");
                 break;
             }
-            case "QUANT":
+            case "IIFT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_quant);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_iift1);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
                 motivation_video_url = "9AzWC0TZDWo";
@@ -57,9 +57,9 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 //videoDescription.setText("The details for Verbal Section Go Here!");
                 break;
             }
-            case "GK":
+            case "SNAP":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_gk);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_snap);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
                 motivation_video_url = "cJG66qbLfHU";
@@ -67,13 +67,14 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 //videoDescription.setText("The details for DI & LR Section Go Here!");
                 break;
             }
-/*            case "XAT":
+            case "XAT":
             {
                 Drawable myDrawable = getResources().getDrawable(R.drawable.focus_xat);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
+                motivation_video_url = "cJG66qbLfHU";
                 break;
-            }*/
+            }
         }
 
         //videoName=(TextView)findViewById(R.id.motivation_youtube_video_name);
@@ -92,27 +93,27 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                             case "CAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus CAT Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_HEADER","Focus RC Preparation Course");
                                 break;
                             }
                             case "IIFT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus IIFT Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_HEADER","Focus QUANT Preparation Course");
                                 break;
                             }
                             case "SNAP":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus SNAP Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_HEADER","Focus GK Preparation Course");
                                 break;
                             }
-/*                            case "XAT":
+                            case "XAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
                                 intent.putExtra("PREP_CATEGORY_HEADER","Focus XAT Preparation Course");
                                 break;
-                            }*/
+                            }
                         }
 
 
