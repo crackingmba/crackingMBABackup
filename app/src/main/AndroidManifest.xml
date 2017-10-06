@@ -169,7 +169,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Article Details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PlaynWinActivity"></activity>
+        <activity android:name=".CourseEnrollmentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Course Enrollment"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity android:name=".PlaynWinActivity" />
+
     </application>
 
 </manifest>

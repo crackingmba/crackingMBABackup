@@ -35,14 +35,6 @@ import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.restAPI.UserEnrollmentAPIService;
 import com.crackingMBA.training.util.MyUtil;
 import com.crackingMBA.training.util.RecyclerItemClickListener;
-import com.instamojo.android.Instamojo;
-import com.instamojo.android.activities.PaymentDetailsActivity;
-import com.instamojo.android.callbacks.OrderRequestCallBack;
-import com.instamojo.android.helpers.Constants;
-import com.instamojo.android.models.Errors;
-import com.instamojo.android.models.Order;
-import com.instamojo.android.network.Request;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,11 +61,9 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     PrepHLContentAPIService apiService;
     String course_category;String str;int index;
     TextView prep_content_header;
-    ProgressDialog mTestProgressDialog;
     SharedPreferences prefs;
     SharedPreferences.Editor ed;
     UserEnrollmentAPIService enrollment_apiService;
-    Boolean temp_val=false;
 
 
     @Override
@@ -86,7 +76,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Instamojo.initialize(this);
+
 
         apiService = RestClient.getClient().create(PrepHLContentAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.prepHLcontentRecyclerView);
@@ -189,32 +179,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         }
     }
 
-    private void startPreCreatedUI(Order order){
-        //Using Pre created UI
-        mTestProgressDialog.dismiss();
-        Intent intent = new Intent(getBaseContext(), PaymentDetailsActivity.class);
-        intent.putExtra(Constants.ORDER, order);
-        startActivityForResult(intent, Constants.REQUEST_CODE);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constants.REQUEST_CODE && data != null) {
-            String orderID = data.getStringExtra(Constants.ORDER_ID);
-            String transactionID = data.getStringExtra(Constants.TRANSACTION_ID);
-            String paymentID = data.getStringExtra(Constants.PAYMENT_ID);
-
-            // Check transactionID, orderID, and orderID for null before using them to check the Payment status.
-            if (orderID != null && transactionID != null && paymentID != null) {
-                //Check for Payment status with Order ID or Transaction ID
-                //Toast.makeText(this, "Payment is successfully processed!", Toast.LENGTH_SHORT).show();
-            } else {
-                //Oops!! Payment was cancelled
-                //Toast.makeText(this, "Oops! There was some issue in Payment!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     private void fetchPrepContentList() {
         call.enqueue(new Callback<RetrofitPrepHLContentList>() {
@@ -313,20 +278,6 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     }
 
     public int displayPaymentOptions(final String study, final String studyType, final String course_name){
-
-        //first check if the user is logged in
-            //if logged in, then check if the user is a paid user for this course
-                //if the user is a paid user, then show the content
-                //if the user is not a paid user, then prompt to Enroll for this course
-
-
-            // if not logged in, prompt the user that this is a paid course and user has option to login if
-            //already enrolled or enroll if not already enrolled
-                //Take the user to the login page
-                //Or take the user to the Enroll page where you will collect the user information before proceeding to payment.
-                //Display the Instamojo logo on the collecting details page
-
-
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ed = prefs.edit();
 
@@ -350,7 +301,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     RetrofitPostResponse retrofitPostResponse = response.body();
 
                     if(retrofitPostResponse.getResponse().equals("0")) {
-                        Toast.makeText(PreparationHLContentActivity.this, "Sorry! You are not enrolled", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(PreparationHLContentActivity.this, "Sorry! You are not enrolled", Toast.LENGTH_SHORT).show();
                         //display the form
                         //display the dialog box to Enroll or Cancel
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PreparationHLContentActivity.this);
@@ -360,80 +311,12 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int id) {
                                         //Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
                                         //startActivity(intent);
-                                        Random r = new Random();
-                                        String trxn_id="t"+r.nextInt(1000+1);
 
-                                        Order order = new Order("kSwHu82gpTVO7sCn2zWcPB2VzyPqBE", trxn_id, "test", "test@gmail.com", "9823498234", "10", "banking");
-
-                                        // Good time to show progress dialog to user
-                                        //MyUtil.showProgressDialog();
-                                        mTestProgressDialog = new ProgressDialog(PreparationHLContentActivity.this);
-                                        mTestProgressDialog.setMessage("Loading Payment Options");
-                                        mTestProgressDialog.setIndeterminate(true);
-                                        mTestProgressDialog.setCanceledOnTouchOutside(false);
-
-                                        mTestProgressDialog.show();
-                                        Request request = new Request(order, new OrderRequestCallBack() {
-                                            @Override
-                                            public void onFinish(Order order, Exception error) {
-                                                //dismiss the dialog if showed
+                                        Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                                        startActivity(intent);
 
 
-                                                // Make sure the follwoing code is called on UI thread to show Toasts or to
-                                                //update UI elements
-                                                if (error != null) {
-                                                    if (error instanceof Errors.ConnectionError) {
-                                                        Log.e("App", "No internet connection");
-                                                    } else if (error instanceof Errors.ServerError) {
-                                                        Log.e("App", "Server Error. Try again");
-                                                    } else if (error instanceof Errors.AuthenticationError){
-                                                        Log.e("App", "Access token is invalid or expired");
-                                                    } else if (error instanceof Errors.ValidationError){
-                                                        // Cast object to validation to pinpoint the issue
-                                                        Errors.ValidationError validationError = (Errors.ValidationError) error;
-                                                        if (!validationError.isValidTransactionID()) {
-                                                            Log.e("App", "Transaction ID is not Unique");
-                                                            return;
-                                                        }
-                                                        if (!validationError.isValidRedirectURL()) {
-                                                            Log.e("App", "Redirect url is invalid");
-                                                            return;
-                                                        }
 
-
-                                                        if (!validationError.isValidWebhook()) {
-                                                            Toast.makeText(PreparationHLContentActivity.this, "Webhook url is invalid", Toast.LENGTH_SHORT).show();
-//                                    /showToast("Webhook url is invalid");
-                                                            return;
-                                                        }
-
-                                                        if (!validationError.isValidPhone()) {
-                                                            Log.e("App", "Buyer's Phone Number is invalid/empty");
-                                                            return;
-                                                        }
-                                                        if (!validationError.isValidEmail()) {
-                                                            Log.e("App", "Buyer's Email is invalid/empty");
-                                                            return;
-                                                        }
-                                                        if (!validationError.isValidAmount()) {
-                                                            Log.e("App", "Amount is either less than Rs.9 or has more than two decimal places");
-                                                            return;
-                                                        }
-                                                        if (!validationError.isValidName()) {
-                                                            Log.e("App", "Buyer's Name is required");
-                                                            return;
-                                                        }
-                                                    } else {
-                                                        Log.e("App", error.getMessage());
-                                                    }
-                                                    return;
-                                                }
-
-                                                startPreCreatedUI(order);
-                                            }
-                                        });
-
-                                        request.execute();
                                     }
                                 })
                                 .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -453,7 +336,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         //String name_of_user=retrofitPostResponse.getResponse();
                         //String user_id = name_of_user.substring( 0, name_of_user.indexOf(","));
                         //String name_of_the_user = name_of_user.substring(name_of_user.indexOf(",")+1, name_of_user.length());
-                        Toast.makeText(PreparationHLContentActivity.this, "You are enrolled!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(PreparationHLContentActivity.this, "You are enrolled!", Toast.LENGTH_SHORT).show();
                         //display the actual content
                         switch(studyType){
                             case "pmocktest":{
@@ -537,7 +420,9 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     .setNegativeButton("NOT ENROLLED YET - ENROLL NOW", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
+                            Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                            startActivity(intent);
+
                         }
                     })
                     .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
