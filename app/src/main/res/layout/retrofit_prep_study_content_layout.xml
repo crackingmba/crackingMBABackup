@@ -51,6 +51,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <!--<TextView
+                android:id="@+id/prep_study1_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>-->
+            <ImageView
+                android:id="@+id/prep_study1_enroll_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="0"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/id_card"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
         <LinearLayout
@@ -80,6 +96,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/prep_study2_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,6 +133,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/prep_study3_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/prep_study4_layout"
@@ -137,6 +169,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/prep_study4_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/prep_study5_layout"
@@ -165,6 +205,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/prep_study5_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/prep_study6_layout"
@@ -193,6 +241,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/prep_study6_enroll_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="ENROLL"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"/>
         </LinearLayout>
     </LinearLayout>
 
