@@ -1,7 +1,10 @@
 package com.crackingMBA.training;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crackingMBA.training.pojo.MockTestTest;
+import com.crackingMBA.training.pojo.RetrofitPostResponse;
+import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.restAPI.ServerKeyAPIService;
+import com.crackingMBA.training.restAPI.UserEnrollmentAPIService;
 import com.instamojo.android.Instamojo;
 import com.instamojo.android.activities.PaymentDetailsActivity;
 import com.instamojo.android.callbacks.OrderRequestCallBack;
@@ -20,13 +28,22 @@ import com.instamojo.android.models.Errors;
 import com.instamojo.android.models.Order;
 import com.instamojo.android.network.Request;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CourseEnrollmentActivity extends AppCompatActivity {
     EditText enroll_transaction_id_et, enroll_course_name_et, enroll_email_id_et, enroll_name_et;
     Button enroll_payment_btn;
     ProgressDialog mTestProgressDialog;
-    String key, email, course_name;String trxn_id, user_name;
+    String serverKey, email;String trxn_id, user_name;
+    ServerKeyAPIService serverKeyAPIService;String prep_category_code;
+    SharedPreferences prefs;
 
 
     @Override
@@ -36,25 +53,80 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
         Instamojo.initialize(this);
 
+        prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
+
+        switch(prep_category_code){
+            case "CATPREP1":{
+                prep_category_code="Focus CAT";
+                break;
+            }
+
+            case "IIFTPREP1":{
+                prep_category_code="Focus IIFT";
+                break;
+            }
+
+            case "SNAPPREP1":{
+                prep_category_code="Focus SNAP";
+                break;
+            }
+
+            case "XATPREP":{
+                prep_category_code="Focus XAT";
+                break;
+            }
+        }
+
         enroll_transaction_id_et=(EditText)findViewById(R.id.enroll_transaction_id_et);
         enroll_course_name_et=(EditText)findViewById(R.id.enroll_course_name_et);
         enroll_email_id_et=(EditText)findViewById(R.id.enroll_email_id_et);
         enroll_name_et=(EditText)findViewById(R.id.enroll_name_et);
 
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            email = prefs.getString("emailofUser", "");
+            user_name=prefs.getString("nameofUser", "");
+        }else{
+            email=""; user_name="";
+        }
+
+
         enroll_payment_btn=(Button)findViewById(R.id.enroll_payment_btn);
         enroll_transaction_id_et.setText("1234");
         enroll_course_name_et.setText("SNAP");
-        enroll_email_id_et.setText("");
-        key="5I6WbB8NaT3FqnPDhNQ44XLj4j3Iem";
-        email="test@gmail.com";
-        course_name="CAT";
-        user_name="test";
+        enroll_email_id_et.setText(email);
+        enroll_name_et.setText(user_name);
+        //key="5I6WbB8NaT3FqnPDhNQ44XLj4j3Iem";
+
+
+        //MyUtil.showProgressDialog(PreparationHLContentActivity.this);
+        serverKeyAPIService = RestClient.getClient().create(ServerKeyAPIService.class);
+        serverKeyAPIService.getKeyFromServer("key").enqueue(new Callback<RetrofitPostResponse>() {
+
+
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+                    serverKey= retrofitPostResponse.getResponse();
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
 
         Random r = new Random();
-        trxn_id="trxn"+ r.nextInt(1000+1);
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+        trxn_id = formatter.format(date)+ r.nextInt(100000+1);
+
 
         enroll_transaction_id_et.setText(trxn_id);
-        enroll_course_name_et.setText("TEST");
+        enroll_course_name_et.setText(prep_category_code);
 
         enroll_payment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +135,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                     user_name=enroll_name_et.getText().toString();
                     email=enroll_email_id_et.getText().toString();
 
-                    Order order = new Order(key, trxn_id, user_name, email, "9823498234", "300", course_name);
+                    Order order = new Order(serverKey, trxn_id, user_name, email, "9823498234", "300", prep_category_code);
 
                     // Good time to show progress dialog to user
                     //MyUtil.showProgressDialog();

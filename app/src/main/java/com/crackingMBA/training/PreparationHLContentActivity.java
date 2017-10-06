@@ -117,6 +117,10 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         course_category="SNAP 2017 Preparation Course";
                         break;
                     }
+                    case "XAT":{
+                        course_category="SNAP 2017 Preparation Course";
+                        break;
+                    }
 
                 }
 
@@ -313,6 +317,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                         //startActivity(intent);
 
                                         Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                                        intent.putExtra("PREP_CATEGORY_CODE",course_category);
                                         startActivity(intent);
 
 
@@ -406,21 +411,53 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
         }else{
             Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
+            String temp_message="";
+            String dialog_header="";
+
+            switch(course_category){
+                case "CATPREP1":{
+                    temp_message="To access the premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
+                    dialog_header="You need to ENROLL for Focus 'CAT' course";
+
+                    break;
+                }
+
+                case "IIFTPREP1":{
+                    temp_message="To access all content in this section, please enroll for the Focus 'IIFT' course for Rs 300 only";
+                    dialog_header="You need to ENROLL for Focus 'IIFT' course";
+                    break;
+                }
+
+                case "SNAPPREP1":{
+                    temp_message="To access all content in this section, please enroll for the Focus 'SNAP' course for Rs 300 only";
+                    dialog_header="You need to ENROLL for Focus 'SNAP' course";
+                    break;
+                }
+
+                case "XATPREP":{
+                    temp_message="To access all content in this section, please enroll for the Focus 'XAT' course for Rs 300 only";
+                    dialog_header="You need to ENROLL for Focus 'XAT' course";
+                    break;
+                }
+
+            }
+
 
             //Display the Dialog Here
             android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-            builder.setMessage("To access all content marked with a star, you need to ENROLL for the Focus 'RC' Course for Rs 250 only.")
+            builder.setMessage(temp_message)
                     .setCancelable(false)
-                    .setPositiveButton("IF ALREADY ENROLLED - LOGIN NOW", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("ALREADY ENROLLED?  LOGIN NOW", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
                     })
-                    .setNegativeButton("NOT ENROLLED YET - ENROLL NOW", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("NOT ENROLLED YET? ENROLL NOW", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                            intent.putExtra("PREP_CATEGORY_CODE",course_category);
                             startActivity(intent);
 
                         }
@@ -435,7 +472,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
             //Creating dialog box
             android.support.v7.app.AlertDialog alert = builder.create();
             //Setting the title manually
-            alert.setTitle("You need to ENROLL for RC Course!");
+            alert.setTitle(dialog_header);
             alert.show();
 
 
