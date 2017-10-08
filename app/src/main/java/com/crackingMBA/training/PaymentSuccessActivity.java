@@ -33,7 +33,7 @@ public class PaymentSuccessActivity extends AppCompatActivity {
         payment_success_btn=(Button)findViewById(R.id.payment_success_btn);
 
         payment_success_header_tv.setText(course_name+" "+"Course Payment");
-        String success_msg = "Congratulations "+name_of_user+" ("+email_of_user+")! "+"You are now enrolled for the "+course_name+" course. Thank you very much for taking the ride with us. Hope this course makes a difference in your preparation. All the BEST!";
+        String success_msg = "Congratulations "+name_of_user+" ("+email_of_user+"). "+"You are now enrolled for the "+course_name+" course. Thank you very much for taking the ride with us. Hope this course makes a difference in your preparation. All the BEST!";
         payment_success_message_tv.setText(success_msg);
 
         payment_success_btn.setOnClickListener(new View.OnClickListener() {

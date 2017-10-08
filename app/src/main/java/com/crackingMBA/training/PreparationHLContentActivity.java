@@ -64,6 +64,8 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor ed;
     UserEnrollmentAPIService enrollment_apiService;
+    String temp_message="";
+    String dialog_header="";
 
 
     @Override
@@ -119,6 +121,34 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
                     case "XAT":{
                         course_category="SNAP 2017 Preparation Course";
+                        break;
+                    }
+
+                }
+
+                switch(course_category){
+                    case "CATPREP1":{
+                        temp_message="To access all premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
+                        dialog_header="ENROLL for Focus 'CAT' course";
+
+                        break;
+                    }
+
+                    case "IIFTPREP1":{
+                        temp_message="To access all content in this section, please enroll for the Focus 'IIFT' course for Rs 300 only";
+                        dialog_header="ENROLL for Focus 'IIFT' course";
+                        break;
+                    }
+
+                    case "SNAPPREP1":{
+                        temp_message="To access all content in this section, please enroll for the Focus 'SNAP' course for Rs 300 only";
+                        dialog_header="ENROLL for Focus 'SNAP' course";
+                        break;
+                    }
+
+                    case "XATPREP":{
+                        temp_message="To access all content in this section, please enroll for the Focus 'XAT' course for Rs 300 only";
+                        dialog_header="ENROLL for Focus 'XAT' course";
                         break;
                     }
 
@@ -309,7 +339,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         //display the form
                         //display the dialog box to Enroll or Cancel
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PreparationHLContentActivity.this);
-                        builder.setMessage("To access all content marked with a star, you need to ENROLL for the Focus 'RC' Course for Rs 250 only.")
+                        builder.setMessage(temp_message)
                                 .setCancelable(false)
                                 .setPositiveButton("ENROLL NOW", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -334,7 +364,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         //Creating dialog box
                         android.support.v7.app.AlertDialog alert = builder.create();
                         //Setting the title manually
-                        alert.setTitle("You need to ENROLL for RC Course!");
+                        alert.setTitle(dialog_header);
                         alert.show();
 
                     }else{
@@ -410,37 +440,10 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
 
         }else{
-            Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
-            String temp_message="";
-            String dialog_header="";
+            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
 
-            switch(course_category){
-                case "CATPREP1":{
-                    temp_message="To access all premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
-                    dialog_header="ENROLL for Focus 'CAT' course";
 
-                    break;
-                }
 
-                case "IIFTPREP1":{
-                    temp_message="To access all content in this section, please enroll for the Focus 'IIFT' course for Rs 300 only";
-                    dialog_header="ENROLL for Focus 'IIFT' course";
-                    break;
-                }
-
-                case "SNAPPREP1":{
-                    temp_message="To access all content in this section, please enroll for the Focus 'SNAP' course for Rs 300 only";
-                    dialog_header="ENROLL for Focus 'SNAP' course";
-                    break;
-                }
-
-                case "XATPREP":{
-                    temp_message="To access all content in this section, please enroll for the Focus 'XAT' course for Rs 300 only";
-                    dialog_header="ENROLL for Focus 'XAT' course";
-                    break;
-                }
-
-            }
 
 
             //Display the Dialog Here

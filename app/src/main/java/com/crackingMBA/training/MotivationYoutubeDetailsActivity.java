@@ -1,7 +1,10 @@
 package com.crackingMBA.training;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,9 +15,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crackingMBA.training.pojo.MockTestTest;
+import com.crackingMBA.training.pojo.RetrofitPostResponse;
+import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.restAPI.UserEnrollmentAPIService;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MotivationYoutubeDetailsActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
     private static final int RECOVERY_REQUEST = 1;
@@ -24,6 +35,10 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
     TextView motivation_tv, motivation_yt_focus_tv;
     //TextView videoName, videoDescription;
     String sectionName, exam_name_text;
+    SharedPreferences prefs;
+    SharedPreferences.Editor ed;
+    UserEnrollmentAPIService enrollment_apiService;
+    int isUserEnrolled=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +132,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                         }
 
 
-
+                        loadUserEnrollmentDetails();
                         startActivity(intent);
                         //ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
                         //viewPager.setCurrentItem(1, true);
@@ -139,6 +154,106 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    public void loadUserEnrollmentDetails(){
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+        Toast.makeText(MotivationYoutubeDetailsActivity.this, "Loading User Enrollment details", Toast.LENGTH_SHORT).show();
+
+        if(isUserLoggedIn){
+            final String email = prefs.getString("emailofUser", "");
+
+
+            //get the Enrollment Details and load here
+            //isUserEnrolledforCourse(email, "CAT");
+            enrollment_apiService = RestClient.getClient().create(UserEnrollmentAPIService.class);
+            enrollment_apiService.validateUserEnrollment(email, "CAT").enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("0")) {
+                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
+                        isUserEnrolled=0;
+                    }else{
+                        isUserEnrolled=1;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
+            enrollment_apiService.validateUserEnrollment(email, "IIFT").enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("0")) {
+                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
+                        isUserEnrolled=0;
+                    }else{
+                        isUserEnrolled=1;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
+            enrollment_apiService.validateUserEnrollment(email, "SNAP").enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("0")) {
+                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
+                        isUserEnrolled=0;
+                    }else{
+                        isUserEnrolled=1;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
+            enrollment_apiService.validateUserEnrollment(email, "XAT").enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("0")) {
+                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
+                        isUserEnrolled=0;
+                    }else{
+                        isUserEnrolled=1;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
+
+        }else{
+            //do nothing much for now
+        }
+
     }
 
     @Override
