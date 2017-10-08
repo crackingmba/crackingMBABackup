@@ -25,119 +25,114 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="80dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal"
-            android:textSize="20sp"
-            android:text="COURSE ENROLLMENT FORM"
-            android:textColor="#424242"/>
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
+            android:orientation="vertical"
+            android:layout_marginTop="80dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
 
-            <!-- Transaction ID Label -->
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/enroll_transaction_id_et"
+                android:paddingTop="20dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+
+                <!-- Transaction ID Label -->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:text="CAT"
-                    android:focusable="false"
-                    android:hint="TRANSACTION ID"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText android:id="@+id/enroll_transaction_id_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:text="CAT"
+                        android:focusable="false"
+                        android:hint="TRANSACTION ID"/>
+                </android.support.design.widget.TextInputLayout>
 
-            <!-- Course Name Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/enroll_course_name_et"
+                <!-- Course Name Label -->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:text="CAT"
-                    android:focusable="false"
-                    android:hint="COURSE NAME"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText android:id="@+id/enroll_course_name_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:text="CAT"
+                        android:focusable="false"
+                        android:hint="COURSE NAME"/>
+                </android.support.design.widget.TextInputLayout>
 
-            <!-- Name Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/enroll_name_et"
+                <!-- Name Label -->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Name"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText android:id="@+id/enroll_name_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Name"/>
+                </android.support.design.widget.TextInputLayout>
 
-            <!-- User Email Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/enroll_email_id_et"
+                <!-- User Email Label -->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Email ID"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText android:id="@+id/enroll_email_id_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="Email ID"/>
+                </android.support.design.widget.TextInputLayout>
 
-            <!-- Signup Button -->
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/enroll_payment_btn"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:padding="12dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:text="Pay Rs 300"/>
+                <!-- Signup Button -->
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/enroll_payment_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:text="Pay Rs 10"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:src="@drawable/instapay"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:src="@drawable/instapay"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"/>
 
+
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/enroll_progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
 
         </LinearLayout>
-        <ProgressBar
-            android:id="@+id/enroll_progressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone" />
-
-    </LinearLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
 

@@ -169,10 +169,16 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Article Details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CourseEnrollmentActivity"
+        <activity
+            android:name=".CourseEnrollmentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Course Enrollment"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".PaymentSuccessActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Payment Status"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".PlaynWinActivity" />
 
     </application>

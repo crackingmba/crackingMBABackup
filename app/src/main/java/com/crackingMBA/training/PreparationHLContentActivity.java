@@ -416,27 +416,27 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
             switch(course_category){
                 case "CATPREP1":{
-                    temp_message="To access the premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
-                    dialog_header="You need to ENROLL for Focus 'CAT' course";
+                    temp_message="To access all premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
+                    dialog_header="ENROLL for Focus 'CAT' course";
 
                     break;
                 }
 
                 case "IIFTPREP1":{
                     temp_message="To access all content in this section, please enroll for the Focus 'IIFT' course for Rs 300 only";
-                    dialog_header="You need to ENROLL for Focus 'IIFT' course";
+                    dialog_header="ENROLL for Focus 'IIFT' course";
                     break;
                 }
 
                 case "SNAPPREP1":{
                     temp_message="To access all content in this section, please enroll for the Focus 'SNAP' course for Rs 300 only";
-                    dialog_header="You need to ENROLL for Focus 'SNAP' course";
+                    dialog_header="ENROLL for Focus 'SNAP' course";
                     break;
                 }
 
                 case "XATPREP":{
                     temp_message="To access all content in this section, please enroll for the Focus 'XAT' course for Rs 300 only";
-                    dialog_header="You need to ENROLL for Focus 'XAT' course";
+                    dialog_header="ENROLL for Focus 'XAT' course";
                     break;
                 }
 

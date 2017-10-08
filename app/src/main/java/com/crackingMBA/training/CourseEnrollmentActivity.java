@@ -135,7 +135,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                     user_name=enroll_name_et.getText().toString();
                     email=enroll_email_id_et.getText().toString();
 
-                    Order order = new Order(serverKey, trxn_id, user_name, email, "9823498234", "300", prep_category_code);
+                    Order order = new Order(serverKey, trxn_id, user_name, email, "9823498234", "10", prep_category_code);
 
                     // Good time to show progress dialog to user
                     //MyUtil.showProgressDialog();
@@ -205,7 +205,20 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                         }
                     });
 
-                    request.execute();
+                    //request.execute();
+                    Intent intent= new Intent(CourseEnrollmentActivity.this, PaymentSuccessActivity.class);
+
+                    intent.putExtra("COURSE_NAME",prep_category_code);
+                    intent.putExtra("NAME_OF_USER",user_name);
+                    intent.putExtra("EMAIL_OF_USER",email);
+                    //ed.commit();
+
+                    //pass the details of course, name and email to the next page
+                    //set the preferences here
+                    //submit the enrollment data to the server
+
+                    startActivity(intent);
+                    finish();
             }
         });
 
@@ -236,7 +249,20 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
             // Check transactionID, orderID, and orderID for null before using them to check the Payment status.
             if (orderID != null && transactionID != null && paymentID != null) {
                 //Check for Payment status with Order ID or Transaction ID
-                //Toast.makeText(this, "Payment is successfully processed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Payment is successfully processed!", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(CourseEnrollmentActivity.this, PaymentSuccessActivity.class);
+
+                intent.putExtra("COURSE_NAME",prep_category_code);
+                intent.putExtra("NAME_OF_USER",user_name);
+                intent.putExtra("EMAIL_OF_USER",email);
+                //ed.commit();
+
+                //pass the details of course, name and email to the next page
+                //set the preferences here
+                //submit the enrollment data to the server
+
+                startActivity(intent);
+                finish();
             } else {
                 //Oops!! Payment was cancelled
                 //Toast.makeText(this, "Oops! There was some issue in Payment!", Toast.LENGTH_SHORT).show();
