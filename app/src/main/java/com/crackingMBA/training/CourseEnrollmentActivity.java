@@ -45,7 +45,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
     ProgressDialog mTestProgressDialog;
     String serverKey, email;String trxn_id, user_name;
     ServerKeyAPIService serverKeyAPIService;SaveUserEnrollmentService saveUserEnrollmentService;
-    String prep_category_code;
+    String prep_category_code, temp_course_code;
     SharedPreferences prefs;
 
 
@@ -60,22 +60,22 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
         switch(prep_category_code){
             case "CATPREP1":{
-                prep_category_code="Focus CAT";
+                prep_category_code="Focus CAT";temp_course_code="CAT";
                 break;
             }
 
             case "IIFTPREP1":{
-                prep_category_code="Focus IIFT";
+                prep_category_code="Focus IIFT";temp_course_code="IIFT";
                 break;
             }
 
             case "SNAPPREP1":{
-                prep_category_code="Focus SNAP";
+                prep_category_code="Focus SNAP";temp_course_code="SNAP";
                 break;
             }
 
             case "XATPREP":{
-                prep_category_code="Focus XAT";
+                prep_category_code="Focus XAT";temp_course_code="XAT";
                 break;
             }
         }
@@ -227,8 +227,6 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                         });
 
                         request.execute();
-
-
                     }
 
 
@@ -269,13 +267,9 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 intent.putExtra("NAME_OF_USER",user_name);
                 intent.putExtra("EMAIL_OF_USER",email);
 
-                //pass the details of course, name and email to the next page
-                //set the preferences here
-                //submit the enrollment data to the server
-
                 //MyUtil.showProgressDialog(PreparationHLContentActivity.this);
                 saveUserEnrollmentService = RestClient.getClient().create(SaveUserEnrollmentService.class);
-                saveUserEnrollmentService.saveUserEnrollment(email, prep_category_code).enqueue(new Callback<RetrofitPostResponse>() {
+                saveUserEnrollmentService.saveUserEnrollment(email, temp_course_code).enqueue(new Callback<RetrofitPostResponse>() {
 
 
                     @Override
@@ -287,7 +281,39 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                             Toast.makeText(CourseEnrollmentActivity.this, "Sorry! The enrollment details are not saved!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(CourseEnrollmentActivity.this, "The enrollment details are saved!!", Toast.LENGTH_SHORT).show();
-                            //finish();
+
+                            //Set the user login credentials
+                            SharedPreferences.Editor ed = prefs.edit();
+                            ed.putBoolean("isUserLoggedIn", true);
+                            ed.putString("nameofUser", user_name);
+                            ed.putString("emailofUser",email);
+
+                            //Set the preferences for enrollment
+                            switch(prep_category_code){
+                                case "CAT":{
+                                    ed.putString("whetherCATcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+
+                                case "IIFT":{
+                                    ed.putString("whetherIIFTcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+
+                                case "SNAP":{
+                                    ed.putString("whetherSNAPcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+
+                                case "XAT":{
+                                    ed.putString("whetherXATcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+                            }
                         }
 
                         startActivity(intent);
@@ -305,8 +331,6 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 //set the preferences here
                 //submit the enrollment data to the server
 
-                startActivity(intent);
-                finish();
             } else {
                 //Oops!! Payment was cancelled
                 //Toast.makeText(this, "Oops! There was some issue in Payment!", Toast.LENGTH_SHORT).show();

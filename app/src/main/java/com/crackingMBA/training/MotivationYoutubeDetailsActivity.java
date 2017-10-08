@@ -160,95 +160,104 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
-        Toast.makeText(MotivationYoutubeDetailsActivity.this, "Loading User Enrollment details", Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "Loading User Enrollment details", Toast.LENGTH_SHORT).show();
 
         if(isUserLoggedIn){
             final String email = prefs.getString("emailofUser", "");
+            String whetherSpecificCourseEnrolled="notqueried";
+
+            switch(sectionName){
+                case "CAT":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherCATcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "IIFT":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherIIFTcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "SNAP":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherSNAPcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "XAT":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
+                    break;
+                }
+             }
 
 
-            //get the Enrollment Details and load here
-            //isUserEnrolledforCourse(email, "CAT");
-            enrollment_apiService = RestClient.getClient().create(UserEnrollmentAPIService.class);
-            enrollment_apiService.validateUserEnrollment(email, "CAT").enqueue(new Callback<RetrofitPostResponse>() {
-                @Override
-                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                    //MyUtil.hideProgressDialog();
-                    RetrofitPostResponse retrofitPostResponse = response.body();
 
-                    if(retrofitPostResponse.getResponse().equals("0")) {
-                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
-                        isUserEnrolled=0;
-                    }else{
-                        isUserEnrolled=1;
+            if(whetherSpecificCourseEnrolled.equals("notqueried")){
+                final SharedPreferences.Editor ed = prefs.edit();
+                //then query it from the server and record the details
+                enrollment_apiService = RestClient.getClient().create(UserEnrollmentAPIService.class);
+                enrollment_apiService.validateUserEnrollment(email, sectionName).enqueue(new Callback<RetrofitPostResponse>() {
+                    @Override
+                    public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                        //MyUtil.hideProgressDialog();
+                        RetrofitPostResponse retrofitPostResponse = response.body();
+
+                        if(retrofitPostResponse.getResponse().equals("0")) {
+                            Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is not enrolled for"+sectionName, Toast.LENGTH_SHORT).show();
+                            switch(sectionName){
+                                case "CAT":{
+                                    ed.putString("whetherCATcourseEnrolled","queried0");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "IIFT":{
+                                    ed.putString("whetherIIFTcourseEnrolled","queried0");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "SNAP":{
+                                    ed.putString("whetherSNAPcourseEnrolled","queried0");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "XAT":{
+                                    ed.putString("whetherXATcourseEnrolled","queried0");
+                                    ed.commit();
+                                    break;
+                                }
+                            }
+
+                        }else{
+                            Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+sectionName, Toast.LENGTH_SHORT).show();
+                            switch(sectionName){
+                                case "CAT":{
+                                    ed.putString("whetherCATcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "IIFT":{
+                                    ed.putString("whetherIIFTcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "SNAP":{
+                                    ed.putString("whetherSNAPcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+                                case "XAT":{
+                                    ed.putString("whetherXATcourseEnrolled","queried1");
+                                    ed.commit();
+                                    break;
+                                }
+                            }
+                        }
+
                     }
 
-                }
-
-                @Override
-                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                }
-            });
-
-            enrollment_apiService.validateUserEnrollment(email, "IIFT").enqueue(new Callback<RetrofitPostResponse>() {
-                @Override
-                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                    //MyUtil.hideProgressDialog();
-                    RetrofitPostResponse retrofitPostResponse = response.body();
-
-                    if(retrofitPostResponse.getResponse().equals("0")) {
-                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
-                        isUserEnrolled=0;
-                    }else{
-                        isUserEnrolled=1;
+                    @Override
+                    public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
                     }
+                });
 
-                }
 
-                @Override
-                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                }
-            });
-
-            enrollment_apiService.validateUserEnrollment(email, "SNAP").enqueue(new Callback<RetrofitPostResponse>() {
-                @Override
-                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                    //MyUtil.hideProgressDialog();
-                    RetrofitPostResponse retrofitPostResponse = response.body();
-
-                    if(retrofitPostResponse.getResponse().equals("0")) {
-                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
-                        isUserEnrolled=0;
-                    }else{
-                        isUserEnrolled=1;
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                }
-            });
-
-            enrollment_apiService.validateUserEnrollment(email, "XAT").enqueue(new Callback<RetrofitPostResponse>() {
-                @Override
-                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                    //MyUtil.hideProgressDialog();
-                    RetrofitPostResponse retrofitPostResponse = response.body();
-
-                    if(retrofitPostResponse.getResponse().equals("0")) {
-                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+course_name, Toast.LENGTH_SHORT).show();
-                        isUserEnrolled=0;
-                    }else{
-                        isUserEnrolled=1;
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                }
-            });
-
+            }
 
         }else{
             //do nothing much for now

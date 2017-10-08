@@ -283,27 +283,53 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
 
                     case "pmocktest":{
-                        displayPaymentOptions(study, studyType, course_category);
+                        if(displayPaymentOptions(study, studyType, course_category)>0){
+                            str = study;
+                            String test_name = str.substring(0,str.indexOf(","));
+
+                            str= study;
+                            String test_id=str.substring(str.indexOf(",") + 1);
+
+                            MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
+                            VideoApplication.selectedMockTestTest= mockTestTest;
+
+                            Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                            startActivity(startIntent);
+                            break;
+                        }
                         break;
                     }
                     case "pvideo":{
-                        displayPaymentOptions(study, studyType, course_category);
+                        if(displayPaymentOptions(study, studyType, course_category)>0)
+                        {
+                            str = study;
+                            String course_name = str.substring(0,str.indexOf(","));
+
+                            str= study;
+                            String url=str.substring(str.indexOf(",") + 1);
+
+                            Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
+                            intent.putExtra("COURSE_NAME",course_category);
+                            intent.putExtra("COURSE_SUBJECT",course_name);
+                            intent.putExtra("URL",url);
+                            startActivity(intent);
+                        }
                         break;
                     }
                     case "ptext":{
-/*                        str = study;
-                        String course_name = str.substring(0,str.indexOf(","));
 
-                        str= study;
-                        String webview_url=str.substring(str.indexOf(",") + 1);
-                        Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
-                        intent.putExtra("COURSE_NAME",course_category);
-                        intent.putExtra("COURSE_SUBJECT",course_name);
-                        intent.putExtra("WEBVIEW_URL",webview_url);
-                        startActivity(intent);*/
+                        if(displayPaymentOptions(study, studyType, course_category)>0){
+                            str = study;
+                            String course_name = str.substring(0,str.indexOf(","));
 
-
-                        displayPaymentOptions(study, studyType, course_category);//testing some text
+                            str= study;
+                            String webview_url=str.substring(str.indexOf(",") + 1);
+                            Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
+                            intent.putExtra("COURSE_NAME",course_category);
+                            intent.putExtra("COURSE_SUBJECT",course_name);
+                            intent.putExtra("WEBVIEW_URL",webview_url);
+                            startActivity(intent);
+                        }
 
                         break;
                     }
@@ -313,139 +339,65 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
     public int displayPaymentOptions(final String study, final String studyType, final String course_name){
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        ed = prefs.edit();
 
         Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
         final String email = prefs.getString("emailofUser", "");
-        //name_of_user = prefs.getString("nameofUser", "");
-
 
         if(isUserLoggedIn){
-            Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
-
-            //Now that the user is logged in, check if the user has enrolled
-            //make a call to the remote server to check this
-
-            //MyUtil.showProgressDialog(PreparationHLContentActivity.this);
-            enrollment_apiService = RestClient.getClient().create(UserEnrollmentAPIService.class);
-            enrollment_apiService.validateUserEnrollment(email, course_name).enqueue(new Callback<RetrofitPostResponse>() {
-                @Override
-                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                    //MyUtil.hideProgressDialog();
-                    RetrofitPostResponse retrofitPostResponse = response.body();
-
-                    if(retrofitPostResponse.getResponse().equals("0")) {
-                        //Toast.makeText(PreparationHLContentActivity.this, "Sorry! You are not enrolled", Toast.LENGTH_SHORT).show();
-                        //display the form
-                        //display the dialog box to Enroll or Cancel
-                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PreparationHLContentActivity.this);
-                        builder.setMessage(temp_message)
-                                .setCancelable(false)
-                                .setPositiveButton("ENROLL NOW", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        //Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
-                                        //startActivity(intent);
-
-                                        Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
-                                        intent.putExtra("PREP_CATEGORY_CODE",course_category);
-                                        startActivity(intent);
-
-
-
-                                    }
-                                })
-                                .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
-                                        dialog.cancel();
-                                    }
-                                });
-
-                        //Creating dialog box
-                        android.support.v7.app.AlertDialog alert = builder.create();
-                        //Setting the title manually
-                        alert.setTitle(dialog_header);
-                        alert.show();
-
-                    }else{
-                        //String name_of_user=retrofitPostResponse.getResponse();
-                        //String user_id = name_of_user.substring( 0, name_of_user.indexOf(","));
-                        //String name_of_the_user = name_of_user.substring(name_of_user.indexOf(",")+1, name_of_user.length());
-                        //Toast.makeText(PreparationHLContentActivity.this, "You are enrolled!", Toast.LENGTH_SHORT).show();
-                        //display the actual content
-                        switch(studyType){
-                            case "pmocktest":{
-                                str = study;
-                                String test_name = str.substring(0,str.indexOf(","));
-
-                                str= study;
-                                String test_id=str.substring(str.indexOf(",") + 1);
-
-                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                                VideoApplication.selectedMockTestTest= mockTestTest;
-
-                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                                startActivity(startIntent);
-                                break;
-                            }
-
-                            case "pvideo":{
-                                str = study;
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= study;
-                                String url=str.substring(str.indexOf(",") + 1);
-
-                                Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("URL",url);
-                                startActivity(intent);
-                                break;
-                            }
-
-                            case "ptext":{
-                                str = study;
-                                String course_name = str.substring(0,str.indexOf(","));
-
-                                str= study;
-                                String webview_url=str.substring(str.indexOf(",") + 1);
-                                Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
-                                intent.putExtra("COURSE_NAME",course_category);
-                                intent.putExtra("COURSE_SUBJECT",course_name);
-                                intent.putExtra("WEBVIEW_URL",webview_url);
-                                startActivity(intent);
-                                break;
-                            }
-
-                        }
-                        /*
-
-                            SharedPreferences.Editor ed = prefs.edit();
-                            ed.putBoolean("isUserLoggedIn", true);
-                            ed.putString("nameofUser",name_of_the_user);
-                            ed.putString("emailofUser",email);
-                            ed.putString("userID",user_id);
-                            ed.commit();
-                            finish();
-*/
-
+                String whetherSpecificCourseEnrolled="notqueried";
+                switch(course_name){
+                    case "CATPREP1":{
+                        whetherSpecificCourseEnrolled = prefs.getString("whetherCATcourseEnrolled", "notqueried");
+                        break;
+                    }
+                    case "IIFTPREP1":{
+                        whetherSpecificCourseEnrolled = prefs.getString("whetherIIFTcourseEnrolled", "notqueried");
+                        break;
+                    }
+                    case "SNAPPREP1":{
+                        whetherSpecificCourseEnrolled = prefs.getString("whetherSNAPcourseEnrolled", "notqueried");
+                        break;
+                    }
+                    case "XATPREP":{
+                        whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
+                        break;
                     }
                 }
 
-                @Override
-                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                if(whetherSpecificCourseEnrolled.equals("queried1")){
+                    return 1;
                 }
-            });
 
+                if(whetherSpecificCourseEnrolled.equals("queried0")){
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PreparationHLContentActivity.this);
+                    builder.setMessage(temp_message)
+                            .setCancelable(false)
+                            .setPositiveButton("ENROLL NOW", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
+                                    //startActivity(intent);
 
-        }else{
-            //Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                                    intent.putExtra("PREP_CATEGORY_CODE",course_category);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                                    dialog.cancel();
+                                }
+                            });
 
+                    //Creating dialog box
+                    android.support.v7.app.AlertDialog alert = builder.create();
+                    //Setting the title manually
+                    alert.setTitle(dialog_header);
+                    alert.show();
+                }
 
-
-
-
+            }
+        else{
             //Display the Dialog Here
             android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
             builder.setMessage(temp_message)
