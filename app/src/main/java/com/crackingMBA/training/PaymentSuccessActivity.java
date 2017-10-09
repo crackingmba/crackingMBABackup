@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class PaymentSuccessActivity extends AppCompatActivity {
-    TextView payment_success_message_tv;
+    TextView payment_success_message_tv, ps_course_name_tv, ps_name_tv, ps_email_tv;
     Button payment_success_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +29,16 @@ public class PaymentSuccessActivity extends AppCompatActivity {
         String email_of_user = getIntent().getStringExtra("EMAIL_OF_USER");
 
         payment_success_message_tv=(TextView)findViewById(R.id.payment_success_message_tv);
+        ps_course_name_tv=(TextView)findViewById(R.id.ps_course_name_tv);
+        ps_name_tv=(TextView)findViewById(R.id.ps_name_tv);
+        ps_email_tv=(TextView)findViewById(R.id.ps_email_tv);
         payment_success_btn=(Button)findViewById(R.id.payment_success_btn);
 
-        String success_msg = "Congratulations! You are now enrolled for the Focus "+course_name+" course.";
+        String success_msg = "Congratulations! You are now enrolled for the "+course_name+" course.";
         payment_success_message_tv.setText(success_msg);
+        ps_course_name_tv.setText(course_name);
+        ps_name_tv.setText(name_of_user);
+        ps_email_tv.setText(email_of_user);
 
         payment_success_btn.setOnClickListener(new View.OnClickListener() {
             @Override

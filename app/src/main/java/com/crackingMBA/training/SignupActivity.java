@@ -111,6 +111,10 @@ public class SignupActivity extends AppCompatActivity {
                     ed.putString("nameofUser", name);
                     ed.putString("emailofUser",email);
                     ed.putString("userID",user_id);
+                    ed.putString("whetherCATcourseEnrolled","notqueried");
+                    ed.putString("whetherIIFTcourseEnrolled","notqueried");
+                    ed.putString("whetherSNAPcourseEnrolled","notqueried");
+                    ed.putString("whetherXATcourseEnrolled","notqueried");
                     ed.commit();
                     finish();
 

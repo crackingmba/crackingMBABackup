@@ -59,7 +59,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     List<RetrofitPrepHLContent> questions = new ArrayList<>();
     Call<RetrofitPrepHLContentList> call;
     PrepHLContentAPIService apiService;
-    String course_category;String str;int index;
+    String course_category, course_category_header;String str;int index;
     TextView prep_content_header;
     SharedPreferences prefs;
     SharedPreferences.Editor ed;
@@ -107,20 +107,20 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                 course_category=questions.get(position).getCategory();
 
                 switch(course_category){
-                    case "CAT":{
-                        course_category="CAT 2017 Preparation Course";
+                    case "CATPREP1":{
+                        course_category_header="CAT 2017 Preparation Course";
                         break;
                     }
-                    case "IIFT":{
-                        course_category="IIFT 2017 Preparation Course";
+                    case "IIFTPREP1":{
+                        course_category_header="IIFT 2017 Preparation Course";
                         break;
                     }
-                    case "SNAP":{
-                        course_category="SNAP 2017 Preparation Course";
+                    case "SNAPPREP1":{
+                        course_category_header="SNAP 2017 Preparation Course";
                         break;
                     }
-                    case "XAT":{
-                        course_category="SNAP 2017 Preparation Course";
+                    case "XATPREP":{
+                        course_category_header="SNAP 2017 Preparation Course";
                         break;
                     }
 
@@ -130,7 +130,6 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     case "CATPREP1":{
                         temp_message="To access all premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
                         dialog_header="ENROLL for Focus 'CAT' course";
-
                         break;
                     }
 
@@ -283,7 +282,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
 
                     case "pmocktest":{
-                        if(displayPaymentOptions(study, studyType, course_category)>0){
+                        if(displayPaymentOptions(course_category)>0){
                             str = study;
                             String test_name = str.substring(0,str.indexOf(","));
 
@@ -300,7 +299,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         break;
                     }
                     case "pvideo":{
-                        if(displayPaymentOptions(study, studyType, course_category)>0)
+                        if(displayPaymentOptions(course_category)>0)
                         {
                             str = study;
                             String course_name = str.substring(0,str.indexOf(","));
@@ -318,7 +317,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
                     case "ptext":{
 
-                        if(displayPaymentOptions(study, studyType, course_category)>0){
+                        if(displayPaymentOptions(course_category)>0){
                             str = study;
                             String course_name = str.substring(0,str.indexOf(","));
 
@@ -337,7 +336,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
     }
 
-    public int displayPaymentOptions(final String study, final String studyType, final String course_name){
+    public int displayPaymentOptions(final String course_name){
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);

@@ -45,7 +45,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
     ProgressDialog mTestProgressDialog;
     String serverKey, email;String trxn_id, user_name;
     ServerKeyAPIService serverKeyAPIService;SaveUserEnrollmentService saveUserEnrollmentService;
-    String prep_category_code, temp_course_code;
+    String prep_category_code, course_name, temp_course_code;
     SharedPreferences prefs;
 
 
@@ -60,22 +60,22 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
         switch(prep_category_code){
             case "CATPREP1":{
-                prep_category_code="Focus CAT";temp_course_code="CAT";
+                course_name="Focus CAT";temp_course_code="CAT";
                 break;
             }
 
             case "IIFTPREP1":{
-                prep_category_code="Focus IIFT";temp_course_code="IIFT";
+                course_name="Focus IIFT";temp_course_code="IIFT";
                 break;
             }
 
             case "SNAPPREP1":{
-                prep_category_code="Focus SNAP";temp_course_code="SNAP";
+                course_name="Focus SNAP";temp_course_code="SNAP";
                 break;
             }
 
             case "XATPREP":{
-                prep_category_code="Focus XAT";temp_course_code="XAT";
+                course_name="Focus XAT";temp_course_code="XAT";
                 break;
             }
         }
@@ -129,7 +129,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
 
         enroll_transaction_id_et.setText(trxn_id);
-        enroll_course_name_et.setText(prep_category_code);
+        enroll_course_name_et.setText(course_name);
 
         enroll_payment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +263,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 Toast.makeText(this, "Payment is successfully processed!", Toast.LENGTH_SHORT).show();
                 final Intent intent= new Intent(CourseEnrollmentActivity.this, PaymentSuccessActivity.class);
 
-                intent.putExtra("COURSE_NAME",prep_category_code);
+                intent.putExtra("COURSE_NAME",course_name);
                 intent.putExtra("NAME_OF_USER",user_name);
                 intent.putExtra("EMAIL_OF_USER",email);
 
@@ -290,25 +290,25 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
                             //Set the preferences for enrollment
                             switch(prep_category_code){
-                                case "CAT":{
+                                case "CATPREP1":{
                                     ed.putString("whetherCATcourseEnrolled","queried1");
                                     ed.commit();
                                     break;
                                 }
 
-                                case "IIFT":{
+                                case "IIFTPREP1":{
                                     ed.putString("whetherIIFTcourseEnrolled","queried1");
                                     ed.commit();
                                     break;
                                 }
 
-                                case "SNAP":{
+                                case "SNAPPREP1":{
                                     ed.putString("whetherSNAPcourseEnrolled","queried1");
                                     ed.commit();
                                     break;
                                 }
 
-                                case "XAT":{
+                                case "XATPREP":{
                                     ed.putString("whetherXATcourseEnrolled","queried1");
                                     ed.commit();
                                     break;

@@ -102,11 +102,6 @@ public class MyDashboardFragment extends Fragment implements View.OnClickListene
         return rootView;
     }
 
-    private void    fblogginFragment(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
-    }
-
 
     @Override
     public void onClick(View v) {
