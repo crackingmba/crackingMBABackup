@@ -29,10 +29,19 @@
                     android:orientation="vertical"
                     android:paddingTop="10dp">
 
+                     <fragment
+                        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
+                        android:id="@+id/youtube_home_fragment_video_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:layout_margin="20dp"/>
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Daily Dose!"
+                        android:visibility="gone"
                         android:textSize="16sp"
                         android:layout_gravity="center"
                         android:textColor="#424242"/>
@@ -41,6 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -64,6 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -87,6 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <ImageView

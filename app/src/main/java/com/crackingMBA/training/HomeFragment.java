@@ -28,11 +28,18 @@ import com.crackingMBA.training.pojo.RetrofitForumComment;
 import com.crackingMBA.training.pojo.RetrofitForumCommentList;
 import com.crackingMBA.training.pojo.RetrofitNoticeBoard;
 import com.crackingMBA.training.pojo.RetrofitNoticeBoardList;
+import com.crackingMBA.training.pojo.RetrofitPostResponse;
 import com.crackingMBA.training.restAPI.ForumCommentsAPIService;
 import com.crackingMBA.training.restAPI.NoticeBoardAPIService;
+import com.crackingMBA.training.restAPI.NoticeBoardURLAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
+import com.crackingMBA.training.restAPI.UserEnrollmentAPIService;
 import com.crackingMBA.training.util.FileDownloader;
 import com.crackingMBA.training.util.MyUtil;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,25 +52,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//import com.bumptech.glide.Glide;
-
-
-/**
- * Created by MSK on 24-01-2017.
- */
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements YouTubePlayer.OnInitializedListener{
     RecyclerView quantRecyclerView;
     View rootView;
     private static String TAG = "HomeFragment";
-    //LinearLayout online_sessions_layout, study_material_layout, mock_tests_layout, videos_layout, forum_layout, motivationLayout;
     LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout, home_fragment_xat_layout;
     NoticeBoardAPIService apiService;
     List<RetrofitNoticeBoard> boards = new ArrayList<>();
     Call<RetrofitNoticeBoardList> call;
-    TextView notice_board_tv1, notice_board_tv2, notice_board_tv3;
     Button high_5, share_feedback;
     public static final String apk_version="2.8.17";
     public static String server_apk_version;
+    String url;
+    NoticeBoardURLAPIService enrollment_apiService;
+    private static final int RECOVERY_REQUEST_HOME_FRAGMENT = 1;
+
 
     @Nullable
     @Override
@@ -80,11 +83,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         high_5=(Button)rootView.findViewById(R.id.high_5);
         share_feedback=(Button)rootView.findViewById(R.id.share_feedback);
 
+        YouTubePlayerFragment frag = (YouTubePlayerFragment)getActivity().getFragmentManager().findFragmentById(R.id.youtube_home_fragment_video_fragment);
+        frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
+
         apiService = RestClient.getClient().create(NoticeBoardAPIService.class);
         call = apiService.fetchBoardList("recent");
 
         if(MyUtil.checkConnectivity(getContext())) {
-            fetchBoardList();
+            enrollment_apiService = RestClient.getClient().create(NoticeBoardURLAPIService.class);
+            enrollment_apiService.getNoticeBoardVideoURL(apk_version).enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("0")) {
+                        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is not enrolled for"+sectionName, Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        String temp_str=retrofitPostResponse.getResponse().toString();
+                        String str = temp_str;
+                        url = str.substring(0,str.indexOf(","));
+
+                        str = temp_str;
+                        server_apk_version =str.substring(str.indexOf(",") + 1);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
         }
         else{
             Toast.makeText(getContext(), "Sorry. There is no internet connection!", Toast.LENGTH_SHORT).show();
@@ -94,36 +124,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 switch (view.getId()){
-                    /*case R.id.online_sessions_layout:{
-                        break;
-                    }
-                    case R.id.study_material_layout:{
-                        Intent examDetails = new Intent(getActivity(), ExamDetailsActivity.class);
-                        examDetails.putExtra("MBA_EXAM_CODE", "XAT");
-                        startActivity(examDetails);
-                        break;
-                    }
-                    case R.id.mock_tests_layout:{
-                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
-                        viewPager.setCurrentItem(2, true);
-                        break;
-                    }
-                    case R.id.videos_layout:{
-                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
-                        viewPager.setCurrentItem(1, true);
-                        break;
-                    }
-                    case R.id.forum_layout:{
-                        ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
-                        viewPager.setCurrentItem(3, true);
-                        break;
-                    }
-
-                    case R.id.motivationLayout:{
-                        Intent motivationIntent = new Intent(getActivity(), MotivationVideosActivity.class);
-                        startActivity(motivationIntent);
-                        break;
-                    }*/
                     case R.id.home_fragment_iift_layout:{
                         ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
                         viewPager.setCurrentItem(1, true);
@@ -146,15 +146,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         viewPager.setCurrentItem(1, true);
                         break;
                     }
-
-
-                    /*case R.id.home_fragment_xat_layout:{
-                        Intent intent = new Intent(getActivity(), PreparationContentActivity.class);
-                        intent.putExtra("PREP_CATEGORY_CODE","XAT");
-                        intent.putExtra("PREP_CATEGORY_HEADER","XAT 2018 Preparation");
-                        startActivity(intent);
-                        break;
-                    }*/
 
                     case R.id.high_5:{
                         Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
@@ -185,12 +176,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         };
 
-        //online_sessions_layout.setOnClickListener(examOnClickListener);
-        //study_material_layout.setOnClickListener(examOnClickListener);
-        //mock_tests_layout.setOnClickListener(examOnClickListener);
-        //videos_layout.setOnClickListener(examOnClickListener);
-        //forum_layout.setOnClickListener(examOnClickListener);
-        //motivationLayout.setOnClickListener(examOnClickListener);
         home_fragment_cat_layout.setOnClickListener(examOnClickListener);
         home_fragment_iift_layout.setOnClickListener(examOnClickListener);
         home_fragment_snap_layout.setOnClickListener(examOnClickListener);
@@ -202,92 +187,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-
-    private void fetchBoardList() {
-        MyUtil.showProgressDialog(getActivity());
-        call.enqueue(new Callback<RetrofitNoticeBoardList>() {
-            @Override
-            public void onResponse(Call<RetrofitNoticeBoardList> call, Response<RetrofitNoticeBoardList> response) {
-                MyUtil.hideProgressDialog();
-
-                if(response.body() == null){
-                    Toast.makeText(getContext(), "Oops! The data couldnt be fetched successfully!", Toast.LENGTH_SHORT).show();
-                    //comments_comments_not_added.setVisibility(View.VISIBLE);
-                    return;
-                }else{
-                    boards = response.body().getQuestions();
-                    notice_board_tv1=(TextView)rootView.findViewById(R.id.notice_board_tv1);
-                    notice_board_tv2=(TextView)rootView.findViewById(R.id.notice_board_tv2);
-                    notice_board_tv3=(TextView)rootView.findViewById(R.id.notice_board_tv3);
-
-                    server_apk_version=boards.get(0).getAPK_Version();
-
-                    if(boards.get(0).getAPK_Version().equals(apk_version)){
-                        //thats ok
-                    }else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage("You are running an older version of this app. Download and install the latest update from Play Store")
-                                .setCancelable(false)
-                                .setPositiveButton("UPDATE NOW!", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
-                                        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                                        // To count with Play market backstack, After pressing back button,
-                                        // to taken back to our application, we need to add following flags to intent.
-                                        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                                        try {
-                                            startActivity(goToMarket);
-                                        } catch (ActivityNotFoundException e) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW,
-                                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
-                                        }
-                                    }
-                                })
-                                .setNeutralButton("SOMETIME LATER!", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
-                                        dialog.cancel();
-                                    }
-                                });
-
-                        //Creating dialog box
-                        AlertDialog alert = builder.create();
-                        //Setting the title manually
-                        alert.setTitle("New update available on Play Store!!");
-                        alert.show();
-                    }
-
-                    notice_board_tv1.setText(boards.get(0).getBoard_name());
-
-                    if(boards.size()>1){
-                        notice_board_tv2.setText(boards.get(1).getBoard_name());
-                    }
-
-                    if(boards.size()>2){
-                        notice_board_tv3.setText(boards.get(2).getBoard_name());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RetrofitNoticeBoardList> call, Throwable t) {
-                Toast.makeText(getContext(), "Oops! The data couldnt be fetched successfully!", Toast.LENGTH_SHORT).show();
-                MyUtil.hideProgressDialog();
-            }
-        });
-
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
     }
 
-        @Override
-        public void onClick (View view){
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        //url = "dwH-dAEYgyM";
+        youTubePlayer.cueVideo(url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        if (youTubeInitializationResult.isUserRecoverableError()) {
+            youTubeInitializationResult.getErrorDialog(getActivity(), RECOVERY_REQUEST_HOME_FRAGMENT).show();
+        } else {
+            Toast.makeText(getContext(), "Sorry! There is an issue in loading the video in YouTube Player", Toast.LENGTH_SHORT).show();
 
         }
+    }
 }
