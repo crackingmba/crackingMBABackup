@@ -84,7 +84,7 @@
                             android:textColor="#212121"
                             />
                         <TextView
-                            android:text="Tai Lang is back to seek vengeance. Having realized he cannot beat the Kung Fu Panda at Kung Fu, he drugs his favorite food... the dumplings. Master Shifu has entrusted upon you, the responsibility of saving his dearest Panda."
+                            android:text="Tai Lang is back to seek revenge. Having realized he cannot beat the Kung Fu Panda at Kung Fu, he drugs his favorite food... the dumplings. Master Shifu has entrusted upon you, the responsibility of saving his dearest Panda."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#212121"/>
@@ -92,8 +92,6 @@
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
-
 
             <!-- Save the Panda details -->
             <android.support.v7.widget.CardView

@@ -113,7 +113,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
-                    android:text="Pay Rs 10"/>
+                    android:text="Pay Rs 300"/>
 
                 <ImageView
                     android:layout_width="wrap_content"

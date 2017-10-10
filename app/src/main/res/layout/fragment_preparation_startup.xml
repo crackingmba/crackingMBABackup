@@ -77,7 +77,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Improve your confidence levels and score more in RC passages of CAT, IIFT, SNAP and XAT"
+                                android:text="Your focused preparation approach for CAT 2017 to help you score your dream percentile and book a slot in the IIMs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -136,7 +136,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Ace the Quant section in CAT, IIFT, SNAP and XAT exams with our awesome study material, formulae sheets, mock tests and more."
+                                android:text="Ace the IIFT 2017 and book a slot in one of the IIFT campuses."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -192,7 +192,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Boost your GK preparation and approach the GK section in IIFT, SNAP and XAT with greater confidence."
+                                android:text="Ace the SNAP 2017 and book a slot in one of the beautiful Symbi campuses."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"
@@ -248,7 +248,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Boost your GK preparation and approach the GK section in IIFT, SNAP and XAT with greater confidence."
+                                android:text="Ace the XAT 2018 and book a slot in one of the Xavier institutes."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"

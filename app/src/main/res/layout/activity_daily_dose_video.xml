@@ -26,8 +26,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/daily_dose_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Daily Dose of some gyan, exam alerts, chit chat and more importantly, stuff to keep your enthu and confidence levels high during your preparation."
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#212121"
+                    android:layout_margin="20dp"/>
 
                 <fragment
                     android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"

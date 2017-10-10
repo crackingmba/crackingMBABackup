@@ -101,6 +101,26 @@ public class LoginActivity extends AppCompatActivity {
                     ed.putString("emailofUser",email);
                     ed.putString("userID",user_id);
                     ed.commit();
+
+                    String reason_code = getIntent().getStringExtra("IS_IT_FOR_ENROLLMENT");
+                    String exam_name = getIntent().getStringExtra("EXAM_NAME");
+                    String exam_name_text = getIntent().getStringExtra("EXAM_NAME_TEXT");
+                    if(reason_code.equals("1")){
+                        SharedPreferences.Editor ed1 = prefs.edit();
+                        ed1.putString("whetherCATcourseEnrolled","notqueried");
+                        ed1.putString("whetherIIFTcourseEnrolled","notqueried");
+                        ed1.putString("whetherSNAPcourseEnrolled","notqueried");
+                        ed1.putString("whetherXATcourseEnrolled","notqueried");
+                        ed1.commit();
+                        Intent motivationVideoDetails = new Intent(getApplicationContext(), MotivationYoutubeDetailsActivity.class);
+                        motivationVideoDetails.putExtra("EXAM_NAME", exam_name);
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", exam_name_text);
+
+                        startActivity(motivationVideoDetails);
+                        finish();
+                    }
+
+                    ed.commit();
                     finish();
 
                 }

@@ -124,7 +124,7 @@ View rootView;
                 case R.id.play_n_win_btn:
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage("Tai Lang has deadly arsenal up his sleeve this time. Rev up your Vocabulary and Grammar skills. The game activates on 16th October 2017.")
-                            .setPositiveButton("SURE! AM ALL GAME! ", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("SURE! BRING IT ON!", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
 
                                 }

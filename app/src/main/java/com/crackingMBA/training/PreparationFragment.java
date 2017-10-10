@@ -66,7 +66,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                     Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                     motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
-                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 250, for the price of a medium pan pizza, you can now crack the RC Section of CAT, IIFT, SNAP and XAT!");
+                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 300, for the price of a medium pan pizza, you can now crack CAT 2017!");
                     startActivity(motivationVideoDetails);
                 } else {
                     //Launch the dialog to update from server
@@ -79,7 +79,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "IIFT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 250, for the price of a medium pan pizza, you can now crack the Quant Section of CAT, IIFT, SNAP and XAT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 300, for the price of a medium pan pizza, you can now crack IIFT!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
@@ -90,7 +90,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "SNAP");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 250, for the price of a medium pan pizza, you can now crack the GK Section of IIFT, SNAP and XAT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack SNAP!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
@@ -101,7 +101,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "XAT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 499, for the price of a medium pan pizza, you can now crack XAT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();

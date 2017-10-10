@@ -40,11 +40,12 @@ public class HomeFragment extends Fragment{
     private static String TAG = "HomeFragment";
     LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout, home_fragment_xat_layout;
     Button high_5, share_feedback;
-    public static final String apk_version="2.8.17";
+    public static final String apk_version="2.8.19";
     public static String server_apk_version;
     String img_url;
     NoticeBoardURLAPIService enrollment_apiService;
     ImageView home_fragment_img; TextView home_fragment_daily_dose_tv;
+    String video_url;
 
     @Nullable
     @Override
@@ -80,13 +81,47 @@ public class HomeFragment extends Fragment{
                         String temp_str=retrofitPostResponse.getResponse().toString();
                         String str = temp_str;
                         img_url = str.substring(0,str.indexOf(","));
+                        String sub_str =str.substring(str.indexOf(",") + 1);
+                        video_url =sub_str.substring(0,sub_str.indexOf(","));
+                        server_apk_version =sub_str.substring(sub_str.indexOf(",") + 1);
 
-                        Picasso.with(getContext())
-                                .load("http://www.crackingmba.com/wp-content/uploads/2017/03/how-to-prepare-for-cat-2017.png")
-                                .into(home_fragment_img);
 
-                        str = temp_str;
-                        server_apk_version =str.substring(str.indexOf(",") + 1);
+                        if(apk_version.equals(server_apk_version)){
+                            //well and good
+                            Picasso.with(getContext())
+                                    .load(img_url)
+                                    .into(home_fragment_img);
+                        }else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("There is a new update of this app available on play store. Please update your app. Thanks!")
+                                    .setPositiveButton("UPDATE FROM PLAY STORE!", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+                                            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                                            // To count with Play market backstack, After pressing back button,
+                                            // to taken back to our application, we need to add following flags to intent.
+                                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                            try {
+                                                startActivity(goToMarket);
+                                            } catch (ActivityNotFoundException e) {
+                                                startActivity(new Intent(Intent.ACTION_VIEW,
+                                                        Uri.parse("http://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+                                            }
+
+                                        }
+                                    })
+                                    .setCancelable(false);
+
+                            //Creating dialog box
+                            AlertDialog alert = builder.create();
+                            //Setting the title manually
+                            alert.setTitle("ALERT! New Update Available");
+                            alert.show();
+                        }
+
+
                     }
 
                 }
@@ -104,7 +139,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DailyDoseVideoActivity.class);
-                intent.putExtra("DAILY_DOSE_VIDEO_URL", img_url);
+                intent.putExtra("DAILY_DOSE_VIDEO_URL", video_url);
                 startActivity(intent);
             }
         });

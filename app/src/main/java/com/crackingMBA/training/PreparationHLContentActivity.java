@@ -404,6 +404,36 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     .setPositiveButton("ALREADY ENROLLED?  LOGIN NOW", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
+                            intent.putExtra("IS_IT_FOR_ENROLLMENT","1");
+
+                            switch(course_name){
+                                case "CATPREP1":{
+                                    intent.putExtra("EXAM_NAME","CAT");
+                                    intent.putExtra("EXAM_NAME_TEXT","Spare your pizza craving today for a bigger one later!'. At 300, for the price of a medium pan pizza, you can now crack CAT 2017!");
+                                    break;
+                                }
+                                case "IIFTPREP1":{
+                                    intent.putExtra("EXAM_NAME","IIFT");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 300, for the price of a medium pan pizza, you can now crack IIFT!");
+                                    break;
+                                }
+                                case "SNAPPREP1":{
+                                    intent.putExtra("EXAM_NAME","SNAP");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack SNAP!");
+                                    break;
+                                }
+                                case "XATPREP":{
+                                    intent.putExtra("EXAM_NAME","XAT");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
+                                    break;
+                                }
+
+
+                            }
+
+
+
+
                             startActivity(intent);
                         }
                     })

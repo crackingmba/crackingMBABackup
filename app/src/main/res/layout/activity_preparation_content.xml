@@ -92,7 +92,7 @@
             android:layout_weight="0"
             android:layout_marginBottom="40dp"
             android:textSize="16sp"
-            android:text="EVALUATE FOR FREE UPTO 24th SEP!"
+            android:text="email : support@crackingmba.com"
             android:background="#BF360C"
             android:gravity="center"/>
 

@@ -1,8 +1,10 @@
 package com.crackingMBA.training;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -13,7 +15,7 @@ public class DailyDoseVideoActivity extends AppCompatActivity implements YouTube
 
 
 
-    String daily_dose_video_url;
+    String daily_dose_video_url; TextView daily_dose_tv;
     private static final int DD_RECOVERY_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,11 @@ public class DailyDoseVideoActivity extends AppCompatActivity implements YouTube
         setContentView(R.layout.activity_daily_dose_video);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView daily_dose_tv = (TextView) findViewById(R.id.daily_dose_tv);
+
         daily_dose_video_url = getIntent().getStringExtra("DAILY_DOSE_VIDEO_URL");
+        Typeface custom_font=Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Raleway-Light.ttf");
+        daily_dose_tv.setTypeface(custom_font);
 
         YouTubePlayerSupportFragment frag;
         frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_daily_dose_video_fragment);
