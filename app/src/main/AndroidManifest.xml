@@ -175,12 +175,16 @@
             android:label="Course Enrollment"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".PaymentSuccessActivity"
+        <activity
+            android:name=".PaymentSuccessActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Payment Status"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DailyDoseVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Daily Dose!"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".PlaynWinActivity" />
-
     </application>
 
 </manifest>

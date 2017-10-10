@@ -143,7 +143,7 @@
                             android:textColor="#212121"
                             />
                         <TextView
-                            android:text="You got just 100 seconds to answer 10 questions to save the panda. Any wrong answer and Tai Lang will devour you. If you can save the panda thrice a week, you can win these cool headphones from Flipkart."
+                            android:text="You got just 100 seconds to answer 10 questions to save the panda. Any wrong answer and Tai Lang will devour you. If you can save the panda thrice in a week, you can win these cool headphones from Flipkart."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#212121"/>
@@ -173,6 +173,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/play_n_win_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
