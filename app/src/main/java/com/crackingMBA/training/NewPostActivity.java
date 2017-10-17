@@ -77,6 +77,7 @@ public class NewPostActivity extends AppCompatActivity {
                     Toast.makeText(NewPostActivity.this, "Please enter the details and submit ", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
+                    newcomment=newcomment.replaceAll("'","\\\\'");
                     saveNewPost(selectedCategory,newcomment, emailofUser);
                 }
 

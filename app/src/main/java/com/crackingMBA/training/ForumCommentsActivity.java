@@ -122,6 +122,8 @@ public class ForumCommentsActivity extends AppCompatActivity {
                         Toast.makeText(ForumCommentsActivity.this, "Please enter a comment and submit ", Toast.LENGTH_SHORT).show();
                         return;
                     }else{
+                        newcomment=newcomment.replaceAll("'","\\\\'");
+                        //Toast.makeText(ForumCommentsActivity.this, newcomment, Toast.LENGTH_SHORT).show();
                         saveNewComment(post_id, newcomment, userID);
                     }
                 }

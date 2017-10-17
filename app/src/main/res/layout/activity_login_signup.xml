@@ -34,7 +34,7 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:text="You need to Signup or Login to submit a new post or comment!"
+            android:text="You need to Signup or Login to submit a new post, comment or mock test score!"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"

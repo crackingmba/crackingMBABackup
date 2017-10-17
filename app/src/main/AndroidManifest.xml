@@ -180,11 +180,15 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Payment Status"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DailyDoseVideoActivity"
+        <activity
+            android:name=".DailyDoseVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Daily Dose!"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".PlaynWinActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MockTestAnalysisActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mock Test Analysis Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

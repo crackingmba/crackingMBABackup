@@ -24,26 +24,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="SAVE THE PANDA"
+                android:text="Mock CAT Analysis"
                 android:textSize="18sp"
                 android:textColor="#212121"
                 android:textStyle="bold"
-                android:layout_marginTop="25dp"/>
-<!--
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Save the panda thrice in a week and stand a chance to win Flipkart SmartBuy On the Ear Foldable Headphones!"
-                android:textSize="14sp"
-                android:textColor="#212121"
-                android:layout_margin="10dp"/>-->
+                android:layout_marginTop="10dp"/>
 
             <!-- Personal Help -->
             <android.support.v7.widget.CardView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/personal_help_cv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -55,45 +45,20 @@
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/panda"
-                            android:adjustViewBounds="true" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
                         <TextView
+                            android:text="To maximize scores in CAT 2017, you not only need to give mock tests but also analyze them well to improve your performance."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="The Background"
-                            android:layout_margin="3dp"
-                            android:textStyle="bold"
-                            android:textColor="#212121"
-                            />
-                        <TextView
-                            android:text="Tai Lang is back to seek revenge. Having realized he cannot beat the Kung Fu Panda at Kung Fu, he drugs his favorite food... the dumplings. Master Shifu has entrusted upon you, the responsibility of saving his dearest Panda."
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:textColor="#212121"/>
-                    </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!-- Save the Panda details -->
+            <!-- How we work -->
             <android.support.v7.widget.CardView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -111,188 +76,66 @@
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/headphones"
-                            android:adjustViewBounds="true" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Save the Panda and win!"
+                            android:text="How it works!"
                             android:textStyle="bold"
-                            android:layout_margin="3dp"
+                            android:layout_margin="5dp"
                             android:textColor="#212121"
+                            android:gravity="center"
+                            android:layout_gravity="center"
                             />
                         <TextView
-                            android:text="You got just 100 seconds to answer 10 questions to save the panda. Any wrong answer and Tai Lang will devour you. If you can save the panda thrice in a week, you can win these cool headphones from Flipkart."
+                            android:text="1. You attempt the mock CAT on a Sunday"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
                             android:textColor="#212121"/>
-                    </LinearLayout>
+
+                        <TextView
+                            android:text="2. You record the score in that test in this app"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#212121"/>
+
+                        <TextView
+                            android:text="3. We analyze the key metrics based on the scores in that test"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#212121"/>
+
+                        <TextView
+                            android:text="4. We conduct 1 on 1 session with you to analyze your attempts in the question paper"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#212121"/>
+
+                        <TextView
+                            android:text="5. We provide our insights and study material on how to improve for next mock CAT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#212121"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!-- button to start the game -->
-            <android.support.v7.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/app_feedback1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                android:layout_margin="5dp"
-                >
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/play_n_win_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Let's Save the Panda!"
-                        android:padding="20dp"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
-            <!-- SNAP CardView -->
-
-
-
+           <Button
+               android:id="@+id/mock_test_dashboard_btn"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="15dp"
+               android:padding="15dp"
+               android:gravity="center"
+               android:text="Mock Test Analysis Dashboard"/>
         </LinearLayout>
-
-
-
-        <!-- Quant CardView -->
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/mock_test_quantrow"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="2dp"
-            app:cardElevation="2dp"
-            android:visibility="gone"
-            android:layout_margin="5dp">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/mock_test_quant_bg"
-                android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/mock_test_quant_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quant Sectional Tests"
-                        android:textSize="20sp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="3dp"
-                        android:textColor="#E3F2FD"
-                        />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-
-        <!-- DI LR CardView -->
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/mock_test_dilrrow"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="2dp"
-            app:cardElevation="2dp"
-            android:visibility="gone"
-            android:layout_margin="5dp">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/mock_test_quant_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/mock_test_dilr_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DI and LR Sectional Tests"
-                    android:textSize="20sp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="3dp"
-                    android:textColor="#E3F2FD"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <!-- Verbal CardView -->
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/mock_test_verbalrow"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="2dp"
-            app:cardElevation="2dp"
-            android:visibility="gone"
-            android:layout_margin="5dp">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/mock_test_quant_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/mock_test_verbal_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Verbal Sectional Tests"
-                    android:textSize="20sp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="3dp"
-                    android:textColor="#E3F2FD"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 </ScrollView>

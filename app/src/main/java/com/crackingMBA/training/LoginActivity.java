@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
 
-                    ed.commit();
+                    //ed.commit();
                     finish();
 
                 }

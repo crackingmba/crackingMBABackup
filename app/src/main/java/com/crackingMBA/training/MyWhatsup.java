@@ -167,11 +167,6 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                         ed.putString("POSTED_BY", questions.get(position).getPostedBy());
                         ed.putString("POSTED_BY_ID", questions.get(position).getPostedById());
                         ed.commit();
-
-
-
-
-
                         startActivity(forumpostIntent);
 
                     }

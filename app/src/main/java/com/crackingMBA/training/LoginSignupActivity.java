@@ -40,6 +40,9 @@ public class LoginSignupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(LoginSignupActivity.this, LoginActivity.class);
+                intent.putExtra("IS_IT_FOR_ENROLLMENT","0");
+                intent.putExtra("EXAM_NAME","CAT");
+                intent.putExtra("EXAM_NAME_TEXT","Spare");
                 startActivity(intent);
                 finish();
 
