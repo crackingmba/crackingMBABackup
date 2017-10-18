@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Mock CAT Analysis"
+                android:text="Pit Stop!"
                 android:textSize="18sp"
                 android:textColor="#212121"
                 android:textStyle="bold"
@@ -49,7 +49,7 @@
                     android:orientation="vertical">
 
                         <TextView
-                            android:text="To maximize scores in CAT 2017, you not only need to give mock tests but also analyze them well to improve your performance."
+                            android:text="A Pit Stop for all our enrolled users to take stock of their preparation."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -90,35 +90,35 @@
                             android:layout_gravity="center"
                             />
                         <TextView
-                            android:text="1. You attempt the mock CAT on a Sunday"
+                            android:text="1. Enrolled users, should complete the study material in that course or for a specific day (30 Day Challenge)"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:textColor="#212121"/>
 
                         <TextView
-                            android:text="2. You record the score in that test in this app"
+                            android:text="2. Your performance in mock tests will be recorded for speed and accuracy."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:textColor="#212121"/>
 
                         <TextView
-                            android:text="3. We analyze the key metrics based on the scores in that test"
+                            android:text="3. We will post regular inputs for improvement in your Preparation Dashboard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:textColor="#212121"/>
 
                         <TextView
-                            android:text="4. We conduct 1 on 1 session with you to analyze your attempts in the question paper"
+                            android:text="4. You can ask your queries in your Preparation Dashboard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:textColor="#212121"/>
 
                         <TextView
-                            android:text="5. We provide our insights and study material on how to improve for next mock CAT"
+                            android:text="5. We will schedule 1 on 1 sessions with you to help you analyze your performance and improve scores in Full Length Mocks by TIME, CL and others."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
@@ -134,7 +134,7 @@
                android:layout_margin="15dp"
                android:padding="15dp"
                android:gravity="center"
-               android:text="Mock Test Analysis Dashboard"/>
+               android:text="Preparation Dashboard"/>
         </LinearLayout>
     </LinearLayout>
 

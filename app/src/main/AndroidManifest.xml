@@ -187,7 +187,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MockTestAnalysisActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Mock Test Analysis Dashboard"
+            android:label="Dashboard"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 

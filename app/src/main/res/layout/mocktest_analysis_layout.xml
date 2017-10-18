@@ -4,14 +4,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/analysis_dashboard"
-            android:layout_marginTop="10dp"/>
+            android:src="@drawable/person_img" />
 
         <TextView
             android:id="@+id/mock_test_name"

@@ -155,27 +155,27 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
                 switch(index){
                     case 1:{
-                        processRows(questions.get(position).getStudy1(), questions.get(position).getStudy1Type());
+                        processRows(questions.get(position).getStudy1(), questions.get(position).getStudy1Type(), questions.get(position).getEnabled());
                         break;
                     }
                     case 2:{
-                        processRows(questions.get(position).getStudy2(), questions.get(position).getStudy2Type());
+                        processRows(questions.get(position).getStudy2(), questions.get(position).getStudy2Type(), questions.get(position).getEnabled());
                         break;
                     }
                     case 3:{
-                        processRows(questions.get(position).getStudy3(), questions.get(position).getStudy3Type());
+                        processRows(questions.get(position).getStudy3(), questions.get(position).getStudy3Type(), questions.get(position).getEnabled());
                         break;
                     }
                     case 4:{
-                        processRows(questions.get(position).getStudy4(), questions.get(position).getStudy4Type());
+                        processRows(questions.get(position).getStudy4(), questions.get(position).getStudy4Type(), questions.get(position).getEnabled());
                         break;
                     }
                     case 5:{
-                        processRows(questions.get(position).getStudy5(), questions.get(position).getStudy5Type());
+                        processRows(questions.get(position).getStudy5(), questions.get(position).getStudy5Type(), questions.get(position).getEnabled());
                         break;
                     }
                     case 6:{
-                        processRows(questions.get(position).getStudy6(), questions.get(position).getStudy6Type());
+                        processRows(questions.get(position).getStudy6(), questions.get(position).getStudy6Type(), questions.get(position).getEnabled());
                         break;
                     }
                 }
@@ -236,102 +236,123 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     }
 
 
-    private void processRows(String study, String studyType){
+    private void processRows(String study, String studyType, String enabled){
 
-                switch(studyType){
-                    case "mocktest":{
-                        str = study;
-                        String test_name = str.substring(0,str.indexOf(","));
+                if(enabled.equals("y")) {
 
-                        str= study;
-                        String test_id=str.substring(str.indexOf(",") + 1);
-
-                        MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                        VideoApplication.selectedMockTestTest= mockTestTest;
-
-                        Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
-                        startActivity(startIntent);
-                        break;
-                    }
-                    case "video":{
-                        str = study;
-                        String course_name = str.substring(0,str.indexOf(","));
-
-                        str= study;
-                        String url=str.substring(str.indexOf(",") + 1);
-
-                        Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                        intent.putExtra("COURSE_NAME",course_category);
-                        intent.putExtra("COURSE_SUBJECT",course_name);
-                        intent.putExtra("URL",url);
-                        startActivity(intent);
-                        break;
-                    }
-                    case "text":{
-                        str = study;
-                        String course_name = str.substring(0,str.indexOf(","));
-
-                        str= study;
-                        String webview_url=str.substring(str.indexOf(",") + 1);
-                        Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
-                        intent.putExtra("COURSE_NAME",course_category);
-                        intent.putExtra("COURSE_SUBJECT",course_name);
-                        intent.putExtra("WEBVIEW_URL",webview_url);
-                        startActivity(intent);
-                        break;
-                    }
-
-                    case "pmocktest":{
-                        if(displayPaymentOptions(course_category)>0){
+                    switch (studyType) {
+                        case "mocktest": {
                             str = study;
-                            String test_name = str.substring(0,str.indexOf(","));
+                            String test_name = str.substring(0, str.indexOf(","));
 
-                            str= study;
-                            String test_id=str.substring(str.indexOf(",") + 1);
+                            str = study;
+                            String test_id = str.substring(str.indexOf(",") + 1);
 
-                            MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png",test_name);
-                            VideoApplication.selectedMockTestTest= mockTestTest;
+                            MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png", test_name);
+                            VideoApplication.selectedMockTestTest = mockTestTest;
 
                             Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
                             startActivity(startIntent);
                             break;
                         }
-                        break;
-                    }
-                    case "pvideo":{
-                        if(displayPaymentOptions(course_category)>0)
-                        {
+                        case "video": {
                             str = study;
-                            String course_name = str.substring(0,str.indexOf(","));
+                            String course_name = str.substring(0, str.indexOf(","));
 
-                            str= study;
-                            String url=str.substring(str.indexOf(",") + 1);
+                            str = study;
+                            String url = str.substring(str.indexOf(",") + 1);
 
                             Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
-                            intent.putExtra("COURSE_NAME",course_category);
-                            intent.putExtra("COURSE_SUBJECT",course_name);
-                            intent.putExtra("URL",url);
+                            intent.putExtra("COURSE_NAME", course_category);
+                            intent.putExtra("COURSE_SUBJECT", course_name);
+                            intent.putExtra("URL", url);
                             startActivity(intent);
+                            break;
                         }
-                        break;
-                    }
-                    case "ptext":{
-
-                        if(displayPaymentOptions(course_category)>0){
+                        case "text": {
                             str = study;
-                            String course_name = str.substring(0,str.indexOf(","));
+                            String course_name = str.substring(0, str.indexOf(","));
 
-                            str= study;
-                            String webview_url=str.substring(str.indexOf(",") + 1);
+                            str = study;
+                            String webview_url = str.substring(str.indexOf(",") + 1);
                             Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
-                            intent.putExtra("COURSE_NAME",course_category);
-                            intent.putExtra("COURSE_SUBJECT",course_name);
-                            intent.putExtra("WEBVIEW_URL",webview_url);
+                            intent.putExtra("COURSE_NAME", course_category);
+                            intent.putExtra("COURSE_SUBJECT", course_name);
+                            intent.putExtra("WEBVIEW_URL", webview_url);
                             startActivity(intent);
+                            break;
                         }
 
-                        break;
+                        case "pmocktest": {
+                            if (displayPaymentOptions(course_category) > 0) {
+                                str = study;
+                                String test_name = str.substring(0, str.indexOf(","));
+
+                                str = study;
+                                String test_id = str.substring(str.indexOf(",") + 1);
+
+                                MockTestTest mockTestTest = new MockTestTest(test_id, "1000", "numbers1.png", test_name);
+                                VideoApplication.selectedMockTestTest = mockTestTest;
+
+                                Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
+                                startActivity(startIntent);
+                                break;
+                            }
+                            break;
+                        }
+                        case "pvideo": {
+                            if (displayPaymentOptions(course_category) > 0) {
+                                str = study;
+                                String course_name = str.substring(0, str.indexOf(","));
+
+                                str = study;
+                                String url = str.substring(str.indexOf(",") + 1);
+
+                                Intent intent = new Intent(getApplicationContext(), TargetVideoActivity.class);
+                                intent.putExtra("COURSE_NAME", course_category);
+                                intent.putExtra("COURSE_SUBJECT", course_name);
+                                intent.putExtra("URL", url);
+                                startActivity(intent);
+                            }
+                            break;
+                        }
+                        case "ptext": {
+
+                            if (displayPaymentOptions(course_category) > 0) {
+                                str = study;
+                                String course_name = str.substring(0, str.indexOf(","));
+
+                                str = study;
+                                String webview_url = str.substring(str.indexOf(",") + 1);
+                                Intent intent = new Intent(getApplicationContext(), ViewPDFDetailsActivity.class);
+                                intent.putExtra("COURSE_NAME", course_category);
+                                intent.putExtra("COURSE_SUBJECT", course_name);
+                                intent.putExtra("WEBVIEW_URL", webview_url);
+                                startActivity(intent);
+                            }
+
+                            break;
+                        }
                     }
+
+                }else{
+                    //for not enabled case
+
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PreparationHLContentActivity.this);
+                    builder.setMessage("This content is not yet enabled. It will be enabled on the date mentioned on top of this section.")
+                            .setCancelable(false)
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                                    dialog.cancel();
+                                }
+                            });
+
+                    //Creating dialog box
+                    android.support.v7.app.AlertDialog alert = builder.create();
+                    //Setting the title manually
+                    alert.setTitle("30 Day Challenge Alert!");
+                    alert.show();
                 }
 
     }

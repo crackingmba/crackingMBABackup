@@ -54,7 +54,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         switch (sectionName){
             case "CAT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_cat);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.cat_challenge);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
                 motivation_video_url = "MEHaAT7nJL0";

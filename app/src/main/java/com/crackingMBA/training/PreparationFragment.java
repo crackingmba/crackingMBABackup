@@ -66,7 +66,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                     Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                     motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
-                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Spare your pizza craving today for a bigger one later!'. At 300, for the price of a medium pan pizza, you can now crack CAT 2017!");
+                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Still stuck with mock scores below 90 %ile? Or in early 90s but not able to cross 95 %ile? Sign up for our '30 Day CAT Challenge'. You get a 30 day study plan with study material, mock tests and personalized feedback to improve your scores!");
                     startActivity(motivationVideoDetails);
                 } else {
                     //Launch the dialog to update from server

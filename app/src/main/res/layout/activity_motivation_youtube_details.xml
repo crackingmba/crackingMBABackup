@@ -45,154 +45,24 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/focus_cat"/>
+                android:src="@drawable/cat_challenge"/>
 
             <TextView
                 android:id="@+id/motivation_yt_focus_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
+                android:layout_margin="15dp"
                 android:textSize="14sp"
                 android:textColor="#212121"
                 android:text="At 499, for the price of a medium pan pizza, you can now crack CAT!"/>
-
-           <!-- <TextView
-                android:id="@+id/motivation_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:textSize="14sp"
-                android:textColor="#212121"
-                android:text="And the best part is .. we will all work together to give you a reason to celebrate a big fat pizza party a few months from now!!"/>
--->
-
-            <!-- first set of tick marks -->
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/tick_mark"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#212121"
-                        android:text="Prep Videos"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/tick_mark"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#212121"
-                        android:text="Support/Guidance"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            &lt;!&ndash; second set of tick marks &ndash;&gt;
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/tick_mark"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#212121"
-                        android:text="Mock Tests"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="20dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/tick_mark"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#212121"
-                        android:text="Online Sessions"/>
-                </LinearLayout>
-
-            </LinearLayout>-->
 
             <fragment
                 android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
                 android:id="@+id/youtube_motivation_video_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
-                android:layout_margin="20dp"/>
-
-
-
-
+                android:layout_margin="15dp"/>
 
         </LinearLayout>
 
@@ -202,7 +72,7 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:layout_weight="0"
             android:text="VIEW COURSE DETAILS"/>
 

@@ -35,13 +35,14 @@
 
             <TextView
                 android:id="@+id/payment_success_message_tv"
-                android:text="My Mock Tests"
-                android:textSize="18sp"
+                android:text="Preparation Dashboard"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:textColor="#212121"
                 android:gravity="center"/>
 
             <TextView
@@ -91,15 +92,30 @@
                 android:layout_margin="15dp"
                 android:src="@drawable/analysis_dashboard"/>
 
-            <Button
-                android:id="@+id/payment_success_btn"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
                 android:layout_margin="15dp"
+                android:text="My Messages"
+                android:textColor="#212121"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="ADD NEW MOCK TEST SCORES"/>
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/accent_color"/>
+
+            <TextView
+                android:id="@+id/mock_test_analysis_message_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                android:text="Hi! This section is for users enrolled for 30 Day Challenge courses. You need to login to view your performance improvement tips and recommendations from us!"/>
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mocktestListRecyclerView"

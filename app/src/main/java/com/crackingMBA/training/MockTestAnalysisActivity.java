@@ -3,6 +3,7 @@ package com.crackingMBA.training;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +43,8 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
     Call<RetrofitMockTestList> call;
     SharedPreferences prefs; TextView mocktest_user;String userID; Button mocktest_analysis_btn, mocktest_analysis_logout_btn;
     SharedPreferences.Editor ed;
+    TextView mock_test_analysis_message_tv;
+    Boolean onLoginActivityFlag=false;
 
 
     @Override
@@ -56,6 +59,7 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
 
 
         mocktest_user = (TextView)findViewById(R.id.mocktest_user);
+        mock_test_analysis_message_tv = (TextView)findViewById(R.id.mock_test_analysis_message_tv);
         mocktest_analysis_btn = (Button)findViewById(R.id.mocktest_analysis_btn);
         mocktest_analysis_logout_btn = (Button)findViewById(R.id.mocktest_analysis_logout_btn);
 
@@ -90,7 +94,11 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
         mocktest_analysis_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MockTestAnalysisActivity.this, LoginSignupActivity.class);
+                Intent intent = new Intent(MockTestAnalysisActivity.this, LoginActivity.class);
+                intent.putExtra("IS_IT_FOR_ENROLLMENT","0");
+                intent.putExtra("EXAM_NAME","CAT");
+                intent.putExtra("EXAM_NAME_TEXT","Spare");
+                onLoginActivityFlag=true;
                 startActivity(intent);
             }
         });
@@ -107,11 +115,25 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
                 mocktest_analysis_logout_btn.setVisibility(View.GONE);
                 mocktest_user.setText("Welcome Guest");
                 mocktest_analysis_btn.setVisibility(View.VISIBLE);
+                if(mocktests.size()>0){
+                    mocktests.clear();
+                    adapter.notifyDataSetChanged();
+                }
+                mock_test_analysis_message_tv.setVisibility(View.VISIBLE);
+                mock_test_analysis_message_tv.setText("Hi! This section is for users enrolled for any of our courses such as '30 Day Challenge, Focus IIFT, Focus SNAP or Focus XAT'. If you are enrolled, please login to view your performance improvement tips and recommendations from us!");
             }
         });
 
-        call = apiService.fetchMockTests(userID);
-        fetchQuestionList();
+
+        if(isUserLoggedIn){
+            mock_test_analysis_message_tv.setVisibility(View.GONE);
+            call = apiService.fetchMockTests(userID);
+            fetchQuestionList();
+        }else{
+            mock_test_analysis_message_tv.setVisibility(View.VISIBLE);
+            mock_test_analysis_message_tv.setText("Hi! This section is for users enrolled for any of our courses such as '30 Day Challenge, Focus IIFT, Focus SNAP or Focus XAT'. If you are enrolled, please login to view your performance improvement tips and recommendations from us!");
+        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -127,8 +149,13 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
                 MyUtil.hideProgressDialog();
 
                 if(response.body()==null){
-                    Toast.makeText(getApplicationContext(), "There are no posts in this category!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "There are no posts in this category!", Toast.LENGTH_SHORT).show();
+
+                    if(mocktests.size()>0){
+                        mocktests.clear();
+                    }
                     adapter.notifyDataSetChanged();
+                    Toast.makeText(getApplicationContext(), "There are no posts in this category!", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     mocktests.addAll(response.body().getMockTestScores());
@@ -158,19 +185,30 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        if(mocktests.size()>0){
+            mocktests.clear();
+            adapter.notifyDataSetChanged();
+        }
+
         Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
         String nameofUser = prefs.getString("nameofUser", "");
 
-        if(isUserLoggedIn){
-            mocktest_user.setText("Welcome "+nameofUser);
-            userID= prefs.getString("userID", "");
-            mocktest_analysis_btn.setVisibility(View.GONE);
-            mocktest_analysis_logout_btn.setVisibility(View.VISIBLE);
-        }else{
-            mocktest_user.setText("Welcome Guest");
-            userID="1";
-            mocktest_analysis_btn.setVisibility(View.VISIBLE);
-            mocktest_analysis_logout_btn.setVisibility(View.GONE);
+        if(onLoginActivityFlag){
+            if(isUserLoggedIn){
+                mocktest_user.setText("Welcome "+nameofUser);
+                userID= prefs.getString("userID", "");
+                mocktest_analysis_btn.setVisibility(View.GONE);
+                mocktest_analysis_logout_btn.setVisibility(View.VISIBLE);
+                mock_test_analysis_message_tv.setVisibility(View.GONE);
+                call = apiService.fetchMockTests(userID);
+                fetchQuestionList();
+            }else{
+                mocktest_user.setText("Welcome Guest");
+                userID="1";
+                mocktest_analysis_btn.setVisibility(View.VISIBLE);
+                mocktest_analysis_logout_btn.setVisibility(View.GONE);
+            }
+
         }
 
 

@@ -71,13 +71,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Focus 'CAT'"
+                                android:text="30 Day CAT Challenge!"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Your focused preparation approach for CAT 2017 to help you score your dream percentile and book a slot in the IIMs"
+                                android:text="A fixed 30 day study plan with study material, mock tests and regular feedback on your preparation to help you reach your dream percentile."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>

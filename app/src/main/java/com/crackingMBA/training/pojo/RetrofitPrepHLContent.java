@@ -1,7 +1,7 @@
 package com.crackingMBA.training.pojo;
 
 public class RetrofitPrepHLContent {
-    String id, category, day_name, study_1, study_1_type, study_2, study_2_type, study_3, study_3_type, study_4, study_4_type, study_5, study_5_type, study_6, study_6_type;
+    String id, category, day_name, study_1, study_1_type, study_2, study_2_type, study_3, study_3_type, study_4, study_4_type, study_5, study_5_type, study_6, study_6_type, enabled;
     public String getId() {return id;}
     public String getCategory() {return category;}
     public String getName() {return day_name;}
@@ -17,4 +17,5 @@ public class RetrofitPrepHLContent {
     public String getStudy5Type() {return study_5_type;}
     public String getStudy6() {return study_6;}
     public String getStudy6Type() {return study_6_type;}
+    public String getEnabled() {return enabled;}
 }
