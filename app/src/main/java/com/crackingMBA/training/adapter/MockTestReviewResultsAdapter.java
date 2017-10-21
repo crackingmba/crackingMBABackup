@@ -14,15 +14,10 @@ import com.crackingMBA.training.pojo.ReviewResultPojo;
 
 import java.util.List;
 
-/**
- * Created by Harish on 1/31/2017.
- */
 public class MockTestReviewResultsAdapter extends RecyclerView
         .Adapter<MockTestReviewResultsAdapter.DataObjectHolder> {
-    private static String LOG_TAG = "MockTestReviewResultsAdapter";
     private List<ReviewResultPojo> mDataset;
     private static MyClickListener myClickListener;
-    private static String TAG = "MockTestReviewResultsAdapter";
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -55,7 +50,6 @@ public class MockTestReviewResultsAdapter extends RecyclerView
     @Override
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
-        Log.d(TAG,"in onCreateViewHolder..");
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.mocktest_reviewresultsview_layout, parent, false);
 
@@ -65,25 +59,24 @@ public class MockTestReviewResultsAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        Log.d(TAG,"in onBindViewHolder..");
         holder.questionTxt.setText(mDataset.get(position).getQuestionTxt());
-        String yourAnsrTxt = mDataset.get(position).getSelectedAnswerTxt()==null ? CrackingConstant.NOT_ATTEMPTED : mDataset.get(position).getSelectedAnswerTxt()+" (Your Answer)";
+        String yourAnsrTxt = mDataset.get(position).getSelectedAnswerTxt()==null ? CrackingConstant.NOT_ATTEMPTED : "Your Answer : "+mDataset.get(position).getSelectedAnswerTxt();
         holder.selectedAnswerTxt.setText(yourAnsrTxt);
         //#AB0800 #3F9D2F
-        holder.selectedAnswerTxt.setTextColor(Color.rgb(171,8,0));
-        holder.correctAnswerTxt.setText(mDataset.get(position).getCorrectAnswerTxt()+" (Correct Answer)");
-        holder.correctAnswerTxt.setTextColor(Color.rgb(63,157,47));
-        holder.answerExplanationTxt.setText(mDataset.get(position).getAnswerExplanation());
+        //holder.selectedAnswerTxt.setTextColor(Color.rgb(171,8,0));
+        holder.selectedAnswerTxt.setTextColor(Color.BLUE);
+        holder.correctAnswerTxt.setText("Correct Answer : "+mDataset.get(position).getCorrectAnswerTxt());
+        //holder.correctAnswerTxt.setTextColor(Color.rgb(63,157,47));
+        holder.correctAnswerTxt.setTextColor(Color.GREEN);
+        holder.answerExplanationTxt.setText("ANSWER EXPLANATION : "+mDataset.get(position).getAnswerExplanation());
     }
 
     public void addItem(ReviewResultPojo dataObj, int index) {
-        Log.d(TAG,"in addItem..");
         mDataset.add(dataObj);
         notifyItemInserted(index);
     }
 
     public void deleteItem(int index) {
-        Log.d(TAG,"in deleteView..");
         mDataset.remove(index);
         notifyItemRemoved(index);
     }

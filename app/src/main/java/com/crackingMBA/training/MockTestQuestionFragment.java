@@ -3,7 +3,6 @@ package com.crackingMBA.training;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -15,12 +14,10 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.pojo.MockTestQuestion;
+import com.squareup.picasso.Picasso;
 
-public class MockTestQuestionFragment extends Fragment implements View.OnClickListener {
-
-    private static String TAG = "MockTestQuestionFragment";
+public class MockTestQuestionFragment extends Fragment{
     View rootView;
 
     TextView qstnTxt;
@@ -31,30 +28,20 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MockTestQuestion selectedQstn = VideoApplication.selectedMockTestQuestion;
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_mocktest_question, container, false);
         qstnTxt = ((TextView) rootView.findViewById(R.id.mocktest_qstn_txt));
         qstnTxt.setText(selectedQstn.getQstnNo()+". "+selectedQstn.getQstnTxt());
         imageView=(ImageView)rootView.findViewById(R.id.mock_test_img) ;
-
-        String qn_formula=selectedQstn.getQstnFormula();
-
-        String test="Test type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here ";
-        Log.d("qstn_Formula",test);
-
-        //mathView.setText("What type of a number is the sum of the following: $${2+\\\\sqrt{3}*\\\\sqrt{8}}$$. After this add some more text in the question here");
-        //mathView.setText("Test type of a number is the sum of the following: $${2+\\sqrt{3}*\\sqrt{8}}$$. After this add some more text in the question here");
-        //mathView.setText(qn_formula.toString());
         String mocktestImg=selectedQstn.getQstnImage();
 
         if(mocktestImg.isEmpty()){
             //the image is not displayed here
         }else{
             try {
-                Log.d("mock_test_img_check", CrackingConstant.MYPATH +"img/mock_tests/"+mocktestImg);
-                AsyncTask result = new DownloadImageTask((ImageView) imageView, this.getContext())
-                        .execute(CrackingConstant.MYPATH +"img/mock_tests/"+mocktestImg);
+                Picasso.with(getContext())
+                        .load(CrackingConstant.MYPATH +"img/mock_tests/"+mocktestImg)
+                        .into(imageView);
             }
             catch (Exception e){
             }
@@ -72,11 +59,6 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
         option4.setText(Html.fromHtml(selectedQstn.getOption4()));
 
         return rootView;
-    }
-
-    @Override
-    public void onClick(View v) {
-        //Log.d(TAG,"clicked view "+rootView.findViewById(v.getId()));
     }
 
 }

@@ -14,8 +14,6 @@ import com.crackingMBA.training.pojo.MockTestQuestion;
 public class MockTestResultActivity extends AppCompatActivity {
 
     private static String TAG = "MockTestResultActivity";
-    private TextView msg;
-    boolean isMock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +27,7 @@ public class MockTestResultActivity extends AppCompatActivity {
         int attemptedQstns = 0;
         int correctQstns = 0;
         int incorrectQstns = 0;
+        double accuracy = 0.0;
         double totalMarks = 0.0;
 
         for(MockTestQuestion question : VideoApplication.allMockQstns){
@@ -43,12 +42,15 @@ public class MockTestResultActivity extends AppCompatActivity {
             }
         }
 
+        accuracy=(correctQstns/attemptedQstns)*100.0;
+
         ((TextView) findViewById(R.id.testresult_testTitle)).setText(VideoApplication.selectedMockTestTest.getTestTitle());
-        ((TextView) findViewById(R.id.testresult_total_qstns_txt)).setText("Total Questions: "+totalQstns);
-        ((TextView) findViewById(R.id.testresult_attempted_qstns_txt)).setText("Attempted: "+attemptedQstns);
-        ((TextView) findViewById(R.id.testresult_correcct_qstns_txt)).setText("Correct: "+correctQstns);
-        ((TextView) findViewById(R.id.testresult_incorrect_qstns_txt)).setText("Incorrect: "+(attemptedQstns-correctQstns));
-        ((TextView) findViewById(R.id.testresult_totalmarks_txt)).setText("Total Marks: "+ String.format("%.2f",totalMarks));
+        ((TextView) findViewById(R.id.testresult_total_qstns_txt)).setText(""+totalQstns);
+        ((TextView) findViewById(R.id.testresult_attempted_qstns_txt)).setText(""+attemptedQstns);
+        ((TextView) findViewById(R.id.testresult_correct_qstns_txt)).setText(""+correctQstns);
+        ((TextView) findViewById(R.id.testresult_incorrect_qstns_txt)).setText(""+(attemptedQstns-correctQstns));
+        //((TextView) findViewById(R.id.testresult_accuracy_txt)).setText(""+ String.format("%.2f",accuracy));
+        ((TextView) findViewById(R.id.testresult_totalmarks_txt)).setText(""+ String.format("%.2f",totalMarks));
     }
 
     public void attemptAnotherTest(View v){

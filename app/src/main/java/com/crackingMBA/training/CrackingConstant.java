@@ -35,7 +35,7 @@ public class CrackingConstant {
     public static final String PLEASE_CHOOSE_AN_OPTION = "Please choose an option to submit";
 
     public static final String TOTAL_NO_OF_QSTNS = "10";
-    public static final String TOTAL_TEST_DURATION = "10";
+    public static final String TOTAL_TEST_DURATION = "1";
     public static final String EMPTY_TEXT = "";
     public static final String NOT_ATTEMPTED = "NOT ATTEMPTED";
 

@@ -32,9 +32,6 @@ public class StartMockTestActivity extends AppCompatActivity {
 
     private static String TAG = "StartMockTestActivity";
     RecyclerView recyclerView;
-    LinearLayoutManager mLayoutManager;
-    RecyclerView.Adapter mAdapter;
-    boolean isMock;
     TextView mock_test_rules;
     private static List<MockTestQuestion> qstns = new ArrayList<>();
 
@@ -53,7 +50,7 @@ public class StartMockTestActivity extends AppCompatActivity {
                 "<p>1. Please read the question carefully and answer from the options</p>" +
                 "<p>2. Each correct answer carries 1 mark</p>" +
                 "<p>3. Each incorrect answer carries -1/4 mark</p>"+
-                "<p>4. This is a timed test. After 10 minutes the test will stop and your score will be displayed.</p>";
+                "<p>4. After completion of this test, the score will be displayed along with EXPLANATION of the answers.</p>";
         Spanned sp= Html.fromHtml(htmltext);
         mock_test_rules.setText(sp);
         ((Button) findViewById(R.id.mocktest_starttest_button)).setEnabled(true);

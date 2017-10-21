@@ -1,8 +1,5 @@
 package com.crackingMBA.training.adapter;
 
-/**
- * Created by Harish on 2/1/2017.
- */
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;

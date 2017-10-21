@@ -3,7 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#7986CB">
 
 
     <TextView
@@ -26,6 +28,7 @@
         android:id="@+id/reviewanswers_correctAnswerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textSize="12sp"
         android:gravity="left"/>
 
@@ -36,7 +39,9 @@
         android:layout_marginTop="10dp"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:textColor="@color/black_overlay"
+        android:textColor="#C5CAE9"
         android:text="Sample Answer Explanation"
         android:gravity="left"/>
+    
+
 </LinearLayout>

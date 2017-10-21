@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.crackingMBA.training.StartMockTestActivity">
+    tools:context="com.crackingMBA.training.MockTestResultActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -22,18 +22,6 @@
 
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-          <!--  <ImageView
-                android:layout_width="90px"
-                android:layout_height="110px"
-                android:layout_gravity="left"
-                android:contentDescription="suresh"
-                android:src="@drawable/applogo" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_activity_dashboard"
-                android:textSize="22sp"
-                android:textColor="@android:color/white"/>-->
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -73,40 +61,137 @@
                 android:textColor="#831306"
                 android:layout_gravity="left"/>
 
-            <TextView
-                android:id="@+id/testresult_total_qstns_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="left"/>
 
-            <TextView
-                android:id="@+id/testresult_attempted_qstns_txt"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="left"/>
+                android:layout_margin="15dp">
 
-            <TextView
-                android:id="@+id/testresult_correcct_qstns_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="left"/>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/testresult_incorrect_qstns_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="left"/>
+                    <TextView
+                        android:text="Total Questions"
+                        android:layout_weight="1"
+                        android:background="#b0b0b0"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
 
-            <TextView
-                android:id="@+id/testresult_totalmarks_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="left"/>
+                    <TextView
+                        android:id="@+id/testresult_total_qstns_txt"
+                        android:layout_weight="1"
+                        android:background="#a09f9f"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:text="Attempted"
+                        android:layout_weight="1"
+                        android:background="#b0b0b0"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:id="@+id/testresult_attempted_qstns_txt"
+                        android:layout_weight="1"
+                        android:background="#a09f9f"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:text="Correct"
+                        android:layout_weight="1"
+                        android:background="#b0b0b0"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:id="@+id/testresult_correct_qstns_txt"
+                        android:layout_weight="1"
+                        android:background="#a09f9f"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:text="Incorrect"
+                        android:layout_weight="1"
+                        android:background="#b0b0b0"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:id="@+id/testresult_incorrect_qstns_txt"
+                        android:layout_weight="1"
+                        android:background="#a09f9f"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:text="Total Marks"
+                        android:layout_weight="1"
+                        android:background="#b0b0b0"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:id="@+id/testresult_totalmarks_txt"
+                        android:layout_weight="1"
+                        android:background="#a09f9f"
+                        android:textColor="#000000"
+                        android:padding="18dip"
+                        android:textStyle="bold"
+                        android:gravity="left"/>
+                </TableRow>
+
+            </TableLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,24 +208,19 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
                     <Button
                         android:text="@string/review_answers"
                         android:textStyle="bold"
                         android:onClick="reviewAnswers"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:padding="15dp"
                         android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"/>
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp" />
             </LinearLayout>
-
-           <!-- <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/invisible_button"
-                android:visibility="invisible"/>-->
 
         </LinearLayout>
     </ScrollView>

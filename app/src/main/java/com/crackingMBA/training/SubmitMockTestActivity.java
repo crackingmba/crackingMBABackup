@@ -72,9 +72,9 @@ public class SubmitMockTestActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
-                startActivity(mainIntent);
-                finish();
+                //Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
+                //startActivity(mainIntent);
+                //finish();
             }
         };
         countDownTimer.start();

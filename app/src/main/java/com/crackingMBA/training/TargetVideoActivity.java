@@ -25,8 +25,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.db.DBHelper;
 import com.crackingMBA.training.pojo.VideoDataObject;
 import com.crackingMBA.training.pojo.VideoList;
