@@ -31,9 +31,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
     private static final int RECOVERY_REQUEST = 1;
 
     String motivation_video_url;
-    Button motivateYT_details_btn;ImageView imgView;
-    TextView motivation_tv, motivation_yt_focus_tv;
-    //TextView videoName, videoDescription;
+    Button motivateYT_details_btn, motivateYT_enroll_btn;
     String sectionName, exam_name_text;
     SharedPreferences prefs;
     SharedPreferences.Editor ed;
@@ -92,41 +90,43 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
             }
         }
 
-        //videoName=(TextView)findViewById(R.id.motivation_youtube_video_name);
-        //videoDescription=(TextView)findViewById(R.id.motivation_youtube_video_description);
-
         motivateYT_details_btn = (Button)findViewById(R.id.motivateYT_details_btn);
+        motivateYT_enroll_btn = (Button)findViewById(R.id.motivateYT_enroll_btn);
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.motivateYT_details_btn:{
-                        Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, PreparationContentActivity.class);
+                        Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, PreparationHLContentActivity.class);
 
                         switch (sectionName){
                             case "CAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus CAT Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_NAME","testing");
+                                intent.putExtra("PREP_CATEGORY_HEADER","30 Day CAT Challenge");
                                 break;
                             }
                             case "IIFT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus IIFT Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_NAME","testing");
+                                intent.putExtra("PREP_CATEGORY_HEADER","40 Day IIFT Challenge");
                                 break;
                             }
                             case "SNAP":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus SNAP Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_NAME","testing");
+                                intent.putExtra("PREP_CATEGORY_HEADER","50 Day SNAP Challenge");
                                 break;
                             }
                             case "XAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
-                                intent.putExtra("PREP_CATEGORY_HEADER","Focus XAT Preparation Course");
+                                intent.putExtra("PREP_CATEGORY_NAME","XC");
+                                intent.putExtra("PREP_CATEGORY_HEADER","60 Day XAT Challenge");
                                 break;
                             }
                         }
@@ -134,8 +134,35 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
 
                         loadUserEnrollmentDetails();
                         startActivity(intent);
-                        //ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.container);
-                        //viewPager.setCurrentItem(1, true);
+                        break;
+                    }
+
+                    case R.id.motivateYT_enroll_btn:{
+                        Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, CourseEnrollmentActivity.class);
+                        switch (sectionName){
+                            case "CAT":
+                            {
+                                intent.putExtra("PREP_CATEGORY_CODE","30 Day CAT Challenge");
+                                break;
+                            }
+                            case "IIFT":
+                            {
+                                intent.putExtra("PREP_CATEGORY_CODE","40 Day IIFT Challenge");
+                                break;
+                            }
+                            case "SNAP":
+                            {
+                                intent.putExtra("PREP_CATEGORY_CODE","50 Day SNAP Challenge");
+                                break;
+                            }
+                            case "XAT":
+                            {
+                                intent.putExtra("PREP_CATEGORY_CODE","60 Day XAT Challenge");
+                                break;
+                            }
+                        }
+
+                        startActivity(intent);
                         break;
                     }
 
@@ -144,6 +171,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         };
 
         motivateYT_details_btn.setOnClickListener(examOnClickListener);
+        motivateYT_enroll_btn.setOnClickListener(examOnClickListener);
 
 
 

@@ -96,9 +96,7 @@ public class DownloadViewAdapter extends RecyclerView
         holder.thumbnailURL.setText(mDataset.get(position).getThumbnailURL());
         Bitmap myBitmap = BitmapFactory.decodeFile(mDataset.get(position).getThumbnailURL());
         try {
-/*            Log.d("DownloadviewAdapater", mDataset.get(position).getThumbnailURL());
-            AsyncTask result = new DownloadImageTask((ImageView) holder.thumbnail)
-                    .execute(*//*CrackingConstant.MYPATH+"img/"+*//*mDataset.get(position).getThumbnailURL());*/
+                //no action here for now
         }
         catch (Exception e){
         }

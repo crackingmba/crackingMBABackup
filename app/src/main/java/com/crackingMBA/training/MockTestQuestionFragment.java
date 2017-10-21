@@ -18,16 +18,12 @@ import android.widget.TextView;
 import com.crackingMBA.training.adapter.DownloadImageTask;
 import com.crackingMBA.training.pojo.MockTestQuestion;
 
-/**
- * Created by MSK on 24-01-2017.
- */
 public class MockTestQuestionFragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = "MockTestQuestionFragment";
     View rootView;
 
     TextView qstnTxt;
-    //MathView mathView;
     RadioButton option1, option2,option3,option4;
     ImageView imageView;
 
@@ -35,17 +31,11 @@ public class MockTestQuestionFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MockTestQuestion selectedQstn = VideoApplication.selectedMockTestQuestion;
-        //Log.d(TAG, selectedQstn + " question is selected");
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_mocktest_question, container, false);
-
-        //question text here
         qstnTxt = ((TextView) rootView.findViewById(R.id.mocktest_qstn_txt));
         qstnTxt.setText(selectedQstn.getQstnNo()+". "+selectedQstn.getQstnTxt());
-
-        //the mathjax details here
-        //mathView = ((MathView) rootView.findViewById(R.id.id_quiz_mathjax));
         imageView=(ImageView)rootView.findViewById(R.id.mock_test_img) ;
 
         String qn_formula=selectedQstn.getQstnFormula();

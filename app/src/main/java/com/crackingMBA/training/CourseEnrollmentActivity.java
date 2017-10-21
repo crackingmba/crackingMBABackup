@@ -40,10 +40,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CourseEnrollmentActivity extends AppCompatActivity {
-    EditText enroll_transaction_id_et, enroll_course_name_et, enroll_email_id_et, enroll_name_et;
+    EditText enroll_course_name_et, enroll_email_id_et, enroll_name_et, enroll_phone_id_et;
     Button enroll_payment_btn;
     ProgressDialog mTestProgressDialog;
-    String serverKey, email;String trxn_id, user_name;
+    String serverKey, email, phone;String trxn_id, user_name;
     ServerKeyAPIService serverKeyAPIService;SaveUserEnrollmentService saveUserEnrollmentService;
     String prep_category_code, course_name, temp_course_code;
     SharedPreferences prefs;
@@ -57,33 +57,10 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
         Instamojo.initialize(this);
 
         prep_category_code = getIntent().getStringExtra("PREP_CATEGORY_CODE");
-
-        switch(prep_category_code){
-            case "CATPREP1":{
-                course_name="Focus CAT";temp_course_code="CAT";
-                break;
-            }
-
-            case "IIFTPREP1":{
-                course_name="Focus IIFT";temp_course_code="IIFT";
-                break;
-            }
-
-            case "SNAPPREP1":{
-                course_name="Focus SNAP";temp_course_code="SNAP";
-                break;
-            }
-
-            case "XATPREP":{
-                course_name="Focus XAT";temp_course_code="XAT";
-                break;
-            }
-        }
-
-        enroll_transaction_id_et=(EditText)findViewById(R.id.enroll_transaction_id_et);
         enroll_course_name_et=(EditText)findViewById(R.id.enroll_course_name_et);
         enroll_email_id_et=(EditText)findViewById(R.id.enroll_email_id_et);
         enroll_name_et=(EditText)findViewById(R.id.enroll_name_et);
+        enroll_phone_id_et=(EditText)findViewById(R.id.enroll_phone_id_et);
 
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -98,8 +75,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
 
         enroll_payment_btn=(Button)findViewById(R.id.enroll_payment_btn);
-        enroll_transaction_id_et.setText("1234");
-        enroll_course_name_et.setText("SNAP");
+        enroll_course_name_et.setText(prep_category_code);
         enroll_email_id_et.setText(email);
         enroll_name_et.setText(user_name);
         //key="5I6WbB8NaT3FqnPDhNQ44XLj4j3Iem";
@@ -127,20 +103,17 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
         trxn_id = formatter.format(date)+ r.nextInt(100000+1);
 
-
-        enroll_transaction_id_et.setText(trxn_id);
-        enroll_course_name_et.setText(course_name);
-
         enroll_payment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                     user_name=enroll_name_et.getText().toString();
                     email=enroll_email_id_et.getText().toString();
+                    phone=enroll_phone_id_et.getText().toString();
 
-                    if(user_name.equals("")||email.equals("")){
+                    if(user_name.equals("")||email.equals("")||phone.equals("")){
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(CourseEnrollmentActivity.this);
-                        builder.setMessage("Please enter valid values for Name and Email ID")
+                        builder.setMessage("Please enter valid values for Name, Email ID and Phone")
                                 .setCancelable(false)
                                 .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -152,11 +125,11 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                         //Creating dialog box
                         android.support.v7.app.AlertDialog alert = builder.create();
                         //Setting the title manually
-                        alert.setTitle("ALERT! Please check the data");
+                        alert.setTitle("ALERT!");
                         alert.show();
                     }else {
 
-                        Order order = new Order(serverKey, trxn_id, user_name, email, "9823498234", "300", prep_category_code);
+                        Order order = new Order(serverKey, trxn_id, user_name, email, phone, "300", prep_category_code);
 
                         // Good time to show progress dialog to user
                         //MyUtil.showProgressDialog();

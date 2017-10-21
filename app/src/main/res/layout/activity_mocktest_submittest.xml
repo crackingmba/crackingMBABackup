@@ -129,11 +129,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center">
             </TextView>
-  <!--          <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/invisible_button"
-                android:visibility="invisible"/>-->
 
         </LinearLayout>
     </ScrollView>
