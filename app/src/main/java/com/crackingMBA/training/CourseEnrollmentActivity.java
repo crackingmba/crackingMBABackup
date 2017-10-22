@@ -111,9 +111,9 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                     email=enroll_email_id_et.getText().toString();
                     phone=enroll_phone_id_et.getText().toString();
 
-                    if(user_name.equals("")||email.equals("")||phone.equals("")){
+                    if(user_name.equals("")||email.equals("")||phone.equals("")||phone.length()<10){
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(CourseEnrollmentActivity.this);
-                        builder.setMessage("Please enter valid values for Name, Email ID and Phone")
+                        builder.setMessage("Please enter valid values for Name, Email ID and Phone. Phone number should have 10 digits.")
                                 .setCancelable(false)
                                 .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
