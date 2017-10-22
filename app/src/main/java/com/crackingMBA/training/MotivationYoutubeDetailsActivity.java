@@ -104,7 +104,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                             case "CAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                intent.putExtra("PREP_CATEGORY_NAME","testing");
+                                intent.putExtra("PREP_CATEGORY_NAME","CC");
                                 intent.putExtra("PREP_CATEGORY_HEADER","30 Day CAT Challenge");
                                 break;
                             }
