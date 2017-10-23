@@ -75,7 +75,7 @@
 
                     <TextView
                         android:id="@+id/ps_course_name_tv"
-                        android:text="Focus CAT"
+                        android:text="30 Day Course Challenge"
                         android:layout_weight="1"
                         android:background="#a09f9f"
                         android:textColor="#000000"

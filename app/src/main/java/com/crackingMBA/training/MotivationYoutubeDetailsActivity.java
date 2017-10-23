@@ -55,37 +55,37 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 Drawable myDrawable = getResources().getDrawable(R.drawable.cat_challenge);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "MEHaAT7nJL0";
+                motivation_video_url = "baC_wGbAzU0";
                 //videoName.setText("'Focus' Quant");
                 //videoDescription.setText("The details for Quant Section Go Here!");
                 break;
             }
             case "IIFT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_iift1);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.iift_challenge);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "mN79yWoBjF4";
+                motivation_video_url = "5OB_tohbsi0";
                 //videoName.setText("'Focus' Verbal");
                 //videoDescription.setText("The details for Verbal Section Go Here!");
                 break;
             }
             case "SNAP":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_snap);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.snap_challenge);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "6PuN4Wy8e9g";
+                motivation_video_url = "mF0pnMJb7Ic";
                 //videoName.setText("'Focus' DI & LR");
                 //videoDescription.setText("The details for DI & LR Section Go Here!");
                 break;
             }
             case "XAT":
             {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.focus_xat);
+                Drawable myDrawable = getResources().getDrawable(R.drawable.xat_challenge);
                 imgView.setImageDrawable(myDrawable);
                 motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "9WQlGOTLP48";
+                motivation_video_url = "FXTZvwiXqQQ";
                 break;
             }
         }

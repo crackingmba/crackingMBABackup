@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class PreparationContentActivity extends AppCompatActivity {
     PrepContentAPIService apiService;
     TextView prep_content_header;
     String prep_category_header;
+    Button prep_content_enroll_now;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,38 @@ public class PreparationContentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        prep_content_enroll_now = (Button)findViewById(R.id.prep_content_enroll_now);
+
+        prep_content_enroll_now.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PreparationContentActivity.this, CourseEnrollmentActivity.class);
+                switch (prep_category_code){
+                    case "CATPREP1":
+                    {
+                        intent.putExtra("PREP_CATEGORY_CODE","30 Day CAT Challenge");
+                        break;
+                    }
+                    case "IIFTPREP1":
+                    {
+                        intent.putExtra("PREP_CATEGORY_CODE","40 Day IIFT Challenge");
+                        break;
+                    }
+                    case "SNAPPREP1":
+                    {
+                        intent.putExtra("PREP_CATEGORY_CODE","50 Day SNAP Challenge");
+                        break;
+                    }
+                    case "XATPREP":
+                    {
+                        intent.putExtra("PREP_CATEGORY_CODE","60 Day XAT Challenge");
+                        break;
+                    }
+                }
+
+                startActivity(intent);
+            }
+        });
 
 
         apiService = RestClient.getClient().create(PrepContentAPIService.class);

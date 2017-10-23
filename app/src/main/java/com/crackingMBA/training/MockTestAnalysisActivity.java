@@ -120,7 +120,7 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
                 mock_test_analysis_message_tv.setVisibility(View.VISIBLE);
-                mock_test_analysis_message_tv.setText("Hi! This section is for users enrolled for any of our courses such as '30 Day Challenge, Focus IIFT, Focus SNAP or Focus XAT'. If you are enrolled, please login to view your performance improvement tips and recommendations from us!");
+                mock_test_analysis_message_tv.setText("Hi!");
             }
         });
 
@@ -131,7 +131,7 @@ public class MockTestAnalysisActivity extends AppCompatActivity {
             fetchQuestionList();
         }else{
             mock_test_analysis_message_tv.setVisibility(View.VISIBLE);
-            mock_test_analysis_message_tv.setText("Hi! This section is for users enrolled for any of our courses such as '30 Day Challenge, Focus IIFT, Focus SNAP or Focus XAT'. If you are enrolled, please login to view your performance improvement tips and recommendations from us!");
+            mock_test_analysis_message_tv.setText("Hi!");
         }
 
 

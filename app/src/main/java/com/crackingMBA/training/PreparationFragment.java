@@ -66,7 +66,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                     Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                     motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
-                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Still stuck with mock scores below 90 %ile? Or in early 90s but not able to cross 95 %ile? Sign up for our '30 Day CAT Challenge'. You get a 30 day study plan with study material, mock tests and personalized feedback to improve your scores!");
+                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Still stuck with mock scores below 90 %ile? Or in early 90s but not able to cross 95 %ile? Sign up for our '30 Day CAT Challenge' to get a 30 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
                     startActivity(motivationVideoDetails);
                 } else {
                     //Launch the dialog to update from server
@@ -79,7 +79,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "IIFT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 300, for the price of a medium pan pizza, you can now crack IIFT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Wondering how to prepare for IIFT 2017 and IIFT GK section? Sign up for our '40 Day IIFT Challenge' to get a 40 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
@@ -90,7 +90,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "SNAP");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack SNAP!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Wondering how to prepare for SNAP 2017 and SNAP GK section? Sign up for our '50 Day SNAP Challenge' to get a 50 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
@@ -101,7 +101,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "XAT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
+                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Wondering how to prepare for XAT 2017 and XAT GK section? Sign up for our '60 Day XAT Challenge' to get a 60 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
                         startActivity(motivationVideoDetails);
                     }else{
                         launch_update_dialog();
