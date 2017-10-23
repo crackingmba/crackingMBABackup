@@ -62,8 +62,6 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     String course_category, course_category_header;String str;int index;
     TextView prep_content_header;
     SharedPreferences prefs;
-    SharedPreferences.Editor ed;
-    UserEnrollmentAPIService enrollment_apiService;
     String temp_message="";
     String dialog_header="";
 
@@ -128,26 +126,26 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
                 switch(course_category){
                     case "CATPREP1":{
-                        temp_message="To access all premium content in this section, please enroll for the Focus 'CAT' course for Rs 300 only";
-                        dialog_header="ENROLL for Focus 'CAT' course";
+                        temp_message="To access all premium content in this section, please enroll for the '30 Day CAT Challenge' course for Rs 300 only";
+                        dialog_header="ENROLL for '30 Day CAT Challenge' course";
                         break;
                     }
 
                     case "IIFTPREP1":{
-                        temp_message="To access all content in this section, please enroll for the Focus 'IIFT' course for Rs 300 only";
-                        dialog_header="ENROLL for Focus 'IIFT' course";
+                        temp_message="To access all content in this section, please enroll for the '40 Day IIFT Challenge' course for Rs 300 only";
+                        dialog_header="ENROLL for '40 Day IIFT Challenge' course";
                         break;
                     }
 
                     case "SNAPPREP1":{
-                        temp_message="To access all content in this section, please enroll for the Focus 'SNAP' course for Rs 300 only";
-                        dialog_header="ENROLL for Focus 'SNAP' course";
+                        temp_message="To access all content in this section, please enroll for the '50 Day SNAP Challenge' course for Rs 300 only";
+                        dialog_header="ENROLL for '50 Day SNAP Challenge' course";
                         break;
                     }
 
                     case "XATPREP":{
-                        temp_message="To access all content in this section, please enroll for the Focus 'XAT' course for Rs 300 only";
-                        dialog_header="ENROLL for Focus 'XAT' course";
+                        temp_message="To access all content in this section, please enroll for the '60 Day XAT Challenge' course for Rs 300 only";
+                        dialog_header="ENROLL for '60 Day XAT Challenge' course";
                         break;
                     }
 
@@ -448,12 +446,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                     intent.putExtra("EXAM_NAME_TEXT","'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
                                     break;
                                 }
-
-
                             }
-
-
-
 
                             startActivity(intent);
                         }

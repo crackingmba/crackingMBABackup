@@ -42,14 +42,11 @@ public class MockTestResultActivity extends AppCompatActivity {
             }
         }
 
-        accuracy=(correctQstns/attemptedQstns)*100.0;
-
         ((TextView) findViewById(R.id.testresult_testTitle)).setText(VideoApplication.selectedMockTestTest.getTestTitle());
         ((TextView) findViewById(R.id.testresult_total_qstns_txt)).setText(""+totalQstns);
         ((TextView) findViewById(R.id.testresult_attempted_qstns_txt)).setText(""+attemptedQstns);
         ((TextView) findViewById(R.id.testresult_correct_qstns_txt)).setText(""+correctQstns);
         ((TextView) findViewById(R.id.testresult_incorrect_qstns_txt)).setText(""+(attemptedQstns-correctQstns));
-        //((TextView) findViewById(R.id.testresult_accuracy_txt)).setText(""+ String.format("%.2f",accuracy));
         ((TextView) findViewById(R.id.testresult_totalmarks_txt)).setText(""+ String.format("%.2f",totalMarks));
     }
 

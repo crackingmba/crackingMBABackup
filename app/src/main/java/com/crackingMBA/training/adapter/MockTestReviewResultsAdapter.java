@@ -22,7 +22,7 @@ public class MockTestReviewResultsAdapter extends RecyclerView
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView questionTxt, selectedAnswerTxt, correctAnswerTxt, answerExplanationTxt;
+        TextView questionTxt, selectedAnswerTxt, correctAnswerTxt, answerExplanationTxt, reviewanswers_AnswerStatus;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -30,6 +30,7 @@ public class MockTestReviewResultsAdapter extends RecyclerView
             selectedAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_selectedAnswerTxt);
             correctAnswerTxt = (TextView) itemView.findViewById(R.id.reviewanswers_correctAnswerTxt);
             answerExplanationTxt = (TextView) itemView.findViewById(R.id.reviewanswers_AnswerExplanation);
+            reviewanswers_AnswerStatus = (TextView) itemView.findViewById(R.id.reviewanswers_AnswerStatus);
             itemView.setOnClickListener(this);
         }
 
@@ -60,14 +61,19 @@ public class MockTestReviewResultsAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.questionTxt.setText(mDataset.get(position).getQuestionTxt());
-        String yourAnsrTxt = mDataset.get(position).getSelectedAnswerTxt()==null ? CrackingConstant.NOT_ATTEMPTED : "Your Answer : "+mDataset.get(position).getSelectedAnswerTxt();
-        holder.selectedAnswerTxt.setText(yourAnsrTxt);
-        //#AB0800 #3F9D2F
-        //holder.selectedAnswerTxt.setTextColor(Color.rgb(171,8,0));
-        holder.selectedAnswerTxt.setTextColor(Color.BLUE);
-        holder.correctAnswerTxt.setText("Correct Answer : "+mDataset.get(position).getCorrectAnswerTxt());
-        //holder.correctAnswerTxt.setTextColor(Color.rgb(63,157,47));
-        holder.correctAnswerTxt.setTextColor(Color.GREEN);
+        String yourAnsrTxt = (mDataset.get(position).getSelectedAnswerTxt()==null ) ? ("Your Answer : "+CrackingConstant.NOT_ATTEMPTED ): ("Your Answer : "+mDataset.get(position).getSelectedAnswerTxt());
+
+        if(mDataset.get(position).getSelectedAnswerTxt().equals(mDataset.get(position).getCorrectAnswerTxt())){
+            holder.reviewanswers_AnswerStatus.setText("CORRECT ANSWER");
+            holder.selectedAnswerTxt.setVisibility(View.GONE);
+        }else{
+            holder.reviewanswers_AnswerStatus.setText("WRONG ANSWER");
+            holder.selectedAnswerTxt.setText(yourAnsrTxt);
+            holder.correctAnswerTxt.setText("Correct Answer : "+mDataset.get(position).getCorrectAnswerTxt());
+            holder.reviewanswers_AnswerStatus.setBackgroundColor(Color.parseColor("#BF360C"));
+
+        }
+
         holder.answerExplanationTxt.setText("ANSWER EXPLANATION : "+mDataset.get(position).getAnswerExplanation());
     }
 

@@ -5,7 +5,7 @@
     android:layout_margin="10dp"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#7986CB">
+    android:background="#BBDEFB">
 
 
     <TextView
@@ -17,10 +17,23 @@
         android:gravity="left"/>
 
     <TextView
+        android:id="@+id/reviewanswers_AnswerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ANSWER"
+        android:background="#33691E"
+        android:textColor="#E3F2FD"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:gravity="center"/>
+
+    <TextView
         android:id="@+id/reviewanswers_selectedAnswerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="#BF360C"
         android:textSize="12sp"
         android:gravity="left"/>
 
@@ -29,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="#33691E"
         android:textSize="12sp"
         android:gravity="left"/>
 
@@ -39,7 +53,7 @@
         android:layout_marginTop="10dp"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:textColor="#C5CAE9"
+        android:textColor="#424242"
         android:text="Sample Answer Explanation"
         android:gravity="left"/>
     

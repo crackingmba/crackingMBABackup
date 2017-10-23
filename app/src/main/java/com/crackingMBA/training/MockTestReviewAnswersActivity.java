@@ -24,8 +24,6 @@ public class MockTestReviewAnswersActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     LinearLayoutManager mLayoutManager;
 
-    private static String TAG = "MockTestReviewAnswersActivity";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 

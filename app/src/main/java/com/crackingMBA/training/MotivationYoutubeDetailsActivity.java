@@ -98,13 +98,13 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.motivateYT_details_btn:{
-                        Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, PreparationHLContentActivity.class);
+                        Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, PreparationContentActivity.class);
 
                         switch (sectionName){
                             case "CAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                intent.putExtra("PREP_CATEGORY_NAME","CC");
+                                intent.putExtra("PREP_CATEGORY_NAME","testing");
                                 intent.putExtra("PREP_CATEGORY_HEADER","30 Day CAT Challenge");
                                 break;
                             }
@@ -125,7 +125,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                             case "XAT":
                             {
                                 intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
-                                intent.putExtra("PREP_CATEGORY_NAME","XC");
+                                intent.putExtra("PREP_CATEGORY_NAME","testing");
                                 intent.putExtra("PREP_CATEGORY_HEADER","60 Day XAT Challenge");
                                 break;
                             }

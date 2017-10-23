@@ -29,9 +29,9 @@ public class SubmitMockTestActivity extends AppCompatActivity {
     private static int currentQstnIndex = 0;
 
     private Button prevBtn;
-    private TextView countDownTimerTxt;
-    private CountDownTimer countDownTimer;
-    private final long countDowmInterval = 1*1000;
+    //private TextView countDownTimerTxt;
+    //private CountDownTimer countDownTimer;
+    //private final long countDowmInterval = 1*1000;
 
     List<MockTestQuestionFragment> qstns = new ArrayList<>();
 
@@ -57,17 +57,17 @@ public class SubmitMockTestActivity extends AppCompatActivity {
         populateQstnFragments();
         toggleQstnFragment();
 
-        countDownTimerTxt = (TextView) findViewById(R.id.mocktest_countdown_timer_txt);
-        long counterStartTime = Integer.parseInt(CrackingConstant.TOTAL_TEST_DURATION)*60*1000;
-        countDownTimer = new CountDownTimer(counterStartTime,countDowmInterval) {
+        //countDownTimerTxt = (TextView) findViewById(R.id.mocktest_countdown_timer_txt);
+        //long counterStartTime = Integer.parseInt(CrackingConstant.TOTAL_TEST_DURATION)*60*1000;
+/*        countDownTimer = new CountDownTimer(counterStartTime,countDowmInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
 
                 String minsTxt = formatTimeTxt(String.valueOf(millisUntilFinished/60000));
                 String secsTxt = formatTimeTxt(String.valueOf((millisUntilFinished%60000)/1000));
 
-                countDownTimerTxt.setText(minsTxt+":"+secsTxt+"/"+CrackingConstant.TOTAL_TEST_DURATION+":00");
-                countDownTimerTxt.setBackgroundColor(Color.rgb(241,132,1));
+                //countDownTimerTxt.setText(minsTxt+":"+secsTxt+"/"+CrackingConstant.TOTAL_TEST_DURATION+":00");
+                //countDownTimerTxt.setBackgroundColor(Color.rgb(241,132,1));
             }
 
             @Override
@@ -77,17 +77,17 @@ public class SubmitMockTestActivity extends AppCompatActivity {
                 //finish();
             }
         };
-        countDownTimer.start();
+        countDownTimer.start();*/
     }
 
-    private String formatTimeTxt(String unit){
+/*    private String formatTimeTxt(String unit){
         if(unit.length()==0){
             return "00";
         }else if(unit.length()==1){
             return "0"+unit;
         }else
             return unit;
-    }
+    }*/
 
     private void showNoTestsAvailable(){
         setMsgText(CrackingConstant.NO_QSTNS_AVAILABLE);
@@ -137,7 +137,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
         VideoApplication.selectedMockTestQuestion.setSelectedOption(null);
         ((RadioGroup) findViewById(R.id.mocktest_qstn_radiogroup)).clearCheck();
         if(currentQstnIndex == VideoApplication.allMockQstns.size()-1){
-            countDownTimer.cancel();
+            //countDownTimer.cancel();
             Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
             startActivity(mainIntent);
             finish();
@@ -149,7 +149,6 @@ public class SubmitMockTestActivity extends AppCompatActivity {
     }
 
     public void submitAnswer(View v){
-        Log.d(TAG,"CLicked submitTest..");
         setMsgText(CrackingConstant.EMPTY_TEXT);
         if(null == VideoApplication.selectedMockTestQuestion.getSelectedOption()){
             setMsgText(CrackingConstant.PLEASE_CHOOSE_AN_OPTION);
@@ -158,7 +157,7 @@ public class SubmitMockTestActivity extends AppCompatActivity {
                 prevBtn.setVisibility(View.VISIBLE);
             }
             if(currentQstnIndex == VideoApplication.allMockQstns.size()-1){
-                countDownTimer.cancel();
+                //countDownTimer.cancel();
                 Intent mainIntent = new Intent(getApplicationContext(),MockTestResultActivity.class);
                 startActivity(mainIntent);
                 finish();

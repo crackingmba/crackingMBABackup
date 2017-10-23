@@ -21,7 +21,7 @@ public class MockTestQuestionFragment extends Fragment{
     View rootView;
 
     TextView qstnTxt;
-    RadioButton option1, option2,option3,option4;
+    RadioButton option1, option2,option3,option4,option5;
     ImageView imageView;
 
     @Nullable
@@ -57,6 +57,16 @@ public class MockTestQuestionFragment extends Fragment{
         option3.setText(Html.fromHtml(selectedQstn.getOption3()));
         option4 = ((RadioButton) rootView.findViewById(R.id.option4));
         option4.setText(Html.fromHtml(selectedQstn.getOption4()));
+        option5 = ((RadioButton) rootView.findViewById(R.id.option5));
+
+        if(selectedQstn.getOption5().isEmpty()){
+            option5.setVisibility(View.GONE);
+        }else{
+            option5.setVisibility(View.VISIBLE);
+            option5.setText(Html.fromHtml(selectedQstn.getOption5()));
+        }
+
+
 
         return rootView;
     }

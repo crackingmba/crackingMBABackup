@@ -130,7 +130,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Focus 'IIFT'"
+                                android:text="40 Day IIFT Challenge!"
                                 android:textStyle="bold"
                                 android:layout_margin="3dp"
                                 android:textColor="#212121"
@@ -186,7 +186,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Focus 'SNAP'"
+                                android:text="50 Day SNAP Challenge!"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"
@@ -242,7 +242,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Focus 'XAT'"
+                                android:text="60 Day XAT Challenge!"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"

@@ -14,5 +14,5 @@ import retrofit2.http.POST;
 public interface NoticeBoardURLAPIService {
     @POST("/getNoticeBoardVideoURL.php")
     @FormUrlEncoded
-    Call<RetrofitPostResponse> getNoticeBoardVideoURL(@Field("app_apk_version") String app_apk_version);
+    Call<RetrofitPostResponse> getNoticeBoardVideoURL(@Field("user_apk_version") String user_apk_version);
 }

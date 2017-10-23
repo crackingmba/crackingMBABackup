@@ -14,6 +14,7 @@ public class MockTestQuestion {
     private String option2;
     private String option3;
     private String option4;
+    private String option5;
     private String selectedOption;
     private String answer;
     private String explanation;
@@ -42,6 +43,9 @@ public class MockTestQuestion {
     public String getOption4() {
         return option4;
     }
+    public String getOption5() {
+        return option5;
+    }
     public String getSelectedOption() {
         return selectedOption;
     }
@@ -65,6 +69,9 @@ public class MockTestQuestion {
             case "4" :
                 answerTxt = option4;
                 break;
+            case "5" :
+                answerTxt = option5;
+                break;
         }
         return answerTxt;
     }
@@ -79,6 +86,7 @@ public class MockTestQuestion {
                 ", option2='" + option2 + '\'' +
                 ", option3='" + option3 + '\'' +
                 ", option4='" + option4 + '\'' +
+                ", option5='" + option5 + '\'' +
                 ", selectedOption='" + selectedOption + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
