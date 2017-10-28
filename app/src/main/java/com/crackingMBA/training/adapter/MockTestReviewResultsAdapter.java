@@ -60,19 +60,36 @@ public class MockTestReviewResultsAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
+        String yourAnsrTxt="";
         holder.questionTxt.setText(mDataset.get(position).getQuestionTxt());
-        String yourAnsrTxt = (mDataset.get(position).getSelectedAnswerTxt()==null ) ? ("Your Answer : "+CrackingConstant.NOT_ATTEMPTED ): ("Your Answer : "+mDataset.get(position).getSelectedAnswerTxt());
 
-        if(mDataset.get(position).getSelectedAnswerTxt().equals(mDataset.get(position).getCorrectAnswerTxt())){
-            holder.reviewanswers_AnswerStatus.setText("CORRECT ANSWER");
+        if(mDataset.get(position).getSelectedAnswerTxt()==null){
+            holder.reviewanswers_AnswerStatus.setBackgroundColor(Color.parseColor("#424242"));
+            //holder.reviewanswers_AnswerStatus.setTextColor(Color.parseColor("#CFD8DC"));
+            holder.reviewanswers_AnswerStatus.setText("NOT ATTEMPTED");
             holder.selectedAnswerTxt.setVisibility(View.GONE);
-        }else{
-            holder.reviewanswers_AnswerStatus.setText("WRONG ANSWER");
-            holder.selectedAnswerTxt.setText(yourAnsrTxt);
+            holder.correctAnswerTxt.setVisibility(View.VISIBLE);
             holder.correctAnswerTxt.setText("Correct Answer : "+mDataset.get(position).getCorrectAnswerTxt());
-            holder.reviewanswers_AnswerStatus.setBackgroundColor(Color.parseColor("#BF360C"));
-
+        }else{
+            yourAnsrTxt="Your Answer : "+mDataset.get(position).getSelectedAnswerTxt();
+            if(mDataset.get(position).getSelectedAnswerTxt().equals(mDataset.get(position).getCorrectAnswerTxt())){
+                holder.reviewanswers_AnswerStatus.setBackgroundColor(Color.parseColor("#33691E"));
+                holder.reviewanswers_AnswerStatus.setTextColor(Color.parseColor("#CFD8DC"));
+                holder.reviewanswers_AnswerStatus.setText("CORRECT ANSWER");
+                holder.selectedAnswerTxt.setVisibility(View.GONE);
+                holder.correctAnswerTxt.setVisibility(View.GONE);
+            }else{
+                holder.reviewanswers_AnswerStatus.setBackgroundColor(Color.parseColor("#BF360C"));
+                holder.reviewanswers_AnswerStatus.setText("WRONG ANSWER");
+                holder.reviewanswers_AnswerStatus.setTextColor(Color.parseColor("#CFD8DC"));
+                holder.selectedAnswerTxt.setVisibility(View.VISIBLE);
+                holder.selectedAnswerTxt.setText(yourAnsrTxt);
+                holder.correctAnswerTxt.setVisibility(View.VISIBLE);
+                holder.correctAnswerTxt.setText("Correct Answer : "+mDataset.get(position).getCorrectAnswerTxt());
+            }
         }
+
+
 
         holder.answerExplanationTxt.setText("ANSWER EXPLANATION : "+mDataset.get(position).getAnswerExplanation());
     }
