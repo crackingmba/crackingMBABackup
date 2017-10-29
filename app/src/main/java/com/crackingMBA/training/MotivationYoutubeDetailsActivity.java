@@ -142,22 +142,22 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                         switch (sectionName){
                             case "CAT":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","30 Day CAT Challenge");
+                                intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
                                 break;
                             }
                             case "IIFT":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","40 Day IIFT Challenge");
+                                intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
                                 break;
                             }
                             case "SNAP":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","50 Day SNAP Challenge");
+                                intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
                                 break;
                             }
                             case "XAT":
                             {
-                                intent.putExtra("PREP_CATEGORY_CODE","60 Day XAT Challenge");
+                                intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
                                 break;
                             }
                         }
@@ -227,7 +227,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                         RetrofitPostResponse retrofitPostResponse = response.body();
 
                         if(retrofitPostResponse.getResponse().equals("0")) {
-                            Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is not enrolled for"+sectionName, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is not enrolled for "+sectionName, Toast.LENGTH_SHORT).show();
                             switch(sectionName){
                                 case "CAT":{
                                     ed.putString("whetherCATcourseEnrolled","queried0");

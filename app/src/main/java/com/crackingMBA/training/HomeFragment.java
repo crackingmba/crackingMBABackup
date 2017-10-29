@@ -40,8 +40,8 @@ public class HomeFragment extends Fragment{
     private static String TAG = "HomeFragment";
     LinearLayout home_fragment_cat_layout,home_fragment_iift_layout, home_fragment_snap_layout, home_fragment_xat_layout;
     Button high_5, share_feedback;
-    public static final String apk_version="2.8.20";
-    public static String server_apk_version="2.8.20";
+    public static final String apk_version="2.8.21";
+    public static String server_apk_version="2.8.21";
     String img_url;
     NoticeBoardURLAPIService enrollment_apiService;
     ImageView home_fragment_img; TextView home_fragment_daily_dose_tv;

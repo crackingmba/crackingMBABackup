@@ -1,6 +1,9 @@
 package com.crackingMBA.training;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,9 +41,9 @@ public class PreparationContentActivity extends AppCompatActivity {
     List<RetrofitPrepContent> questions = new ArrayList<>();
     Call<RetrofitPrepContentList> call;
     PrepContentAPIService apiService;
-    TextView prep_content_header;
+    TextView prep_content_header, enrolled_status_tv;
     String prep_category_header;
-    Button prep_content_enroll_now;
+    Button prep_content_enroll_now;SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,48 @@ public class PreparationContentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        prep_content_header=(TextView)findViewById(R.id.prep_content_header);
+        enrolled_status_tv=(TextView)findViewById(R.id.enrolled_status_tv);
+        //prep_content_enroll_now = (Button)findViewById(R.id.prep_content_enroll_now);
 
-        prep_content_enroll_now = (Button)findViewById(R.id.prep_content_enroll_now);
+       /* prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        prep_content_enroll_now.setOnClickListener(new View.OnClickListener() {
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+
+        if(isUserLoggedIn){
+            String whetherSpecificCourseEnrolled="notqueried";
+            switch(prep_category_code){
+                case "CATPREP1":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherCATcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "IIFTPREP1":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherIIFTcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "SNAPPREP1":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherSNAPcourseEnrolled", "notqueried");
+                    break;
+                }
+                case "XATPREP":{
+                    whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
+                    break;
+                }
+            }
+
+            if(whetherSpecificCourseEnrolled.equals("queried1")){
+                Toast.makeText(this, "HOORRAY! USER ENROLLED FOR THIS COURSE", Toast.LENGTH_SHORT).show();
+                //prep_content_enroll_now.setVisibility(View.GONE);
+                enrolled_status_tv.setVisibility(View.VISIBLE);
+            }else{
+                //Toast.makeText(this, "HOORRAY! USER IS NOT ENROLLED FOR THIS COURSE", Toast.LENGTH_SHORT).show();
+                //prep_content_enroll_now.setVisibility(View.VISIBLE);
+                //enrolled_status_tv.setVisibility(View.GONE);
+            }
+
+        }*/
+
+       /* prep_content_enroll_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PreparationContentActivity.this, CourseEnrollmentActivity.class);
@@ -86,14 +127,13 @@ public class PreparationContentActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });
+        });*/
 
 
         apiService = RestClient.getClient().create(PrepContentAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.prepcontentRecyclerView);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(PreparationContentActivity.this));
-        prep_content_header=(TextView)findViewById(R.id.prep_content_header);
 
         adapter = new PreparationContentAdapter(questions, R.layout.retrofit_prep_content_layout, PreparationContentActivity.this);
         recyclerView.setAdapter(adapter);

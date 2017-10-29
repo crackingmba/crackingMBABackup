@@ -85,7 +85,7 @@
 
         </LinearLayout>
 
-        <Button
+<!--        <Button
             android:id="@+id/prep_content_enroll_now"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +95,21 @@
             android:textSize="16sp"
             android:text="ENROLL NOW"
             android:background="#BF360C"
-            android:gravity="center"/>
+            android:gravity="center"/>-->
+
+        <TextView
+            android:id="@+id/enrolled_status_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:gravity="center"
+            android:background="#33691E"
+            android:textColor="#E3F2FD"
+            android:text="YOU ARE ENROLLED! For any help or issues, email support@crackingmba.com"
+            android:layout_weight="0"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

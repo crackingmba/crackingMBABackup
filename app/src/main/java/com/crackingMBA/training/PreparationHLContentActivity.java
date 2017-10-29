@@ -349,7 +349,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     //Creating dialog box
                     android.support.v7.app.AlertDialog alert = builder.create();
                     //Setting the title manually
-                    alert.setTitle("30 Day Challenge Alert!");
+                    alert.setTitle("CONTENT ALERT!");
                     alert.show();
                 }
 

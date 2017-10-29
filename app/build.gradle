@@ -6,13 +6,13 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.crackingMBA.training"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 26
-        versionName "2.8.20"
+        versionCode 27
+        versionName "2.8.21"
     }
     buildTypes {
         debug {
