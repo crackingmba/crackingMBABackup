@@ -185,9 +185,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Daily Dose!"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MockTestAnalysisActivity"
+        <activity
+            android:name=".MockTestAnalysisActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MiniTestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Mini Tests"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 

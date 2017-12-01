@@ -19,9 +19,9 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/minitest_img"
             android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/pit_stop_flags" />
+            android:layout_height="40dp" />
 
         <TextView
             android:id="@+id/mock_test_name"
