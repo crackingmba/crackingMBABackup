@@ -43,7 +43,6 @@ public class PreparationContentActivity extends AppCompatActivity {
     PrepContentAPIService apiService;
     TextView prep_content_header, enrolled_status_tv;
     String prep_category_header;
-    Button prep_content_enroll_now;SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

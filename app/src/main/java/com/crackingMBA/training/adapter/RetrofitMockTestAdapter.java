@@ -36,6 +36,7 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
         holder.mock_test_name.setText(mocktests.get(position).getTestName());
+        holder.mock_test_date.setText(mocktests.get(position).getDate());
         Drawable myDrawable = holder.minitest_img.getResources().getDrawable(R.drawable.snap2017);
         holder.minitest_img.setImageDrawable(myDrawable);
     }
@@ -46,12 +47,13 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
     }
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView mock_test_name;
+        TextView mock_test_name, mock_test_date;
         ImageView minitest_img;
 
         public QuestionViewHolder(View v) {
             super(v);
             mock_test_name= (TextView) v.findViewById(R.id.mock_test_name);
+            mock_test_date= (TextView) v.findViewById(R.id.mock_test_date);
             minitest_img=(ImageView)v.findViewById(R.id.minitest_img);
         }
     }

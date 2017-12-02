@@ -190,9 +190,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MiniTestActivity"
+        <activity
+            android:name=".MiniTestActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Mini Tests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LeaderboardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Leaderboard"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
