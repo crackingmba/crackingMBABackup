@@ -72,7 +72,7 @@ public class MockTestFragment extends Fragment{
 
                         String temp_url=mocktests.get(position).getURL().toString();
 
-                        Toast.makeText(getActivity(), exam_name, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), exam_name, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(getContext(), MiniTestActivity.class);
                         intent.putExtra("MINI_TEST_NAME",temp_str);
                         intent.putExtra("MINI_TEST_EXAM_ID",temp_url);
@@ -86,10 +86,10 @@ public class MockTestFragment extends Fragment{
             if(mocktests.size()>0){
                 mocktests.clear();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getContext(), "Flushing list and creating list again", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Flushing list and creating list again", Toast.LENGTH_SHORT).show();
                 fetchQuestionList(); //calling the list again
             }else{
-                Toast.makeText(getContext(), "Calling Fetch Question List first time", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Calling Fetch Question List first time", Toast.LENGTH_SHORT).show();
                 fetchQuestionList(); //calling the list again
             }
         }else{
@@ -97,22 +97,13 @@ public class MockTestFragment extends Fragment{
             if(mocktests.size()>0){
                 mocktests.clear();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getContext(), "Calling Fetch Question List again", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Calling Fetch Question List again", Toast.LENGTH_SHORT).show();
                 fetchQuestionList(); //calling the list again
             }else{
-                Toast.makeText(getContext(), "Calling Fetch Question List again", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Calling Fetch Question List again", Toast.LENGTH_SHORT).show();
                 fetchQuestionList(); //calling the list again
             }
         }
-
-
-/*        mock_test_dashboard_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MockTestAnalysisActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
         return rootView;
     }
@@ -126,13 +117,10 @@ public class MockTestFragment extends Fragment{
                 MyUtil.hideProgressDialog();
 
                 if(response.body()==null){
-                    //Toast.makeText(getApplicationContext(), "There are no posts in this category!", Toast.LENGTH_SHORT).show();
-
                     if(mocktests.size()>0){
                         mocktests.clear();
                     }
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "There are no posts in this category!", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     mocktests.addAll(response.body().getMockTestScores());
@@ -150,12 +138,6 @@ public class MockTestFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-
-        Toast.makeText(getContext(), "We are in Resume", Toast.LENGTH_SHORT).show();
-        /*if(mocktests.size()>0){
-            mocktests.clear();
-            adapter.notifyDataSetChanged();
-        }*/
 
     }
 

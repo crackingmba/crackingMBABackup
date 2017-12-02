@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="Live the SNAP 2017 and XAT 2018 experience more often. Challenge your peers to stay on top of the Leaderboard!"
+        android:text="Prepare for SNAP and XAT through mini tests in the same format and similar level as SNAP 2017 and XAT 2018. Challenge your peers to stay on top of the Leaderboard!"
         android:textSize="14sp"/>
 
     <android.support.v7.widget.RecyclerView

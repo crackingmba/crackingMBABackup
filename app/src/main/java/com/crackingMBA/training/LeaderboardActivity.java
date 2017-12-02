@@ -1,23 +1,15 @@
 package com.crackingMBA.training;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.crackingMBA.training.adapter.LeaderboardAdapter;
 import com.crackingMBA.training.pojo.RetrofitLeaderboardContent;
 import com.crackingMBA.training.pojo.RetrofitLeaderboardList;
-import com.crackingMBA.training.pojo.RetrofitMockTest;
-import com.crackingMBA.training.pojo.RetrofitMockTestList;
 import com.crackingMBA.training.restAPI.LeaderboardAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
@@ -51,8 +43,6 @@ public class LeaderboardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         exam_id= getIntent().getStringExtra("MINI_TEST_EXAM_ID");
-        Log.d("Leaderboard",exam_id);
-        Toast.makeText(getApplicationContext(), "just started for id= "+exam_id, Toast.LENGTH_SHORT).show();
 
         apiService = RestClient.getClient().create(LeaderboardAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.leaderboardRecyclerView);
@@ -100,12 +90,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 //MyUtil.hideProgressDialog();
 
                 if(response.body() == null){
-                    Log.d("Leaderboard","no response");
-                    Toast.makeText(getApplicationContext(), "response not received", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
-                    Log.d("Leaderboard","response received");
-                    Toast.makeText(getApplicationContext(), "response received", Toast.LENGTH_SHORT).show();
                     questions.addAll(response.body().getQuestions());
                     adapter.notifyDataSetChanged();
                 }
@@ -113,7 +99,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RetrofitLeaderboardList> call, Throwable t) {
-                Log.d("Leaderboard","some issue here. need to fix");
+
             }
         });
     }
