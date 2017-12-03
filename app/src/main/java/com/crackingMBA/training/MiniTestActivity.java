@@ -1,7 +1,10 @@
 package com.crackingMBA.training;
 
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -40,10 +43,36 @@ public class MiniTestActivity extends AppCompatActivity {
         minitest_attempt_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String temp_url= "http://www.crackingmba.com/prep";
-                Toast.makeText(getApplicationContext(), temp_url, Toast.LENGTH_SHORT).show();
-                Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(temp_url));
-                startActivity(browserIntent);
+
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MiniTestActivity.this);
+                builder.setMessage("The test will be launched in a browser on your phone.")
+                        .setCancelable(false)
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        })
+                        .setPositiveButton("LAUNCH NOW", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                                Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.crackingmba.com/prep"));
+                                startActivity(browserIntent);
+                            }
+                        });
+
+                //Creating dialog box
+                android.support.v7.app.AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("NOTE!");
+                alert.show();
+
+
+
+
+
+
+
             }
         });
 
@@ -62,7 +91,7 @@ public class MiniTestActivity extends AppCompatActivity {
 
         if(exam_type.equals("free")){
 
-            htmltext="<h2>Instructions</h2>" +
+            htmltext="<h4>Instructions</h4>" +
                     "<p>1. This is a <b>FREE</b> test</p>" +
                     "<p>2. On clicking <b>'ATTEMPT TEST'</b>, you will be taken to the 'crackingMBA Prep Zone' portal</p>"+
                     "<p>3. In the Portal, <b>LOGIN</b> with your crackingMBA credentials or <b>REGISTER</b>.</p>"+
@@ -73,7 +102,7 @@ public class MiniTestActivity extends AppCompatActivity {
 
         if(exam_type.equals("paid")){
 
-            htmltext="<h2>Instructions</h2>" +
+            htmltext="<h4>Instructions</h4>" +
                     "<p>1. This is a <b>PREMIUM</b> test available to all enrolled users.</p>" +
                     "<p>2. Please enroll for SNAP or XAT Challenge Course for Rs 300</p>" +
                     "<p>3. On clicking <b>'ATTEMPT TEST'</b>, you will be taken to the 'crackingMBA Prep Zone' portal</p>"+
