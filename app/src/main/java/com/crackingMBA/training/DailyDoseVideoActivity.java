@@ -15,7 +15,7 @@ public class DailyDoseVideoActivity extends AppCompatActivity implements YouTube
 
 
 
-    String daily_dose_video_url; TextView daily_dose_tv;
+    String daily_dose_video_url, daily_dose_test_name; TextView daily_dose_test_name_tv;
     private static final int DD_RECOVERY_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,14 @@ public class DailyDoseVideoActivity extends AppCompatActivity implements YouTube
         setContentView(R.layout.activity_daily_dose_video);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView daily_dose_tv = (TextView) findViewById(R.id.daily_dose_tv);
+        TextView daily_dose_test_name_tv = (TextView) findViewById(R.id.daily_dose_test_name_tv);
 
         daily_dose_video_url = getIntent().getStringExtra("DAILY_DOSE_VIDEO_URL");
+        daily_dose_test_name = getIntent().getStringExtra("DAILY_DOSE_TEST_NAME");
         Typeface custom_font=Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Raleway-Light.ttf");
-        daily_dose_tv.setTypeface(custom_font);
+        daily_dose_test_name_tv.setTypeface(custom_font);
+
+        daily_dose_test_name_tv.setText(daily_dose_test_name + "Analysis Video");
 
         YouTubePlayerSupportFragment frag;
         frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_daily_dose_video_fragment);

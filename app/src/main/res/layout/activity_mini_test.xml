@@ -59,40 +59,36 @@
                     android:textSize="14sp"
                     android:textColor="#212121"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:weightSum="2">
 
                     <Button
                         android:id="@+id/minitest_attempt_test"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:padding="10dp"
                         android:gravity="center"
-                        android:layout_alignParentLeft="true"
-                        android:layout_toLeftOf="@+id/view"
-                        android:text="ATTEMPT TEST"/>
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="10dp"
-                        android:layout_height="1dp"
-                        android:layout_centerHorizontal="true" />
+                        android:background="#1976D2"
+                        android:text="ATTEMPT TEST"
+                        android:layout_weight="1"/>
 
                     <Button
                         android:id="@+id/minitest_leaderboard_btn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:layout_toRightOf="@+id/view"
                         android:padding="10dp"
-                        android:layout_alignParentRight="true"
                         android:layout_marginLeft="5dp"
+                        android:background="#1976D2"
                         android:gravity="center"
-                        android:text="VIEW LEADERBOARD"/>
-                </RelativeLayout>
+                        android:text="VIEW LEADERBOARD"
+                        android:layout_weight="1"/>
+                </LinearLayout>
 
         </LinearLayout>
 

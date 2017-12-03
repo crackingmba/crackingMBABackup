@@ -15,9 +15,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MyUtil {
     public static  ProgressDialog mProgressDialog;
+
 public static boolean checkConnectivity(Context context) {
     ConnectivityManager cm =
             (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -25,12 +27,12 @@ public static boolean checkConnectivity(Context context) {
     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
     boolean isConnected = activeNetwork != null &&
             activeNetwork.isConnectedOrConnecting();
-    Log.d("first","internet connectivtiy status "+isConnected);
+    //Log.d("first","internet connectivtiy status "+isConnected);
 
     return isConnected;
 }
-    public static void showProgressDialog(Activity activity) {
 
+    public static void showProgressDialog(Activity activity) {
             mProgressDialog = new ProgressDialog(activity);
             mProgressDialog.setMessage("loading");
             mProgressDialog.setIndeterminate(true);

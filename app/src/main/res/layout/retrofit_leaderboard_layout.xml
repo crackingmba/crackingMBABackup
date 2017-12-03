@@ -17,14 +17,16 @@
             android:id="@+id/leaderboard_sl"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:layout_weight="1"
-            android:text="Sl.No"/>
+            android:text="#"/>
 
         <TextView
             android:id="@+id/leaderboard_name"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:gravity="left"
             android:text="Name"/>
 
         <TextView
@@ -32,6 +34,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="right"
             android:text="Marks"/>
 
         <TextView
@@ -39,6 +42,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="right"
             android:text="Accuracy"/>
 
     </LinearLayout>
