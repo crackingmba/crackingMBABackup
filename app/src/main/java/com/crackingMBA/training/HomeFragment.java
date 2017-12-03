@@ -112,18 +112,20 @@ public class HomeFragment extends Fragment{
                         String temp_str_1 =str.substring(str.indexOf(",") + 1);
 
                         snap_exam_id = first_chunk.substring(0,first_chunk.indexOf("+"));
-                        first_chunk=first_chunk.substring(str.indexOf("+") + 1);
+                        first_chunk=first_chunk.substring(first_chunk.indexOf("+") + 1);
                         snap_exam_name= first_chunk.substring(0,first_chunk.indexOf("+"));
                         snap_exam_analysis_url=first_chunk.substring(first_chunk.indexOf("+") + 1);
                         //Toast.makeText(getContext(), "Exam id= "+snap_exam_id+" Exam Name="+snap_exam_name+" Exam URL="+snap_exam_analysis_url, Toast.LENGTH_SHORT).show();
+                        home_fragment_leaderboard_1_tv.setText(snap_exam_name);
 
                         String second_chunk=temp_str_1.substring(0,temp_str_1.indexOf(","));
                         String third_chunk =temp_str_1.substring(temp_str_1.indexOf(",") + 1);
 
                         xat_exam_id =second_chunk.substring(0,second_chunk.indexOf("+"));
-                        second_chunk=second_chunk.substring(str.indexOf("+") + 1);
-                        xat_exam_name= second_chunk.substring(0,first_chunk.indexOf("+"));
+                        second_chunk=second_chunk.substring(second_chunk.indexOf("+") + 1);
+                        xat_exam_name= second_chunk.substring(0,second_chunk.indexOf("+"));
                         xat_exam_analysis_url=second_chunk.substring(second_chunk.indexOf("+") + 1);
+                        home_fragment_leaderboard_2_tv.setText(xat_exam_name);
 
                         //Toast.makeText(getContext(), "Exam id= "+xat_exam_id+" Exam Name="+xat_exam_name+" Exam URL="+xat_exam_analysis_url, Toast.LENGTH_SHORT).show();
 
@@ -260,7 +262,7 @@ public class HomeFragment extends Fragment{
                     }
 
                     case R.id.exam_analysis_2:{
-                        Intent intent= new Intent(getContext(), MiniTestActivity.class);
+                        Intent intent= new Intent(getContext(), DailyDoseVideoActivity.class);
                         intent.putExtra("DAILY_DOSE_TEST_NAME", xat_exam_name);
                         intent.putExtra("DAILY_DOSE_VIDEO_URL",xat_exam_analysis_url);
                         startActivity(intent);

@@ -30,7 +30,7 @@ public class DailyDoseVideoActivity extends AppCompatActivity implements YouTube
         Typeface custom_font=Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Raleway-Light.ttf");
         daily_dose_test_name_tv.setTypeface(custom_font);
 
-        daily_dose_test_name_tv.setText(daily_dose_test_name + "Analysis Video");
+        daily_dose_test_name_tv.setText(daily_dose_test_name + " Analysis Video");
 
         YouTubePlayerSupportFragment frag;
         frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_daily_dose_video_fragment);

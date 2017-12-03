@@ -29,14 +29,56 @@
                     android:layout_gravity="center"
                     android:textColor="#424242"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:background="#212121"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:textColor="#E3F2FD"
+                        android:text="#"/>
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:textColor="#E3F2FD"
+                        android:text="Name"/>
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="#E3F2FD"
+                        android:text="Marks"/>
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="#E3F2FD"
+                        android:text="Accu %"/>
+
+                </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/leaderboardHomeFragmentRecyclerView1"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="10dp">
                 </android.support.v7.widget.RecyclerView>
 
 
@@ -98,10 +140,7 @@
                     android:id="@+id/leaderboardHomeFragmentRecyclerView2"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="10dp">
                 </android.support.v7.widget.RecyclerView>
 
 
