@@ -35,7 +35,7 @@
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
                 android:textColor="#212121"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

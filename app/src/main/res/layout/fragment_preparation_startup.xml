@@ -13,18 +13,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Focused Preparation"
-                    android:textSize="18sp"
-                    android:textColor="#212121"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"/>
-
                 <!-- CAT CardView -->
-               <!-- <android.support.v7.widget.CardView
+               <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/CATCardView"
@@ -68,7 +58,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="A fixed 30 Day CAT study plan with study material, mock tests, formulae and previous year solved papers"
+                                android:text="A 30 Day CAT study plan with study material, mock tests and formulae"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -79,7 +69,7 @@
 
 
 
-                &lt;!&ndash; IIFT CardView &ndash;&gt;
+                <!-- IIFT CardView -->
                 <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -115,8 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp">
+                            android:layout_marginLeft="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -127,14 +116,14 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="A fixed 40 Day IIFT study plan with study material, mock tests, formulae and previous year solved papers"
+                                android:text="A 40 Day IIFT study plan with study material, mock tests and formulae"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
                         </LinearLayout>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>-->
+                </android.support.v7.widget.CardView>
 
 
                 <!-- SNAP CardView -->
@@ -183,7 +172,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="Perhaps the best course on the planet for SNAP 2017, with multiple mini SNAP tests and 5 Full Length Tests, we challenge to refund you 90% of what you pay if you score less than 90% in SNAP 2017"
+                                android:text="Specific study material, mini SNAP tests and 5 ALL INDIA ONLINE Full Length Tests (FLTs) should help you crack SNAP 2017 in style!"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"
@@ -239,7 +228,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="A fixed 60 Day XAT study plan with study material, mock tests, formulae and previous year solved papers"
+                                android:text="Specific study material, mini XAT tests and 5 ALL INDIA ONLINE Full Length Tests (FLTs) should help you crack XAT 2018 in style!"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"
