@@ -38,13 +38,13 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
-            IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
+            //CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
+            //IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
             SNAPCardView = (CardView)rootView.findViewById(R.id.SNAPCardView);
             XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
 
-            CATCardView.setOnClickListener(this);
-            IIFTCardView.setOnClickListener(this);
+            //CATCardView.setOnClickListener(this);
+            //IIFTCardView.setOnClickListener(this);
             SNAPCardView.setOnClickListener(this);
             XATCardView.setOnClickListener(this);
         }
@@ -62,7 +62,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.CATCardView: {
+            /*case R.id.CATCardView: {
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                     Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                     motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
@@ -85,7 +85,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                         launch_update_dialog();
                     }
                 }
-                break;
+                break;*/
             case R.id.SNAPCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);

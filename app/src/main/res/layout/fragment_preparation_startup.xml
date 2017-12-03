@@ -24,7 +24,7 @@
                     android:layout_margin="10dp"/>
 
                 <!-- CAT CardView -->
-                <android.support.v7.widget.CardView
+               <!-- <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/CATCardView"
@@ -79,7 +79,7 @@
 
 
 
-                <!-- IIFT CardView -->
+                &lt;!&ndash; IIFT CardView &ndash;&gt;
                 <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -134,7 +134,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>-->
 
 
                 <!-- SNAP CardView -->
@@ -183,7 +183,7 @@
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="A fixed 50 Day SNAP study plan with study material, mock tests, formulae and previous year solved papers"
+                                android:text="Perhaps the best course on the planet for SNAP 2017, with multiple mini SNAP tests and 5 Full Length Tests, we challenge to refund you 90% of what you pay if you score less than 90% in SNAP 2017"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"

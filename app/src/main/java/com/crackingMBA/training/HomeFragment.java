@@ -1,20 +1,13 @@
 package com.crackingMBA.training;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +24,9 @@ import com.crackingMBA.training.pojo.RetrofitLeaderboardContent;
 import com.crackingMBA.training.pojo.RetrofitLeaderboardList;
 import com.crackingMBA.training.pojo.RetrofitPostResponse;
 import com.crackingMBA.training.restAPI.LeaderboardAPIService;
-import com.crackingMBA.training.restAPI.LeaderboardAPIService2;
 import com.crackingMBA.training.restAPI.NoticeBoardURLAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
 import com.crackingMBA.training.util.MyUtil;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +42,7 @@ public class HomeFragment extends Fragment{
     List<RetrofitLeaderboardContent> questions2 = new ArrayList<>();
     Call<RetrofitLeaderboardList> call123, call2;
     LeaderboardAPIService apiService;
-    String snap_exam_id="215", snap_exam_name="SNAP Challenge Test", snap_exam_analysis_url="", xat_exam_id="169", xat_exam_name="XAT Challenge Test", xat_exam_analysis_url="";
+    String snap_exam_id="215", snap_exam_name="SNAP Challenge Test", snap_exam_analysis_url="", snap_exam_type="free", xat_exam_id="169", xat_exam_name="XAT Challenge Test", xat_exam_analysis_url="", xat_exam_type="free";
     ImageView imageView;
 
     private static String TAG = "HomeFragment";
@@ -71,17 +61,11 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_home1, container, false);
-        /*home_fragment_cat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_cat_layout);
-        home_fragment_iift_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_iift_layout);
-        home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
-        home_fragment_snap_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_snap_layout);
-        home_fragment_xat_layout=(LinearLayout)rootView.findViewById(R.id.home_fragment_xat_layout);*/
         exam_details_1=(Button)rootView.findViewById(R.id.exam_details_1);
         exam_details_2=(Button)rootView.findViewById(R.id.exam_details_2);
         exam_analysis_1=(Button)rootView.findViewById(R.id.exam_analysis_1);
         exam_analysis_2=(Button)rootView.findViewById(R.id.exam_analysis_2);
         imageView=(ImageView)rootView.findViewById(R.id.offline_img);
-        //home_fragment_img=(ImageView)rootView.findViewById(R.id.home_fragment_img);
         home_fragment_leaderboard_1_tv=(TextView)rootView.findViewById(R.id.home_fragment_leaderboard_1_tv);
         home_fragment_leaderboard_2_tv=(TextView)rootView.findViewById(R.id.home_fragment_leaderboard_2_tv);
 
@@ -114,7 +98,9 @@ public class HomeFragment extends Fragment{
                         snap_exam_id = first_chunk.substring(0,first_chunk.indexOf("+"));
                         first_chunk=first_chunk.substring(first_chunk.indexOf("+") + 1);
                         snap_exam_name= first_chunk.substring(0,first_chunk.indexOf("+"));
-                        snap_exam_analysis_url=first_chunk.substring(first_chunk.indexOf("+") + 1);
+                        first_chunk=first_chunk.substring(first_chunk.indexOf("+") + 1);
+                        snap_exam_analysis_url= first_chunk.substring(0,first_chunk.indexOf("+"));
+                        snap_exam_type=first_chunk.substring(first_chunk.indexOf("+") + 1);
                         //Toast.makeText(getContext(), "Exam id= "+snap_exam_id+" Exam Name="+snap_exam_name+" Exam URL="+snap_exam_analysis_url, Toast.LENGTH_SHORT).show();
                         home_fragment_leaderboard_1_tv.setText(snap_exam_name);
 
@@ -124,7 +110,9 @@ public class HomeFragment extends Fragment{
                         xat_exam_id =second_chunk.substring(0,second_chunk.indexOf("+"));
                         second_chunk=second_chunk.substring(second_chunk.indexOf("+") + 1);
                         xat_exam_name= second_chunk.substring(0,second_chunk.indexOf("+"));
-                        xat_exam_analysis_url=second_chunk.substring(second_chunk.indexOf("+") + 1);
+                        second_chunk=second_chunk.substring(second_chunk.indexOf("+") + 1);
+                        xat_exam_analysis_url= second_chunk.substring(0,second_chunk.indexOf("+"));
+                        xat_exam_type=second_chunk.substring(second_chunk.indexOf("+") + 1);
                         home_fragment_leaderboard_2_tv.setText(xat_exam_name);
 
                         //Toast.makeText(getContext(), "Exam id= "+xat_exam_id+" Exam Name="+xat_exam_name+" Exam URL="+xat_exam_analysis_url, Toast.LENGTH_SHORT).show();
@@ -241,6 +229,8 @@ public class HomeFragment extends Fragment{
                         Intent intent= new Intent(getContext(), MiniTestActivity.class);
                         intent.putExtra("MINI_TEST_EXAM_ID",snap_exam_id);
                         intent.putExtra("MINI_TEST_NAME",snap_exam_name);
+                        intent.putExtra("MINI_TEST_EXAM_TYPE",snap_exam_type);
+                        //Toast.makeText(getContext(), "Exam id= "+snap_exam_id+" Exam Name="+snap_exam_name+" Exam URL="+snap_exam_analysis_url+"Exam Type = "+snap_exam_type, Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                         break;
                     }
@@ -249,6 +239,7 @@ public class HomeFragment extends Fragment{
                         Intent intent= new Intent(getContext(), MiniTestActivity.class);
                         intent.putExtra("MINI_TEST_EXAM_ID",xat_exam_id);
                         intent.putExtra("MINI_TEST_NAME",xat_exam_name);
+                        intent.putExtra("MINI_TEST_EXAM_TYPE",xat_exam_type);
                         startActivity(intent);
                         break;
                     }

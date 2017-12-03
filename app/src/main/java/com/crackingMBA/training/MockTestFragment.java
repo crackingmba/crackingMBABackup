@@ -68,14 +68,16 @@ public class MockTestFragment extends Fragment{
                     @Override public void onItemClick(View view, int position) {
 
                         String temp_str=mocktests.get(position).getTestName().toString();
-                        String exam_name = temp_str.substring(0, temp_str.indexOf(" "));
+                        //String exam_name = temp_str.substring(0, temp_str.indexOf(" "));
 
                         String temp_url=mocktests.get(position).getURL().toString();
+                        String temp_exam_type=mocktests.get(position).getExamType().toString();
 
                         //Toast.makeText(getActivity(), exam_name, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(getContext(), MiniTestActivity.class);
-                        intent.putExtra("MINI_TEST_NAME",temp_str);
                         intent.putExtra("MINI_TEST_EXAM_ID",temp_url);
+                        intent.putExtra("MINI_TEST_NAME",temp_str);
+                        intent.putExtra("MINI_TEST_EXAM_TYPE",temp_exam_type);
                         startActivity(intent);
                     }
                 })

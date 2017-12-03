@@ -19,6 +19,7 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
     private List<RetrofitMockTest> mocktests;
     private int rowLayout;
     private Context context;
+    Drawable myDrawable;
 
     public RetrofitMockTestAdapter(List<RetrofitMockTest> questions, int rowLayout, Context context) {
         this.mocktests = questions;
@@ -36,8 +37,29 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, final int position) {
         holder.mock_test_name.setText(mocktests.get(position).getTestName());
-        holder.mock_test_date.setText(mocktests.get(position).getDate());
-        Drawable myDrawable = holder.minitest_img.getResources().getDrawable(R.drawable.snap2017);
+        holder.mock_test_sections.setText("* " +mocktests.get(position).getSections());
+        holder.mock_test_time.setText("* " +mocktests.get(position).getTime());
+
+        String temp_exam_type="";
+        if(mocktests.get(position).getExamType().equals("free")){
+            temp_exam_type="FREE Test";
+        }else if(mocktests.get(position).getExamType().equals("premium")){
+            temp_exam_type="PREMIUM Test";
+        }
+        holder.mock_test_type.setText("* " + temp_exam_type);
+        holder.mock_test_date.setText("* " +mocktests.get(position).getDate());
+
+        String exam_name = mocktests.get(position).getTestName().toString();
+        exam_name=exam_name.substring(0, exam_name.indexOf(" "));
+
+        if(exam_name.equals("SNAP")){
+            myDrawable = holder.minitest_img.getResources().getDrawable(R.drawable.snap2017);
+        }
+
+        if(exam_name.equals("XAT")){
+            myDrawable = holder.minitest_img.getResources().getDrawable(R.drawable.xat2018);
+        }
+
         holder.minitest_img.setImageDrawable(myDrawable);
     }
 
@@ -47,12 +69,15 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
     }
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView mock_test_name, mock_test_date;
+        TextView mock_test_name, mock_test_sections, mock_test_time, mock_test_type, mock_test_date;
         ImageView minitest_img;
 
         public QuestionViewHolder(View v) {
             super(v);
             mock_test_name= (TextView) v.findViewById(R.id.mock_test_name);
+            mock_test_sections= (TextView) v.findViewById(R.id.mock_test_sections);
+            mock_test_time= (TextView) v.findViewById(R.id.mock_test_time);
+            mock_test_type= (TextView) v.findViewById(R.id.mock_test_type);
             mock_test_date= (TextView) v.findViewById(R.id.mock_test_date);
             minitest_img=(ImageView)v.findViewById(R.id.minitest_img);
         }

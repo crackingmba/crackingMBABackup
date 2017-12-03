@@ -20,8 +20,9 @@
 
         <ImageView
             android:id="@+id/minitest_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_vertical"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,9 +41,36 @@
 
 
             <TextView
+                android:id="@+id/mock_test_sections"
+                android:layout_marginLeft="10dp"
+                android:textColor="#424242"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="* 4 sections * 10 qns each = 40 qns"/>
+
+
+            <TextView
+                android:id="@+id/mock_test_time"
+                android:layout_marginLeft="10dp"
+                android:textColor="#424242"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="* Total 30 minutes"/>
+
+            <TextView
+                android:id="@+id/mock_test_type"
+                android:layout_marginLeft="10dp"
+                android:textColor="#424242"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="* FREE Test"/>
+
+            <TextView
                 android:id="@+id/mock_test_date"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
                 android:textColor="#424242"
                 android:textSize="14sp"
                 android:layout_width="match_parent"
