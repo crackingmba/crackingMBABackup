@@ -70,14 +70,16 @@ public class MockTestFragment extends Fragment{
                         String temp_str=mocktests.get(position).getTestName().toString();
                         //String exam_name = temp_str.substring(0, temp_str.indexOf(" "));
 
-                        String temp_url=mocktests.get(position).getURL().toString();
+                        String temp_exam_id=mocktests.get(position).getExamID().toString();
                         String temp_exam_type=mocktests.get(position).getExamType().toString();
+                        String temp_analysis_url=mocktests.get(position).getURL().toString();
 
                         //Toast.makeText(getActivity(), exam_name, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(getContext(), MiniTestActivity.class);
-                        intent.putExtra("MINI_TEST_EXAM_ID",temp_url);
+                        intent.putExtra("MINI_TEST_EXAM_ID",temp_exam_id);
                         intent.putExtra("MINI_TEST_NAME",temp_str);
                         intent.putExtra("MINI_TEST_EXAM_TYPE",temp_exam_type);
+                        intent.putExtra("MINI_TEST_ANALYSIS_URL",temp_analysis_url);
                         startActivity(intent);
                     }
                 })

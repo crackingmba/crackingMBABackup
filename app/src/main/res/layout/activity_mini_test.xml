@@ -59,6 +59,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="14sp"
+                    android:layout_marginTop="10dp"
                     android:textColor="#212121"/>
 
                 <LinearLayout
@@ -67,7 +68,7 @@
                     android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:weightSum="2">
 
                     <Button
@@ -93,6 +94,19 @@
                         android:text="VIEW LEADERBOARD"
                         android:layout_weight="1"/>
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/minitest_analysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#e65100"
+                    android:gravity="center"
+                    android:text="VIEW TEST ANALYSIS"/>
 
         </LinearLayout>
 

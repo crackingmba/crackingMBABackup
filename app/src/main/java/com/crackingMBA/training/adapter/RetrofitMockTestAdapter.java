@@ -43,7 +43,7 @@ public class RetrofitMockTestAdapter extends RecyclerView.Adapter<RetrofitMockTe
         String temp_exam_type="";
         if(mocktests.get(position).getExamType().equals("free")){
             temp_exam_type="FREE Test";
-        }else if(mocktests.get(position).getExamType().equals("premium")){
+        }else if(mocktests.get(position).getExamType().equals("paid")){
             temp_exam_type="PREMIUM Test";
         }
         holder.mock_test_type.setText("* " + temp_exam_type);
