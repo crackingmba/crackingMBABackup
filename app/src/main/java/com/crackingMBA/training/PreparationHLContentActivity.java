@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.crackingMBA.training.pojo.MockTestTest;
 import com.crackingMBA.training.pojo.RetrofitPostResponse;
 import com.crackingMBA.training.pojo.RetrofitPrepHLContent;
 import com.crackingMBA.training.pojo.RetrofitPrepHLContentList;
+import com.crackingMBA.training.restAPI.ComboCourseEnrollmentAPIService;
 import com.crackingMBA.training.restAPI.LoginAPIService;
 import com.crackingMBA.training.restAPI.PrepHLContentAPIService;
 import com.crackingMBA.training.restAPI.RestClient;
@@ -64,6 +66,8 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     SharedPreferences prefs;
     String temp_message="";
     String dialog_header="";
+    SharedPreferences.Editor ed;
+    ComboCourseEnrollmentAPIService comboCourseEnrollmentAPIService;
 
 
     @Override
@@ -87,6 +91,7 @@ public class PreparationHLContentActivity extends AppCompatActivity {
         adapter = new PreparationHLContentAdapter(questions, R.layout.retrofit_prep_study_content_layout, PreparationHLContentActivity.this, new ClickListener() {
             @Override
             public void onPositionClicked(int selected_position) {
+
 
                 int position=0;
 
@@ -237,6 +242,8 @@ public class PreparationHLContentActivity extends AppCompatActivity {
     private void processRows(String study, String studyType, String enabled){
 
                 if(enabled.equals("y")) {
+                    loadComboCourseEnrolledUser();
+                    String whetherComboCourseEnrolled = prefs.getString("whetherComboCourseEnrolled", "notqueried");
 
                     switch (studyType) {
                         case "mocktest": {
@@ -282,7 +289,9 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                         }
 
                         case "pmocktest": {
-                            if (displayPaymentOptions(course_category) > 0) {
+                            //if (displayPaymentOptions(course_category) > 0) {
+
+                            if (whetherComboCourseEnrolled.equals("queried1")) {
                                 str = study;
                                 String test_name = str.substring(0, str.indexOf(","));
 
@@ -295,11 +304,13 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                 Intent startIntent = new Intent(getApplicationContext(), StartMockTestActivity.class);
                                 startActivity(startIntent);
                                 break;
+                            }else{
+                                displayDialogBox();
                             }
                             break;
                         }
                         case "pvideo": {
-                            if (displayPaymentOptions(course_category) > 0) {
+                            if (whetherComboCourseEnrolled.equals("queried1")) {
                                 str = study;
                                 String course_name = str.substring(0, str.indexOf(","));
 
@@ -311,12 +322,14 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                 intent.putExtra("COURSE_SUBJECT", course_name);
                                 intent.putExtra("URL", url);
                                 startActivity(intent);
+                            }else{
+                                displayDialogBox();
                             }
                             break;
                         }
                         case "ptext": {
 
-                            if (displayPaymentOptions(course_category) > 0) {
+                            if (whetherComboCourseEnrolled.equals("queried1")) {
                                 str = study;
                                 String course_name = str.substring(0, str.indexOf(","));
 
@@ -327,6 +340,8 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                                 intent.putExtra("COURSE_SUBJECT", course_name);
                                 intent.putExtra("WEBVIEW_URL", webview_url);
                                 startActivity(intent);
+                            }else{
+                                displayDialogBox();
                             }
 
                             break;
@@ -355,6 +370,168 @@ public class PreparationHLContentActivity extends AppCompatActivity {
 
     }
 
+    private void loadComboCourseEnrolledUser(){
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
+        final String email = prefs.getString("emailofUser", "");
+
+        if(isUserLoggedIn){
+
+            comboCourseEnrollmentAPIService = RestClient.getClient().create(ComboCourseEnrollmentAPIService.class);
+            comboCourseEnrollmentAPIService .validateComboCourseEnrollment(email).enqueue(new Callback<RetrofitPostResponse>() {
+                @Override
+                public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
+                    //MyUtil.hideProgressDialog();
+                    RetrofitPostResponse retrofitPostResponse = response.body();
+
+                    if(retrofitPostResponse.getResponse().equals("1")) {
+                        //Toast.makeText(FlashCardsActivity.this, "The response is 1", Toast.LENGTH_SHORT).show();
+                        ed = prefs.edit();
+                        SharedPreferences.Editor ed1 = prefs.edit();
+                        ed.putString("whetherComboCourseEnrolled","queried1");
+                        ed.commit();
+
+                    }else if(retrofitPostResponse.getResponse().equals("0")){
+                        //Toast.makeText(FlashCardsActivity.this, "The response is 0", Toast.LENGTH_SHORT).show();
+                        ed = prefs.edit();
+                        ed.putString("whetherComboCourseEnrolled","queried0");
+                        ed.commit();
+
+                    }else{
+                        //Toast.makeText(FlashCardsActivity.this, "The response is neither 0 nor 1", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
+                }
+            });
+
+
+
+        }
+        else{
+            //Display the Dialog Here
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+            builder.setMessage(temp_message)
+                    .setCancelable(false)
+                    .setPositiveButton("ALREADY ENROLLED?  LOGIN NOW", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
+                            intent.putExtra("IS_IT_FOR_ENROLLMENT","1");
+
+                            String course_name="XATPREP";
+                            switch(course_name){
+                                case "CATPREP1":{
+                                    intent.putExtra("EXAM_NAME","CAT");
+                                    intent.putExtra("EXAM_NAME_TEXT","Spare your pizza craving today for a bigger one later!'. At 300, for the price of a medium pan pizza, you can now crack CAT 2017!");
+                                    break;
+                                }
+                                case "IIFTPREP1":{
+                                    intent.putExtra("EXAM_NAME","IIFT");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 300, for the price of a medium pan pizza, you can now crack IIFT!");
+                                    break;
+                                }
+                                case "SNAPPREP1":{
+                                    intent.putExtra("EXAM_NAME","SNAP");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack SNAP!");
+                                    break;
+                                }
+                                case "XATPREP":{
+                                    intent.putExtra("EXAM_NAME","XAT");
+                                    intent.putExtra("EXAM_NAME_TEXT","'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
+                                    break;
+                                }
+                            }
+
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("NOT ENROLLED YET? ENROLL NOW", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                            intent.putExtra("PREP_CATEGORY_CODE",course_category);
+                            startActivity(intent);
+
+                        }
+                    })
+                    .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                        }
+                    });
+
+            //Creating dialog box
+            android.support.v7.app.AlertDialog alert = builder.create();
+            //Setting the title manually
+            alert.setTitle(dialog_header);
+            alert.show();
+
+
+        }
+    }
+
+    public void displayDialogBox(){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage(temp_message)
+                .setCancelable(false)
+                .setPositiveButton("ALREADY ENROLLED?  LOGIN NOW", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(PreparationHLContentActivity.this, LoginActivity.class);
+                        intent.putExtra("IS_IT_FOR_ENROLLMENT","1");
+
+                        String course_name="XATPREP";
+                        switch(course_name){
+                            case "CATPREP1":{
+                                intent.putExtra("EXAM_NAME","CAT");
+                                intent.putExtra("EXAM_NAME_TEXT","Spare your pizza craving today for a bigger one later!'. At 300, for the price of a medium pan pizza, you can now crack CAT 2017!");
+                                break;
+                            }
+                            case "IIFTPREP1":{
+                                intent.putExtra("EXAM_NAME","IIFT");
+                                intent.putExtra("EXAM_NAME_TEXT","'Let your hard work, blood, toil and sweat earn you a pizza treat!'. At 300, for the price of a medium pan pizza, you can now crack IIFT!");
+                                break;
+                            }
+                            case "SNAPPREP1":{
+                                intent.putExtra("EXAM_NAME","SNAP");
+                                intent.putExtra("EXAM_NAME_TEXT","'Invest in a medium pizza to yield a jumbo size pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack SNAP!");
+                                break;
+                            }
+                            case "XATPREP":{
+                                intent.putExtra("EXAM_NAME","XAT");
+                                intent.putExtra("EXAM_NAME_TEXT","'Sow this single pizza slice today to reap a big fat pizza in a few months!'. At 300, for the price of a medium pan pizza, you can now crack XAT!");
+                                break;
+                            }
+                        }
+
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("NOT ENROLLED YET? ENROLL NOW", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PreparationHLContentActivity.this, CourseEnrollmentActivity.class);
+                        intent.putExtra("PREP_CATEGORY_CODE",course_category);
+                        startActivity(intent);
+
+                    }
+                })
+                .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Toast.makeText(SupportGuidanceActivity.this, "Going to Login screen", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+
+        //Creating dialog box
+        android.support.v7.app.AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle(dialog_header);
+        alert.show();
+    }
+
     public int displayPaymentOptions(final String course_name){
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -378,11 +555,13 @@ public class PreparationHLContentActivity extends AppCompatActivity {
                     }
                     case "XATPREP":{
                         whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
+                        String whetherComboCourseEnrolled = prefs.getString("whetherComboCourseEnrolled", "notqueried");
                         break;
                     }
                 }
 
                 if(whetherSpecificCourseEnrolled.equals("queried1")){
+                    //Toast.makeText(this, "XAT course is enrolled", Toast.LENGTH_SHORT).show();
                     return 1;
                 }
 

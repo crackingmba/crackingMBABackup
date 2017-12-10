@@ -156,7 +156,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 }else {
 
                     //Order order = new Order(serverKey, trxn_id, user_name, email, phone, "300", temp_course_name);
-                    Order order = new Order(serverKey, trxn_id, user_name, email, phone, "10", temp_course_name);
+                    Order order = new Order(serverKey, trxn_id, user_name, email, phone, "300", temp_course_name);
 
                     // Good time to show progress dialog to user
                     //MyUtil.showProgressDialog();
