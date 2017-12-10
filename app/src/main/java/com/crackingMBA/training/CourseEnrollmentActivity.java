@@ -95,13 +95,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
 
             case "XATPREP":{
                 temp_course_code="XAT";
-                temp_course_name="60 DAY XAT CHALLENGE";
-                break;
-            }
-
-            case "COMBO":{
-                temp_course_code="XAT";
-                temp_course_name="SNAP and XAT 90 %ile CHALLENGE";
+                temp_course_name="SNAP and XAT 90 %ILE CHALLENGE";
                 break;
             }
 
@@ -162,7 +156,7 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 }else {
 
                     //Order order = new Order(serverKey, trxn_id, user_name, email, phone, "300", temp_course_name);
-                    Order order = new Order(serverKey, trxn_id, user_name, email, phone, "300", temp_course_name);
+                    Order order = new Order(serverKey, trxn_id, user_name, email, phone, "10", temp_course_name);
 
                     // Good time to show progress dialog to user
                     //MyUtil.showProgressDialog();
@@ -315,7 +309,8 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                                 }
 
                                 case "XATPREP":{
-                                    ed.putString("whetherXATcourseEnrolled","queried1");
+                                    ed.putString("whetherXATCourseEnrolled","queried1");
+                                    ed.putString("whetherComboCourseEnrolled","queried1");
                                     ed.commit();
                                     break;
                                 }

@@ -51,10 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome Guest"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textColor="#212121"
             android:gravity="center"/>
 
@@ -62,52 +63,48 @@
             android:id="@+id/flash_card_header_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Flash Card Content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            android:textColor="#212121"
-            android:gravity="center"/>
+            android:text="Flash Card Message"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="#212121" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="20dp"
             android:weightSum="4">
-
 
             <Button
                 android:id="@+id/flash_card_prev_btn"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:padding="10dp"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical"
                 android:gravity="center"
+                android:layout_gravity="center_vertical"
                 android:text="Previous Card"/>
 
 
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:layout_weight="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 android:layout_margin="20dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/flash_card_content"
+                    android:id="@+id/flash_card_content_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Previous Year GK Papers"
+                    android:text="Flash Card Content"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:paddingTop="20dp"
@@ -148,10 +145,10 @@
             <Button
                 android:id="@+id/flash_card_next_btn"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:padding="10dp"
-                android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="Next Card"/>
 

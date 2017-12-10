@@ -111,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                         ed1.putString("whetherIIFTcourseEnrolled","notqueried");
                         ed1.putString("whetherSNAPcourseEnrolled","notqueried");
                         ed1.putString("whetherXATcourseEnrolled","notqueried");
-                        ed1.putString("whetherXATcourseEnrolled","notqueried");
                         ed1.putString("whetherComboCourseEnrolled","notqueried");
                         ed1.commit();
 /*                        Intent motivationVideoDetails = new Intent(getApplicationContext(), MotivationYoutubeDetailsActivity.class);

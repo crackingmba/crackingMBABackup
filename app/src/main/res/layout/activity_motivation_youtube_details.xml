@@ -27,78 +27,104 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
         android:gravity="top">
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#E8EAF6"
+            android:background="#BF360C"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:text="SNAP and XAT 90 %ile Challenge"/>
+
+
+        <TextView
+            android:id="@+id/motivation_yt_focus_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#212121"
+            android:text="Welcome to the SNAP and XAT 90%ile challenge"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#E8EAF6"
+            android:background="#BF360C"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:text="Challenge Details"/>
+
+
+        <TextView
+            android:id="@+id/motivation_challenge_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#212121"
+            android:text="If you review our flash cards, all mock tests and FLTs and still get less than 90 %ile in both SNAP and XAT, we will refund 90% of what you pay for this course."/>
+
+
+
+        <!--<fragment
+            android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+            android:id="@+id/youtube_motivation_video_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"/>-->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/motivation_yt_focus_img"
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/cat_challenge"/>
-
-            <TextView
-                android:id="@+id/motivation_yt_focus_tv"
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/motivateYT_details_btn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:textSize="14sp"
-                android:textColor="#212121"
-                android:text="At 499, for the price of a medium pan pizza, you can now crack CAT!"/>
+                android:padding="15dp"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="COURSE DETAILS"/>
 
-            <fragment
-                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-                android:id="@+id/youtube_motivation_video_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:layout_margin="15dp"/>
+            <Button
+                android:id="@+id/motivateYT_enroll_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="ENROLL NOW"/>
 
         </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/motivateYT_details_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="COURSE DETAILS"/>
-
-        <Button
-            android:id="@+id/motivateYT_enroll_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="ENROLL NOW"/>
-
-    </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

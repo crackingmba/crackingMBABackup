@@ -23,7 +23,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    CardView VocabCardView, GKCardView;
+    CardView VocabCardView, GKCardView, QuantCardView, SNAPandXATCardView;
 
     @Nullable
     @Override
@@ -39,11 +39,13 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             VocabCardView = (CardView)rootView.findViewById(R.id.VocabCardView);
             GKCardView = (CardView)rootView.findViewById(R.id.GKCardView);
-            //XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
+            QuantCardView = (CardView)rootView.findViewById(R.id.QuantCardView);
+            SNAPandXATCardView = (CardView)rootView.findViewById(R.id.SNAPandXATCardView);
 
             VocabCardView.setOnClickListener(this);
             GKCardView.setOnClickListener(this);
-            //XATCardView.setOnClickListener(this);
+            QuantCardView.setOnClickListener(this);
+            SNAPandXATCardView.setOnClickListener(this);
         }
 
         return rootView;
@@ -54,7 +56,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
         super.onResume();
     }
 
-    Intent motivationVideoDetails;
+
 
     @Override
     public void onClick(View v) {
@@ -76,7 +78,7 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
             case R.id.GKCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         Intent intent = new Intent(getContext(), PreparationContentActivity.class);
-                        intent.putExtra("PREP_CATEGORY_CODE","GK");
+                        intent.putExtra("PREP_CATEGORY_CODE","GKFLASH");
                         intent.putExtra("PREP_CATEGORY_HEADER","GK Flash Cards");
                         startActivity(intent);
                     }else{
@@ -84,6 +86,29 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                     }
                 }
                 break;
+
+            case R.id.QuantCardView: {
+                if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
+                    Intent intent = new Intent(getContext(), PreparationContentActivity.class);
+                    intent.putExtra("PREP_CATEGORY_CODE","QUANT");
+                    intent.putExtra("PREP_CATEGORY_HEADER","Quant Flash Cards");
+                    startActivity(intent);
+                }else{
+                    launch_update_dialog();
+                }
+            }
+            break;
+
+            case R.id.SNAPandXATCardView: {
+                if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
+                    Intent intent = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
+                    startActivity(intent);
+                }else{
+                    launch_update_dialog();
+                }
+            }
+            break;
+
             /*case R.id.XATCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);

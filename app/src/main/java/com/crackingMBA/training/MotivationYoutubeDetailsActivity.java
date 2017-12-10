@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,71 +29,34 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MotivationYoutubeDetailsActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
+public class MotivationYoutubeDetailsActivity extends AppCompatActivity{
     private static final int RECOVERY_REQUEST = 1;
 
     String motivation_video_url;
     Button motivateYT_details_btn, motivateYT_enroll_btn;
-    String sectionName, exam_name_text;
-    SharedPreferences prefs;
-    SharedPreferences.Editor ed;
-    UserEnrollmentAPIService enrollment_apiService;
-    int isUserEnrolled=0;
+    String HTMLString; Spanned sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_motivation_youtube_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView motivation_yt_focus_tv = (TextView) findViewById(R.id.motivation_yt_focus_tv);
-        ImageView imgView = (ImageView) findViewById(R.id.motivation_yt_focus_img);
+        TextView motivation_yt_focus_tv;
 
-
-        sectionName = getIntent().getStringExtra("EXAM_NAME");
-        exam_name_text= getIntent().getStringExtra("EXAM_NAME_TEXT");
-        switch (sectionName){
-            case "CAT":
-            {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.cat_challenge);
-                imgView.setImageDrawable(myDrawable);
-                motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "baC_wGbAzU0";
-                //videoName.setText("'Focus' Quant");
-                //videoDescription.setText("The details for Quant Section Go Here!");
-                break;
-            }
-            case "IIFT":
-            {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.iift_challenge);
-                imgView.setImageDrawable(myDrawable);
-                motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "5OB_tohbsi0";
-                //videoName.setText("'Focus' Verbal");
-                //videoDescription.setText("The details for Verbal Section Go Here!");
-                break;
-            }
-            case "SNAP":
-            {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.snap_challenge);
-                imgView.setImageDrawable(myDrawable);
-                motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "mF0pnMJb7Ic";
-                //videoName.setText("'Focus' DI & LR");
-                //videoDescription.setText("The details for DI & LR Section Go Here!");
-                break;
-            }
-            case "XAT":
-            {
-                Drawable myDrawable = getResources().getDrawable(R.drawable.xat_challenge);
-                imgView.setImageDrawable(myDrawable);
-                motivation_yt_focus_tv.setText(exam_name_text);
-                motivation_video_url = "FXTZvwiXqQQ";
-                break;
-            }
-        }
+        //motivation_video_url = "baC_wGbAzU0";
 
         motivateYT_details_btn = (Button)findViewById(R.id.motivateYT_details_btn);
         motivateYT_enroll_btn = (Button)findViewById(R.id.motivateYT_enroll_btn);
+        motivation_yt_focus_tv = (TextView)findViewById(R.id.motivation_yt_focus_tv);
+
+        HTMLString="<p>1. Welcome to the 'SNAP & XAT 90 %ile Challenge' Course</p>"+
+                "<p>2. For Rs 300, you get access to the following learning resources</p>"+
+                "<p>3. All Study Videos and practice Mock Tests in this app and crackingMBA portal</p>"+
+                "<p>4. 2 Mini Tests and 3 Full Length Tests (FLTs) for SNAP 2017</p>"+
+                "<p>5. 2 Mini Tests and 3 Full Length Tests (FLTs) of XAT 2018</p>"+
+                "<p>6. Access to all Quant, GK and Verbal Flash Cards</p>";
+        sp= Html.fromHtml(HTMLString);
+        motivation_yt_focus_tv.setText(sp);
 
         View.OnClickListener examOnClickListener = new View.OnClickListener() {
             @Override
@@ -99,69 +64,18 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
                 switch (view.getId()){
                     case R.id.motivateYT_details_btn:{
                         Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, PreparationContentActivity.class);
-
-                        switch (sectionName){
-                            case "CAT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                intent.putExtra("PREP_CATEGORY_NAME","testing");
-                                intent.putExtra("PREP_CATEGORY_HEADER","30 Day CAT Challenge");
-                                break;
-                            }
-                            case "IIFT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
-                                intent.putExtra("PREP_CATEGORY_NAME","testing");
-                                intent.putExtra("PREP_CATEGORY_HEADER","40 Day IIFT Challenge");
-                                break;
-                            }
-                            case "SNAP":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
-                                intent.putExtra("PREP_CATEGORY_NAME","testing");
-                                intent.putExtra("PREP_CATEGORY_HEADER","50 Day SNAP Challenge");
-                                break;
-                            }
-                            case "XAT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
-                                intent.putExtra("PREP_CATEGORY_NAME","testing");
-                                intent.putExtra("PREP_CATEGORY_HEADER","60 Day XAT Challenge");
-                                break;
-                            }
-                        }
-
-
-                        loadUserEnrollmentDetails();
+                        intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
+                        intent.putExtra("PREP_CATEGORY_NAME","testing");
+                        intent.putExtra("PREP_CATEGORY_HEADER","SNAP and XAT 90 %ile Challenge");
                         startActivity(intent);
+                        }
+                        //loadUserEnrollmentDetails();
                         break;
-                    }
+
 
                     case R.id.motivateYT_enroll_btn:{
                         Intent intent = new Intent(MotivationYoutubeDetailsActivity.this, CourseEnrollmentActivity.class);
-                        switch (sectionName){
-                            case "CAT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","CATPREP1");
-                                break;
-                            }
-                            case "IIFT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","IIFTPREP1");
-                                break;
-                            }
-                            case "SNAP":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","SNAPPREP1");
-                                break;
-                            }
-                            case "XAT":
-                            {
-                                intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
-                                break;
-                            }
-                        }
-
+                        intent.putExtra("PREP_CATEGORY_CODE","XATPREP");
                         startActivity(intent);
                         break;
                     }
@@ -174,134 +88,25 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
         motivateYT_enroll_btn.setOnClickListener(examOnClickListener);
 
 
-
-        YouTubePlayerSupportFragment frag;
+        /*YouTubePlayerSupportFragment frag;
         frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_motivation_video_fragment);
         frag.initialize(MyConfig.YOUTUBE_API_KEY, this);
-
+*/
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    public void loadUserEnrollmentDetails(){
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
-
-        //Toast.makeText(MotivationYoutubeDetailsActivity.this, "Loading User Enrollment details", Toast.LENGTH_SHORT).show();
-
-        if(isUserLoggedIn){
-            final String email = prefs.getString("emailofUser", "");
-            String whetherSpecificCourseEnrolled="notqueried";
-
-            switch(sectionName){
-                case "CAT":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherCATcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "IIFT":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherIIFTcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "SNAP":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherSNAPcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "XAT":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
-                    break;
-                }
-             }
-
-
-
-            if(whetherSpecificCourseEnrolled.equals("notqueried")){
-                final SharedPreferences.Editor ed = prefs.edit();
-                //then query it from the server and record the details
-                enrollment_apiService = RestClient.getClient().create(UserEnrollmentAPIService.class);
-                enrollment_apiService.validateUserEnrollment(email, sectionName).enqueue(new Callback<RetrofitPostResponse>() {
-                    @Override
-                    public void onResponse(Call<RetrofitPostResponse> call, Response<RetrofitPostResponse> response) {
-                        //MyUtil.hideProgressDialog();
-                        RetrofitPostResponse retrofitPostResponse = response.body();
-
-                        if(retrofitPostResponse.getResponse().equals("0")) {
-                            Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is not enrolled for "+sectionName, Toast.LENGTH_SHORT).show();
-                            switch(sectionName){
-                                case "CAT":{
-                                    ed.putString("whetherCATcourseEnrolled","queried0");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "IIFT":{
-                                    ed.putString("whetherIIFTcourseEnrolled","queried0");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "SNAP":{
-                                    ed.putString("whetherSNAPcourseEnrolled","queried0");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "XAT":{
-                                    ed.putString("whetherXATcourseEnrolled","queried0");
-                                    ed.commit();
-                                    break;
-                                }
-                            }
-
-                        }else{
-                            //Toast.makeText(MotivationYoutubeDetailsActivity.this, "User is enrolled for"+sectionName, Toast.LENGTH_SHORT).show();
-                            switch(sectionName){
-                                case "CAT":{
-                                    ed.putString("whetherCATcourseEnrolled","queried1");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "IIFT":{
-                                    ed.putString("whetherIIFTcourseEnrolled","queried1");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "SNAP":{
-                                    ed.putString("whetherSNAPcourseEnrolled","queried1");
-                                    ed.commit();
-                                    break;
-                                }
-                                case "XAT":{
-                                    ed.putString("whetherXATcourseEnrolled","queried1");
-                                    ed.commit();
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<RetrofitPostResponse> call, Throwable t) {
-                    }
-                });
-
-
-            }
-
-        }else{
-            //do nothing much for now
-        }
-
-    }
-
-    @Override
+/*    @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
             player.cueVideo(motivation_video_url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
         if (errorReason.isUserRecoverableError()) {
             errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
@@ -309,7 +114,7 @@ public class MotivationYoutubeDetailsActivity extends AppCompatActivity implemen
             String error = String.format(getString(R.string.player_error), errorReason.toString());
             Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
 
     @Override
