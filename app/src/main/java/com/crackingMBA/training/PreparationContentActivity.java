@@ -58,76 +58,6 @@ public class PreparationContentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         prep_content_header=(TextView)findViewById(R.id.prep_content_header);
         enrolled_status_tv=(TextView)findViewById(R.id.enrolled_status_tv);
-        //prep_content_enroll_now = (Button)findViewById(R.id.prep_content_enroll_now);
-
-       /* prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        Boolean isUserLoggedIn = prefs.getBoolean("isUserLoggedIn", false);
-
-        if(isUserLoggedIn){
-            String whetherSpecificCourseEnrolled="notqueried";
-            switch(prep_category_code){
-                case "CATPREP1":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherCATcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "IIFTPREP1":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherIIFTcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "SNAPPREP1":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherSNAPcourseEnrolled", "notqueried");
-                    break;
-                }
-                case "XATPREP":{
-                    whetherSpecificCourseEnrolled = prefs.getString("whetherXATcourseEnrolled", "notqueried");
-                    break;
-                }
-            }
-
-            if(whetherSpecificCourseEnrolled.equals("queried1")){
-                Toast.makeText(this, "HOORRAY! USER ENROLLED FOR THIS COURSE", Toast.LENGTH_SHORT).show();
-                //prep_content_enroll_now.setVisibility(View.GONE);
-                enrolled_status_tv.setVisibility(View.VISIBLE);
-            }else{
-                //Toast.makeText(this, "HOORRAY! USER IS NOT ENROLLED FOR THIS COURSE", Toast.LENGTH_SHORT).show();
-                //prep_content_enroll_now.setVisibility(View.VISIBLE);
-                //enrolled_status_tv.setVisibility(View.GONE);
-            }
-
-        }*/
-
-       /* prep_content_enroll_now.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PreparationContentActivity.this, CourseEnrollmentActivity.class);
-                switch (prep_category_code){
-                    case "CATPREP1":
-                    {
-                        intent.putExtra("PREP_CATEGORY_CODE","30 Day CAT Challenge");
-                        break;
-                    }
-                    case "IIFTPREP1":
-                    {
-                        intent.putExtra("PREP_CATEGORY_CODE","40 Day IIFT Challenge");
-                        break;
-                    }
-                    case "SNAPPREP1":
-                    {
-                        intent.putExtra("PREP_CATEGORY_CODE","50 Day SNAP Challenge");
-                        break;
-                    }
-                    case "XATPREP":
-                    {
-                        intent.putExtra("PREP_CATEGORY_CODE","60 Day XAT Challenge");
-                        break;
-                    }
-                }
-
-                startActivity(intent);
-            }
-        });*/
-
 
         apiService = RestClient.getClient().create(PrepContentAPIService.class);
         recyclerView = (RecyclerView)findViewById(R.id.prepcontentRecyclerView);
@@ -142,18 +72,18 @@ public class PreparationContentActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         //Toast.makeText(PreparationContentActivity.this, "Hey There!", Toast.LENGTH_SHORT).show();
 
-                        if(questions.get(position).getType().toString().equals("support")){
-                            Intent intent = new Intent(PreparationContentActivity.this, SupportGuidanceActivity.class);
-                            startActivity(intent);
-                        }else if(questions.get(position).getType().toString().equals("study"))
+                        if(questions.get(position).getType().toString().equals("study"))
                         {
                             Intent intent = new Intent(PreparationContentActivity.this, PreparationHLContentActivity.class);
                             intent.putExtra("PREP_CATEGORY_CODE",prep_category_code);
                             intent.putExtra("PREP_CATEGORY_NAME",questions.get(position).getName());
                             intent.putExtra("PREP_CATEGORY_HEADER",prep_category_header);
                             startActivity(intent);
+                        } else if (questions.get(position).getType().toString().equals("flash")){
+                            Intent intent = new Intent(PreparationContentActivity.this, FlashCardsActivity.class);
+                            intent.putExtra("CATEGORY_CODE", questions.get(position).getName());
+                            startActivity(intent);
                         }
-
                         else{
                             Intent intent = new Intent(PreparationContentActivity.this, PreparationDetailsActivity.class);
                             intent.putExtra("PREP_CATEGORY_ID",questions.get(position).getId());

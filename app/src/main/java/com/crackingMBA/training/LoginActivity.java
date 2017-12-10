@@ -111,13 +111,15 @@ public class LoginActivity extends AppCompatActivity {
                         ed1.putString("whetherIIFTcourseEnrolled","notqueried");
                         ed1.putString("whetherSNAPcourseEnrolled","notqueried");
                         ed1.putString("whetherXATcourseEnrolled","notqueried");
+                        ed1.putString("whetherXATcourseEnrolled","notqueried");
+                        ed1.putString("whetherComboCourseEnrolled","notqueried");
                         ed1.commit();
-                        Intent motivationVideoDetails = new Intent(getApplicationContext(), MotivationYoutubeDetailsActivity.class);
+/*                        Intent motivationVideoDetails = new Intent(getApplicationContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", exam_name);
                         motivationVideoDetails.putExtra("EXAM_NAME_TEXT", exam_name_text);
 
-                        startActivity(motivationVideoDetails);
-                        finish();
+                        startActivity(motivationVideoDetails);*/
+                        //finish();
                     }
 
                     //ed.commit();

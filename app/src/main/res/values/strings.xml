@@ -2,7 +2,7 @@
     <string name="app_name">crackingMBA</string>
     <string-array name="tab_items">
         <item>Dashboard</item>
-        <item>Focus Prep</item>
+        <item>Flash Cards</item>
         <item>Test Zone</item>
         <item>Forum</item>
     </string-array>
@@ -12,7 +12,7 @@
     <!-- Keep them in order as the titles are in -->
     <array name="tab_icons">
         <item>@drawable/exams1</item>
-        <item>@drawable/dartboard</item>
+        <item>@drawable/vocab_game</item>
         <item>@drawable/mock_test_icon_1</item>
         <item>@drawable/whatsup_img</item>videos_img.png
 
@@ -27,7 +27,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activ_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_dashboard">crackingMBA</string>

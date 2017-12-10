@@ -115,6 +115,7 @@ public class SignupActivity extends AppCompatActivity {
                     ed.putString("whetherIIFTcourseEnrolled","notqueried");
                     ed.putString("whetherSNAPcourseEnrolled","notqueried");
                     ed.putString("whetherXATcourseEnrolled","notqueried");
+                    ed.putString("whetherComboCourseEnrolled","notqueried");
                     ed.commit();
                     finish();
 

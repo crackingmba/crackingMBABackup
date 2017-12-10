@@ -99,6 +99,12 @@ public class CourseEnrollmentActivity extends AppCompatActivity {
                 break;
             }
 
+            case "COMBO":{
+                temp_course_code="XAT";
+                temp_course_name="SNAP and XAT 90 %ile CHALLENGE";
+                break;
+            }
+
         }
         enroll_payment_btn=(Button)findViewById(R.id.enroll_payment_btn);
         enroll_course_name_et.setText(temp_course_name);

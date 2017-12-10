@@ -20,11 +20,10 @@ import android.widget.Toast;
 
 public class PreparationFragment extends Fragment implements View.OnClickListener{
 
-    private static String TAG = "PreparationFragment";
     View rootView;
     LayoutInflater inflater;
     ViewGroup container;
-    CardView CATCardView, IIFTCardView, SNAPCardView, XATCardView;
+    CardView VocabCardView, GKCardView;
 
     @Nullable
     @Override
@@ -38,15 +37,13 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
 
             rootView = inflater.inflate(R.layout.fragment_preparation_startup, container, false);
 
-            CATCardView = (CardView)rootView.findViewById(R.id.CATCardView);
-            IIFTCardView = (CardView)rootView.findViewById(R.id.IIFTCardView);
-            SNAPCardView = (CardView)rootView.findViewById(R.id.SNAPCardView);
-            XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
+            VocabCardView = (CardView)rootView.findViewById(R.id.VocabCardView);
+            GKCardView = (CardView)rootView.findViewById(R.id.GKCardView);
+            //XATCardView = (CardView)rootView.findViewById(R.id.XATCardView);
 
-            CATCardView.setOnClickListener(this);
-            IIFTCardView.setOnClickListener(this);
-            SNAPCardView.setOnClickListener(this);
-            XATCardView.setOnClickListener(this);
+            VocabCardView.setOnClickListener(this);
+            GKCardView.setOnClickListener(this);
+            //XATCardView.setOnClickListener(this);
         }
 
         return rootView;
@@ -62,42 +59,32 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.CATCardView: {
+            case R.id.VocabCardView: {
                 if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
-                    Intent motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                    motivationVideoDetails.putExtra("EXAM_NAME", "CAT");
-                    motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Still stuck with mock scores below 90 %ile? Or in early 90s but not able to cross 95 %ile? Sign up for our '30 Day CAT Challenge' to get a 30 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
-                    startActivity(motivationVideoDetails);
+                    Intent intent = new Intent(getContext(), PreparationContentActivity.class);
+                    intent.putExtra("PREP_CATEGORY_CODE","VOCAB");
+                    intent.putExtra("PREP_CATEGORY_HEADER","VOCAB Flash Cards");
+                    startActivity(intent);
                 } else {
                     //Launch the dialog to update from server
                     launch_update_dialog();
 
                 }
+                break;
             }
-                break;
-                case R.id.IIFTCardView: {
+
+            case R.id.GKCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
-                        motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                        motivationVideoDetails.putExtra("EXAM_NAME", "IIFT");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Wondering how to prepare for IIFT 2017 and IIFT GK section? Sign up for our '40 Day IIFT Challenge' to get a 40 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
-                        startActivity(motivationVideoDetails);
+                        Intent intent = new Intent(getContext(), PreparationContentActivity.class);
+                        intent.putExtra("PREP_CATEGORY_CODE","GK");
+                        intent.putExtra("PREP_CATEGORY_HEADER","GK Flash Cards");
+                        startActivity(intent);
                     }else{
                         launch_update_dialog();
                     }
                 }
                 break;
-            case R.id.SNAPCardView: {
-                    if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
-                        motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
-                        motivationVideoDetails.putExtra("EXAM_NAME", "SNAP");
-                        motivationVideoDetails.putExtra("EXAM_NAME_TEXT", "Wondering how to prepare for SNAP 2017 and SNAP GK section? Sign up for our '50 Day SNAP Challenge' to get a 50 day study plan with study material, mock tests, tips, formulae and previous year solved papers to improve your scores!");
-                        startActivity(motivationVideoDetails);
-                    }else{
-                        launch_update_dialog();
-                    }
-                }
-                break;
-            case R.id.XATCardView: {
+            /*case R.id.XATCardView: {
                     if (HomeFragment.apk_version.equals(HomeFragment.server_apk_version)) {
                         motivationVideoDetails = new Intent(getContext(), MotivationYoutubeDetailsActivity.class);
                         motivationVideoDetails.putExtra("EXAM_NAME", "XAT");
@@ -107,9 +94,8 @@ public class PreparationFragment extends Fragment implements View.OnClickListene
                         launch_update_dialog();
                     }
                 }
-                break;
+                break;*/
             default:
-                Log.d(TAG,"Unknown button clicked..");
                 break;
         }
 

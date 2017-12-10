@@ -195,9 +195,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Mini Tests"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LeaderboardActivity"
+        <activity
+            android:name=".LeaderboardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Leaderboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FlashCardsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Flash Cards"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 

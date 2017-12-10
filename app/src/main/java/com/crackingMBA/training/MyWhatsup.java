@@ -94,6 +94,7 @@ public class MyWhatsup extends Fragment implements AdapterView.OnItemSelectedLis
                 ed.putString("whetherIIFTcourseEnrolled","notqueried");
                 ed.putString("whetherSNAPcourseEnrolled","notqueried");
                 ed.putString("whetherXATcourseEnrolled","notqueried");
+                ed.putString("whetherComboCourseEnrolled","notqueried");
                 ed.commit();
                 forum_user_details.setText("Hello Guest!");
                 forum_logout_btn.setVisibility(View.GONE);

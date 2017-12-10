@@ -1,0 +1,165 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.crackingMBA.training.FlashCardsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:background="#ECEFF1"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/prep_content_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flash Cards"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:textColor="#212121"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:id="@+id/flash_card_user_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome Guest"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:textColor="#212121"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/flash_card_header_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flash Card Content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:textColor="#212121"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+
+            <Button
+                android:id="@+id/flash_card_prev_btn"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="Previous Card"/>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/flash_card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Previous Year GK Papers"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#212121"
+                    android:gravity="center"/>
+
+
+                <Button
+                    android:id="@+id/flash_card_show_answer_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="View Card Details"
+                    android:background="#e65100"
+                    android:gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/flash_card_details_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Card Details"
+                    android:textSize="18sp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#212121"
+                    android:gravity="center"/>
+            </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+            <Button
+                android:id="@+id/flash_card_next_btn"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Next Card"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -11,20 +11,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
 
-                <!-- CAT CardView -->
+                <!-- Vocab Flash Cards  CardView -->
                <android.support.v7.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/CATCardView"
+                    android:id="@+id/VocabCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
-                    android:layout_margin="5dp">
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_marginBottom="20dp">
+
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
@@ -40,7 +44,7 @@
                                 android:layout_width="50dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_height="50dp"
-                                android:src="@drawable/cat2017"
+                                android:src="@drawable/verbal"
                                 android:adjustViewBounds="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -52,13 +56,70 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="30 Day CAT Challenge!"
+                                android:text="VOCAB Flash Cards"
                                 android:layout_margin="3dp"
                                 android:textStyle="bold"
                                 android:textColor="#212121"
                                 />
                             <TextView
-                                android:text="A 30 Day CAT study plan with study material, mock tests and formulae"
+                                android:text="If you are strong in Vocabulary (Words), then your battle in SNAP and XAT Verbal section is half won!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#212121"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <!-- GK Flash Cards CardView -->
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/GKCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:padding="15dp">
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_margin="15dp">
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_height="50dp"
+                                android:src="@drawable/vocab_game"
+                                android:adjustViewBounds="true" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="GK Flash Cards!"
+                                android:textStyle="bold"
+                                android:layout_margin="3dp"
+                                android:textColor="#212121"
+                                />
+                            <TextView
+                                android:text="A fun way to learn GK for SNAP and XAT using Flash Cards."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"/>
@@ -69,174 +130,6 @@
 
 
 
-                <!-- IIFT CardView -->
-                <android.support.v7.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/IIFTCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    android:layout_margin="5dp"
-                    android:padding="15dp">
-
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_margin="15dp">
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_height="50dp"
-                                android:src="@drawable/iift2017"
-                                android:adjustViewBounds="true" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="10dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Day IIFT Challenge!"
-                                android:textStyle="bold"
-                                android:layout_margin="3dp"
-                                android:textColor="#212121"
-                                />
-                            <TextView
-                                android:text="A 40 Day IIFT study plan with study material, mock tests and formulae"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#212121"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-
-                <!-- SNAP CardView -->
-                <android.support.v7.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/SNAPCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    android:layout_margin="5dp"
-                    android:padding="15dp">
-
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_margin="15dp">
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_height="50dp"
-                                android:src="@drawable/snap2017"
-                                android:adjustViewBounds="true" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="10dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="50 Day SNAP Challenge!"
-                                android:layout_margin="3dp"
-                                android:textStyle="bold"
-                                android:textColor="#212121"
-                                />
-                            <TextView
-                                android:text="Specific study material, mini SNAP tests and 5 ALL INDIA ONLINE Full Length Tests (FLTs) should help you crack SNAP 2017 in style!"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#212121"
-                                />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <!-- XAT CardView -->
-                <android.support.v7.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/XATCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    android:layout_margin="5dp"
-                    android:padding="15dp">
-
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_margin="15dp">
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_height="50dp"
-                                android:src="@drawable/xat2018"
-                                android:adjustViewBounds="true" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="10dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="60 Day XAT Challenge!"
-                                android:layout_margin="3dp"
-                                android:textStyle="bold"
-                                android:textColor="#212121"
-                                />
-                            <TextView
-                                android:text="Specific study material, mini XAT tests and 5 ALL INDIA ONLINE Full Length Tests (FLTs) should help you crack XAT 2018 in style!"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#212121"
-                                />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
 
 
 
